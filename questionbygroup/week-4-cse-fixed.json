@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Week - 4: Deque",
+        "questions": [
+            {
+                "id": "w4-deque-001",
+                "question_text": "Implement Deque using Array",
+                "question_description": "In this exercise, you must sequentially implement a Deque (Double-Ended Queue) utilizing a fixed-size array. You are required to support dynamic insertions and deletions from both the front and the rear of the data structure. You need to maintain 'front' and 'rear' pointers and precisely handle both Underflow and Overflow anomalies, while treating the array as completely linear or circularly buffered logic if bounds are exceeded.",
+                "input_format": "An integer N (number of operations), followed by N lines of commands:\n1. 'insert_front X': Add integer X to the front.\n2. 'insert_rear X': Add integer X to the rear.\n3. 'delete_front': Remove and print the front element.\n4. 'delete_rear': Remove and print the rear element.\n5. 'display': Print all elements from front to rear.",
+                "output_format": "For 'delete_front' and 'delete_rear', print the value or 'Underflow'. For 'insert_front' and 'insert_rear', print 'Overflow' if full. For 'display', print elements separated by space or 'Empty'.",
+                "constraints": "Array Capacity = 100. 1 <= N <= 200.",
+                "hints": "Initialize 'front' and 'rear' to -1. Handle cases where the queue gets full or empty by resetting the pointers appropriately. For a robust structure, use circular modulus logic or boundaries wrap-around checks (0 to 99).",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint dq[100], f=-1, r=-1, n, v; char op[20];\nint main() {\n    if(scanf(\"%d\", &n) != 1) return 0;\n    while(n--) {\n        scanf(\"%s\", op);\n        if(strcmp(op, \"insert_front\") == 0) {\n            if(scanf(\"%d\", &v) == 1) {\n                if((f == 0 && r == 99) || f == r + 1) { printf(\"Overflow\\n\"); }\n                else { if(f == -1) f = r = 0; else if(f == 0) f = 99; else f--; dq[f] = v; }\n            }\n        } else if(strcmp(op, \"insert_rear\") == 0) {\n            if(scanf(\"%d\", &v) == 1) {\n                if((f == 0 && r == 99) || f == r + 1) { printf(\"Overflow\\n\"); }\n                else { if(f == -1) f = r = 0; else if(r == 99) r = 0; else r++; dq[r] = v; }\n            }\n        } else if(strcmp(op, \"delete_front\") == 0) {\n            if(f == -1) printf(\"Underflow\\n\");\n            else { printf(\"%d\\n\", dq[f]); if(f == r) f = r = -1; else if(f == 99) f = 0; else f++; }\n        } else if(strcmp(op, \"delete_rear\") == 0) {\n            if(f == -1) printf(\"Underflow\\n\");\n            else { printf(\"%d\\n\", dq[r]); if(f == r) f = r = -1; else if(r == 0) r = 99; else r--; }\n        } else if(strcmp(op, \"display\") == 0) {\n            if(f == -1) printf(\"Empty\\n\");\n            else { int i = f; while(1){ printf(\"%d%c\", dq[i], i==r?'\\n':' '); if(i==r)break; if(i==99)i=0; else i++; } }\n        }\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\ninsert_rear 10\ninsert_front 20\ndisplay\ndelete_front",
+                        "expectedOutput": "20 10\n20"
+                    },
+                    {
+                        "input": "2\ndelete_front\ndelete_rear",
+                        "expectedOutput": "Underflow\nUnderflow"
+                    },
+                    {
+                        "input": "3\ninsert_front 5\ndisplay\ndelete_rear",
+                        "expectedOutput": "5\n5"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\ninsert_front 1\ninsert_front 2\ninsert_front 3\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "2\ninsert_rear 100\ndelete_front",
+                        "expectedOutput": "100"
+                    },
+                    {
+                        "input": "3\ninsert_front 7\ndelete_rear\ndelete_front",
+                        "expectedOutput": "7\nUnderflow"
+                    },
+                    {
+                        "input": "2\ninsert_rear 44\ndelete_rear",
+                        "expectedOutput": "44"
+                    },
+                    {
+                        "input": "4\ninsert_rear 1\ninsert_rear 2\ndelete_front\ndisplay",
+                        "expectedOutput": "1\n2"
+                    },
+                    {
+                        "input": "3\ninsert_front 9\ndelete_front\ndisplay",
+                        "expectedOutput": "9\nEmpty"
+                    }
+                ],
+                "solution_explanation": "A robust array-based Deque must handle wraparound boundaries. When inserting at the front at index 0, the next location logically wraps back to index 99. The implementation effectively checks for array exhaustion via boundary checks.",
+                "language": "C"
+            },
+            {
+                "id": "w4-deque-002",
+                "question_text": "Palindrome Checker using Deque",
+                "question_description": "A palindrome is a word or string that reads identical from front-to-back as back-to-front. You must utilize a Deque format to verify this. Your program should sequentially insert all characters of an inputted string into the rear of a deque data structure. To evaluate, repeatedly delete and compare a character extracted from the front against a character extracted from the rear. Any mismatch immediately invalidates the palindrome condition.",
+                "input_format": "A single string S without spaces.",
+                "output_format": "Print 'Palindrome' if the given string is a palindrome, otherwise print 'Not Palindrome'.",
+                "constraints": "1 <= length of string <= 1000.",
+                "hints": "Loop and push all characters into the deque array incrementing the rear. Iterate from the front and rear sequentially bridging inwards until pointers cross to check pairs.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint main() {\n    char s[1001], dq[1001]; int f = 0, r = -1;\n    if(scanf(\"%s\", s) == 1) {\n        for(int i=0; s[i]; i++) dq[++r] = s[i];\n        int isPal = 1;\n        while(f < r) {\n            if(dq[f++] != dq[r--]) { isPal = 0; break; }\n        }\n        if(isPal) printf(\"Palindrome\\n\");\n        else printf(\"Not Palindrome\\n\");\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "radar",
+                        "expectedOutput": "Palindrome"
+                    },
+                    {
+                        "input": "hello",
+                        "expectedOutput": "Not Palindrome"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "Palindrome"
+                    },
+                    {
+                        "input": "madam",
+                        "expectedOutput": "Palindrome"
+                    },
+                    {
+                        "input": "aabb",
+                        "expectedOutput": "Not Palindrome"
+                    },
+                    {
+                        "input": "ab",
+                        "expectedOutput": "Not Palindrome"
+                    },
+                    {
+                        "input": "racecar",
+                        "expectedOutput": "Palindrome"
+                    },
+                    {
+                        "input": "deified",
+                        "expectedOutput": "Palindrome"
+                    },
+                    {
+                        "input": "A",
+                        "expectedOutput": "Palindrome"
+                    },
+                    {
+                        "input": "data",
+                        "expectedOutput": "Not Palindrome"
+                    }
+                ],
+                "solution_explanation": "By putting elements in a Double-Ended Queue (simulated via array bounds), we have direct simultaneous access to the First matching the Last element sequentially until we bridge completely towards the center.",
+                "language": "C"
+            }
+        ]
+    }
+]

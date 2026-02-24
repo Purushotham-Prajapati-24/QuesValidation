@@ -1,0 +1,551 @@
+[
+    {
+        "name": "Week - 5: Single Linked List",
+        "questions": [
+            {
+                "id": "w5-sll-001",
+                "question_text": "Create a Singly Linked List",
+                "question_description": "Implement a C program to create a singly linked list using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "5\n10 20 30 40 50",
+                        "expectedOutput": "10 20 30 40 50"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Create a Singly Linked List.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-002",
+                "question_text": "Display all elements of the list",
+                "question_description": "Implement a C program to display all elements of the list using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "5\n10 20 30 40 50",
+                        "expectedOutput": "10 20 30 40 50"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Display all elements of the list.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-003",
+                "question_text": "Count the number of nodes",
+                "question_description": "Implement a C program to count the number of nodes using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); int c=0; while(h){c++; h=h->n;} printf(\"%d\\n\", c); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "5\n1 2 3 4 5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Count the number of nodes.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-004",
+                "question_text": "Search for an element",
+                "question_description": "Implement a C program to search for an element using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N, N elements, then integer X to search.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; int p=1; while(h){ if(h->d==x){ printf(\"Found at %d\\n\", p); return 0; } p++; h=h->n; } printf(\"Not Found\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n20",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "3\n10 20 30\n40",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "0\n5",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "1\n5\n5",
+                        "expectedOutput": "Found at 1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Search for an element.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-005",
+                "question_text": "Find the length of the linked list",
+                "question_description": "Implement a C program to find the length of the linked list using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); int c=0; while(h){c++; h=h->n;} printf(\"%d\\n\", c); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "5\n1 2 3 4 5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Find the length of the linked list.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-006",
+                "question_text": "Insert at Beginning",
+                "question_description": "Implement a C program to insert at beginning using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N, N list elements, then integer X to insert.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; Node* nn=malloc(sizeof(Node)); nn->d=x; nn->n=h; h=nn; disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n5",
+                        "expectedOutput": "5 10 20 30"
+                    },
+                    {
+                        "input": "0\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "1\n20\n10",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "2\n1 2\n3",
+                        "expectedOutput": "3 1 2"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Insert at Beginning.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-007",
+                "question_text": "Insert at End",
+                "question_description": "Implement a C program to insert at end using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N, N list elements, then integer X to insert.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; Node* nn=malloc(sizeof(Node)); nn->d=x; nn->n=NULL; if(!h) h=nn; else{ Node* t=h; while(t->n) t=t->n; t->n=nn; } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n40",
+                        "expectedOutput": "10 20 30 40"
+                    },
+                    {
+                        "input": "0\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "1\n20\n30",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "2\n1 2\n3",
+                        "expectedOutput": "1 2 3"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Insert at End.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-008",
+                "question_text": "Insert at Given Position",
+                "question_description": "Implement a C program to insert at given position using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N, N list elements, Position P (1-based), then Value X.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n, p, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d %d\",&p,&x)!=1) return 0; Node* nn=malloc(sizeof(Node)); nn->d=x; if(p==1){ nn->n=h; h=nn; } else { Node* t=h; for(int i=1; i<p-1 && t!=NULL; i++) t=t->n; if(t!=NULL){ nn->n=t->n; t->n=nn; } else free(nn); } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 30 40\n2 20",
+                        "expectedOutput": "10 20 30 40"
+                    },
+                    {
+                        "input": "0\n1 10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "3\n10 20 30\n4 40",
+                        "expectedOutput": "10 20 30 40"
+                    },
+                    {
+                        "input": "3\n10 20 30\n1 5",
+                        "expectedOutput": "5 10 20 30"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Insert at Given Position.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-009",
+                "question_text": "Delete at Beginning",
+                "question_description": "Implement a C program to delete at beginning using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h){ printf(\"Underflow\\n\"); return 0; } Node* t=h; h=h->n; free(t); disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "2\n1 2",
+                        "expectedOutput": "2"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Delete at Beginning.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-010",
+                "question_text": "Delete at End",
+                "question_description": "Implement a C program to delete at end using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h){ printf(\"Underflow\\n\"); return 0; } if(!h->n) { free(h); h=NULL; } else { Node* t=h; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "2\n1 2",
+                        "expectedOutput": "1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Delete at End.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-011",
+                "question_text": "Delete at Given Position",
+                "question_description": "Implement a C program to delete at given position using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N, N list elements, then Position P (1-based).",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n, p; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&p)!=1) return 0; if(!h) printf(\"Underflow\\n\"); else if(p==1) { Node* t=h; h=h->n; free(t); disp(h); } else { Node* t=h; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* d=t->n; t->n=d->n; free(d); } disp(h); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "4\n10 20 30 40\n2",
+                        "expectedOutput": "10 30 40"
+                    },
+                    {
+                        "input": "0\n1",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "3\n10 20 30\n1",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "3\n10 20 30\n3",
+                        "expectedOutput": "10 20"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Delete at Given Position.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-012",
+                "question_text": "Delete by Key / Value",
+                "question_description": "Implement a C program to delete by key / value using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N, N list elements, then Key X.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; if(!h) printf(\"Underflow\\n\"); else if(h->d==x) { Node* t=h; h=h->n; free(t); disp(h); } else { Node* t=h; while(t->n && t->n->d!=x) t=t->n; if(t->n) { Node* d=t->n; t->n=d->n; free(d); disp(h); } else printf(\"Not Found\\n\"); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n20",
+                        "expectedOutput": "10 30"
+                    },
+                    {
+                        "input": "3\n10 20 30\n40",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "0\n10",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "1\n10\n10",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Delete by Key / Value.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-013",
+                "question_text": "Reverse a Linked List",
+                "question_description": "Implement a C program to reverse a linked list using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); Node *prev=NULL, *curr=h, *next=NULL; while(curr){ next=curr->n; curr->n=prev; prev=curr; curr=next; } h=prev; disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "1\n1",
+                        "expectedOutput": "1"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\n10 20 30 40 50",
+                        "expectedOutput": "50 40 30 20 10"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Reverse a Linked List.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-014",
+                "question_text": "Find Middle Element",
+                "question_description": "Implement a C program to find middle element using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h){ printf(\"Empty\\n\"); return 0; } Node *s=h, *f=h; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"%d\\n\", s->d); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "5\n1 2 3 4 5",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "4\n1 2 3 4",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Find Middle Element.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-015",
+                "question_text": "Sort Linked List",
+                "question_description": "Implement a C program to sort linked list using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h){ disp(h); return 0; } for(Node* i=h; i; i=i->n) for(Node* j=i->n; j; j=j->n) if(i->d > j->d){ int t=i->d; i->d=j->d; j->d=t; } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "4\n4 2 1 3",
+                        "expectedOutput": "1 2 3 4"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\n5 5 2 1 2",
+                        "expectedOutput": "1 2 2 5 5"
+                    },
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Sort Linked List.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-016",
+                "question_text": "Merge Two Sorted Linked Lists",
+                "question_description": "Implement a C program to merge two sorted linked lists using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (size 1), N elements. Integer M (size 2), M elements.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } while(h) { printf(\"%d%c\", h->d, h->n?' ':'\\n'); h=h->n; } }\nint main() { int n,m; if(scanf(\"%d\",&n)!=1) return 0; Node* h1=create(n); if(scanf(\"%d\",&m)!=1) return 0; Node* h2=create(m); Node d; Node* t=&d; d.n=NULL; while(h1&&h2){ if(h1->d <= h2->d){ t->n=h1; h1=h1->n; } else { t->n=h2; h2=h2->n; } t=t->n; } t->n = h1?h1:h2; disp(d.n); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 3 5\n3\n2 4 6",
+                        "expectedOutput": "1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "0\n\n2\n1 2",
+                        "expectedOutput": "1 2"
+                    },
+                    {
+                        "input": "2\n1 2\n0",
+                        "expectedOutput": "1 2"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Merge Two Sorted Linked Lists.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-017",
+                "question_text": "Program to find the addition of two polynomials",
+                "question_description": "Implement a C program to program to find the addition of two polynomials using a singly linked list. Ensure you handle edge cases appropriately.",
+                "input_format": "Integer N (terms), N coeff/exp pairs. Integer M (terms), M coeff/exp pairs.",
+                "output_format": "The modified linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Use dynamic memory allocation (malloc) for node creation and free() for deletion.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int c, e; struct Node* n; } Node;\nNode* create(int k) { Node *h=NULL, *t=NULL; while(k--) { int co, ex; scanf(\"%d %d\", &co, &ex); Node* nn=malloc(sizeof(Node)); nn->c=co; nn->e=ex; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nint main() { int n, m; if(scanf(\"%d\", &n)!=1) return 0; Node* p1 = create(n); if(scanf(\"%d\", &m)!=1) return 0; Node* p2 = create(m); Node d; Node* t = &d; d.n=NULL; while(p1 && p2) { Node* nn = malloc(sizeof(Node)); nn->n=NULL; if(p1->e > p2->e) { nn->c = p1->c; nn->e = p1->e; p1=p1->n; } else if(p1->e < p2->e) { nn->c = p2->c; nn->e = p2->e; p2=p2->n; } else { nn->c = p1->c+p2->c; nn->e = p1->e; p1=p1->n; p2=p2->n; } if(nn->c != 0) { t->n=nn; t=nn; } else free(nn); } while(p1) { Node* nn=malloc(sizeof(Node)); *nn=*p1; nn->n=NULL; t->n=nn; t=nn; p1=p1->n; } while(p2) { Node* nn=malloc(sizeof(Node)); *nn=*p2; nn->n=NULL; t->n=nn; t=nn; p2=p2->n; } if(!d.n) { printf(\"0\\n\"); return 0; } Node* x = d.n; while(x) { printf(\"%dx^%d%s\", x->c, x->e, x->n?\" + \":\"\"); x=x->n; } printf(\"\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n5 2 4 1 2 0\n3\n-5 2 3 1 1 0",
+                        "expectedOutput": "7x^1 + 3x^0"
+                    },
+                    {
+                        "input": "1\n5 2\n1\n-5 2",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "0\n\n1\n6 4",
+                        "expectedOutput": "6x^4"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "0"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a singly linked list and performs: Program to find the addition of two polynomials.",
+                "language": "C"
+            }
+        ]
+    }
+]

@@ -1,0 +1,287 @@
+[
+    {
+        "name": "Week 6: Circular Linked List",
+        "questions": [
+            {
+                "id": "w6-cll-gen-001",
+                "question_text": "CLL Initialization and Traversal",
+                "question_description": "Implement a C program utilizing Circular Linked Lists focused on the following tasks: Initialization, complete iteration display, and counting length efficiently.",
+                "input_format": "Integer N, N commands (e.g. 'display', 'count', 'ins_end').",
+                "output_format": "Integer evaluation or space-separated string representing iterating full cyclic loops.",
+                "constraints": "0 <= N <= 1000. Nodes must circularly map tail to head.",
+                "hints": "Remember that the final node points to the head pointer instead of strictly resolving to standard NULL.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; nn->n=head; head=nn; t->n=head; }\n}\nvoid ie(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; t->n=nn; nn->n=head; }\n}\nvoid ip(int p, int v) {\n    if(p==1) { ib(v); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn;\n}\nvoid db() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n!=head) t=t->n; Node* d=head; head=head->n; t->n=head; free(d); }\n}\nvoid de() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n->n!=head) t=t->n; free(t->n); t->n=head; }\n}\nvoid dp(int p) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(p==1) { db(); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Underflow\\n\");\n}\nvoid dk(int v) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->d==v) { db(); return; }\n    Node* t=head; while(t->n!=head && t->n->d!=v) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Not Found\\n\");\n}\nvoid disp() {\n    if(!head) { printf(\"Empty\\n\"); return; }\n    Node* t=head; do { printf(\"%d%c\", t->d, t->n==head?'\\n':' '); t=t->n; } while(t!=head);\n}\nvoid cnt() {\n    if(!head) { printf(\"0\\n\"); return; }\n    int c=0; Node* t=head; do { c++; t=t->n; } while(t!=head); printf(\"%d\\n\", c);\n}\nvoid sch(int v) {\n    if(!head) { printf(\"Not Found\\n\"); return; }\n    int p=1; Node* t=head; do { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } while(t!=head);\n    printf(\"Not Found\\n\");\n}\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "4\nins_end 5\nins_end 15\ncount\nlength",
+                        "expectedOutput": "2\n2"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ncount\ndisplay",
+                        "expectedOutput": "0\nEmpty"
+                    },
+                    {
+                        "input": "1\ncount",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "1\ncount",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "1\ncount",
+                        "expectedOutput": "0"
+                    }
+                ],
+                "solution_explanation": "Using standard exact 'do-while' conditions verifies safety alongside bounding pointer memory avoiding infinite while loops on circular architecture.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-gen-002",
+                "question_text": "Search Operation",
+                "question_description": "Implement a C program utilizing Circular Linked Lists focused on the following tasks: Searching Elements iteratively.",
+                "input_format": "Integer N followed iteratively by specific positional logic requests ('search X').",
+                "output_format": "'Found at P' or explicit precise standard 'Not Found' strings.",
+                "constraints": "0 <= N <= 1000. Nodes must circularly map tail to head.",
+                "hints": "Iterate tracking index integers, terminating exactly upon reaching original head position cyclically.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; nn->n=head; head=nn; t->n=head; }\n}\nvoid ie(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; t->n=nn; nn->n=head; }\n}\nvoid ip(int p, int v) {\n    if(p==1) { ib(v); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn;\n}\nvoid db() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n!=head) t=t->n; Node* d=head; head=head->n; t->n=head; free(d); }\n}\nvoid de() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n->n!=head) t=t->n; free(t->n); t->n=head; }\n}\nvoid dp(int p) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(p==1) { db(); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Underflow\\n\");\n}\nvoid dk(int v) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->d==v) { db(); return; }\n    Node* t=head; while(t->n!=head && t->n->d!=v) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Not Found\\n\");\n}\nvoid disp() {\n    if(!head) { printf(\"Empty\\n\"); return; }\n    Node* t=head; do { printf(\"%d%c\", t->d, t->n==head?'\\n':' '); t=t->n; } while(t!=head);\n}\nvoid cnt() {\n    if(!head) { printf(\"0\\n\"); return; }\n    int c=0; Node* t=head; do { c++; t=t->n; } while(t!=head); printf(\"%d\\n\", c);\n}\nvoid sch(int v) {\n    if(!head) { printf(\"Not Found\\n\"); return; }\n    int p=1; Node* t=head; do { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } while(t!=head);\n    printf(\"Not Found\\n\");\n}\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\nins_end 10\nins_end 20\nsearch 20\nsearch 30",
+                        "expectedOutput": "Found at 2\nNot Found"
+                    },
+                    {
+                        "input": "1\nsearch 5",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 1",
+                        "expectedOutput": "Found at 1"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 2",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "5\nins_end 4\nins_end 5\nsearch 9\nsearch 4\nsearch 5",
+                        "expectedOutput": "Not Found\nFound at 1\nFound at 2"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 2",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "5\nins_end 4\nins_end 5\nsearch 9\nsearch 4\nsearch 5",
+                        "expectedOutput": "Not Found\nFound at 1\nFound at 2"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\nsearch 20\nsearch 30",
+                        "expectedOutput": "Found at 2\nNot Found"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 2",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 2",
+                        "expectedOutput": "Found at 2"
+                    }
+                ],
+                "solution_explanation": "Circular bounds testing mandates breaking search traversals mathematically immediately following the detection of the origin pointer mapping.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-gen-003",
+                "question_text": "Insertion Operations",
+                "question_description": "Implement a C program utilizing Circular Linked Lists focused on the following tasks: Safe structural cyclical dynamic insertions systematically.",
+                "input_format": "N operations logically triggering 'ins_beg X', 'ins_end X', 'ins_pos P X'.",
+                "output_format": "Explicit verifications are expected upon 'display' commands subsequently.",
+                "constraints": "0 <= N <= 1000. Nodes must circularly map tail to head.",
+                "hints": "If adjusting head insertion perfectly, remember locating the current tail iterating entire chain re-linking securely to new head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; nn->n=head; head=nn; t->n=head; }\n}\nvoid ie(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; t->n=nn; nn->n=head; }\n}\nvoid ip(int p, int v) {\n    if(p==1) { ib(v); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn;\n}\nvoid db() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n!=head) t=t->n; Node* d=head; head=head->n; t->n=head; free(d); }\n}\nvoid de() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n->n!=head) t=t->n; free(t->n); t->n=head; }\n}\nvoid dp(int p) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(p==1) { db(); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Underflow\\n\");\n}\nvoid dk(int v) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->d==v) { db(); return; }\n    Node* t=head; while(t->n!=head && t->n->d!=v) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Not Found\\n\");\n}\nvoid disp() {\n    if(!head) { printf(\"Empty\\n\"); return; }\n    Node* t=head; do { printf(\"%d%c\", t->d, t->n==head?'\\n':' '); t=t->n; } while(t!=head);\n}\nvoid cnt() {\n    if(!head) { printf(\"0\\n\"); return; }\n    int c=0; Node* t=head; do { c++; t=t->n; } while(t!=head); printf(\"%d\\n\", c);\n}\nvoid sch(int v) {\n    if(!head) { printf(\"Not Found\\n\"); return; }\n    int p=1; Node* t=head; do { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } while(t!=head);\n    printf(\"Not Found\\n\");\n}\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\nins_end 10\nins_beg 5\nins_end 20\nins_pos 2 8\ndisplay",
+                        "expectedOutput": "5 8 10 20"
+                    },
+                    {
+                        "input": "2\nins_end 5\ndisplay",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_pos 1 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_beg 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "4\nins_end 1\nins_end 2\nins_pos 3 3\ndisplay",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "2\nins_end 5\ndisplay",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_beg 5\nins_end 20\nins_pos 2 8\ndisplay",
+                        "expectedOutput": "5 8 10 20"
+                    },
+                    {
+                        "input": "4\nins_end 1\nins_end 2\nins_pos 3 3\ndisplay",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "2\nins_end 5\ndisplay",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_beg 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    }
+                ],
+                "solution_explanation": "Maintaining the correct infinite loop structure necessitates O(N) evaluation bounds anytime an operation requires locating the terminal tail block dynamically.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-gen-004",
+                "question_text": "Deletion Operations",
+                "question_description": "Implement a C program utilizing Circular Linked Lists focused on the following tasks: Positional parameter Deletions mapping completely correctly.",
+                "input_format": "Commands 'del_beg', 'del_end', 'del_key X'.",
+                "output_format": "'Underflow' for empty cyclical states.",
+                "constraints": "0 <= N <= 1000. Nodes must circularly map tail to head.",
+                "hints": "Deleting strictly single-element chains mandates precise setting of the local core head pointer to NULL unequivocally.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; nn->n=head; head=nn; t->n=head; }\n}\nvoid ie(int v) {\n    Node* nn = malloc(sizeof(Node)); nn->d=v;\n    if(!head) { head=nn; head->n=head; }\n    else { Node* t=head; while(t->n!=head) t=t->n; t->n=nn; nn->n=head; }\n}\nvoid ip(int p, int v) {\n    if(p==1) { ib(v); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn;\n}\nvoid db() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n!=head) t=t->n; Node* d=head; head=head->n; t->n=head; free(d); }\n}\nvoid de() {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->n==head) { free(head); head=NULL; }\n    else { Node* t=head; while(t->n->n!=head) t=t->n; free(t->n); t->n=head; }\n}\nvoid dp(int p) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(p==1) { db(); return; }\n    Node* t=head; for(int i=1; i<p-1 && t->n!=head; i++) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Underflow\\n\");\n}\nvoid dk(int v) {\n    if(!head) { printf(\"Underflow\\n\"); return; }\n    if(head->d==v) { db(); return; }\n    Node* t=head; while(t->n!=head && t->n->d!=v) t=t->n;\n    if(t->n!=head) { Node* d=t->n; t->n=d->n; free(d); }\n    else printf(\"Not Found\\n\");\n}\nvoid disp() {\n    if(!head) { printf(\"Empty\\n\"); return; }\n    Node* t=head; do { printf(\"%d%c\", t->d, t->n==head?'\\n':' '); t=t->n; } while(t!=head);\n}\nvoid cnt() {\n    if(!head) { printf(\"0\\n\"); return; }\n    int c=0; Node* t=head; do { c++; t=t->n; } while(t!=head); printf(\"%d\\n\", c);\n}\nvoid sch(int v) {\n    if(!head) { printf(\"Not Found\\n\"); return; }\n    int p=1; Node* t=head; do { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } while(t!=head);\n    printf(\"Not Found\\n\");\n}\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "7\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndel_end\ndel_key 20\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ndel_beg\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nins_end 10\ndel_pos 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "3\nins_end 5\ndel_key 9\ndisplay",
+                        "expectedOutput": "Not Found\n5"
+                    },
+                    {
+                        "input": "3\nins_end 5\ndel_key 9\ndisplay",
+                        "expectedOutput": "Not Found\n5"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "3\nins_end 10\ndel_pos 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ndel_beg\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nins_end 10\ndel_pos 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "Safe cyclic deletion forces mapping precisely to the previous node evaluating structurally correct cyclical pointers re-bounding to standard origins completely.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-gen-005",
+                "question_text": "Circular Validation",
+                "question_description": "Implement a C program logically strictly diagnosing Linked Lists: Check sequentially if standard Linked List maps dynamically Circular.",
+                "input_format": "Integer N, sequential list integers, then a hard boolean C integer explicitly defining cyclical nature globally.",
+                "output_format": "'Circular' definitively or exactly bounded 'Not Circular'.",
+                "constraints": "0 <= N <= 1000. Nodes must circularly map tail to head.",
+                "hints": "An exhaustive loop terminates when a variable accurately targets head immediately, opposed mathematically to achieving NULL logically.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node *h=NULL, *t=NULL; for(int i=0; i<n; i++){ int v; scanf(\"%d\",&v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else{ t->n=nn; t=nn; } } int c; if(scanf(\"%d\",&c)==1 && n>0 && c==1) t->n=h; if(!h) { printf(\"Not Circular\\n\"); return 0; } Node* curr=h->n; while(curr && curr!=h) curr=curr->n; if(curr==h) printf(\"Circular\\n\"); else printf(\"Not Circular\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "4\n1 2 3 4\n1",
+                        "expectedOutput": "Circular"
+                    },
+                    {
+                        "input": "4\n1 2 3 4\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "1\n99\n1",
+                        "expectedOutput": "Circular"
+                    },
+                    {
+                        "input": "2\n1 2\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "4\n1 2 3 4\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "2\n1 2\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "1\n99\n1",
+                        "expectedOutput": "Circular"
+                    },
+                    {
+                        "input": "4\n1 2 3 4\n0",
+                        "expectedOutput": "Not Circular"
+                    }
+                ],
+                "solution_explanation": "Identifying true circular pointer maps sequentially terminates perfectly mapping exact values against historical head pointers directly ensuring complete loop evaluation.",
+                "language": "C"
+            }
+        ]
+    }
+]

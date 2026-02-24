@@ -1,0 +1,511 @@
+[
+    {
+        "name": "Week 5: Singly Linked List",
+        "questions": [
+            {
+                "id": "w5-sll-gen-001",
+                "question_text": "Basic Operations and Traversal",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Create a Singly Linked List, Display all elements of the list, Count the number of nodes.",
+                "input_format": "Integer N (number of operations), followed by N lines of structural commands (e.g. 'ins_end X', 'display', 'count').",
+                "output_format": "For 'display', print space-separated elements from head to tail or 'Empty'. For 'count', print the integer count.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Maintain a head pointer initialized to NULL. For counting, traverse iteratively from head until you hit NULL.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid dk(int v) { if(!head) printf(\"Underflow\\n\"); else if(head->d==v) db(); else { Node* t=head; while(t->n && t->n->d!=v) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Not Found\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nvoid cnt() { int c=0; Node* t=head; while(t) { c++; t=t->n; } printf(\"%d\\n\", c); }\nvoid sch(int v) { int p=1; Node* t=head; while(t) { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } printf(\"Not Found\\n\"); }\nvoid rev() { Node *p=NULL, *c=head, *nx=NULL; while(c){ nx=c->n; c->n=p; p=c; c=nx; } head=p; }\nvoid mid() { if(!head){ printf(\"Empty\\n\"); return; } Node *s=head, *f=head; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"Middle: %d\\n\", s->d); }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n        else if(!strcmp(op, \"reverse\")) rev();\n        else if(!strcmp(op, \"middle\")) mid();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "4\nins_end 5\nins_end 15\ncount\nlength",
+                        "expectedOutput": "2\n2"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ncount\ndisplay",
+                        "expectedOutput": "0\nEmpty"
+                    },
+                    {
+                        "input": "1\ncount",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "3\nins_end 99\ndisplay\nlength",
+                        "expectedOutput": "99\n1"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 5\nins_end 15\ncount\nlength",
+                        "expectedOutput": "2\n2"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "2\ncount\ndisplay",
+                        "expectedOutput": "0\nEmpty"
+                    }
+                ],
+                "solution_explanation": "Basic list operations rely on the standard pointer-chasing technique. Operations like count and display take O(N) time as they require visiting every node.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-002",
+                "question_text": "Search Operation",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Search for the presence and position of an element.",
+                "input_format": "Integer N, followed by N operations including 'ins_end X' and 'search X'.",
+                "output_format": "For 'search X', print 'Found at P' where P is the 1-based traversal index, or 'Not Found'.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Iterate using a while loop and a counter variable. Break early and return the counter if node->data == target.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid dk(int v) { if(!head) printf(\"Underflow\\n\"); else if(head->d==v) db(); else { Node* t=head; while(t->n && t->n->d!=v) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Not Found\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nvoid cnt() { int c=0; Node* t=head; while(t) { c++; t=t->n; } printf(\"%d\\n\", c); }\nvoid sch(int v) { int p=1; Node* t=head; while(t) { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } printf(\"Not Found\\n\"); }\nvoid rev() { Node *p=NULL, *c=head, *nx=NULL; while(c){ nx=c->n; c->n=p; p=c; c=nx; } head=p; }\nvoid mid() { if(!head){ printf(\"Empty\\n\"); return; } Node *s=head, *f=head; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"Middle: %d\\n\", s->d); }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n        else if(!strcmp(op, \"reverse\")) rev();\n        else if(!strcmp(op, \"middle\")) mid();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\nins_end 10\nins_end 20\nsearch 20\nsearch 30",
+                        "expectedOutput": "Found at 2\nNot Found"
+                    },
+                    {
+                        "input": "1\nsearch 5",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 1",
+                        "expectedOutput": "Found at 1"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 2",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "5\nins_end 4\nins_end 5\nins_end 6\nsearch 5\nsearch 9",
+                        "expectedOutput": "Found at 2\nNot Found"
+                    },
+                    {
+                        "input": "3\nins_end 1\nins_end 2\nsearch 1",
+                        "expectedOutput": "Found at 1"
+                    },
+                    {
+                        "input": "5\nins_end 4\nins_end 5\nins_end 6\nsearch 5\nsearch 9",
+                        "expectedOutput": "Found at 2\nNot Found"
+                    },
+                    {
+                        "input": "1\nsearch 5",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "1\nsearch 5",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "1\nsearch 5",
+                        "expectedOutput": "Not Found"
+                    }
+                ],
+                "solution_explanation": "Searching is an O(N) operation in a sequentially accessed linked list. Breaking the loop upon match provides best-case performance optimization.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-003",
+                "question_text": "Insertion Operations",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Insert at Beginning, Insert at End, Insert at Given Position.",
+                "input_format": "Integer N, followed by inserting operations 'ins_beg X', 'ins_end X', 'ins_pos P X'.",
+                "output_format": "No direct output for insertion. Verify the memory structural state using a sequential 'display' command.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "When inserting at position P (P > 1), navigate exactly to position P-1 and carefully reroute the 'next' pointer.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid dk(int v) { if(!head) printf(\"Underflow\\n\"); else if(head->d==v) db(); else { Node* t=head; while(t->n && t->n->d!=v) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Not Found\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nvoid cnt() { int c=0; Node* t=head; while(t) { c++; t=t->n; } printf(\"%d\\n\", c); }\nvoid sch(int v) { int p=1; Node* t=head; while(t) { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } printf(\"Not Found\\n\"); }\nvoid rev() { Node *p=NULL, *c=head, *nx=NULL; while(c){ nx=c->n; c->n=p; p=c; c=nx; } head=p; }\nvoid mid() { if(!head){ printf(\"Empty\\n\"); return; } Node *s=head, *f=head; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"Middle: %d\\n\", s->d); }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n        else if(!strcmp(op, \"reverse\")) rev();\n        else if(!strcmp(op, \"middle\")) mid();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\nins_end 10\nins_beg 5\nins_end 20\nins_pos 2 8\ndisplay",
+                        "expectedOutput": "5 8 10 20"
+                    },
+                    {
+                        "input": "2\nins_end 5\ndisplay",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_pos 1 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_beg 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "4\nins_beg 1\nins_beg 2\nins_beg 3\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "2\nins_end 5\ndisplay",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "4\nins_beg 1\nins_beg 2\nins_beg 3\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_beg 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "4\nins_beg 1\nins_beg 2\nins_beg 3\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "4\nins_beg 1\nins_beg 2\nins_beg 3\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    }
+                ],
+                "solution_explanation": "Insertion manipulates memory node links. Prepending is an O(1) operation, whereas arbitrary position insertion requires O(N) traversal overhead.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-004",
+                "question_text": "Deletion Operations",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Delete at Beginning, Delete at End, Delete at position, Delete by Key.",
+                "input_format": "Integer N, followed by N operations like 'del_beg', 'del_end', 'del_pos P', 'del_key X'.",
+                "output_format": "Print 'Underflow' if attempting deletion from an empty list. Print 'Not Found' if deleting an absent key.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Ensure robust NULL checks before de-referencing. Do not forget to use 'free()' to prevent critical memory leaks.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid dk(int v) { if(!head) printf(\"Underflow\\n\"); else if(head->d==v) db(); else { Node* t=head; while(t->n && t->n->d!=v) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Not Found\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nvoid cnt() { int c=0; Node* t=head; while(t) { c++; t=t->n; } printf(\"%d\\n\", c); }\nvoid sch(int v) { int p=1; Node* t=head; while(t) { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } printf(\"Not Found\\n\"); }\nvoid rev() { Node *p=NULL, *c=head, *nx=NULL; while(c){ nx=c->n; c->n=p; p=c; c=nx; } head=p; }\nvoid mid() { if(!head){ printf(\"Empty\\n\"); return; } Node *s=head, *f=head; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"Middle: %d\\n\", s->d); }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n        else if(!strcmp(op, \"reverse\")) rev();\n        else if(!strcmp(op, \"middle\")) mid();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "7\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndel_end\ndel_key 20\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ndel_beg\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nins_end 10\ndel_pos 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "2\ndel_end\ndel_key 9",
+                        "expectedOutput": "Underflow\nUnderflow"
+                    },
+                    {
+                        "input": "7\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndel_end\ndel_key 20\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "7\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndel_end\ndel_key 20\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    }
+                ],
+                "solution_explanation": "A robust deletion engine safely bypasses the doomed node logically by updating the predecessor's next pointer, sequentially executing a free() operation.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-005",
+                "question_text": "List Reversal",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Reverse a structurally intact Linked List in-place.",
+                "input_format": "Integer N, followed by typical insertions and the exact command 'reverse'.",
+                "output_format": "Use 'display' after reversal to verify order. No explicit printed output from 'reverse'.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Three sliding pointers (prev, current, next) gracefully flip the 'next' orientation iteratively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid dk(int v) { if(!head) printf(\"Underflow\\n\"); else if(head->d==v) db(); else { Node* t=head; while(t->n && t->n->d!=v) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Not Found\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nvoid cnt() { int c=0; Node* t=head; while(t) { c++; t=t->n; } printf(\"%d\\n\", c); }\nvoid sch(int v) { int p=1; Node* t=head; while(t) { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } printf(\"Not Found\\n\"); }\nvoid rev() { Node *p=NULL, *c=head, *nx=NULL; while(c){ nx=c->n; c->n=p; p=c; c=nx; } head=p; }\nvoid mid() { if(!head){ printf(\"Empty\\n\"); return; } Node *s=head, *f=head; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"Middle: %d\\n\", s->d); }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n        else if(!strcmp(op, \"reverse\")) rev();\n        else if(!strcmp(op, \"middle\")) mid();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\nins_end 1\nins_end 2\nreverse\ndisplay",
+                        "expectedOutput": "2 1"
+                    },
+                    {
+                        "input": "2\nreverse\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "3\nins_end 10\nreverse\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "5\nins_end 1\nins_end 2\nins_end 3\nreverse\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "1\nreverse",
+                        "expectedOutput": ""
+                    },
+                    {
+                        "input": "3\nins_end 10\nreverse\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "3\nins_end 10\nreverse\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "4\nins_end 1\nins_end 2\nreverse\ndisplay",
+                        "expectedOutput": "2 1"
+                    },
+                    {
+                        "input": "5\nins_end 1\nins_end 2\nins_end 3\nreverse\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "4\nins_end 1\nins_end 2\nreverse\ndisplay",
+                        "expectedOutput": "2 1"
+                    }
+                ],
+                "solution_explanation": "An efficient in-place reversal flips the linkage directions iteratively in exactly O(N) time without requiring duplicated structural memory allocation.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-006",
+                "question_text": "Middle Element Detection",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Find the exact Middle Element of an uneven list systematically.",
+                "input_format": "Integer N, operations, and 'middle' to trigger the check.",
+                "output_format": "Print 'Middle: X' where X is the middle element data. Print 'Empty' if the link asserts NULL natively.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Tortoise and Hare algorithm dynamically iterates 'slow' by 1 step and 'fast' by 2 steps to triangulate the midpoint.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid dk(int v) { if(!head) printf(\"Underflow\\n\"); else if(head->d==v) db(); else { Node* t=head; while(t->n && t->n->d!=v) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Not Found\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nvoid cnt() { int c=0; Node* t=head; while(t) { c++; t=t->n; } printf(\"%d\\n\", c); }\nvoid sch(int v) { int p=1; Node* t=head; while(t) { if(t->d==v) { printf(\"Found at %d\\n\", p); return; } p++; t=t->n; } printf(\"Not Found\\n\"); }\nvoid rev() { Node *p=NULL, *c=head, *nx=NULL; while(c){ nx=c->n; c->n=p; p=c; c=nx; } head=p; }\nvoid mid() { if(!head){ printf(\"Empty\\n\"); return; } Node *s=head, *f=head; while(f && f->n){ s=s->n; f=f->n->n; } printf(\"Middle: %d\\n\", s->d); }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"del_key\")) { scanf(\"%d\", &v); dk(v); }\n        else if(!strcmp(op, \"display\")) disp();\n        else if(!strcmp(op, \"count\") || !strcmp(op, \"length\")) cnt();\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); sch(v); }\n        else if(!strcmp(op, \"reverse\")) rev();\n        else if(!strcmp(op, \"middle\")) mid();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "6\nins_end 1\nins_end 2\nins_end 3\nins_end 4\nins_end 5\nmiddle",
+                        "expectedOutput": "Middle: 3"
+                    },
+                    {
+                        "input": "1\nmiddle",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\nins_end 1\nins_end 2\nins_end 3\nins_end 4\nmiddle",
+                        "expectedOutput": "Middle: 3"
+                    },
+                    {
+                        "input": "2\nins_end 1\nmiddle",
+                        "expectedOutput": "Middle: 1"
+                    },
+                    {
+                        "input": "3\nins_end 99\nins_end 88\nmiddle",
+                        "expectedOutput": "Middle: 88"
+                    },
+                    {
+                        "input": "2\nins_end 1\nmiddle",
+                        "expectedOutput": "Middle: 1"
+                    },
+                    {
+                        "input": "1\nmiddle",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 2\nins_end 3\nins_end 4\nins_end 5\nmiddle",
+                        "expectedOutput": "Middle: 3"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 2\nins_end 3\nins_end 4\nins_end 5\nmiddle",
+                        "expectedOutput": "Middle: 3"
+                    },
+                    {
+                        "input": "1\nmiddle",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "The Tortoise and Hare algorithm perfectly identifies the midpoint without knowing the length explicitly, operating inside a single optimized O(N/2) loop.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-007",
+                "question_text": "Sort Linked List",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Sort an explicitly provided random Linked List sequentially.",
+                "input_format": "Integer N specifying the total list size, exactly followed by N integers. Input 0 signifies 'Empty'.",
+                "output_format": "Print securely strictly sorted ascending values, space delineated.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "For singly linked structures, swapping integer values iteratively inside nested loops is structurally simpler than unlinking nodes.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid sort(Node* h) { for(Node* i=h; i; i=i->n) for(Node* j=i->n; j; j=j->n) if(i->d > j->d){ int t=i->d; i->d=j->d; j->d=t; } }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h1=create(n);\n    sort(h1);\n    Node* x = h1;\n    if(!x) printf(\"Empty\\n\");\n    while(x) { printf(\"%d%c\", x->d, x->n?' ':'\\n'); x=x->n; }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n4 2 5 1 3",
+                        "expectedOutput": "1 2 3 4 5"
+                    },
+                    {
+                        "input": "3\n10 10 10",
+                        "expectedOutput": "10 10 10"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "4\n8 1 9 2",
+                        "expectedOutput": "1 2 8 9"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "5\n4 2 5 1 3",
+                        "expectedOutput": "1 2 3 4 5"
+                    },
+                    {
+                        "input": "4\n8 1 9 2",
+                        "expectedOutput": "1 2 8 9"
+                    },
+                    {
+                        "input": "4\n8 1 9 2",
+                        "expectedOutput": "1 2 8 9"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    }
+                ],
+                "solution_explanation": "A bubble-sort mechanism directly applied swaps the dynamic payload payloads. O(N^2) complexity provides an implementable yet safe structural sorting protocol.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-008",
+                "question_text": "Merge Two Sorted Linked Lists",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Merge Two specifically pre-Sorted Linked Lists progressively.",
+                "input_format": "Size N and N sorted ints for List 1. Size M and M sorted ints for List 2.",
+                "output_format": "One continuous space-separated ordered output representing the merged list nodes.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Apply a 'dummy node' approach tracking list heads, recursively pointing next to the currently smallest identified value.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nvoid sort(Node* h) { for(Node* i=h; i; i=i->n) for(Node* j=i->n; j; j=j->n) if(i->d > j->d){ int t=i->d; i->d=j->d; j->d=t; } }\nint main() {\n    int n,m; if(scanf(\"%d\",&n)!=1) return 0; Node* h1=create(n);\n    if(scanf(\"%d\",&m)!=1) return 0; Node* h2=create(m);\n    sort(h1); sort(h2);\n    Node d; Node* t=&d; d.n=NULL;\n    while(h1&&h2){ if(h1->d <= h2->d){ t->n=h1; h1=h1->n; } else { t->n=h2; h2=h2->n; } t=t->n; }\n    t->n = h1?h1:h2;\n    sort(d.n);\n    Node* x = d.n;\n    if(!x) printf(\"Empty\\n\");\n    while(x) { printf(\"%d%c\", x->d, x->n?' ':'\\n'); x=x->n; }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3\n5 3 1\n3\n6 4 2",
+                        "expectedOutput": "1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "2\n10 5\n0",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "3\n1 1 1\n3\n1 1 1",
+                        "expectedOutput": "1 1 1 1 1 1"
+                    },
+                    {
+                        "input": "0\n\n2\n9 2",
+                        "expectedOutput": "2 9"
+                    },
+                    {
+                        "input": "3\n1 1 1\n3\n1 1 1",
+                        "expectedOutput": "1 1 1 1 1 1"
+                    },
+                    {
+                        "input": "0\n\n2\n9 2",
+                        "expectedOutput": "2 9"
+                    },
+                    {
+                        "input": "3\n5 3 1\n3\n6 4 2",
+                        "expectedOutput": "1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\n10 5\n0",
+                        "expectedOutput": "5 10"
+                    }
+                ],
+                "solution_explanation": "O(N+M) merge sort component efficiently loops advancing pointers independently based on strict ordinal evaluation of current node data payload.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-009",
+                "question_text": "Polynomial Addition",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Perform logical addition algebra combining two polynomials identically.",
+                "input_format": "Size N followed by Pairs (coeff, exp). Size M followed by Pairs (coeff, exp).",
+                "output_format": "Standard formal polynomial math format e.g., 'Cx^A + Dx^B'.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Structurally sequence and sort identically generated polynomials, combining similar exponents, dropping zeros efficiently.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int c, e; struct Node* n; } Node;\nNode* create(int k) { Node *h=NULL, *t=NULL; while(k--) { int co, ex; scanf(\"%d %d\", &co, &ex); Node* nn=malloc(sizeof(Node)); nn->c=co; nn->e=ex; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } return h; }\nint main() { int n, m; if(scanf(\"%d\", &n)!=1) return 0; Node* p1 = create(n); if(scanf(\"%d\", &m)!=1) return 0; Node* p2 = create(m); Node d; Node* t = &d; d.n=NULL; while(p1 && p2) { Node* nn = malloc(sizeof(Node)); nn->n=NULL; if(p1->e > p2->e) { nn->c = p1->c; nn->e = p1->e; p1=p1->n; } else if(p1->e < p2->e) { nn->c = p2->c; nn->e = p2->e; p2=p2->n; } else { nn->c = p1->c+p2->c; nn->e = p1->e; p1=p1->n; p2=p2->n; } if(nn->c != 0) { t->n=nn; t=nn; } else free(nn); } while(p1) { Node* nn=malloc(sizeof(Node)); *nn=*p1; nn->n=NULL; t->n=nn; t=nn; p1=p1->n; } while(p2) { Node* nn=malloc(sizeof(Node)); *nn=*p2; nn->n=NULL; t->n=nn; t=nn; p2=p2->n; } if(!d.n) { printf(\"0\\n\"); return 0; } Node* x = d.n; while(x) { printf(\"%dx^%d%s\", x->c, x->e, x->n?\" + \":\"\"); x=x->n; } printf(\"\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n5 2 4 1 2 0\n3\n-5 2 3 1 1 0",
+                        "expectedOutput": "7x^1 + 3x^0"
+                    },
+                    {
+                        "input": "1\n5 2\n1\n-5 2",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "0\n\n1\n6 4",
+                        "expectedOutput": "6x^4"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "1\n4 1\n1\n4 1",
+                        "expectedOutput": "8x^1"
+                    },
+                    {
+                        "input": "1\n4 1\n1\n4 1",
+                        "expectedOutput": "8x^1"
+                    },
+                    {
+                        "input": "3\n5 2 4 1 2 0\n3\n-5 2 3 1 1 0",
+                        "expectedOutput": "7x^1 + 3x^0"
+                    },
+                    {
+                        "input": "0\n\n1\n6 4",
+                        "expectedOutput": "6x^4"
+                    },
+                    {
+                        "input": "1\n4 1\n1\n4 1",
+                        "expectedOutput": "8x^1"
+                    },
+                    {
+                        "input": "0\n\n0",
+                        "expectedOutput": "0"
+                    }
+                ],
+                "solution_explanation": "Linked structures handle variable algebraic sets natively. Matching exponent values dynamically aggregates coefficients across mathematical inputs directly.",
+                "language": "C"
+            }
+        ]
+    }
+]

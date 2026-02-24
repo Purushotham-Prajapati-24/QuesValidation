@@ -1,0 +1,423 @@
+[
+    {
+        "name": "Week - 6: Circular Linked List",
+        "questions": [
+            {
+                "id": "w6-cll-001",
+                "question_text": "Create a Circular Linked List",
+                "question_description": "Implement a C program to create a circular linked list using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "4\n1 2 3 4",
+                        "expectedOutput": "1 2 3 4"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Create a Circular Linked List.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-002",
+                "question_text": "Display Circular Linked List",
+                "question_description": "Implement a C program to display circular linked list using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\n5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "4\n1 2 3 4",
+                        "expectedOutput": "1 2 3 4"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Display Circular Linked List.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-003",
+                "question_text": "Count Number of Nodes",
+                "question_description": "Implement a C program to count number of nodes using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h){ printf(\"0\\n\"); return 0; } int c=0; Node* t=h; do{c++; t=t->n;} while(t!=h); printf(\"%d\\n\", c); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "5\n1 2 3 4 5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Count Number of Nodes.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-004",
+                "question_text": "Search an Element",
+                "question_description": "Implement a C program to search an element using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N elements, then integer X to search.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; if(!h){ printf(\"Not Found\\n\"); return 0; } int p=1; Node* t=h; do{ if(t->d==x){ printf(\"Found at %d\\n\", p); return 0; } p++; t=t->n; } while(t!=h); printf(\"Not Found\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n20",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "3\n10 20 30\n40",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "0\n5",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "1\n5\n5",
+                        "expectedOutput": "Found at 1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Search an Element.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-005",
+                "question_text": "Find Length of Circular Linked List",
+                "question_description": "Implement a C program to find length of circular linked list using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h){ printf(\"0\\n\"); return 0; } int c=0; Node* t=h; do{c++; t=t->n;} while(t!=h); printf(\"%d\\n\", c); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "5\n1 2 3 4 5",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Find Length of Circular Linked List.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-006",
+                "question_text": "Insert at Beginning",
+                "question_description": "Implement a C program to insert at beginning using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N list elements, then integer X to insert.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; Node* nn=malloc(sizeof(Node)); nn->d=x; if(!h){ h=nn; h->n=h; } else { Node* t=h; while(t->n!=h) t=t->n; nn->n=h; h=nn; t->n=h; } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n5",
+                        "expectedOutput": "5 10 20 30"
+                    },
+                    {
+                        "input": "0\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "1\n20\n10",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "2\n1 2\n3",
+                        "expectedOutput": "3 1 2"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Insert at Beginning.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-007",
+                "question_text": "Insert at End",
+                "question_description": "Implement a C program to insert at end using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N list elements, then integer X to insert.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; Node* nn=malloc(sizeof(Node)); nn->d=x; if(!h){ h=nn; h->n=h; } else { Node* t=h; while(t->n!=h) t=t->n; t->n=nn; nn->n=h; } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n40",
+                        "expectedOutput": "10 20 30 40"
+                    },
+                    {
+                        "input": "0\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "1\n20\n30",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "2\n1 2\n3",
+                        "expectedOutput": "1 2 3"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Insert at End.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-008",
+                "question_text": "Insert at Given Position",
+                "question_description": "Implement a C program to insert at given position using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N elements, Pos P, Value X.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n, p, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d %d\",&p,&x)!=1) return 0; Node* nn=malloc(sizeof(Node)); nn->d=x; if(p==1){ if(!h) { h=nn; h->n=h; } else { Node* t=h; while(t->n!=h) t=t->n; nn->n=h; h=nn; t->n=h; } } else { Node* t=h; for(int i=1; i<p-1 && t->n!=h; i++) t=t->n; nn->n=t->n; t->n=nn; } disp(h); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 30 40\n2 20",
+                        "expectedOutput": "10 20 30 40"
+                    },
+                    {
+                        "input": "0\n1 10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "3\n10 20 30\n4 40",
+                        "expectedOutput": "10 20 30 40"
+                    },
+                    {
+                        "input": "3\n10 20 30\n1 5",
+                        "expectedOutput": "5 10 20 30"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Insert at Given Position.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-009",
+                "question_text": "Delete at Beginning",
+                "question_description": "Implement a C program to delete at beginning using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h) printf(\"Underflow\\n\"); else if(h->n==h){ free(h); h=NULL; disp(h); } else { Node* t=h; while(t->n!=h) t=t->n; Node* d=h; h=h->n; t->n=h; free(d); disp(h); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "2\n1 2",
+                        "expectedOutput": "2"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Delete at Beginning.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-010",
+                "question_text": "Delete at End",
+                "question_description": "Implement a C program to delete at end using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N (size of list) followed by N integers. Depending on the operation, additional inputs may follow.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(!h) printf(\"Underflow\\n\"); else if(h->n==h){ free(h); h=NULL; disp(h); } else { Node* t=h; while(t->n->n!=h) t=t->n; free(t->n); t->n=h; disp(h); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "2\n1 2",
+                        "expectedOutput": "1"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Delete at End.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-011",
+                "question_text": "Delete at Given Position",
+                "question_description": "Implement a C program to delete at given position using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N list elements, then Position P (1-based).",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n, p; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&p)!=1) return 0; if(!h) printf(\"Underflow\\n\"); else if(p==1){ if(h->n==h){ free(h); h=NULL; } else { Node* t=h; while(t->n!=h) t=t->n; Node* d=h; h=h->n; t->n=h; free(d); } disp(h); } else { Node* t=h; for(int i=1; i<p-1 && t->n!=h; i++) t=t->n; if(t->n!=h){ Node* d=t->n; t->n=d->n; free(d); } disp(h); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "4\n10 20 30 40\n2",
+                        "expectedOutput": "10 30 40"
+                    },
+                    {
+                        "input": "0\n1",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "3\n10 20 30\n1",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "3\n10 20 30\n3",
+                        "expectedOutput": "10 20"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Delete at Given Position.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-012",
+                "question_text": "Delete by Key / Value",
+                "question_description": "Implement a C program to delete by key / value using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N list elements, then Key X.",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* create(int n) { if(n<=0) return NULL; Node *h=NULL, *t=NULL; while(n--) { int v; scanf(\"%d\", &v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else { t->n=nn; t=nn; } } if(t) t->n=h; return h; }\nvoid disp(Node* h) { if(!h) { printf(\"Empty\\n\"); return; } Node* t=h; do { printf(\"%d%c\", t->d, t->n==h?'\\n':' '); t=t->n; } while(t!=h); }\nint main() { int n, x; if(scanf(\"%d\",&n)!=1) return 0; Node* h = create(n); if(scanf(\"%d\",&x)!=1) return 0; if(!h) printf(\"Underflow\\n\"); else if(h->d==x) { if(h->n==h){ free(h); h=NULL; } else { Node* t=h; while(t->n!=h) t=t->n; Node* d=h; h=h->n; t->n=h; free(d); } disp(h); } else { Node* t=h; while(t->n!=h && t->n->d!=x) t=t->n; if(t->n!=h){ Node* d=t->n; t->n=d->n; free(d); disp(h); } else printf(\"Not Found\\n\"); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30\n20",
+                        "expectedOutput": "10 30"
+                    },
+                    {
+                        "input": "3\n10 20 30\n40",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "0\n10",
+                        "expectedOutput": "Underflow"
+                    },
+                    {
+                        "input": "1\n10\n10",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Delete by Key / Value.",
+                "language": "C"
+            },
+            {
+                "id": "w6-cll-013",
+                "question_text": "Check if Linked List is Circular",
+                "question_description": "Implement a C program to check if linked list is circular using a circular linked list. The tail node must point back to the head node.",
+                "input_format": "Integer N, N integers. Integer C (1 to make strictly circular, 0 to keep linear).",
+                "output_format": "The modified circular linked list elements separated by space, or the specific query result.",
+                "constraints": "0 <= N <= 100",
+                "hints": "Make sure to maintain the circular nature by linking the tail's next to the new head or existing head.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nint main() { int n; if(scanf(\"%d\",&n)!=1) return 0; Node *h=NULL, *t=NULL; for(int i=0; i<n; i++){ int v; scanf(\"%d\",&v); Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!h) h=t=nn; else{ t->n=nn; t=nn; } } int c; if(scanf(\"%d\",&c)==1 && n>0 && c==1) t->n=h; if(!h) { printf(\"Not Circular\\n\"); return 0; } Node* curr=h->n; while(curr && curr!=h) curr=curr->n; if(curr==h) printf(\"Circular\\n\"); else printf(\"Not Circular\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "4\n1 2 3 4\n1",
+                        "expectedOutput": "Circular"
+                    },
+                    {
+                        "input": "4\n1 2 3 4\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "0\n0",
+                        "expectedOutput": "Not Circular"
+                    },
+                    {
+                        "input": "1\n99\n1",
+                        "expectedOutput": "Circular"
+                    }
+                ],
+                "solution_explanation": "Dynamically allocates nodes to form a circular linked list and performs: Check if Linked List is Circular.",
+                "language": "C"
+            }
+        ]
+    }
+]
