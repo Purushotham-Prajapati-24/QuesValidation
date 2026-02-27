@@ -61,9 +61,9 @@
             {
                 "id": "w7-dll-002",
                 "question_text": "Double-Linked List: Arbitrary Deletions",
-                "question_description": "Advance your DLL implementation to perfectly handle destructive deletion boundaries (`del_beg`, `del_end`, `del_pos`). Validate that deleting unique edge cases updates the global `head` and `tail` correctly without segmentation fault strings.",
-                "input_format": "Integer N (comma-separated commands), then N iterations mapping string ops to deletion handlers.",
-                "output_format": "Appropriate space array, or \"Underflow\" distinct text string on unauthorized deletion loops.",
+                "question_description": "Advance your DLL implementation to perfectly handle destructive deletion boundaries (`del_beg`, `del_end`, `del_pos`). Validate that deleting unique edge cases updates the global `head` and `tail` correctly without memory access violations.",
+                "input_format": "Integer N followed by N newline-separated commands indicating deletion operations.",
+                "output_format": "Space-separated string of node values, or the exact \"Underflow\" distinct text string on unauthorized deletions.",
                 "constraints": "N <= 1000. All memory spaces gracefully freed mapping memory constraints.",
                 "hints": "Be profoundly careful to re-assign global `tail = NULL` if deleting the last remaining node in the entire list.",
                 "question_type": "CODING",

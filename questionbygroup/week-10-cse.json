@@ -5,7 +5,7 @@
             {
                 "id": "w10-sort-001",
                 "question_text": "Merge Sort Implementation",
-                "question_description": "Implement the **Merge Sort** algorithm to sort a given array of integers in ascending order. Observe how the array handles dynamic fractional pivots and recursive joining behavior.",
+                "question_description": "Implement the **Merge Sort** algorithm to sort a given array of integers in ascending order. Observe how the array recursively divides at the midpoint and merges the subarrays back together in sorted order.",
                 "input_format": "Integer N (size of array), followed by N space-separated integers.",
                 "output_format": "The sorted sequence of N integers, single-spaced.",
                 "constraints": "N <= 1000. Use standard integer typing. Handle an empty list without seg-faulting.",
@@ -86,7 +86,7 @@
                     },
                     {
                         "input": "0",
-                        "expectedOutput": ""
+                        "expectedOutput": "\n"
                     },
                     {
                         "input": "4\n8 1 9 2",
