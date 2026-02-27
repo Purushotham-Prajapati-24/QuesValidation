@@ -30,7 +30,7 @@
                     },
                     {
                         "input": "0",
-                        "expectedOutput": ""
+                        "expectedOutput": "\n"
                     },
                     {
                         "input": "4\n8 1 9 2",
@@ -142,7 +142,7 @@
                     },
                     {
                         "input": "0",
-                        "expectedOutput": ""
+                        "expectedOutput": "\n"
                     },
                     {
                         "input": "4\n8 1 9 2",
