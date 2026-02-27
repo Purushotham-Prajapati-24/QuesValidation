@@ -1,0 +1,287 @@
+[
+    {
+        "name": "Week 7: Double Linked List, Stack, and Queue using Linked List",
+        "questions": [
+            {
+                "id": "w7-dll-001",
+                "question_text": "Double-Linked List: Insertions and Bidirectional Display",
+                "question_description": "Implement a **Double-Linked List** evaluating basic insertions (`ins_beg`, `ins_end`, `ins_pos`) and validating bidirectional integrity through exact forward (`display`) and reverse string matching (`rev_display`).",
+                "input_format": "Integer N (commands), followed by N operations (e.g. `ins_beg 5`, `rev_display`).",
+                "output_format": "Singular space-delimited string of node values from `display` or `rev_display` operations, or `Empty` if no nodes exist.",
+                "constraints": "N <= 1000. Data values within integer limits. Memory limits apply.",
+                "hints": "Double-Linked Lists require managing `prev` and `next` pointers precisely. For backwards traversal, keep a global `tail` pointer to quickly start from the end.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* prev;\n    struct Node* next;\n} Node;\n\nNode* head = NULL;\nNode* tail = NULL;\n\nvoid ins_beg(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = NULL;\n    nn->next = head;\n    if (head) head->prev = nn;\n    else tail = nn;\n    head = nn;\n}\n\nvoid ins_end(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = NULL;\n    nn->prev = tail;\n    if (tail) tail->next = nn;\n    else head = nn;\n    tail = nn;\n}\n\nvoid ins_pos(int p, int v) {\n    if (p == 1) { ins_beg(v); return; }\n    Node* t = head;\n    for (int i = 1; i < p - 1 && t; i++) t = t->next;\n    if (!t) return;\n    if (!t->next) { ins_end(v); return; }\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = t;\n    nn->next = t->next;\n    t->next->prev = nn;\n    t->next = nn;\n}\n\nvoid del_beg() {\n    if (!head) { printf(\"Underflow\\n\"); return; }\n    Node* t = head;\n    head = head->next;\n    if (head) head->prev = NULL;\n    else tail = NULL;\n    free(t);\n}\n\nvoid del_end() {\n    if (!tail) { printf(\"Underflow\\n\"); return; }\n    Node* t = tail;\n    tail = tail->prev;\n    if (tail) tail->next = NULL;\n    else head = NULL;\n    free(t);\n}\n\nvoid del_pos(int p) {\n    if (!head) { printf(\"Underflow\\n\"); return; }\n    if (p == 1) { del_beg(); return; }\n    Node* t = head;\n    for (int i = 1; i < p && t; i++) t = t->next;\n    if (!t) { printf(\"Underflow\\n\"); return; }\n    if (!t->next) { del_end(); return; }\n    t->prev->next = t->next;\n    t->next->prev = t->prev;\n    free(t);\n}\n\nvoid display() {\n    if (!head) { printf(\"Empty\\n\"); return; }\n    Node* t = head;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nvoid rev_display() {\n    if (!tail) { printf(\"Empty\\n\"); return; }\n    Node* t = tail;\n    while (t) {\n        printf(\"%d%c\", t->data, t->prev ? ' ' : '\\n');\n        t = t->prev;\n    }\n}\n\nvoid search(int v) {\n    int p = 1;\n    Node* t = head;\n    while (t) {\n        if (t->data == v) { printf(\"Found at %d\\n\", p); return; }\n        p++;\n        t = t->next;\n    }\n    printf(\"Not Found\\n\");\n}\n\nvoid count() {\n    int c = 0;\n    Node* t = head;\n    while (t) { c++; t = t->next; }\n    printf(\"%d\\n\", c);\n}\n\nint main() {\n    int N, v, p;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ins_beg(v); }\n        else if (!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ins_end(v); }\n        else if (!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ins_pos(p, v); }\n        else if (!strcmp(op, \"del_beg\")) del_beg();\n        else if (!strcmp(op, \"del_end\")) del_end();\n        else if (!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); del_pos(p); }\n        else if (!strcmp(op, \"display\")) display();\n        else if (!strcmp(op, \"rev_display\")) rev_display();\n        else if (!strcmp(op, \"search\")) { scanf(\"%d\", &v); search(v); }\n        else if (!strcmp(op, \"count\")) count();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "Insertions must strictly update adjoining node logic (both neighbor's `next` and neighbor's `prev`). Printing uses `display` running from global `head`, while `rev_display` executes via iteration starting uniquely backwards from global `tail` pointer.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "4\nins_beg 5\nins_beg 1\nrev_display\ndisplay",
+                        "expectedOutput": "5 1\n1 5"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\nrev_display",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 7\nins_pos 2 9\ndisplay\nrev_display",
+                        "expectedOutput": "7 9\n9 7"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 3\nins_pos 2 2\ndisplay\nrev_display\ndisplay",
+                        "expectedOutput": "1 2 3\n3 2 1\n1 2 3"
+                    },
+                    {
+                        "input": "3\nins_pos 1 42\ndisplay\nrev_display",
+                        "expectedOutput": "42\n42"
+                    },
+                    {
+                        "input": "5\nins_beg 3\nins_beg 2\nins_beg 1\ndisplay\nrev_display",
+                        "expectedOutput": "1 2 3\n3 2 1"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_beg 5\nrev_display",
+                        "expectedOutput": "10 5"
+                    },
+                    {
+                        "input": "4\nins_end 99\nins_pos 2 100\nins_pos 1 98\ndisplay",
+                        "expectedOutput": "98 99 100"
+                    }
+                ]
+            },
+            {
+                "id": "w7-dll-002",
+                "question_text": "Double-Linked List: Arbitrary Deletions",
+                "question_description": "Advance your DLL implementation to perfectly handle destructive deletion boundaries (`del_beg`, `del_end`, `del_pos`). Validate that deleting unique edge cases updates the global `head` and `tail` correctly without segmentation fault strings.",
+                "input_format": "Integer N (comma-separated commands), then N iterations mapping string ops to deletion handlers.",
+                "output_format": "Appropriate space array, or \"Underflow\" distinct text string on unauthorized deletion loops.",
+                "constraints": "N <= 1000. All memory spaces gracefully freed mapping memory constraints.",
+                "hints": "Be profoundly careful to re-assign global `tail = NULL` if deleting the last remaining node in the entire list.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* prev;\n    struct Node* next;\n} Node;\n\nNode* head = NULL;\nNode* tail = NULL;\n\nvoid ins_beg(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = NULL;\n    nn->next = head;\n    if (head) head->prev = nn;\n    else tail = nn;\n    head = nn;\n}\n\nvoid ins_end(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = NULL;\n    nn->prev = tail;\n    if (tail) tail->next = nn;\n    else head = nn;\n    tail = nn;\n}\n\nvoid ins_pos(int p, int v) {\n    if (p == 1) { ins_beg(v); return; }\n    Node* t = head;\n    for (int i = 1; i < p - 1 && t; i++) t = t->next;\n    if (!t) return;\n    if (!t->next) { ins_end(v); return; }\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = t;\n    nn->next = t->next;\n    t->next->prev = nn;\n    t->next = nn;\n}\n\nvoid del_beg() {\n    if (!head) { printf(\"Underflow\\n\"); return; }\n    Node* t = head;\n    head = head->next;\n    if (head) head->prev = NULL;\n    else tail = NULL;\n    free(t);\n}\n\nvoid del_end() {\n    if (!tail) { printf(\"Underflow\\n\"); return; }\n    Node* t = tail;\n    tail = tail->prev;\n    if (tail) tail->next = NULL;\n    else head = NULL;\n    free(t);\n}\n\nvoid del_pos(int p) {\n    if (!head) { printf(\"Underflow\\n\"); return; }\n    if (p == 1) { del_beg(); return; }\n    Node* t = head;\n    for (int i = 1; i < p && t; i++) t = t->next;\n    if (!t) { printf(\"Underflow\\n\"); return; }\n    if (!t->next) { del_end(); return; }\n    t->prev->next = t->next;\n    t->next->prev = t->prev;\n    free(t);\n}\n\nvoid display() {\n    if (!head) { printf(\"Empty\\n\"); return; }\n    Node* t = head;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nvoid rev_display() {\n    if (!tail) { printf(\"Empty\\n\"); return; }\n    Node* t = tail;\n    while (t) {\n        printf(\"%d%c\", t->data, t->prev ? ' ' : '\\n');\n        t = t->prev;\n    }\n}\n\nvoid search(int v) {\n    int p = 1;\n    Node* t = head;\n    while (t) {\n        if (t->data == v) { printf(\"Found at %d\\n\", p); return; }\n        p++;\n        t = t->next;\n    }\n    printf(\"Not Found\\n\");\n}\n\nvoid count() {\n    int c = 0;\n    Node* t = head;\n    while (t) { c++; t = t->next; }\n    printf(\"%d\\n\", c);\n}\n\nint main() {\n    int N, v, p;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ins_beg(v); }\n        else if (!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ins_end(v); }\n        else if (!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ins_pos(p, v); }\n        else if (!strcmp(op, \"del_beg\")) del_beg();\n        else if (!strcmp(op, \"del_end\")) del_end();\n        else if (!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); del_pos(p); }\n        else if (!strcmp(op, \"display\")) display();\n        else if (!strcmp(op, \"rev_display\")) rev_display();\n        else if (!strcmp(op, \"search\")) { scanf(\"%d\", &v); search(v); }\n        else if (!strcmp(op, \"count\")) count();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "The logic evaluates bounds check for `Underflow` before updating node adjacencies. By verifying node presence natively prior to pointer unlinking, memory unmapping correctly avoids stray memory leaps or isolated pointer garbage.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_end\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\ndel_beg\nrev_display\ndisplay",
+                        "expectedOutput": "20\n20"
+                    },
+                    {
+                        "input": "2\ndel_beg\ndel_end",
+                        "expectedOutput": "Underflow\nUnderflow"
+                    },
+                    {
+                        "input": "4\nins_end 5\ndel_end\ndel_end\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nins_end 5\ndel_pos 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\nins_end 1\nins_end 2\nins_end 3\ndel_pos 2\ndisplay",
+                        "expectedOutput": "1 3"
+                    },
+                    {
+                        "input": "3\nins_end 1\ndel_pos 5\ndisplay",
+                        "expectedOutput": "Underflow\n1"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 2\nins_end 3\ndel_end\ndel_beg\ndisplay",
+                        "expectedOutput": "2"
+                    },
+                    {
+                        "input": "3\nins_end 5\ndel_pos 1\nrev_display",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\nins_end 1\nins_end 2\ndel_beg\ndel_beg\ndel_beg",
+                        "expectedOutput": "Underflow"
+                    }
+                ]
+            },
+            {
+                "id": "w7-dll-003",
+                "question_text": "Double-Linked List: Search and Count",
+                "question_description": "Utilize bidirectional list generation to write custom evaluators counting the sheer volume of elements (`count`) alongside strict linear positional mapping indexing queries (`search`).",
+                "input_format": "Integer N followed by mapping commands spanning `search X` querying positions.",
+                "output_format": "Single integer counts or dynamically injected text mapped exactly outputting \"Found at X\" formats.",
+                "constraints": "N <= 1000. Count starts linearly mapping 1-based exact logical indexes.",
+                "hints": "Both operations are standard `O(n)` tasks traversing explicitly using an independent iteration pointer running through `t=t->next` exclusively avoiding global mutations.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* prev;\n    struct Node* next;\n} Node;\n\nNode* head = NULL;\nNode* tail = NULL;\n\nvoid ins_beg(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = NULL;\n    nn->next = head;\n    if (head) head->prev = nn;\n    else tail = nn;\n    head = nn;\n}\n\nvoid ins_end(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = NULL;\n    nn->prev = tail;\n    if (tail) tail->next = nn;\n    else head = nn;\n    tail = nn;\n}\n\nvoid ins_pos(int p, int v) {\n    if (p == 1) { ins_beg(v); return; }\n    Node* t = head;\n    for (int i = 1; i < p - 1 && t; i++) t = t->next;\n    if (!t) return;\n    if (!t->next) { ins_end(v); return; }\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = t;\n    nn->next = t->next;\n    t->next->prev = nn;\n    t->next = nn;\n}\n\nvoid del_beg() {\n    if (!head) { printf(\"Underflow\\n\"); return; }\n    Node* t = head;\n    head = head->next;\n    if (head) head->prev = NULL;\n    else tail = NULL;\n    free(t);\n}\n\nvoid del_end() {\n    if (!tail) { printf(\"Underflow\\n\"); return; }\n    Node* t = tail;\n    tail = tail->prev;\n    if (tail) tail->next = NULL;\n    else head = NULL;\n    free(t);\n}\n\nvoid del_pos(int p) {\n    if (!head) { printf(\"Underflow\\n\"); return; }\n    if (p == 1) { del_beg(); return; }\n    Node* t = head;\n    for (int i = 1; i < p && t; i++) t = t->next;\n    if (!t) { printf(\"Underflow\\n\"); return; }\n    if (!t->next) { del_end(); return; }\n    t->prev->next = t->next;\n    t->next->prev = t->prev;\n    free(t);\n}\n\nvoid display() {\n    if (!head) { printf(\"Empty\\n\"); return; }\n    Node* t = head;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nvoid rev_display() {\n    if (!tail) { printf(\"Empty\\n\"); return; }\n    Node* t = tail;\n    while (t) {\n        printf(\"%d%c\", t->data, t->prev ? ' ' : '\\n');\n        t = t->prev;\n    }\n}\n\nvoid search(int v) {\n    int p = 1;\n    Node* t = head;\n    while (t) {\n        if (t->data == v) { printf(\"Found at %d\\n\", p); return; }\n        p++;\n        t = t->next;\n    }\n    printf(\"Not Found\\n\");\n}\n\nvoid count() {\n    int c = 0;\n    Node* t = head;\n    while (t) { c++; t = t->next; }\n    printf(\"%d\\n\", c);\n}\n\nint main() {\n    int N, v, p;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ins_beg(v); }\n        else if (!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ins_end(v); }\n        else if (!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ins_pos(p, v); }\n        else if (!strcmp(op, \"del_beg\")) del_beg();\n        else if (!strcmp(op, \"del_end\")) del_end();\n        else if (!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); del_pos(p); }\n        else if (!strcmp(op, \"display\")) display();\n        else if (!strcmp(op, \"rev_display\")) rev_display();\n        else if (!strcmp(op, \"search\")) { scanf(\"%d\", &v); search(v); }\n        else if (!strcmp(op, \"count\")) count();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "Iteration executes identically across Single or Double variations mapping list parameters. Validating integer variables linearly identifies key positions avoiding binary or sorted tree lookups in default Linked List mappings.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ncount",
+                        "expectedOutput": "2"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\nins_end 30\nsearch 20",
+                        "expectedOutput": "Found at 2"
+                    },
+                    {
+                        "input": "1\ncount",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "1\nsearch 99",
+                        "expectedOutput": "Not Found"
+                    },
+                    {
+                        "input": "4\nins_end 5\ndel_beg\ncount\nsearch 5",
+                        "expectedOutput": "0\nNot Found"
+                    },
+                    {
+                        "input": "3\nins_end 11\nins_end 11\nsearch 11",
+                        "expectedOutput": "Found at 1"
+                    },
+                    {
+                        "input": "5\nins_end 8\nins_end 2\nins_end 9\nsearch 9\ncount",
+                        "expectedOutput": "Found at 3\n3"
+                    },
+                    {
+                        "input": "3\nins_end 5\nsearch 10\ncount",
+                        "expectedOutput": "Not Found\n1"
+                    },
+                    {
+                        "input": "5\nins_end 1\nins_end 2\nins_end 3\ndel_end\ncount",
+                        "expectedOutput": "2"
+                    },
+                    {
+                        "input": "4\nins_beg 20\nins_beg 10\nsearch 20\ncount",
+                        "expectedOutput": "Found at 2\n2"
+                    }
+                ]
+            },
+            {
+                "id": "w7-stack-001",
+                "question_text": "Stack Operations using Linked List",
+                "question_description": "Build a **Stack** dynamically utilizing explicit Linked List principles where items mapping strictly `push`, `pop`, and returning the topmost element seamlessly via `peek` function handlers accurately demonstrate Last-In-First-Out (LIFO) flows.",
+                "input_format": "Integer N mapping iterative string blocks calling `push X`, `pop`, `peek`, or `display` stack contents natively.",
+                "output_format": "Integer strings evaluating variables returned manually bounding constraints. `Underflow` returned for `pop` issues and `Empty` for missing node visualizations.",
+                "constraints": "N <= 1000. Data values within integer limits. Linked List must dynamically adapt scale memory perfectly.",
+                "hints": "Visualize a Singly Linked List where you universally insert *AND* delete from exactly the same location (the global `head` pointer, aliased as `top`).",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* next;\n} Node;\n\nNode* top = NULL;\n\nvoid push(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = top;\n    top = nn;\n}\n\nvoid pop() {\n    if (!top) { printf(\"Underflow\\n\"); return; }\n    Node* t = top;\n    top = top->next;\n    free(t);\n}\n\nvoid peek() {\n    if (!top) { printf(\"Empty\\n\"); return; }\n    printf(\"%d\\n\", top->data);\n}\n\nvoid display() {\n    if (!top) { printf(\"Empty\\n\"); return; }\n    Node* t = top;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nint main() {\n    int N, v;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"push\")) { scanf(\"%d\", &v); push(v); }\n        else if (!strcmp(op, \"pop\")) pop();\n        else if (!strcmp(op, \"peek\")) peek();\n        else if (!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "LIFO (Last In First Out) operations natively emulate inserting uniformly backwards. By setting `nn->next = top` and `top = nn`, `push` maintains native runtime bounds seamlessly pushing newest data elements highest logically for absolute minimal `O(1)` pointer manipulation sequences.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "4\npush 5\npush 10\npeek\ndisplay",
+                        "expectedOutput": "10\n10 5"
+                    },
+                    {
+                        "input": "2\npop\npeek",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "3\npush 1\npop\npeek",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\npush 100\npush 200\npop\npeek\ndisplay",
+                        "expectedOutput": "100\n100"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\npush 7\npush 8\npush 9\ndisplay",
+                        "expectedOutput": "9 8 7"
+                    },
+                    {
+                        "input": "3\npop\npop\ndisplay",
+                        "expectedOutput": "Underflow\nUnderflow\nEmpty"
+                    },
+                    {
+                        "input": "6\npush 1\npush 2\npop\npush 3\npeek\ndisplay",
+                        "expectedOutput": "3\n3 1"
+                    },
+                    {
+                        "input": "5\npush 99\npeek\npop\npop\ndisplay",
+                        "expectedOutput": "99\nUnderflow\nEmpty"
+                    },
+                    {
+                        "input": "3\npush 55\npush 66\npeek",
+                        "expectedOutput": "66"
+                    }
+                ]
+            },
+            {
+                "id": "w7-queue-001",
+                "question_text": "Queue Operations using Linked List",
+                "question_description": "Construct a dynamic **Queue** architecture handling iterative node linkages applying First-In-First-Out (FIFO) standards using exact `enqueue` natively linked structures and exact `dequeue` bounds evaluation algorithms alongside raw state visualization strings.",
+                "input_format": "Integer N mapped specifically applying logic command routines (`enqueue X`, `dequeue`, `front`, `display`).",
+                "output_format": "Printed variables verifying space outputs properly, utilizing exact single string prints (\"Empty\" or \"Underflow\") to manage pointer collisions.",
+                "constraints": "N <= 1000. Operations must track bidirectional references gracefully via Dual Pointer Logic.",
+                "hints": "Keep active logical track of both `front` and `rear` pointers mapping to distinct unique list extremities resolving dynamic insertion memory allocation issues.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* next;\n} Node;\n\nNode* front = NULL;\nNode* rear = NULL;\n\nvoid enqueue(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = NULL;\n    if (rear) rear->next = nn;\n    else front = nn;\n    rear = nn;\n}\n\nvoid dequeue() {\n    if (!front) { printf(\"Underflow\\n\"); return; }\n    Node* t = front;\n    front = front->next;\n    if (!front) rear = NULL;\n    free(t);\n}\n\nvoid get_front() {\n    if (!front) { printf(\"Empty\\n\"); return; }\n    printf(\"%d\\n\", front->data);\n}\n\nvoid display() {\n    if (!front) { printf(\"Empty\\n\"); return; }\n    Node* t = front;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nint main() {\n    int N, v;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"enqueue\")) { scanf(\"%d\", &v); enqueue(v); }\n        else if (!strcmp(op, \"dequeue\")) dequeue();\n        else if (!strcmp(op, \"front\")) get_front();\n        else if (!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "A Linked Queue applies elements universally allocating at the tail bounds via tracking explicit `rear->next = nn` operations avoiding arbitrary list evaluation traversals completely bounding insertion tasks inside raw `O(1)` runtime executions simultaneously alongside native generic `front` bounds node deletions.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "4\nenqueue 10\nenqueue 20\nfront\ndisplay",
+                        "expectedOutput": "10\n10 20"
+                    },
+                    {
+                        "input": "3\nenqueue 5\ndequeue\nfront",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ndequeue\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "5\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndisplay",
+                        "expectedOutput": "2 3"
+                    },
+                    {
+                        "input": "4\ndequeue\ndequeue\nfront\ndisplay",
+                        "expectedOutput": "Underflow\nUnderflow\nEmpty\nEmpty"
+                    },
+                    {
+                        "input": "6\nenqueue 42\nenqueue 55\ndequeue\nenqueue 77\nfront\ndisplay",
+                        "expectedOutput": "55\n55 77"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\nenqueue 9\nfront\ndequeue\ndequeue\nfront",
+                        "expectedOutput": "9\nUnderflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nenqueue 100\nenqueue 200\nfront",
+                        "expectedOutput": "100"
+                    },
+                    {
+                        "input": "4\nfront\nenqueue 1\nfront\ndisplay",
+                        "expectedOutput": "Empty\n1\n1"
+                    }
+                ]
+            }
+        ]
+    }
+]

@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Week 9: Priority Queues and DLL Deque",
+        "questions": [
+            {
+                "id": "w9-pq-001",
+                "question_text": "Priority Queue Linked Implementation",
+                "question_description": "Implement a **Priority Queue** using a Linked List structure where elements are dynamically ordered based on an Ascending priority value (lower numerical value = higher priority). Ensure equivalent priority numbers respect First-In-First-Out sequences.",
+                "input_format": "Integer N mapped specifically applying logic command routines (`enqueue [data] [priority]`, `dequeue`, `peek`, `display`).",
+                "output_format": "Printed variables verifying ordered node outputs properly, utilizing exact single string prints ('Empty' or 'Underflow') to manage bounds.",
+                "constraints": "N <= 1000. Data and priority values within standard signed integer limits.",
+                "hints": "Every explicit enqueue iterates through the linked list to find the first node strictly possessing a lower-placed 'greater' numerical priority, cleanly injecting the new allocation just before it via single pointer replacement.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    int priority;\n    struct Node* next;\n} Node;\n\nNode* front = NULL;\n\nvoid enqueue(int d, int p) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = d;\n    nn->priority = p;\n    if (!front || p < front->priority) {\n        nn->next = front;\n        front = nn;\n    } else {\n        Node* t = front;\n        while (t->next && t->next->priority <= p) t = t->next;\n        nn->next = t->next;\n        t->next = nn;\n    }\n}\n\nvoid dequeue() {\n    if (!front) { printf(\"Underflow\\n\"); return; }\n    Node* t = front;\n    front = front->next;\n    free(t);\n}\n\nvoid peek() {\n    if (!front) { printf(\"Empty\\n\"); return; }\n    printf(\"%d\\n\", front->data);\n}\n\nvoid display() {\n    if (!front) { printf(\"Empty\\n\"); return; }\n    Node* t = front;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nint main() {\n    int N, d, p;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"enqueue\")) { scanf(\"%d %d\", &d, &p); enqueue(d, p); }\n        else if (!strcmp(op, \"dequeue\")) dequeue();\n        else if (!strcmp(op, \"peek\")) peek();\n        else if (!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "The architecture traverses the active list for every 'enqueue', generating an O(N) ordered insertion schema that guarantees 'dequeue' and 'display' retain absolute O(1) instantaneous access logic sequentially from local memory.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "4\nenqueue 10 3\nenqueue 20 1\npeek\ndisplay",
+                        "expectedOutput": "20\n20 10"
+                    },
+                    {
+                        "input": "3\nenqueue 5 2\ndequeue\npeek",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ndequeue\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "5\nenqueue 1 5\nenqueue 2 5\nenqueue 3 2\ndequeue\ndisplay",
+                        "expectedOutput": "1 2"
+                    },
+                    {
+                        "input": "4\ndequeue\ndequeue\npeek\ndisplay",
+                        "expectedOutput": "Underflow\nUnderflow\nEmpty\nEmpty"
+                    },
+                    {
+                        "input": "6\nenqueue 42 10\nenqueue 55 5\ndequeue\nenqueue 77 1\npeek\ndisplay",
+                        "expectedOutput": "77\n77 42"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\nenqueue 9 1\npeek\ndequeue\ndequeue\npeek",
+                        "expectedOutput": "9\nUnderflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nenqueue 100 2\nenqueue 200 1\npeek",
+                        "expectedOutput": "200"
+                    },
+                    {
+                        "input": "4\npeek\nenqueue 1 9\npeek\ndisplay",
+                        "expectedOutput": "Empty\n1\n1"
+                    }
+                ]
+            },
+            {
+                "id": "w9-deque-001",
+                "question_text": "Double-Ended Queue (Deque) using DLL",
+                "question_description": "Construct a dynamic **Double-Ended Queue (Deque)** perfectly integrated via a Doubly Linked List backbone. Standard routines map insertions (`insert_front`, `insert_rear`) alongside boundaries managing precise endpoint queries.",
+                "input_format": "Integer N mapping string operators mapping explicit edge injections (e.g. `delete_rear`, `get_front`).",
+                "output_format": "Exact single space list strings executing explicit 'Underflow' boundaries checking dynamic queue nodes.",
+                "constraints": "N <= 1000. Nodes uniformly managed matching precise DLL architecture constraints without segmentation defects.",
+                "hints": "Be profoundly mindful tracking the 'rear' pointer natively across arbitrary multi-side deletions to maintain accurate LIFO/FIFO hybrid behavior simultaneously.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* prev;\n    struct Node* next;\n} Node;\n\nNode* front = NULL;\nNode* rear = NULL;\n\nvoid insert_front(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->prev = NULL;\n    nn->next = front;\n    if (front) front->prev = nn;\n    else rear = nn;\n    front = nn;\n}\n\nvoid insert_rear(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = NULL;\n    nn->prev = rear;\n    if (rear) rear->next = nn;\n    else front = nn;\n    rear = nn;\n}\n\nvoid delete_front() {\n    if (!front) { printf(\"Underflow\\n\"); return; }\n    Node* t = front;\n    front = front->next;\n    if (front) front->prev = NULL;\n    else rear = NULL;\n    free(t);\n}\n\nvoid delete_rear() {\n    if (!rear) { printf(\"Underflow\\n\"); return; }\n    Node* t = rear;\n    rear = rear->prev;\n    if (rear) rear->next = NULL;\n    else front = NULL;\n    free(t);\n}\n\nvoid get_front() {\n    if (!front) printf(\"Empty\\n\");\n    else printf(\"%d\\n\", front->data);\n}\n\nvoid get_rear() {\n    if (!rear) printf(\"Empty\\n\");\n    else printf(\"%d\\n\", rear->data);\n}\n\nvoid display() {\n    if (!front) { printf(\"Empty\\n\"); return; }\n    Node* t = front;\n    while (t) {\n        printf(\"%d%c\", t->data, t->next ? ' ' : '\\n');\n        t = t->next;\n    }\n}\n\nint main() {\n    int N, d;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"insert_front\")) { scanf(\"%d\", &d); insert_front(d); }\n        else if (!strcmp(op, \"insert_rear\")) { scanf(\"%d\", &d); insert_rear(d); }\n        else if (!strcmp(op, \"delete_front\")) delete_front();\n        else if (!strcmp(op, \"delete_rear\")) delete_rear();\n        else if (!strcmp(op, \"get_front\")) get_front();\n        else if (!strcmp(op, \"get_rear\")) get_rear();\n        else if (!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "Connecting standard independent DLL memory maps seamlessly to formal Deque functionality enforces generic bounds integrity checks executing natively across 'rear' and 'front' pointers, delivering instantaneous uniform O(1) performance independently of list sizing.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "4\ninsert_rear 10\ninsert_front 5\nget_front\ndisplay",
+                        "expectedOutput": "5\n5 10"
+                    },
+                    {
+                        "input": "3\ninsert_rear 5\ndelete_front\nget_rear",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "2\ndelete_rear\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "5\ninsert_front 1\ninsert_rear 2\ninsert_front 3\ndelete_rear\ndisplay",
+                        "expectedOutput": "3 1"
+                    },
+                    {
+                        "input": "4\ndelete_front\ndelete_rear\nget_front\ndisplay",
+                        "expectedOutput": "Underflow\nUnderflow\nEmpty\nEmpty"
+                    },
+                    {
+                        "input": "6\ninsert_front 42\ninsert_rear 55\ndelete_front\ninsert_rear 77\nget_front\ndisplay",
+                        "expectedOutput": "55\n55 77"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\ninsert_front 9\nget_rear\ndelete_rear\ndelete_front\nget_front",
+                        "expectedOutput": "9\nUnderflow\nEmpty"
+                    },
+                    {
+                        "input": "3\ninsert_rear 100\ninsert_front 200\nget_rear",
+                        "expectedOutput": "100"
+                    },
+                    {
+                        "input": "4\nget_front\ninsert_front 1\nget_rear\ndisplay",
+                        "expectedOutput": "Empty\n1\n1"
+                    }
+                ]
+            }
+        ]
+    }
+]

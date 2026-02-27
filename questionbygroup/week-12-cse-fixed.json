@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Week 12: Graph Traversals",
+        "questions": [
+            {
+                "id": "w12-graph-001",
+                "question_text": "Breadth First Search (BFS) Traversal",
+                "question_description": "Implement a **Breadth First Search (BFS)** spanning across an unweighted, undirected core graph. Traverse node associations layer-by-layer starting from a provided source vertex.",
+                "input_format": "Integers V (vertices) and E (edges). Followed by E edge pairs 'u v'. Followed by S (starting node).",
+                "output_format": "Space-separated sequences evaluating exact order of visited integer node IDs natively.",
+                "constraints": "V <= 1000. Ensure queue array prevents boundary overwrites. Traversal favors numerically lower node neighbor IDs explicitly on tie breaks.",
+                "hints": "Use an explicit adjacency matrix and a queue array. Exploring loops should linearly check matrix columns 0 thru V-1 sequentially to strictly visit numerically lower neighbors first.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n\nint main() {\n    int V, E;\n    if (scanf(\"%d %d\", &V, &E) != 2) return 0;\n    int adj[1005][1005] = {0};\n    for (int i=0; i<E; i++) {\n        int u, v;\n        if(scanf(\"%d %d\", &u, &v) == 2) {\n            adj[u][v] = 1;\n            adj[v][u] = 1; \n        }\n    }\n    int S;\n    if (scanf(\"%d\", &S) != 1) return 0;\n    \n    int visited[1005] = {0};\n    int queue[1005];\n    int front = 0, rear = 0;\n    \n    queue[rear++] = S;\n    visited[S] = 1;\n    \n    int first = 1;\n    while(front < rear) {\n        int curr = queue[front++];\n        if(!first) printf(\" \");\n        printf(\"%d\", curr);\n        first = 0;\n        \n        for(int i=0; i<V; i++) {\n            if(adj[curr][i] && !visited[i]) {\n                queue[rear++] = i;\n                visited[i] = 1;\n            }\n        }\n    }\n    printf(\"\\n\");\n    return 0;\n}\n",
+                "solution_explanation": "BFS explores sibling nodes identically across specific depths via classic FIFO execution utilizing a queue stack. Adjacent numeric checking inside the vertex loop guarantees lower vertices enqueue first naturally resolving branch priority.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "5 4\n0 1\n0 2\n1 3\n1 4\n0",
+                        "expectedOutput": "0 1 2 3 4"
+                    },
+                    {
+                        "input": "4 3\n0 1\n1 2\n2 3\n0",
+                        "expectedOutput": "0 1 2 3"
+                    },
+                    {
+                        "input": "5 6\n0 1\n0 2\n1 2\n1 3\n2 4\n3 4\n0",
+                        "expectedOutput": "0 1 2 3 4"
+                    },
+                    {
+                        "input": "3 2\n0 1\n0 2\n1",
+                        "expectedOutput": "1 0 2"
+                    },
+                    {
+                        "input": "6 5\n0 1\n0 2\n1 3\n2 4\n2 5\n0",
+                        "expectedOutput": "0 1 2 3 4 5"
+                    },
+                    {
+                        "input": "4 4\n0 1\n1 2\n2 3\n3 0\n2",
+                        "expectedOutput": "2 1 3 0"
+                    },
+                    {
+                        "input": "3 0\n0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "5 4\n4 3\n3 2\n2 1\n1 0\n4",
+                        "expectedOutput": "4 3 2 1 0"
+                    },
+                    {
+                        "input": "7 6\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n0",
+                        "expectedOutput": "0 1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "1 0\n0",
+                        "expectedOutput": "0"
+                    }
+                ]
+            },
+            {
+                "id": "w12-graph-002",
+                "question_text": "Depth First Search (DFS) Traversal",
+                "question_description": "Construct a recursive **Depth First Search (DFS)** spanning identically across unweighted configurations perfectly digging vertically before backtracking natively through parent frames.",
+                "input_format": "Integers V (vertices) and E (edges). Followed by E edge pairs 'u v'. Followed by S (starting node).",
+                "output_format": "Space-separated sequence depicting exact DFS traversal route explicitly.",
+                "constraints": "V <= 1000. Ensure recursion loops safely mapped. Favor lower node ID indexing organically.",
+                "hints": "Map nodes instantly as visited at call-start prior to looping over V matrix columns validating and recursion branching recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n\nint visited[1005];\nint adj[1005][1005];\nint V;\nint first = 1;\n\nvoid dfs(int u) {\n    if(!first) printf(\" \");\n    printf(\"%d\", u);\n    first = 0;\n    visited[u] = 1;\n    for(int i=0; i<V; i++) {\n        if(adj[u][i] && !visited[i]) dfs(i);\n    }\n}\n\nint main() {\n    int E;\n    if (scanf(\"%d %d\", &V, &E) != 2) return 0;\n    for(int i=0; i<V; i++) {\n        visited[i] = 0;\n        for(int j=0; j<V; j++) adj[i][j] = 0;\n    }\n    for (int i=0; i<E; i++) {\n        int u, v;\n        if(scanf(\"%d %d\", &u, &v) == 2) {\n            adj[u][v] = 1;\n            adj[v][u] = 1; \n        }\n    }\n    int S;\n    if (scanf(\"%d\", &S) != 1) return 0;\n    dfs(S);\n    printf(\"\\n\");\n    return 0;\n}\n",
+                "solution_explanation": "Recursion creates an implied dynamic program sequence organically tracing tree roots downwards. Tracking globally 'visited' arrays stops looping edge-cases natively on fully undirected cyclings.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "5 4\n0 1\n0 2\n1 3\n1 4\n0",
+                        "expectedOutput": "0 1 3 4 2"
+                    },
+                    {
+                        "input": "4 3\n0 1\n1 2\n2 3\n0",
+                        "expectedOutput": "0 1 2 3"
+                    },
+                    {
+                        "input": "5 6\n0 1\n0 2\n1 2\n1 3\n2 4\n3 4\n0",
+                        "expectedOutput": "0 1 2 4 3"
+                    },
+                    {
+                        "input": "3 2\n0 1\n0 2\n1",
+                        "expectedOutput": "1 0 2"
+                    },
+                    {
+                        "input": "6 5\n0 1\n0 2\n1 3\n2 4\n2 5\n0",
+                        "expectedOutput": "0 1 3 2 4 5"
+                    },
+                    {
+                        "input": "4 4\n0 1\n1 2\n2 3\n3 0\n2",
+                        "expectedOutput": "2 1 0 3"
+                    },
+                    {
+                        "input": "3 0\n0",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "5 4\n4 3\n3 2\n2 1\n1 0\n4",
+                        "expectedOutput": "4 3 2 1 0"
+                    },
+                    {
+                        "input": "7 6\n0 1\n0 2\n1 3\n1 4\n2 5\n2 6\n0",
+                        "expectedOutput": "0 1 3 4 2 5 6"
+                    },
+                    {
+                        "input": "1 0\n0",
+                        "expectedOutput": "0"
+                    }
+                ]
+            }
+        ]
+    }
+]

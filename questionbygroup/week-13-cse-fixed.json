@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Week 13: Hashing Techniques",
+        "questions": [
+            {
+                "id": "w13-hash-001",
+                "question_text": "Hashing with Separate Chaining",
+                "question_description": "Implement a **Hash Table using Separate Chaining** to handle indexing collisions. Maintain bounded array buckets constructed through Linked Lists to permanently store dynamically mapping integers.",
+                "input_format": "Integer M (Hash Size) and N (operations). Followed by string commands `insert X`, `search X`, or `display`.",
+                "output_format": "Precise outputs reflecting search variables or complete visual states matching `BucketIdx: node->node` structures exactly.",
+                "constraints": "M <= 100. N <= 1000. Elements safely inserted continually without capacity bounds terminating runtime sequences inherently.",
+                "hints": "Use modulo modulo `data % M` extracting literal index arrays natively tracking independent isolated root nodes inside the master schema.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* next;\n} Node;\n\nNode* table[1005];\nint M = 10;\n\nvoid insert(int v) {\n    int idx = v % M;\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->next = NULL;\n    if (!table[idx]) table[idx] = nn;\n    else {\n        Node* t = table[idx];\n        while(t->next) t = t->next;\n        t->next = nn;\n    }\n}\n\nvoid search(int v) {\n    int idx = v % M;\n    Node* t = table[idx];\n    while(t) {\n        if(t->data == v) { printf(\"Found\\n\"); return; }\n        t = t->next;\n    }\n    printf(\"Not Found\\n\");\n}\n\nvoid display() {\n    for(int i=0; i<M; i++) {\n        printf(\"%d: \", i);\n        Node* t = table[i];\n        if(!t) printf(\"Empty\");\n        while(t) {\n            printf(\"%d%s\", t->data, t->next ? \"->\" : \"\");\n            t = t->next;\n        }\n        printf(\"\\n\");\n    }\n}\n\nint main() {\n    int N, v;\n    char op[20];\n    if (scanf(\"%d %d\", &M, &N) != 2) return 0;\n    for(int i=0; i<M; i++) table[i] = NULL;\n    \n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"insert\")) { scanf(\"%d\", &v); insert(v); }\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); search(v); }\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "Separate chaining flawlessly mitigates identical hashing indexes by building explicit Singly Linked architectures inside any collision slot dynamically scaling isolated sizes inherently eliminating bounds limitations externally.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "5 4\ninsert 10\ninsert 15\ninsert 5\ndisplay",
+                        "expectedOutput": "0: 10->15->5\n1: Empty\n2: Empty\n3: Empty\n4: Empty"
+                    },
+                    {
+                        "input": "3 3\ninsert 1\nsearch 1\nsearch 4",
+                        "expectedOutput": "Found\nNot Found"
+                    },
+                    {
+                        "input": "2 1\ndisplay",
+                        "expectedOutput": "0: Empty\n1: Empty"
+                    },
+                    {
+                        "input": "4 5\ninsert 4\ninsert 8\ninsert 12\nsearch 12\ndisplay",
+                        "expectedOutput": "Found\n0: 4->8->12\n1: Empty\n2: Empty\n3: Empty"
+                    },
+                    {
+                        "input": "5 4\ninsert 2\ninsert 7\ninsert 12\ndisplay",
+                        "expectedOutput": "0: Empty\n1: Empty\n2: 2->7->12\n3: Empty\n4: Empty"
+                    },
+                    {
+                        "input": "1 3\ninsert 1\ninsert 2\ndisplay",
+                        "expectedOutput": "0: 1->2"
+                    },
+                    {
+                        "input": "3 4\ninsert 0\ninsert 3\ninsert 6\ndisplay",
+                        "expectedOutput": "0: 0->3->6\n1: Empty\n2: Empty"
+                    },
+                    {
+                        "input": "4 3\ninsert 1\nsearch 5\nsearch 1",
+                        "expectedOutput": "Not Found\nFound"
+                    },
+                    {
+                        "input": "3 4\ninsert 1\ninsert 2\ninsert 3\ndisplay",
+                        "expectedOutput": "0: 3\n1: 1\n2: 2"
+                    },
+                    {
+                        "input": "2 5\ninsert 10\ninsert 10\nsearch 10\nsearch 10\ndisplay",
+                        "expectedOutput": "Found\nFound\n0: 10->10\n1: Empty"
+                    }
+                ]
+            },
+            {
+                "id": "w13-hash-002",
+                "question_text": "Hashing with Linear Probing",
+                "question_description": "Build an explicit array-bound **Hash Table modeling Linear Probing** algorithms resolving index loops internally. Iterative checks dynamically seek next open contiguous limits seamlessly shifting inputs appropriately protecting states.",
+                "input_format": "Integer M (Hash Size) and N (operations). Followed by explicit indexing calls via `insert X`, `search X`, or `display`.",
+                "output_format": "Explicit `Hash Table Full` or index location returns mapping variables checking arrays securely checking empty `-1` defaults.",
+                "constraints": "M <= 100. N <= 1000. Stop gracefully outputting boundaries instead of seg-faulting if input elements overfill explicit structural limits natively.",
+                "hints": "Linearly search iterative `(idx + i) % M` array locations. Avoid scanning past your starting loop point effectively stopping if total `i == M` size runs empty verifying capacity completely used.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\nint table[1005];\nint M = 10;\n\nvoid insert(int v) {\n    int idx = v % M;\n    int i = 0;\n    while(i < M && table[(idx + i) % M] != -1) {\n        i++;\n    }\n    if (i == M) {\n        printf(\"Hash Table Full\\n\");\n    } else {\n        table[(idx + i) % M] = v;\n    }\n}\n\nvoid search(int v) {\n    int idx = v % M;\n    int i = 0;\n    while(i < M && table[(idx + i) % M] != -1) {\n        if(table[(idx + i) % M] == v) {\n            printf(\"Found at index %d\\n\", (idx + i) % M);\n            return;\n        }\n        i++;\n    }\n    printf(\"Not Found\\n\");\n}\n\nvoid display() {\n    for(int i=0; i<M; i++) {\n        if(table[i] != -1) printf(\"%d: %d\\n\", i, table[i]);\n        else printf(\"%d: Empty\\n\", i);\n    }\n}\n\nint main() {\n    int N, v;\n    char op[20];\n    if (scanf(\"%d %d\", &M, &N) != 2) return 0;\n    for(int i=0; i<M; i++) table[i] = -1;\n    \n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"insert\")) { scanf(\"%d\", &v); insert(v); }\n        else if(!strcmp(op, \"search\")) { scanf(\"%d\", &v); search(v); }\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}\n",
+                "solution_explanation": "Linear probing resolves limits natively allocating inline loops incrementing array indexes utilizing identical mod bounds eliminating all structural link lists entirely relying linearly entirely on existing array gaps.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "5 4\ninsert 10\ninsert 15\ninsert 5\ndisplay",
+                        "expectedOutput": "0: 10\n1: 15\n2: 5\n3: Empty\n4: Empty"
+                    },
+                    {
+                        "input": "3 4\ninsert 1\ninsert 1\ninsert 1\nsearch 1",
+                        "expectedOutput": "Found at index 1"
+                    },
+                    {
+                        "input": "2 1\ndisplay",
+                        "expectedOutput": "0: Empty\n1: Empty"
+                    },
+                    {
+                        "input": "2 3\ninsert 1\ninsert 2\ninsert 3",
+                        "expectedOutput": "Hash Table Full"
+                    },
+                    {
+                        "input": "5 4\ninsert 2\ninsert 7\ninsert 12\ndisplay",
+                        "expectedOutput": "0: Empty\n1: Empty\n2: 2\n3: 7\n4: 12"
+                    },
+                    {
+                        "input": "3 4\ninsert 0\ninsert 3\nsearch 3\ndisplay",
+                        "expectedOutput": "Found at index 1\n0: 0\n1: 3\n2: Empty"
+                    },
+                    {
+                        "input": "4 3\ninsert 1\nsearch 5\nsearch 1",
+                        "expectedOutput": "Not Found\nFound at index 1"
+                    },
+                    {
+                        "input": "3 4\ninsert 1\ninsert 2\ninsert 3\ndisplay",
+                        "expectedOutput": "0: 3\n1: 1\n2: 2"
+                    },
+                    {
+                        "input": "2 4\ninsert 10\ninsert 10\nsearch 10\ndisplay",
+                        "expectedOutput": "Found at index 0\n0: 10\n1: 10"
+                    },
+                    {
+                        "input": "5 5\ninsert 4\ninsert 9\ninsert 14\ninsert 19\ndisplay",
+                        "expectedOutput": "0: 9\n1: 14\n2: 19\n3: Empty\n4: 4"
+                    }
+                ]
+            }
+        ]
+    }
+]

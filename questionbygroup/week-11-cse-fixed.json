@@ -1,0 +1,63 @@
+[
+    {
+        "name": "Week 11: Binary Search Tree",
+        "questions": [
+            {
+                "id": "w11-bst-001",
+                "question_text": "Binary Search Tree Operations",
+                "question_description": "Construct a robust **Binary Search Tree** tracking insertions (`insert`), deletions (`delete`), indexing queries (`search`), and complete hierarchy traversals (`inorder`, `preorder`, `postorder`). Ensure standard sorting laws dynamically maintain node structures.",
+                "input_format": "Integer N (commands), followed by sequential inputs dictating specific operations.",
+                "output_format": "Singular space-delimited string of node values dynamically printing trees during traversal routines, or strict text bounding empty searches.",
+                "constraints": "N <= 1000. BST handles variable integer nodes mapping left/right branches appropriately. Memory safely freed inside delete routines.",
+                "hints": "Inorder traversal uniquely evaluates tree structures logically printing out exact sorted ascending integer sequences natively resolving to purely sorted arrays.",
+                "question_type": "CODING",
+                "difficulty": "HARD",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n\ntypedef struct Node {\n    int data;\n    struct Node* left;\n    struct Node* right;\n} Node;\n\nNode* root = NULL;\nint first = 1;\n\nNode* createNode(int v) {\n    Node* nn = (Node*)malloc(sizeof(Node));\n    nn->data = v;\n    nn->left = NULL;\n    nn->right = NULL;\n    return nn;\n}\n\nNode* insert(Node* node, int v) {\n    if (!node) return createNode(v);\n    if (v < node->data) node->left = insert(node->left, v);\n    else if (v > node->data) node->right = insert(node->right, v);\n    return node;\n}\n\nNode* findMin(Node* node) {\n    while (node && node->left) node = node->left;\n    return node;\n}\n\nNode* deleteNode(Node* node, int v) {\n    if (!node) return node;\n    if (v < node->data) node->left = deleteNode(node->left, v);\n    else if (v > node->data) node->right = deleteNode(node->right, v);\n    else {\n        if (!node->left) {\n            Node* temp = node->right;\n            free(node);\n            return temp;\n        } else if (!node->right) {\n            Node* temp = node->left;\n            free(node);\n            return temp;\n        }\n        Node* temp = findMin(node->right);\n        node->data = temp->data;\n        node->right = deleteNode(node->right, temp->data);\n    }\n    return node;\n}\n\nvoid search(Node* node, int v) {\n    if (!node) { printf(\"Not Found\\n\"); return; }\n    if (node->data == v) { printf(\"Found\\n\"); return; }\n    if (v < node->data) search(node->left, v);\n    else search(node->right, v);\n}\n\nvoid inorder(Node* node) {\n    if (node) {\n        inorder(node->left);\n        if(!first) printf(\" \");\n        printf(\"%d\", node->data);\n        first = 0;\n        inorder(node->right);\n    }\n}\n\nvoid preorder(Node* node) {\n    if (node) {\n        if(!first) printf(\" \");\n        printf(\"%d\", node->data);\n        first = 0;\n        preorder(node->left);\n        preorder(node->right);\n    }\n}\n\nvoid postorder(Node* node) {\n    if (node) {\n        postorder(node->left);\n        postorder(node->right);\n        if(!first) printf(\" \");\n        printf(\"%d\", node->data);\n        first = 0;\n    }\n}\n\nint main() {\n    int N, d;\n    char op[20];\n    if (scanf(\"%d\", &N) != 1) return 0;\n    while (N--) {\n        scanf(\"%s\", op);\n        if (!strcmp(op, \"insert\")) { scanf(\"%d\", &d); root = insert(root, d); }\n        else if (!strcmp(op, \"delete\")) { scanf(\"%d\", &d); root = deleteNode(root, d); }\n        else if (!strcmp(op, \"search\")) { scanf(\"%d\", &d); search(root, d); }\n        else if (!strcmp(op, \"inorder\")) { \n            if(!root) printf(\"Empty\\n\"); \n            else { first = 1; inorder(root); printf(\"\\n\"); }\n        }\n        else if (!strcmp(op, \"preorder\")) { \n            if(!root) printf(\"Empty\\n\"); \n            else { first = 1; preorder(root); printf(\"\\n\"); }\n        }\n        else if (!strcmp(op, \"postorder\")) { \n            if(!root) printf(\"Empty\\n\"); \n            else { first = 1; postorder(root); printf(\"\\n\"); }\n        }\n    }\n    return 0;\n}\n",
+                "solution_explanation": "Binary trees dictate left components remaining strictly lesser than the parent structure, and right limits remaining strictly greater. Recursive pointer replacement elegantly evaluates deeper branch loops efficiently processing updates dynamically maintaining standard O(log N) optimal traversal sequences.",
+                "language": "C",
+                "test_cases": [
+                    {
+                        "input": "6\ninsert 10\ninsert 5\ninsert 15\ninorder\npreorder\npostorder",
+                        "expectedOutput": "5 10 15\n10 5 15\n5 15 10"
+                    },
+                    {
+                        "input": "4\ninsert 50\ninsert 30\nsearch 30\nsearch 99",
+                        "expectedOutput": "Found\nNot Found"
+                    },
+                    {
+                        "input": "1\ninorder",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\ninsert 20\ninsert 10\ninsert 30\ndelete 10\ninorder",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "6\ninsert 50\ninsert 60\ninsert 70\ndelete 60\ninorder\npreorder",
+                        "expectedOutput": "50 70\n50 70"
+                    },
+                    {
+                        "input": "8\ninsert 8\ninsert 3\ninsert 1\ninsert 6\ninsert 4\ninsert 7\ninsert 10\npostorder",
+                        "expectedOutput": "1 4 7 6 3 10 8"
+                    },
+                    {
+                        "input": "7\ninsert 20\ninsert 10\ninsert 30\ninsert 40\ndelete 20\ninorder\npreorder",
+                        "expectedOutput": "10 30 40\n30 10 40"
+                    },
+                    {
+                        "input": "4\ndelete 50\nsearch 50\ninsert 1\ninorder",
+                        "expectedOutput": "Not Found\n1"
+                    },
+                    {
+                        "input": "5\ninsert 99\ninsert 99\ninsert 100\ninorder\npreorder",
+                        "expectedOutput": "99 100\n99 100"
+                    },
+                    {
+                        "input": "3\ninsert 2\ndelete 2\ninorder",
+                        "expectedOutput": "Empty"
+                    }
+                ]
+            }
+        ]
+    }
+]

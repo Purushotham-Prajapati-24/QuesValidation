@@ -4,7 +4,13 @@ const fs = require('fs');
 const files = [
     'questionbygroup/week-4-cse.json',
     'questionbygroup/week-5-cse.json',
-    'questionbygroup/week-6-cse.json'
+    'questionbygroup/week-6-cse.json',
+    'questionbygroup/week-7-cse.json',
+    'questionbygroup/week-9-cse.json',
+    'questionbygroup/week-10-cse.json',
+    'questionbygroup/week-11-cse.json',
+    'questionbygroup/week-12-cse.json',
+    'questionbygroup/week-13-cse.json'
 ];
 
 let results = '# Validation Results\n\n';
