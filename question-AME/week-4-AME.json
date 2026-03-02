@@ -1,0 +1,119 @@
+[
+    {
+        "name": "Week 4: Stacks and Queues",
+        "questions": [
+            {
+                "id": "w4-ame-001",
+                "question_text": "Parenthesis Matching",
+                "question_description": "Implement a C program using a Stack to check if a given expression has balanced parentheses. The expression will contain (), {}, and [].",
+                "input_format": "A single string containing the expression.",
+                "output_format": "Print 'Balanced' if the parentheses are matched, otherwise print 'Not Balanced'.",
+                "constraints": "1 <= Length of string <= 1000. String contains only parentheses characters.",
+                "hints": "Use a stack to track opening brackets. Pop when a closing bracket is encountered and check for a match.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint main() {\n    char exp[1001], stack[1001];\n    int top = -1, i = 0, valid = 1;\n    if(scanf(\"%1000s\", exp) != 1) return 0;\n    while(exp[i]) {\n        if(exp[i] == '(' || exp[i] == '{' || exp[i] == '[') {\n            stack[++top] = exp[i];\n        } else if(exp[i] == ')' || exp[i] == '}' || exp[i] == ']') {\n            if(top == -1) { valid = 0; break; }\n            if(exp[i] == ')' && stack[top] != '(') { valid = 0; break; }\n            if(exp[i] == '}' && stack[top] != '{') { valid = 0; break; }\n            if(exp[i] == ']' && stack[top] != '[') { valid = 0; break; }\n            top--;\n        }\n        i++;\n    }\n    if(top != -1) valid = 0;\n    if(valid) printf(\"Balanced\");\n    else printf(\"Not Balanced\");\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "()",
+                        "expectedOutput": "Balanced"
+                    },
+                    {
+                        "input": "()()",
+                        "expectedOutput": "Balanced"
+                    },
+                    {
+                        "input": "(()",
+                        "expectedOutput": "Not Balanced"
+                    },
+                    {
+                        "input": ")(",
+                        "expectedOutput": "Not Balanced"
+                    },
+                    {
+                        "input": ")))",
+                        "expectedOutput": "Not Balanced"
+                    },
+                    {
+                        "input": "{([])}",
+                        "expectedOutput": "Balanced"
+                    },
+                    {
+                        "input": "{([]})",
+                        "expectedOutput": "Not Balanced"
+                    },
+                    {
+                        "input": "((()))",
+                        "expectedOutput": "Balanced"
+                    },
+                    {
+                        "input": "[]",
+                        "expectedOutput": "Balanced"
+                    },
+                    {
+                        "input": "[()]{}{[()()]()}",
+                        "expectedOutput": "Balanced"
+                    }
+                ],
+                "solution_explanation": "A stack efficiently tracks the latest unmatched opening bracket. Whenever a closing bracket is encountered, it must match the type of the bracket currently at the top of the stack. If types differ or the stack is empty prematurely, or if brackets remain at the end, it's unbalanced.",
+                "language": "C"
+            },
+            {
+                "id": "w4-ame-002",
+                "question_text": "Circular Queue using Array",
+                "question_description": "Implement a Circular Queue using an array. Support operations: Enqueue, Dequeue, and Display. Proper wrap-around should be handled using modulo arithmetic.",
+                "input_format": "Integer S (size of queue) and N (number of operations), followed by N lines of commands: 'enqueue X', 'dequeue', 'display'.",
+                "output_format": "Print the result of each operation. For dequeue, print the removed element. Print 'Queue is Full' or 'Queue is Empty' on overflow/underflow. For display, print elements separated by space, or 'Empty'.",
+                "constraints": "1 <= S <= 100, 1 <= N <= 1000.",
+                "hints": "Use front and rear initially set to -1. Calculate next position as (rear + 1) % S. It's full if this next position equals front.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint queue[100], front = -1, rear = -1, size;\nvoid enqueue(int v) {\n    if ((rear + 1) % size == front) printf(\"Queue is Full\\n\");\n    else {\n        if (front == -1) front = 0;\n        rear = (rear + 1) % size;\n        queue[rear] = v;\n    }\n}\nvoid dequeue() {\n    if (front == -1) printf(\"Queue is Empty\\n\");\n    else {\n        printf(\"%d\\n\", queue[front]);\n        if (front == rear) { front = -1; rear = -1; }\n        else front = (front + 1) % size;\n    }\n}\nvoid display() {\n    if (front == -1) printf(\"Empty\\n\");\n    else {\n        int i = front;\n        while (1) {\n            printf(\"%d%c\", queue[i], i == rear ? '\\n' : ' ');\n            if (i == rear) break;\n            i = (i + 1) % size;\n        }\n    }\n}\nint main() {\n    int ops, v;\n    char op[20];\n    if(scanf(\"%d %d\", &size, &ops) != 2) return 0;\n    while(ops--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"enqueue\")) { scanf(\"%d\", &v); enqueue(v); }\n        else if(!strcmp(op, \"dequeue\")) dequeue();\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3 3\nenqueue 10\nenqueue 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "2 4\nenqueue 1\nenqueue 2\nenqueue 3\ndisplay",
+                        "expectedOutput": "Queue is Full\n1 2"
+                    },
+                    {
+                        "input": "3 2\ndequeue\ndisplay",
+                        "expectedOutput": "Queue is Empty\nEmpty"
+                    },
+                    {
+                        "input": "3 6\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\nenqueue 4\ndisplay",
+                        "expectedOutput": "1\n2 3 4"
+                    },
+                    {
+                        "input": "3 8\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndequeue\nenqueue 4\nenqueue 5\ndisplay",
+                        "expectedOutput": "1\n2\n3 4 5"
+                    },
+                    {
+                        "input": "2 5\nenqueue 1\nenqueue 2\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "1\n2\nQueue is Empty"
+                    },
+                    {
+                        "input": "5 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1 5\nenqueue 10\ndequeue\nenqueue 20\ndequeue\ndisplay",
+                        "expectedOutput": "10\n20\nEmpty"
+                    },
+                    {
+                        "input": "4 8\nenqueue 1\nenqueue 2\nenqueue 3\nenqueue 4\ndequeue\nenqueue 5\ndequeue\ndisplay",
+                        "expectedOutput": "1\n2\n3 4 5"
+                    },
+                    {
+                        "input": "2 6\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "Queue is Full\n1\n2\nQueue is Empty"
+                    }
+                ],
+                "solution_explanation": "Circular Queue optimizes space usage by wrapping around using modulo arithmetic (`%`). The critical checks are 'Queue Full' condition `(rear + 1) % S == front` and 'Queue Empty' condition `front == -1`.",
+                "language": "C"
+            }
+        ]
+    }
+]

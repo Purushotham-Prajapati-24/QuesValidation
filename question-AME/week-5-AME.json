@@ -1,0 +1,231 @@
+[
+    {
+        "name": "Week 5: Singly Linked List",
+        "questions": [
+            {
+                "id": "w5-sll-gen-001",
+                "question_text": "Creation",
+                "question_description": "Implement a C program to Create a Singly Linked List by reading N integer values and constructing nodes dynamically using malloc. After creation, display the list to verify correctness.",
+                "input_format": "Integer N (number of elements), followed by N integer values to insert into the list sequentially.",
+                "output_format": "Print space-separated elements from head to tail. Print 'Empty' if N is 0.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated using malloc.",
+                "hints": "Maintain a head pointer initialized to NULL. For each value, create a new node and link it to the end of the list by traversing to the last node.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\nint main() {\n    int N, v;\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) { scanf(\"%d\", &v); ie(v); }\n    disp();\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3\n10 20 30",
+                        "expectedOutput": "10 20 30"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1\n99",
+                        "expectedOutput": "99"
+                    },
+                    {
+                        "input": "5\n1 2 3 4 5",
+                        "expectedOutput": "1 2 3 4 5"
+                    },
+                    {
+                        "input": "2\n50 100",
+                        "expectedOutput": "50 100"
+                    },
+                    {
+                        "input": "4\n7 14 21 28",
+                        "expectedOutput": "7 14 21 28"
+                    },
+                    {
+                        "input": "3\n5 5 5",
+                        "expectedOutput": "5 5 5"
+                    },
+                    {
+                        "input": "6\n10 20 30 40 50 60",
+                        "expectedOutput": "10 20 30 40 50 60"
+                    },
+                    {
+                        "input": "2\n1000 999",
+                        "expectedOutput": "1000 999"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    }
+                ],
+                "solution_explanation": "Creation involves reading N values and dynamically allocating a new node for each using malloc. Each node is linked sequentially via the next pointer. Traversal from head to NULL displays all elements in O(N) time.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-002",
+                "question_text": "Insertion Operations",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Insert at Beginning, Insert at Middle (given position), Insert at End.",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'ins_beg X' (insert at beginning), 'ins_end X' (insert at end), 'ins_pos P X' (insert at position P), 'display' (print list).",
+                "output_format": "No direct output for insertion. Use 'display' to print space-separated elements or 'Empty' if list is empty.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Insert at beginning: Create a new node and point it to current head, then update head. Insert at end: Traverse to the last node and link the new node. Insert at middle (position P): Navigate to position P-1 and reroute the 'next' pointer.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid ip(int p, int v) { if(p==1) ib(v); else { Node* t=head; for(int i=1; i<p-1 && t; i++) t=t->n; if(t) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=t->n; t->n=nn; } } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"ins_pos\")) { scanf(\"%d %d\", &p, &v); ip(p, v); }\n        else if(!strcmp(op, \"display\")) disp();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\nins_end 10\nins_beg 5\nins_end 20\nins_pos 2 8\ndisplay",
+                        "expectedOutput": "5 8 10 20"
+                    },
+                    {
+                        "input": "2\nins_beg 10\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_pos 1 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "4\nins_beg 1\nins_beg 2\nins_beg 3\ndisplay",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\nins_end 30\ndisplay",
+                        "expectedOutput": "10 20 30"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\nins_end 30\nins_pos 2 15\ndisplay",
+                        "expectedOutput": "10 15 20 30"
+                    },
+                    {
+                        "input": "3\nins_end 10\nins_beg 5\ndisplay",
+                        "expectedOutput": "5 10"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 3\nins_end 5\nins_pos 2 2\nins_pos 4 4\ndisplay",
+                        "expectedOutput": "1 2 3 4 5"
+                    },
+                    {
+                        "input": "2\nins_end 5\ndisplay",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    }
+                ],
+                "solution_explanation": "Insert at beginning is O(1) by pointing new node to head. Insert at end is O(N) requiring traversal to the last node. Insert at middle (position) is O(N) requiring traversal to position P-1 and rerouting the next pointer.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-003",
+                "question_text": "Deletion Operations",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following tasks: Delete at Beginning, Delete at Middle (given position), Delete at End.",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'ins_end X' (insert at end for setup), 'del_beg' (delete first node), 'del_end' (delete last node), 'del_pos P' (delete node at position P), 'display' (print list).",
+                "output_format": "Print 'Underflow' if attempting deletion from an empty list. Use 'display' to print space-separated elements or 'Empty' if list is empty.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Delete at beginning: Update head to head->next and free the old head. Delete at end: Traverse to the second-to-last node and free the last node. Delete at middle (position P): Navigate to position P-1 and reroute the next pointer, then free the removed node.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid dp(int p) { if(!head) printf(\"Underflow\\n\"); else if(p==1) db(); else { Node* t=head; for(int i=1; i<p-1 && t->n; i++) t=t->n; if(t->n) { Node* tmp=t->n; t->n=tmp->n; free(tmp); } else printf(\"Underflow\\n\"); } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\n\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"del_pos\")) { scanf(\"%d\", &p); dp(p); }\n        else if(!strcmp(op, \"display\")) disp();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "6\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndel_end\ndisplay",
+                        "expectedOutput": "20"
+                    },
+                    {
+                        "input": "2\ndel_beg\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nins_end 10\ndel_pos 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 10\nins_end 20\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "2\ndel_end\ndel_beg",
+                        "expectedOutput": "Underflow\nUnderflow"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\nins_end 30\ndel_end\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndisplay",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "6\nins_end 10\nins_end 20\nins_end 30\nins_end 40\ndel_pos 2\ndisplay",
+                        "expectedOutput": "10 30 40"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\nins_end 30\ndel_pos 3\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "4\nins_end 5\ndel_beg\ndel_end\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    }
+                ],
+                "solution_explanation": "Delete at beginning is O(1) by updating head to head->next and freeing the old node. Delete at end is O(N) requiring traversal to the second-to-last node. Delete at middle (position) is O(N) requiring traversal to position P-1 and rerouting the next pointer.",
+                "language": "C"
+            },
+            {
+                "id": "w5-sll-gen-004",
+                "question_text": "Display",
+                "question_description": "Implement a C program utilizing Singly Linked Lists focused on the following task: Display all elements of a Singly Linked List from head to tail after performing a series of insertions and deletions.",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'ins_end X' (insert at end), 'ins_beg X' (insert at beginning), 'del_beg' (delete first node), 'del_end' (delete last node), 'display' (print list).",
+                "output_format": "For 'display', print space-separated elements from head to tail. Print 'Empty' if the list has no nodes. Print 'Underflow' for deletion on an empty list.",
+                "constraints": "0 <= N <= 1000. Nodes must be dynamically allocated.",
+                "hints": "Traverse from head to the last node printing each value. Use a space between elements and a newline after the last element. Handle the empty list case by checking if head is NULL.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode* head = NULL;\n\nvoid ib(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=head; head=nn; }\nvoid ie(int v) { Node* nn = malloc(sizeof(Node)); nn->d=v; nn->n=NULL; if(!head) head=nn; else { Node* t=head; while(t->n) t=t->n; t->n=nn; } }\nvoid db() { if(head) { Node* t=head; head=head->n; free(t); } else printf(\"Underflow\\n\"); }\nvoid de() { if(!head) printf(\"Underflow\\n\"); else if(!head->n) { free(head); head=NULL; } else { Node* t=head; while(t->n->n) t=t->n; free(t->n); t->n=NULL; } }\nvoid disp() { if(!head) printf(\"Empty\\n\"); else { Node* t=head; while(t) { printf(\"%d%c\", t->d, t->n?' ':'\\n'); t=t->n; } } }\n\nint main() {\n    int N, v; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); }\n        else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); }\n        else if(!strcmp(op, \"del_beg\")) db();\n        else if(!strcmp(op, \"del_end\")) de();\n        else if(!strcmp(op, \"display\")) disp();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3\nins_end 10\nins_end 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 5\nins_end 15\nins_end 25\ndisplay",
+                        "expectedOutput": "5 15 25"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\nins_end 30\ndel_beg\ndisplay",
+                        "expectedOutput": "20 30"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_end 20\nins_end 30\ndel_end\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "4\nins_beg 3\nins_beg 2\nins_beg 1\ndisplay",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "3\nins_end 99\ndel_beg\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 2\nins_end 3\nins_end 4\nins_end 5\ndisplay",
+                        "expectedOutput": "1 2 3 4 5"
+                    },
+                    {
+                        "input": "2\ndel_beg\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "5\nins_end 10\nins_beg 5\nins_end 20\ndel_end\ndisplay",
+                        "expectedOutput": "5 10"
+                    }
+                ],
+                "solution_explanation": "Display traverses from head to the last node in O(N) time, printing each element. The key is handling the output format correctly — spaces between elements and a newline after the last element. An empty list (head == NULL) outputs 'Empty'.",
+                "language": "C"
+            }
+        ]
+    }
+]

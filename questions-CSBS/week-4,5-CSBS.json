@@ -1,0 +1,287 @@
+[
+    {
+        "name": "Week 4 & 5: Queues and Priority Queues",
+        "questions": [
+            {
+                "id": "w4-csbs-001",
+                "question_text": "Queue using Array",
+                "question_description": "Implement a Queue using a fixed-size array. Support the following operations: enqueue (insert at rear), dequeue (remove from front), and display (print all elements from front to rear).",
+                "input_format": "Integer S (size of queue) and N (number of operations), followed by N lines of commands: 'enqueue X', 'dequeue', 'display'.",
+                "output_format": "For 'dequeue', print the removed element. Print 'Queue is Full' on overflow, 'Queue is Empty' on underflow. For 'display', print space-separated elements or 'Empty'.",
+                "constraints": "1 <= S <= 100. 1 <= N <= 1000. Data values within integer limits.",
+                "hints": "Use front and rear indices. Enqueue increments rear and inserts. Dequeue increments front. The queue is full when rear == S-1 and empty when front > rear.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint q[100], front = 0, rear = -1, sz;\nvoid enqueue(int v) { if(rear == sz - 1) printf(\"Queue is Full\\n\"); else q[++rear] = v; }\nvoid dequeue() { if(front > rear) printf(\"Queue is Empty\\n\"); else printf(\"%d\\n\", q[front++]); }\nvoid display() { if(front > rear) printf(\"Empty\\n\"); else { for(int i = front; i <= rear; i++) printf(\"%d%c\", q[i], i == rear ? '\\n' : ' '); } }\nint main() {\n    int n, v; char op[20];\n    if(scanf(\"%d %d\", &sz, &n) != 2) return 0;\n    while(n--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"enqueue\")) { scanf(\"%d\", &v); enqueue(v); }\n        else if(!strcmp(op, \"dequeue\")) dequeue();\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5 3\nenqueue 10\nenqueue 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "3 2\ndequeue\ndisplay",
+                        "expectedOutput": "Queue is Empty\nEmpty"
+                    },
+                    {
+                        "input": "2 4\nenqueue 1\nenqueue 2\nenqueue 3\ndisplay",
+                        "expectedOutput": "Queue is Full\n1 2"
+                    },
+                    {
+                        "input": "3 5\nenqueue 10\nenqueue 20\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "10\n20\nQueue is Empty"
+                    },
+                    {
+                        "input": "3 5\nenqueue 5\nenqueue 15\nenqueue 25\ndequeue\ndisplay",
+                        "expectedOutput": "5\n15 25"
+                    },
+                    {
+                        "input": "1 3\nenqueue 99\ndequeue\ndisplay",
+                        "expectedOutput": "99\nEmpty"
+                    },
+                    {
+                        "input": "4 4\nenqueue 1\nenqueue 2\nenqueue 3\ndisplay",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "5 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1 4\nenqueue 10\nenqueue 20\ndequeue\ndisplay",
+                        "expectedOutput": "Queue is Full\n10\nEmpty"
+                    },
+                    {
+                        "input": "3 6\nenqueue 7\nenqueue 8\nenqueue 9\ndequeue\ndequeue\ndisplay",
+                        "expectedOutput": "7\n8\n9"
+                    }
+                ],
+                "solution_explanation": "A linear queue uses front and rear indices. Enqueue inserts at rear+1 if not full (rear < S-1). Dequeue removes from front by incrementing front. The queue is empty when front > rear. This approach is simple but wastes space after dequeues since front only moves forward.",
+                "language": "C"
+            },
+            {
+                "id": "w4-csbs-002",
+                "question_text": "Queue using Linked List",
+                "question_description": "Implement a Queue using a Singly Linked List. Support the following operations: enqueue (insert at rear), dequeue (remove from front), front (peek at front element), and display (print all elements).",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'enqueue X', 'dequeue', 'front', 'display'.",
+                "output_format": "For 'dequeue', print the removed element. For 'front', print the front element. Print 'Underflow' on dequeue from empty queue. Print 'Empty' for front/display on empty queue. For 'display', print space-separated elements.",
+                "constraints": "1 <= N <= 1000. Data values within integer limits.",
+                "hints": "Maintain front and rear pointers. Enqueue creates a new node at rear. Dequeue removes the node at front. Both are O(1) operations with proper pointer tracking.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode *fr = NULL, *re = NULL;\nvoid enqueue(int v) { Node* nn = malloc(sizeof(Node)); nn->d = v; nn->n = NULL; if(re) re->n = nn; else fr = nn; re = nn; }\nvoid dequeue() { if(!fr) { printf(\"Underflow\\n\"); return; } Node* t = fr; printf(\"%d\\n\", fr->d); fr = fr->n; if(!fr) re = NULL; free(t); }\nvoid peek() { if(!fr) printf(\"Empty\\n\"); else printf(\"%d\\n\", fr->d); }\nvoid display() { if(!fr) { printf(\"Empty\\n\"); return; } Node* t = fr; while(t) { printf(\"%d%c\", t->d, t->n ? ' ' : '\\n'); t = t->n; } }\nint main() {\n    int N, v; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"enqueue\")) { scanf(\"%d\", &v); enqueue(v); }\n        else if(!strcmp(op, \"dequeue\")) dequeue();\n        else if(!strcmp(op, \"front\")) peek();\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\nenqueue 10\nenqueue 20\nfront\ndisplay",
+                        "expectedOutput": "10\n10 20"
+                    },
+                    {
+                        "input": "3\nenqueue 5\ndequeue\nfront",
+                        "expectedOutput": "5\nEmpty"
+                    },
+                    {
+                        "input": "2\ndequeue\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "5\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndisplay",
+                        "expectedOutput": "1\n2 3"
+                    },
+                    {
+                        "input": "4\ndequeue\ndequeue\nfront\ndisplay",
+                        "expectedOutput": "Underflow\nUnderflow\nEmpty\nEmpty"
+                    },
+                    {
+                        "input": "6\nenqueue 42\nenqueue 55\ndequeue\nenqueue 77\nfront\ndisplay",
+                        "expectedOutput": "42\n55\n55 77"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "5\nenqueue 9\nfront\ndequeue\ndequeue\nfront",
+                        "expectedOutput": "9\n9\nUnderflow\nEmpty"
+                    },
+                    {
+                        "input": "3\nenqueue 100\nenqueue 200\nfront",
+                        "expectedOutput": "100"
+                    },
+                    {
+                        "input": "4\nfront\nenqueue 1\nfront\ndisplay",
+                        "expectedOutput": "Empty\n1\n1"
+                    }
+                ],
+                "solution_explanation": "A linked list queue uses front and rear pointers. Enqueue appends at rear->next in O(1). Dequeue removes the front node in O(1) by advancing the front pointer. When the last element is dequeued, both front and rear must be set to NULL.",
+                "language": "C"
+            },
+            {
+                "id": "w4-csbs-003",
+                "question_text": "Circular Queue using Array",
+                "question_description": "Implement a Circular Queue using a fixed-size array. Support operations: enqueue, dequeue, and display. Handle wrap-around using modulo arithmetic so that dequeued positions can be reused.",
+                "input_format": "Integer S (size of queue) and N (number of operations), followed by N lines of commands: 'enqueue X', 'dequeue', 'display'.",
+                "output_format": "For 'dequeue', print the removed element. Print 'Queue is Full' on overflow, 'Queue is Empty' on underflow. For 'display', print space-separated elements from front to rear, or 'Empty'.",
+                "constraints": "1 <= S <= 100. 1 <= N <= 1000.",
+                "hints": "Use front and rear initially set to -1. Next position is (rear + 1) % S. The queue is full when (rear + 1) % S == front. When the last element is dequeued, reset both to -1.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint q[100], front = -1, rear = -1, sz;\nvoid enqueue(int v) {\n    if((rear + 1) % sz == front) printf(\"Queue is Full\\n\");\n    else { if(front == -1) front = 0; rear = (rear + 1) % sz; q[rear] = v; }\n}\nvoid dequeue() {\n    if(front == -1) printf(\"Queue is Empty\\n\");\n    else { printf(\"%d\\n\", q[front]); if(front == rear) { front = -1; rear = -1; } else front = (front + 1) % sz; }\n}\nvoid display() {\n    if(front == -1) printf(\"Empty\\n\");\n    else { int i = front; while(1) { printf(\"%d%c\", q[i], i == rear ? '\\n' : ' '); if(i == rear) break; i = (i + 1) % sz; } }\n}\nint main() {\n    int n, v; char op[20];\n    if(scanf(\"%d %d\", &sz, &n) != 2) return 0;\n    while(n--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"enqueue\")) { scanf(\"%d\", &v); enqueue(v); }\n        else if(!strcmp(op, \"dequeue\")) dequeue();\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "3 3\nenqueue 10\nenqueue 20\ndisplay",
+                        "expectedOutput": "10 20"
+                    },
+                    {
+                        "input": "2 4\nenqueue 1\nenqueue 2\nenqueue 3\ndisplay",
+                        "expectedOutput": "Queue is Full\n1 2"
+                    },
+                    {
+                        "input": "3 2\ndequeue\ndisplay",
+                        "expectedOutput": "Queue is Empty\nEmpty"
+                    },
+                    {
+                        "input": "3 6\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\nenqueue 4\ndisplay",
+                        "expectedOutput": "1\n2 3 4"
+                    },
+                    {
+                        "input": "3 8\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndequeue\nenqueue 4\nenqueue 5\ndisplay",
+                        "expectedOutput": "1\n2\n3 4 5"
+                    },
+                    {
+                        "input": "2 5\nenqueue 1\nenqueue 2\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "1\n2\nQueue is Empty"
+                    },
+                    {
+                        "input": "5 1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "1 5\nenqueue 10\ndequeue\nenqueue 20\ndequeue\ndisplay",
+                        "expectedOutput": "10\n20\nEmpty"
+                    },
+                    {
+                        "input": "4 8\nenqueue 1\nenqueue 2\nenqueue 3\nenqueue 4\ndequeue\nenqueue 5\ndequeue\ndisplay",
+                        "expectedOutput": "1\n2\n3 4 5"
+                    },
+                    {
+                        "input": "2 6\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "Queue is Full\n1\n2\nQueue is Empty"
+                    }
+                ],
+                "solution_explanation": "Circular Queue uses modulo arithmetic to wrap rear and front around the array. This reuses space freed by dequeue operations. Full condition is (rear+1)%S == front. Empty is when front == -1. After dequeuing the last element, both front and rear reset to -1.",
+                "language": "C"
+            },
+            {
+                "id": "w4-csbs-004",
+                "question_text": "Circular Queue using Linked List",
+                "question_description": "Implement a Circular Queue using a Singly Linked List. Support operations: enqueue (insert at rear), dequeue (remove from front), and display (print all elements). In a circular linked list queue, the rear node's next pointer points back to the front node.",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'enqueue X', 'dequeue', 'display'.",
+                "output_format": "For 'dequeue', print the removed element. Print 'Underflow' on dequeue from empty queue. For 'display', print space-separated elements, or 'Empty'.",
+                "constraints": "1 <= N <= 1000. Data values within integer limits.",
+                "hints": "Maintain front and rear pointers. When enqueueing the first element, it points to itself. For subsequent enqueues, new node points to front, and old rear points to new node. On dequeue, update rear->next to the new front.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node* n; } Node;\nNode *fr = NULL, *re = NULL;\nvoid enqueue(int v) { Node* nn = malloc(sizeof(Node)); nn->d = v; if(!fr) { fr = nn; re = nn; nn->n = fr; } else { re->n = nn; re = nn; re->n = fr; } }\nvoid dequeue() { if(!fr) { printf(\"Underflow\\n\"); return; } Node* t = fr; printf(\"%d\\n\", fr->d); if(fr == re) { fr = NULL; re = NULL; } else { fr = fr->n; re->n = fr; } free(t); }\nvoid display() { if(!fr) { printf(\"Empty\\n\"); return; } Node* t = fr; do { printf(\"%d%c\", t->d, t == re ? '\\n' : ' '); t = t->n; } while(t != fr); }\nint main() {\n    int N, v; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"enqueue\")) { scanf(\"%d\", &v); enqueue(v); }\n        else if(!strcmp(op, \"dequeue\")) dequeue();\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\nenqueue 10\nenqueue 20\ndequeue\ndisplay",
+                        "expectedOutput": "10\n20"
+                    },
+                    {
+                        "input": "2\ndequeue\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "5\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndisplay",
+                        "expectedOutput": "1\n2 3"
+                    },
+                    {
+                        "input": "6\nenqueue 100\nenqueue 200\ndequeue\nenqueue 300\ndequeue\ndisplay",
+                        "expectedOutput": "100\n200\n300"
+                    },
+                    {
+                        "input": "3\nenqueue 5\ndequeue\ndequeue",
+                        "expectedOutput": "5\nUnderflow"
+                    },
+                    {
+                        "input": "4\nenqueue 9\nenqueue 8\nenqueue 7\ndisplay",
+                        "expectedOutput": "9 8 7"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "7\nenqueue 1\nenqueue 2\nenqueue 3\ndequeue\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "1\n2\n3\nUnderflow"
+                    },
+                    {
+                        "input": "5\nenqueue 42\ndequeue\nenqueue 55\ndequeue\ndisplay",
+                        "expectedOutput": "42\n55\nEmpty"
+                    },
+                    {
+                        "input": "4\nenqueue 10\nenqueue 10\ndequeue\ndisplay",
+                        "expectedOutput": "10\n10"
+                    }
+                ],
+                "solution_explanation": "In a Circular Queue implemented with a Linked List, the `next` pointer of the `rear` node always points back to the `front` node, forming a circle. Enqueue involves creating a node, linking `rear->next` to it, and making it point to `front`. Dequeue involves moving `front` to `front->next` and updating `rear->next` to the new `front`. When the last node is dequeued, both pointers become NULL.",
+                "language": "C"
+            },
+            {
+                "id": "w4-csbs-005",
+                "question_text": "Priority Queue",
+                "question_description": "Implement a Priority Queue using an array where each element has a data value and a priority. The element with the highest priority (lowest priority number) is dequeued first. If two elements have the same priority, the one inserted first is dequeued first (FIFO within same priority).",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'enqueue X P' (insert value X with priority P), 'dequeue' (remove highest priority element), 'display' (print all elements).",
+                "output_format": "For 'dequeue', print the removed value and its priority as 'X P'. Print 'Underflow' if queue is empty. For 'display', print each element as 'X(P)' space-separated in insertion order, or 'Empty'.",
+                "constraints": "1 <= N <= 1000. Priority values are positive integers. Lower number = higher priority.",
+                "hints": "Store data and priority in parallel arrays. When dequeuing, scan the entire array to find the element with the lowest priority number (highest priority). For ties, pick the one with the smallest index.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <string.h>\nint data[1000], pri[1000], cnt = 0;\nvoid enqueue(int v, int p) { data[cnt] = v; pri[cnt] = p; cnt++; }\nvoid dequeue() {\n    if(cnt == 0) { printf(\"Underflow\\n\"); return; }\n    int idx = 0;\n    for(int i = 1; i < cnt; i++) if(pri[i] < pri[idx]) idx = i;\n    printf(\"%d %d\\n\", data[idx], pri[idx]);\n    for(int i = idx; i < cnt - 1; i++) { data[i] = data[i+1]; pri[i] = pri[i+1]; }\n    cnt--;\n}\nvoid display() {\n    if(cnt == 0) { printf(\"Empty\\n\"); return; }\n    for(int i = 0; i < cnt; i++) printf(\"%d(%d)%c\", data[i], pri[i], i == cnt-1 ? '\\n' : ' ');\n}\nint main() {\n    int N, v, p; char op[20];\n    if(scanf(\"%d\", &N) != 1) return 0;\n    while(N--) {\n        scanf(\"%s\", op);\n        if(!strcmp(op, \"enqueue\")) { scanf(\"%d %d\", &v, &p); enqueue(v, p); }\n        else if(!strcmp(op, \"dequeue\")) dequeue();\n        else if(!strcmp(op, \"display\")) display();\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "4\nenqueue 10 2\nenqueue 20 1\nenqueue 30 3\ndequeue",
+                        "expectedOutput": "20 1"
+                    },
+                    {
+                        "input": "5\nenqueue 10 2\nenqueue 20 1\nenqueue 30 3\ndequeue\ndisplay",
+                        "expectedOutput": "20 1\n10(2) 30(3)"
+                    },
+                    {
+                        "input": "2\ndequeue\ndisplay",
+                        "expectedOutput": "Underflow\nEmpty"
+                    },
+                    {
+                        "input": "4\nenqueue 5 1\nenqueue 15 1\ndequeue\ndisplay",
+                        "expectedOutput": "5 1\n15(1)"
+                    },
+                    {
+                        "input": "6\nenqueue 100 3\nenqueue 200 1\nenqueue 300 2\ndequeue\ndequeue\ndisplay",
+                        "expectedOutput": "200 1\n300 2\n100(3)"
+                    },
+                    {
+                        "input": "3\nenqueue 42 5\ndequeue\ndequeue",
+                        "expectedOutput": "42 5\nUnderflow"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "7\nenqueue 1 3\nenqueue 2 2\nenqueue 3 1\ndequeue\ndequeue\ndequeue\ndequeue",
+                        "expectedOutput": "3 1\n2 2\n1 3\nUnderflow"
+                    },
+                    {
+                        "input": "5\nenqueue 10 1\nenqueue 20 2\nenqueue 30 3\nenqueue 40 1\ndequeue",
+                        "expectedOutput": "10 1"
+                    },
+                    {
+                        "input": "6\nenqueue 50 2\nenqueue 60 1\nenqueue 70 3\ndequeue\nenqueue 80 1\ndequeue",
+                        "expectedOutput": "60 1\n80 1"
+                    }
+                ],
+                "solution_explanation": "Priority Queue stores elements with associated priorities. On dequeue, it scans the entire array to find the element with the lowest priority number (highest priority). For equal priorities, the element inserted first (lowest index) is chosen, preserving FIFO order. Dequeue shifts remaining elements left to fill the gap. Enqueue is O(1), dequeue is O(N).",
+                "language": "C"
+            }
+        ]
+    }
+]
