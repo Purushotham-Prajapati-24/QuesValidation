@@ -1,162 +1,167 @@
 [
     {
-        "id": "0e2e8dad-83c4-45fa-ab7b-f08e6e644851",
-        "question": "Consider a stack used to check balanced parentheses. For the expression `( [ { ( ) } ] )`, what is the maximum number of elements present in the stack at any point during the evaluation?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "3",
-            "B": "4",
-            "C": "5",
-            "D": "6"
-        },
-        "test_cases": null,
-        "solution_explanation": "Let's trace the stack operations:\n1. `(` pushed -> stack size: 1\n2. `[` pushed -> stack size: 2\n3. `{` pushed -> stack size: 3\n4. `(` pushed -> stack size: 4 (Maximum depth reached)\n5. `)` popped -> stack size: 3\n6. `}` popped -> stack size: 2\n7. `]` popped -> stack size: 1\n8. `)` popped -> stack size: 0\nThe maximum number of elements present concurrently in the stack is 4.",
-        "language": null
-    },
-    {
-        "id": "cb3f5e05-2c89-4385-9387-f9d3023b2370",
-        "question": "A parenthesis matching algorithm pushes opening brackets (`(`, `[`, `{`) onto a stack and pops an element when a closing bracket is encountered. If the programmer forgets to check whether the popped bracket matches the type of the current closing bracket (only checking that the stack isn't empty), which of the following expressions will be incorrectly identified as balanced?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "( [ ) ]",
-            "B": "( [ ] )",
-            "C": "( ( ) ) { }",
-            "D": "{ [ ] } ( )"
-        },
-        "test_cases": null,
-        "solution_explanation": "If the algorithm only checks for equal counts of opening and closing brackets in sequence without validating types:\n- In `( [ ) ]`, it pushes two items. Then it encounters `)` and pops an item (which is `[`), and then encounters `]` and pops an item (which is `(`). The stack ends up empty, falsely returning balanced.\n- Options B and C are already correctly balanced.\n- Option D ends up with an empty stack too under this flawed logic, but `( [ ) ]` perfectly demonstrates the interleaving error which is a classic edge case in stack-based parsers.",
-        "language": null
-    },
-    {
-        "id": "49b0b109-aa54-4a9c-ab89-83e566578633",
-        "question": "A string of length N contains only parentheses `(`, `)`, `[`, `]`. What is the worst-case auxiliary space complexity of solving the balanced parenthesis problem using a stack?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "O(1)",
-            "B": "O(N/2)",
-            "C": "O(N)",
-            "D": "O(log N)"
-        },
-        "test_cases": null,
-        "solution_explanation": "The auxiliary space depends on the maximum number of items pushed onto the stack. The worst-case scenario occurs when all N characters in the string are opening brackets (e.g., `((((((...`), or highly unbalanced like N-1 opening brackets. In such cases, every character is pushed onto the stack, demanding O(N) space.",
-        "language": null
-    },
-    {
-        "id": "62ffdfc8-974a-4313-8ad7-96c447703d62",
-        "question": "In a Circular Queue implemented using an array of size N (indexed 0 to N-1), if `front` points to the index of the first inserted element and `rear` points to the index of the last inserted element, which of the following conditions accurately checks if the queue is full?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "front == rear",
-            "B": "(rear + 1) % N == front",
-            "C": "(front + 1) % N == rear",
-            "D": "front == 0 && rear == N - 1"
-        },
-        "test_cases": null,
-        "solution_explanation": "In a circular queue, the array conceptually wraps around. The next available position for insertion is calculated as `(rear + 1) % N`. If this next position is equal to the `front` index, it signifies that there is no space left to insert an element without overwriting the queue's front. Thus, `(rear + 1) % N == front` is the standard 'Queue Full' condition.",
-        "language": null
-    },
-    {
-        "id": "d371072a-eb0f-4cc6-9d11-1a2a0636fc9d",
-        "question": "Consider a circular queue of capacity 5 (array indices 0 to 4) with `front = 1` and `rear = 3`. The elements currently in the queue are at indices 1, 2, and 3. If two elements are inserted consecutively and one element is then deleted, what will be the new values of `front` and `rear`?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "front = 1, rear = 0",
-            "B": "front = 2, rear = 0",
-            "C": "front = 2, rear = 1",
-            "D": "front = 0, rear = 2"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Initial state**: `front = 1, rear = 3`.\n2. **First insertion**: Next `rear` = `(3 + 1) % 5 = 4`.\n3. **Second insertion**: Next `rear` = `(4 + 1) % 5 = 0`. The queue wraps around.\n4. **Deletion**: Removes the element at `front`. Next `front` = `(1 + 1) % 5 = 2`.\n**Final state**: `front = 2, rear = 0`.",
-        "language": null
-    },
-    {
-        "id": "966f509d-897e-4a74-9941-19314383b853",
-        "question": "In a circular queue of capacity N, `front` points to the first inserted element and `rear` points to the last inserted element. Assuming the queue is NOT empty, which formula correctly calculates the total number of elements currently present in the queue?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "(rear - front + N) % N + 1",
-            "B": "(rear - front) % N",
-            "C": "(front - rear + N) % N",
-            "D": "(rear - front + 1) % N"
-        },
-        "test_cases": null,
-        "solution_explanation": "Depending on the queue state, `rear` can be mathematically smaller than `front` due to wrap-around. Simple subtraction (`rear - front`) might yield a negative result. Adding N ensures the value is positive before applying modulo N to handle wrap-around cases seamlessly. Since `rear` and `front` are inclusive boundaries of the elements list, we add 1. Thus, the exact count is `(rear - front + N) % N + 1`.",
-        "language": null
-    },
-    {
-        "id": "bbedf738-9f22-4058-b4c2-6f837eae5100",
-        "question": "Can the logic of parenthesis matching be applied directly to validate the structure of properly formatted nested HTML tags (e.g., `<div><p></p></div>`)? What is the main structural property shared by both?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "No, because HTML tags can contain parsed text, whereas mathematical strings only contain brackets.",
-            "B": "Yes, because both follow a Last-In-First-Out (LIFO) hierarchical structure where the most recently opened block must be closed first.",
-            "C": "Yes, but only if the HTML code contains no nested tags of the same name.",
-            "D": "No, because HTML closing tags do not have mathematical equivalents."
-        },
-        "test_cases": null,
-        "solution_explanation": "HTML tags and mathematical parentheses both exhibit a nested, hierarchical structure. The last tag opened must always be the first one closed, seamlessly mirroring the Last-In-First-Out (LIFO) behavior of a standard stack. An opening tag evaluates similarly to `(` and a corresponding closing tag evaluates perfectly to `)`.",
-        "language": null
-    },
-    {
-        "id": "498b7dbc-0690-436f-96c5-5be869bac020",
-        "question": "Why is the modulo operator (`%`) essential in the array implementation of a Circular Queue?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "It encrypts the array indices to prevent out-of-bounds memory reading.",
-            "B": "It triggers automatic dynamic resizing of the underlying array.",
-            "C": "It allows the `front` and `rear` pointers to wrap around mathematically to the beginning of the array.",
-            "D": "It continuously ensures that only integer data types can be processed."
-        },
-        "test_cases": null,
-        "solution_explanation": "The defining feature of a Circular Queue is that it utilizes the empty spaces left behind by deleted elements at the start of the array. The modulo operator computes the remainder of division; when `index + 1` reaches array size N, `(index + 1) % N` appropriately evaluates to 0. This seamlessly wraps pointers back to the first address block.",
-        "language": null
-    },
-    {
-        "id": "563d1535-397a-415d-9505-2e98defb9ebb",
-        "question": "Analyze the following pseudo-code snippet for enqueueing an element in a circular queue of size M.\n\n```c\nvoid enqueue(int val) {\n    if ((rear + 1) % M == front) {\n        printf(\"Queue Full\");\n        return;\n    }\n    if (front == -1) front = 0;\n    rear = _________;\n    queue[rear] = val;\n}\n```\nWhich of the following expressions correctly fills in the blank to maintain the circular queue property?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "rear + 1",
-            "B": "(rear + 1) % M",
-            "C": "(front + 1) % M",
-            "D": "rear % M + 1"
-        },
-        "test_cases": null,
-        "solution_explanation": "To advance the `rear` pointer circularly, we increment it by 1 and take the results over modulo M. The expression `(rear + 1) % M` ensures that if `rear == M - 1`, the next index correctly computes to `(M - 1 + 1) % M = 0`. Using just `rear + 1` would cause an out-of-bounds array access error.",
-        "language": "C"
-    },
-    {
-        "id": "88e28909-52f4-4cc4-9405-0757b5b8e928",
-        "question": "A developer writes a C program to check for balanced parentheses using a character array `stack[100]` and an integer variable `top = -1`. Upon analyzing a closing curly bracket `}`, what is the mathematically exact logical condition to assert a \"Match Failed\" immediately?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "(top == -1) || (stack[top] != '{')",
-            "B": "(top > -1) && (stack[top] == '{')",
-            "C": "(stack[top] == '}')",
-            "D": "(top == 100) || (stack[top] == '{')"
-        },
-        "test_cases": null,
-        "solution_explanation": "When processing a closing bracket like `}`, the sequential string is unbalanced if either:\n1. The stack is already empty (represented by `top == -1`), meaning there is no corresponding opening bracket for this closer.\n2. The element sitting at the top of the stack is NOT the matching opening bracket (`stack[top] != '{'`).\nOption A represents this logical disjunction correctly. Note: We must also check `top == -1` first because short-circuit evaluation prevents triggering an out-of-bounds error on `stack[-1]`.",
-        "language": "C"
+        "name": "Week 4: Stacks and Queues",
+        "questions": [
+            {
+                "id": "0e2e8dad-83c4-45fa-ab7b-f08e6e644851",
+                "question": "Consider a stack used to check balanced parentheses. For the expression `( [ { ( ) } ] )`, what is the maximum number of elements present in the stack at any point during the evaluation?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "3",
+                    "B": "4",
+                    "C": "5",
+                    "D": "6"
+                },
+                "test_cases": null,
+                "solution_explanation": "Let's trace the stack operations:\n1. `(` pushed -> stack size: 1\n2. `[` pushed -> stack size: 2\n3. `{` pushed -> stack size: 3\n4. `(` pushed -> stack size: 4 (Maximum depth reached)\n5. `)` popped -> stack size: 3\n6. `}` popped -> stack size: 2\n7. `]` popped -> stack size: 1\n8. `)` popped -> stack size: 0\nThe maximum number of elements present concurrently in the stack is 4.",
+                "language": null
+            },
+            {
+                "id": "cb3f5e05-2c89-4385-9387-f9d3023b2370",
+                "question": "A parenthesis matching algorithm pushes opening brackets (`(`, `[`, `{`) onto a stack and pops an element when a closing bracket is encountered. If the programmer forgets to check whether the popped bracket matches the type of the current closing bracket (only checking that the stack isn't empty), which of the following expressions will be incorrectly identified as balanced?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "( [ ) ]",
+                    "B": "( [ ] )",
+                    "C": "( ( ) ) { }",
+                    "D": "{ [ ] } ( )"
+                },
+                "test_cases": null,
+                "solution_explanation": "If the algorithm only checks for equal counts of opening and closing brackets in sequence without validating types:\n- In `( [ ) ]`, it pushes two items. Then it encounters `)` and pops an item (which is `[`), and then encounters `]` and pops an item (which is `(`). The stack ends up empty, falsely returning balanced.\n- Options B and C are already correctly balanced.\n- Option D ends up with an empty stack too under this flawed logic, but `( [ ) ]` perfectly demonstrates the interleaving error which is a classic edge case in stack-based parsers.",
+                "language": null
+            },
+            {
+                "id": "49b0b109-aa54-4a9c-ab89-83e566578633",
+                "question": "A string of length N contains only parentheses `(`, `)`, `[`, `]`. What is the worst-case auxiliary space complexity of solving the balanced parenthesis problem using a stack?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "O(1)",
+                    "B": "O(N/2)",
+                    "C": "O(N)",
+                    "D": "O(log N)"
+                },
+                "test_cases": null,
+                "solution_explanation": "The auxiliary space depends on the maximum number of items pushed onto the stack. The worst-case scenario occurs when all N characters in the string are opening brackets (e.g., `((((((...`), or highly unbalanced like N-1 opening brackets. In such cases, every character is pushed onto the stack, demanding O(N) space.",
+                "language": null
+            },
+            {
+                "id": "62ffdfc8-974a-4313-8ad7-96c447703d62",
+                "question": "In a Circular Queue implemented using an array of size N (indexed 0 to N-1), if `front` points to the index of the first inserted element and `rear` points to the index of the last inserted element, which of the following conditions accurately checks if the queue is full?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "front == rear",
+                    "B": "(rear + 1) % N == front",
+                    "C": "(front + 1) % N == rear",
+                    "D": "front == 0 && rear == N - 1"
+                },
+                "test_cases": null,
+                "solution_explanation": "In a circular queue, the array conceptually wraps around. The next available position for insertion is calculated as `(rear + 1) % N`. If this next position is equal to the `front` index, it signifies that there is no space left to insert an element without overwriting the queue's front. Thus, `(rear + 1) % N == front` is the standard 'Queue Full' condition.",
+                "language": null
+            },
+            {
+                "id": "d371072a-eb0f-4cc6-9d11-1a2a0636fc9d",
+                "question": "Consider a circular queue of capacity 5 (array indices 0 to 4) with `front = 1` and `rear = 3`. The elements currently in the queue are at indices 1, 2, and 3. If two elements are inserted consecutively and one element is then deleted, what will be the new values of `front` and `rear`?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "front = 1, rear = 0",
+                    "B": "front = 2, rear = 0",
+                    "C": "front = 2, rear = 1",
+                    "D": "front = 0, rear = 2"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Initial state**: `front = 1, rear = 3`.\n2. **First insertion**: Next `rear` = `(3 + 1) % 5 = 4`.\n3. **Second insertion**: Next `rear` = `(4 + 1) % 5 = 0`. The queue wraps around.\n4. **Deletion**: Removes the element at `front`. Next `front` = `(1 + 1) % 5 = 2`.\n**Final state**: `front = 2, rear = 0`.",
+                "language": null
+            },
+            {
+                "id": "966f509d-897e-4a74-9941-19314383b853",
+                "question": "In a circular queue of capacity N, `front` points to the first inserted element and `rear` points to the last inserted element. Assuming the queue is NOT empty, which formula correctly calculates the total number of elements currently present in the queue?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "(rear - front + N) % N + 1",
+                    "B": "(rear - front) % N",
+                    "C": "(front - rear + N) % N",
+                    "D": "(rear - front + 1) % N"
+                },
+                "test_cases": null,
+                "solution_explanation": "Depending on the queue state, `rear` can be mathematically smaller than `front` due to wrap-around. Simple subtraction (`rear - front`) might yield a negative result. Adding N ensures the value is positive before applying modulo N to handle wrap-around cases seamlessly. Since `rear` and `front` are inclusive boundaries of the elements list, we add 1. Thus, the exact count is `(rear - front + N) % N + 1`.",
+                "language": null
+            },
+            {
+                "id": "bbedf738-9f22-4058-b4c2-6f837eae5100",
+                "question": "Can the logic of parenthesis matching be applied directly to validate the structure of properly formatted nested HTML tags (e.g., `<div><p></p></div>`)? What is the main structural property shared by both?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "No, because HTML tags can contain parsed text, whereas mathematical strings only contain brackets.",
+                    "B": "Yes, because both follow a Last-In-First-Out (LIFO) hierarchical structure where the most recently opened block must be closed first.",
+                    "C": "Yes, but only if the HTML code contains no nested tags of the same name.",
+                    "D": "No, because HTML closing tags do not have mathematical equivalents."
+                },
+                "test_cases": null,
+                "solution_explanation": "HTML tags and mathematical parentheses both exhibit a nested, hierarchical structure. The last tag opened must always be the first one closed, seamlessly mirroring the Last-In-First-Out (LIFO) behavior of a standard stack. An opening tag evaluates similarly to `(` and a corresponding closing tag evaluates perfectly to `)`.",
+                "language": null
+            },
+            {
+                "id": "498b7dbc-0690-436f-96c5-5be869bac020",
+                "question": "Why is the modulo operator (`%`) essential in the array implementation of a Circular Queue?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "It encrypts the array indices to prevent out-of-bounds memory reading.",
+                    "B": "It triggers automatic dynamic resizing of the underlying array.",
+                    "C": "It allows the `front` and `rear` pointers to wrap around mathematically to the beginning of the array.",
+                    "D": "It continuously ensures that only integer data types can be processed."
+                },
+                "test_cases": null,
+                "solution_explanation": "The defining feature of a Circular Queue is that it utilizes the empty spaces left behind by deleted elements at the start of the array. The modulo operator computes the remainder of division; when `index + 1` reaches array size N, `(index + 1) % N` appropriately evaluates to 0. This seamlessly wraps pointers back to the first address block.",
+                "language": null
+            },
+            {
+                "id": "563d1535-397a-415d-9505-2e98defb9ebb",
+                "question": "Analyze the following pseudo-code snippet for enqueueing an element in a circular queue of size M.\n\n```c\nvoid enqueue(int val) {\n    if ((rear + 1) % M == front) {\n        printf(\"Queue Full\");\n        return;\n    }\n    if (front == -1) front = 0;\n    rear = _________;\n    queue[rear] = val;\n}\n```\nWhich of the following expressions correctly fills in the blank to maintain the circular queue property?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "rear + 1",
+                    "B": "(rear + 1) % M",
+                    "C": "(front + 1) % M",
+                    "D": "rear % M + 1"
+                },
+                "test_cases": null,
+                "solution_explanation": "To advance the `rear` pointer circularly, we increment it by 1 and take the results over modulo M. The expression `(rear + 1) % M` ensures that if `rear == M - 1`, the next index correctly computes to `(M - 1 + 1) % M = 0`. Using just `rear + 1` would cause an out-of-bounds array access error.",
+                "language": "C"
+            },
+            {
+                "id": "88e28909-52f4-4cc4-9405-0757b5b8e928",
+                "question": "A developer writes a C program to check for balanced parentheses using a character array `stack[100]` and an integer variable `top = -1`. Upon analyzing a closing curly bracket `}`, what is the mathematically exact logical condition to assert a \"Match Failed\" immediately?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "(top == -1) || (stack[top] != '{')",
+                    "B": "(top > -1) && (stack[top] == '{')",
+                    "C": "(stack[top] == '}')",
+                    "D": "(top == 100) || (stack[top] == '{')"
+                },
+                "test_cases": null,
+                "solution_explanation": "When processing a closing bracket like `}`, the sequential string is unbalanced if either:\n1. The stack is already empty (represented by `top == -1`), meaning there is no corresponding opening bracket for this closer.\n2. The element sitting at the top of the stack is NOT the matching opening bracket (`stack[top] != '{'`).\nOption A represents this logical disjunction correctly. Note: We must also check `top == -1` first because short-circuit evaluation prevents triggering an out-of-bounds error on `stack[-1]`.",
+                "language": "C"
+            }
+        ]
     }
 ]

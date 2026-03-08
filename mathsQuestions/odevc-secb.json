@@ -1,0 +1,258 @@
+[
+    {
+        "name": "Section-B",
+        "questions": [],
+        "children": [
+            {
+                "name": "UNIT - II: HIGHER ORDER ORDINARY DIFFERENTIAL EQUATIONS WITH CONSTANT COEFFICIENTS",
+                "questions": [
+                    {
+                        "id": "e201-q1",
+                        "question_text": "Solve $(D+2)(D-1)^2y = e^{-2x} + 2\\sinh x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: Complementary Function (C.F.)\nThe auxiliary equation is $(m+2)(m-1)^2 = 0$ 6]. Roots are $m = -2, 1, 1$. \n$y_c = c_1 e^{-2x} + (c_2 + c_3 x)e^x$.\n\n### Step 2: Particular Integral (P.I.)\n$P.I. = \\frac{1}{(D+2)(D-1)^2} [e^{-2x} + e^x - e^{-x}]$.\n* For $e^{-2x}$: $D=-2$ is a root once. $P.I_1 = \\frac{x e^{-2x}}{(-2-1)^2} = \\frac{x e^{-2x}}{9}$.\n* For $e^x$: $D=1$ is a root twice. $P.I_2 = \\frac{x^2 e^x}{2!(1+2)} = \\frac{x^2 e^x}{6}$.\n* For $-e^{-x}$: $P.I_3 = \\frac{-e^{-x}}{(-1+2)(-1-1)^2} = -\\frac{e^{-x}}{4}$.\n\n### Final Solution\n$y = c_1 e^{-2x} + (c_2 + c_3 x)e^x + \\frac{x e^{-2x}}{9} + \\frac{x^2 e^x}{6} - \\frac{e^{-x}}{4}$",
+                        "solution_explanation": "We solve the characteristic equation for roots and handle 'Case of Failure' by multiplying by $x$ and differentiating the denominator for the P.I. 5, 6].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q2",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2}-2\\frac{dy}{dx}+2y = e^x + \\cos x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$m^2 - 2m + 2 = 0 \\implies m = 1 \\pm i$. \n$y_c = e^x(c_1 \\cos x + c_2 \\sin x)$.\n\n### Step 2: P.I.\n$P.I. = \\frac{1}{D^2-2D+2}(e^x + \\cos x)$.\n* For $e^x$: Put $D=1 \\implies \\frac{e^x}{1-2+2} = e^x$.\n* For $\\cos x$: Put $D^2=-1 \\implies \\frac{1}{1-2D}\\cos x = \\frac{1+2D}{1-4D^2}\\cos x = \\frac{\\cos x - 2\\sin x}{5}$.\n\n### Final Solution\n$y = e^x(c_1 \\cos x + c_2 \\sin x) + e^x + \\frac{1}{5}(\\cos x - 2\\sin x)$",
+                        "solution_explanation": "This involves complex roots for C.F. and operator substitution for P.I., specifically replacing $D^2$ with $-a^2$ for trigonometric functions 7].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q3",
+                        "question_text": "Solve $(D^2+1)y = \\sin x \\sin 2x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$m^2+1=0 \\implies m = \\pm i$. $y_c = c_1 \\cos x + c_2 \\sin x$.\n\n### Step 2: RHS Transformation\n$\\sin x \\sin 2x = \\frac{1}{2}(\\cos x - \\cos 3x)$.\n\n### Step 3: P.I.\n$P.I. = \\frac{1}{2} [\\frac{1}{D^2+1}\\cos x - \\frac{1}{D^2+1}\\cos 3x]$.\n* For $\\cos x$: Case of failure $\\implies \\frac{x}{2} \\sin x$.\n* For $\\cos 3x$: $D^2=-9 \\implies \\frac{\\cos 3x}{-9+1} = -\\frac{\\cos 3x}{8}$.\n\n### Final Solution\n$y = c_1 \\cos x + c_2 \\sin x + \\frac{x \\sin x}{4} + \\frac{\\cos 3x}{16}$",
+                        "solution_explanation": "Product to sum transformation is required before applying P.I. rules 8].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q4",
+                        "question_text": "Solve $(D^2 -2D+4)y = x^2 + e^{2x} + \\sin 2x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$m^2-2m+4=0 \\implies m = 1 \\pm i\\sqrt{3}$. $y_c = e^x(c_1 \\cos \\sqrt{3}x + c_2 \\sin \\sqrt{3}x)$.\n\n### Step 2: P.I.\n* $P.I_1$ (Algebraic): $\\frac{1}{4}(1 - \\frac{2D-D^2}{4})^{-1}x^2 = \\frac{1}{4}(1 + \\frac{2D-D^2}{4} + \\frac{4D^2}{16})x^2 = \\frac{x^2+x}{4}$.\n* $P.I_2$ (Exp): Put $D=2 \\implies \\frac{e^{2x}}{4-4+4} = \\frac{e^{2x}}{4}$.\n* $P.I_3$ (Trig): Put $D^2=-4 \\implies \\frac{\\sin 2x}{-4-2D+4} = \\frac{\\cos 2x}{4}$.\n\n### Final Solution\n$y = y_c + \\frac{x^2+x}{4} + \\frac{e^{2x}}{4} + \\frac{\\cos 2x}{4}$",
+                        "solution_explanation": "Combines polynomial expansion, exponential substitution, and trigonometric substitution techniques 9].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q5",
+                        "question_text": "Solve $(D^2 -4)y = x^2 \\sinh x + \\cos 2x + e^{-2x}$  ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$m^2-4=0 \\implies m = \\pm 2$. $y_c = c_1 e^{2x} + c_2 e^{-2x}$.\n\n### Step 2: P.I.\n* $x^2 \\sinh x = x^2(\\frac{e^x - e^{-x}}{2})$. Use shift theorem $e^{ax} \\frac{1}{f(D+a)} V$.\n* $\\cos 2x$: Put $D^2=-4 \\implies \\frac{\\cos 2x}{-4-4} = -\\frac{\\cos 2x}{8}$.\n* $e^{-2x}$: Case of failure $\\implies \\frac{x e^{-2x}}{2(-2)} = -\\frac{x e^{-2x}}{4}$.\n\n### Final Solution\n$y = c_1 e^{2x} + c_2 e^{-2x} + P.I_{algebraic} - \\frac{\\cos 2x}{8} - \\frac{x e^{-2x}}{4}$",
+                        "solution_explanation": "Requires application of the Exponential Shift theorem for the $x^2 e^x$ term 10].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q6",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2} + 4y = x \\sin x + e^{-2x} + e^x x^2$  ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$m^2+4=0 \\implies m = \\pm 2i$. $y_c = c_1 \\cos 2x + c_2 \\sin 2x$.\n\n### Step 2: P.I.\n* $x \\sin x$: Part of $Im[\\frac{1}{D^2+4} x e^{ix}]$.\n* $e^{-2x}$: Put $D=-2 \\implies \\frac{e^{-2x}}{8}$.\n* $e^x x^2$: Shift $D \\to D+1 \\implies e^x \\frac{1}{(D+1)^2+4} x^2$.\n\n### Final Solution\n$y = c_1 \\cos 2x + c_2 \\sin 2x + \\frac{1}{3}(x \\sin x - \\frac{2}{3} \\cos x) + \\frac{e^{-2x}}{8} + e^x \\frac{5x^2-4x-2}{25}$",
+                        "solution_explanation": "Multiple methods used: Imaginary part for $x \\sin x$ and Shift Theorem for $e^x x^2$ 11].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q7",
+                        "question_text": "Solve $(D^2 -4D+4) y = 8 x^2 e^{2x} \\sin 2x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$(m-2)^2=0 \\implies m=2, 2$. $y_c = (c_1+c_2 x)e^{2x}$.\n\n### Step 2: P.I.\n$P.I. = 8 e^{2x} \\frac{1}{(D+2-2)^2} (x^2 \\sin 2x) = 8 e^{2x} \\frac{1}{D^2} (x^2 \\sin 2x)$.\n$1/D^2$ means integrate twice.\n$\\int \\int x^2 \\sin 2x dx dx = -\\frac{1}{4}(2x^2-1)\\sin 2x - x\\cos 2x$.\n\n### Final Solution\n$y = (c_1+c_2 x)e^{2x} + e^{2x} [(-4x^2+2)\\sin 2x - 8x\\cos 2x]$",
+                        "solution_explanation": "The shift theorem simplifies the operator to $1/D^2$, which is equivalent to double integration 12].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q8",
+                        "question_text": "Solve $(D^2 -4D +3)y = x e^{3x} + e^x \\cos 2x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$m^2-4m+3=0 \\implies m=1, 3$. $y_c = c_1 e^x + c_2 e^{3x}$.\n\n### Step 2: P.I.\n* $x e^{3x}$: Case of failure. $P.I_1 = e^{3x} \\frac{1}{(D+3-1)(D+3-3)} x = e^{3x} \\frac{1}{D(D+2)}x = e^{3x} \\frac{x^2-x}{4}$.\n* $e^x \\cos 2x$: Case of failure. Shift $D \\to D+1 \\implies e^x \\frac{1}{D(D-2)} \\cos 2x = e^x \\frac{-\\sin 2x}{4}$.\n\n### Final Solution\n$y = c_1 e^x + c_2 e^{3x} + e^{3x}\\frac{x^2-x}{4} - \\frac{e^x \\sin 2x}{4}$",
+                        "solution_explanation": "Both terms in RHS require the shift theorem due to roots overlapping with the homogeneous solution 13].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q9",
+                        "question_text": "Solve $(D^3-3D^2 +3D-1)y = e^x \\cos x + \\sin x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$(m-1)^3=0 \\implies m=1, 1, 1$. $y_c = (c_1+c_2 x + c_3 x^2)e^x$.\n\n### Step 2: P.I.\n* $e^x \\cos x$: Shift $D \\to D+1 \\implies e^x \\frac{1}{D^3} \\cos x = e^x(-\\sin x)$.\n* $\\sin x$: Put $D^2=-1$. $\\frac{\\sin x}{-1(D-3)+3D-1} = \\frac{\\sin x}{2D+2} = \\frac{\\cos x + \\sin x}{4}$.\n\n### Final Solution\n$y = (c_1+c_2 x + c_3 x^2)e^x - e^x \\sin x + \\frac{\\cos x + \\sin x}{4}$",
+                        "solution_explanation": "Triple integration ($1/D^3$) is applied after the shift for the first term 14].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q10",
+                        "question_text": "Solve $(D-2)^2y = 8(e^{2x} + \\sin 2x + x^2)$  ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$(m-2)^2=0 \\implies m=2, 2$. $y_c = (c_1+c_2 x)e^{2x}$.\n\n### Step 2: P.I.\n* $8e^{2x}$: Case of failure (twice). $P.I_1 = 8 \\frac{x^2}{2} e^{2x} = 4x^2 e^{2x}$.\n* $8\\sin 2x$: $D^2=-4$. $8 \\frac{\\sin 2x}{-4-4D+4} = -\\frac{2}{D}\\sin 2x = \\cos 2x$.\n* $8x^2$: $\\frac{8}{4(1-D/2)^2} x^2 = 2(1-D)^{-1} x^2 = 2(x^2+x+1/2)$.\n\n### Final Solution\n$y = (c_1+c_2 x)e^{2x} + 4x^2 e^{2x} + \\cos 2x + 2x^2 + 2x + 1$",
+                        "solution_explanation": "Demonstrates three different P.I. cases: Failure, Trig, and Algebraic 15].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q11",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2}-3\\frac{dy}{dx}+2y = \\sin 2x + x e^{3x}$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: C.F.\n$m^2-3m+2=0 \\implies m=1, 2$. $y_c = c_1 e^x + c_2 e^{2x}$.\n\n### Step 2: P.I.\n* $\\sin 2x$: $D^2=-4 \\implies \\frac{\\sin 2x}{-4-3D+2} = \\frac{-3D+2}{13-9D^2} \\sin 2x = \\frac{1}{50}(3\\cos 2x + \\sin 2x)$.\n* $x e^{3x}$: Shift $D \\to D+3 \\implies e^{3x} \\frac{1}{(D+2)(D+1)} x = e^{3x} \\frac{2x-3}{4}$.\n\n### Final Solution\n$y = c_1 e^x + c_2 e^{2x} + \\frac{1}{10}(3\\cos 2x + \\sin 2x) + e^{3x} \\frac{2x-3}{4}$",
+                        "solution_explanation": "Standard application of trig substitution and shift theorem for exponential-polynomial products 16].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e201-q12",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2} + 16y = x + \\sin 3x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "EASY",
+                        "answer": "### Step 1: C.F.\n$m^2+16=0 \\implies m = \\pm 4i$. $y_c = c_1 \\cos 4x + c_2 \\sin 4x$.\n\n### Step 2: P.I.\n* $x$: $\\frac{1}{16(1+D^2/16)}x = \\frac{1}{16}(1-D^2/16)x = \\frac{x}{16}$.\n* $\\sin 3x$: $D^2=-9 \\implies \\frac{\\sin 3x}{-9+16} = \\frac{\\sin 3x}{7}$.\n\n### Final Solution\n$y = c_1 \\cos 4x + c_2 \\sin 4x + \\frac{x}{16} + \\frac{\\sin 3x}{7}$",
+                        "solution_explanation": "Simple algebraic and trigonometric P.I. calculation without cases of failure 17].",
+                        "options": null,
+                        "test_cases": null
+                    }
+                ]
+            },
+            {
+                "name": "UNIT - III: HIGHER ORDER ORDINARY DIFFERENTIAL EQUATIONS WITH VARIABLE COEFFICIENTS",
+                "questions": [
+                    {
+                        "id": "e301-q1",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2} + y = \\csc x$ using Variation of Parameters ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$y_c = c_1 \\cos x + c_2 \\sin x$. $y_1 = \\cos x, y_2 = \\sin x$. \n\n### Step 2: Wronskian\n$W = \\cos x(\\cos x) - \\sin x(-\\sin x) = 1$.\n\n### Step 3: P.I.\n$u = -\\int \\sin x \\csc x dx = -x$.\n$v = \\int \\cos x \\csc x dx = \\ln|\\sin x|$.\n\n### Final Solution\n$y = c_1 \\cos x + c_2 \\sin x - x \\cos x + \\sin x \\ln|\\sin x|$",
+                        "solution_explanation": "Method of Variation of Parameters is used because $\\csc x$ is not a standard elementary function for operator methods 23].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q2",
+                        "question_text": "Solve $(D^2+a^2)y = \\tan ax$ using Variation of Parameters ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$y_c = c_1 \\cos ax + c_2 \\sin ax$. $y_1 = \\cos ax, y_2 = \\sin ax$.\n\n### Step 2: Wronskian\n$W = a(\\cos^2 ax + \\sin^2 ax) = a$.\n\n### Step 3: P.I.\n$u = -\\int \\frac{\\sin ax \\tan ax}{a} dx = -\\frac{1}{a^2}(\\ln|\\sec ax + \\tan ax| - \\sin ax)$.\n$v = \\int \\frac{\\cos ax \\tan ax}{a} dx = -\\frac{\\cos ax}{a^2}$.\n\n### Final Solution\n$y = y_c - \\frac{\\cos ax}{a^2} \\ln|\\sec ax + \\tan ax|$ 24].",
+                        "solution_explanation": "Calculates Wronskian and integrates the product of the basis functions and the tangent function 24].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q3",
+                        "question_text": "Solve $(D^2+4)y = \\sec 2x$ using Variation of Parameters  ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$y_c = c_1 \\cos 2x + c_2 \\sin 2x$. $W = 2$.\n\n### Step 2: P.I.\n$u = -\\int \\frac{\\sin 2x \\sec 2x}{2} dx = \\frac{1}{4} \\ln|\\cos 2x|$.\n$v = \\int \\frac{\\cos 2x \\sec 2x}{2} dx = \\frac{x}{2}$.\n\n### Final Solution\n$y = c_1 \\cos 2x + c_2 \\sin 2x + \\frac{\\cos 2x}{4} \\ln|\\cos 2x| + \\frac{x \\sin 2x}{2}$",
+                        "solution_explanation": "Specific application of the VOP formula to the secant function 25].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q4",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2}-y = \\frac{2}{1+e^x}$ using Variation of Parameters ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$y_c = c_1 e^x + c_2 e^{-x}$. $W = -2$.\n\n### Step 2: P.I.\n$u = -\\int \\frac{e^{-x} \\cdot 2/(1+e^x)}{-2} dx = \\int \\frac{e^{-x}}{1+e^x} dx = -e^{-x} + \\ln(1+e^{-x})$.\n$v = \\int \\frac{e^x \\cdot 2/(1+e^x)}{-2} dx = -\\ln(1+e^x)$.\n\n### Final Solution\n$y = c_1 e^x + c_2 e^{-x} + e^x \\ln(1+e^{-x}) - e^{-x} \\ln(1+e^x) - 1$",
+                        "solution_explanation": "Useful for rational functions involving exponentials where standard operator methods fail 26].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q5",
+                        "question_text": "Solve $(D^2-2D)y = e^x \\sin x$ using Variation of Parameters ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$m^2-2m=0 \\implies m=0, 2$. $y_1=1, y_2=e^{2x}, W=2e^{2x}$.\n\n### Step 2: P.I.\n$u = -\\int \\frac{e^{2x} e^x \\sin x}{2e^{2x}} dx = \\frac{e^x(\\cos x - \\sin x)}{4}$.\n$v = \\int \\frac{1 \\cdot e^x \\sin x}{2e^{2x}} dx = -\\frac{e^{-x}(\\sin x + \\cos x)}{4}$.\n\n### Final Solution\n$y = c_1 + c_2 e^{2x} - \\frac{e^x}{2} \\sin x$",
+                        "solution_explanation": "Applies VOP to a standard exponential-trig product ",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q6",
+                        "question_text": "Solve $\\frac{d^2y}{dx^2}-2\\frac{dy}{dx}+y = e^x \\ln x$  ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: C.F.\n$y_c = (c_1+c_2 x)e^x$. $y_1=e^x, y_2=xe^x, W=e^{2x}$.\n\n### Step 2: P.I.\n$u = -\\int \\frac{xe^x e^x \\ln x}{e^{2x}} dx = -\\int x \\ln x dx = \\frac{x^2}{4}(1-2\\ln x)$.\n$v = \\int \\frac{e^x e^x \\ln x}{e^{2x}} dx = x \\ln x - x$.\n\n### Final Solution\n$y = (c_1+c_2 x)e^x + e^x [\\frac{x^2}{2} \\ln x - \\frac{3x^2}{4}]$",
+                        "solution_explanation": "Required for logarithmic RHS which cannot be handled by $1/f(D)$ shortcuts 28].",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q7",
+                        "question_text": "Solve $x^2 \\frac{d^2y}{dx^2} -x \\frac{dy}{dx} + y = \\ln x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: Transformation\nLet $x=e^z, z=\\ln x$. $x^2D^2 - xD + 1 \\to D_1(D_1-1) - D_1 + 1 = (D_1-1)^2$.\n\n### Step 2: Solve\n$(D_1-1)^2 y = z$.\n$y_c = (c_1+c_2 z)e^z$. \n$P.I. = (1-D_1)^{-2} z = (1+2D_1)z = z+2$.\n\n### Final Solution\n$y = x(c_1 + c_2 \\ln x) + \\ln x + 2$ ",
+                        "solution_explanation": "Cauchy-Euler equation requires substitution to constant coefficients ",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q8",
+                        "question_text": "Solve $x^2 \\frac{d^2y}{dx^2} -3x \\frac{dy}{dx} + 5y = x^2 \\sin(\\ln x)$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: Transformation\n$(D_1^2 - 4D_1 + 5)y = e^{2z} \\sin z$.\n\n### Step 2: Solve\n$m = 2 \\pm i \\implies y_c = e^{2z}(c_1 \\cos z + c_2 \\sin z)$.\n$P.I. = e^{2z} \\frac{1}{D_1^2+1} \\sin z = e^{2z} (-\\frac{z \\cos z}{2})$.\n\n### Final Solution\n$y = x^2 [c_1 \\cos(\\ln x) + c_2 \\sin(\\ln x) - \\frac{\\ln x \\cos(\\ln x)}{2}]$ ",
+                        "solution_explanation": "Combines Cauchy-Euler substitution with the Exponential Shift theorem ",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q9",
+                        "question_text": "Solve $(x^2D^2-4xD+6)y = x^2$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: Transformation\n$(D_1^2-5D_1+6)y = e^{2z}$.\n\n### Step 2: Solve\n$m=2, 3 \\implies y_c = c_1 x^2 + c_2 x^3$.\n$P.I. = \\frac{1}{(D_1-2)(D_1-3)} e^{2z} = -z e^{2z}$.\n\n### Final Solution\n$y = c_1 x^2 + c_2 x^3 - x^2 \\ln x$",
+                        "solution_explanation": "Handles the case where the RHS is a root of the auxiliary equation (Case of failure) ",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q10",
+                        "question_text": "Solve $((2x-1)^3 D^3 +(2x-1)D-2)y = x$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: Transformation\nLegendre's equation. Let $2x-1 = e^z$. Note the factor of $2^n$.\n$4D_1(D_1-1) + 2D_1 - 2 = 0$.\n\n### Step 2: RHS\n$x = (e^z+1)/2$. Solve for $P.I_1$ and $P.I_2$.\n\n### Final Solution\nRequires solving the cubic in $D_1$ and transforming back to $x$.",
+                        "solution_explanation": "A complex Legendre's equation where coefficients are functions of $(2x-1)$ ",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q11",
+                        "question_text": "Solve $((x+1)2 D^2 +(x+1)D+1)y = \\sin[2 \\log(1+x)]$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "MEDIUM",
+                        "answer": "### Step 1: Transformation\nLet $x+1 = e^z$. $(D_1^2+1)y = \\sin 2z$.\n\n### Step 2: Solve\n$y_c = c_1 \\cos z + c_2 \\sin z$.\n$P.I. = \\frac{\\sin 2z}{-4+1} = -\\frac{\\sin 2z}{3}$.\n\n### Final Solution\n$y = c_1 \\cos(\\ln(x+1)) + c_2 \\sin(\\ln(x+1)) - \\frac{1}{3}\\sin(2\\ln(x+1))$ ",
+                        "solution_explanation": "Legendre's form with $a=1, b=1",
+                        "options": null,
+                        "test_cases": null
+                    },
+                    {
+                        "id": "e301-q12",
+                        "question_text": "Solve $(1+2x)^2 \\frac{d^2y}{dx^2} -6(1+2x) \\frac{dy}{dx} +16y = 8(1+2x)^2$ ",
+                        "question_type": "LATEX",
+                        "difficulty": "HARD",
+                        "answer": "### Step 1: Transformation\n$4D_1(D_1-1) - 12D_1 + 16 = 8e^{2z} \\implies (D_1-2)^2 y = 2e^{2z}$.\n\n### Step 2: Solve\n$y_c = (c_1+c_2 z)e^{2z}$.\n$P.I. = 2 \\frac{z^2}{2} e^{2z} = z^2 e^{2z}$.\n\n### Final Solution\n$y = (1+2x)^2 [c_1 + c_2 \\ln(1+2x) + (\\ln(1+2x))^2]$ ",
+                        "solution_explanation": "Demonstrates repeated roots in Legendre's transformation ",
+                        "options": null,
+                        "test_cases": null
+                    }
+                ]
+            }
+        ]
+    }
+]

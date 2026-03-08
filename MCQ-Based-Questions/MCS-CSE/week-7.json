@@ -1,162 +1,167 @@
 [
     {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
-        "question": "What is the primary structural advantage of a Doubly Linked List (DLL) over a Singly Linked List (SLL) when performing a deletion of a given node?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "B",
-        "options": {
-            "A": "A DLL uses less memory per node than an SLL.",
-            "B": "A DLL allows deletion in O(1) time when a pointer to the node is given, since the previous node is directly accessible via `prev`.",
-            "C": "A DLL allows deletion in O(1) time by swapping data with the next node.",
-            "D": "A DLL does not require a head pointer to delete a node."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **SLL Limitation**: In an SLL, to delete node `X`, you must find the node *before* `X` by traversing from `head`, costing `O(N)`.\n2. **DLL Advantage**: Every node in a DLL stores a `prev` pointer. So given a direct pointer to node `X`, you can reach `X->prev` instantly and perform `X->prev->next = X->next; X->next->prev = X->prev;` — all in `O(1)`.\n3. **Why not C?** Swapping data does not actually delete the structural node; it is a workaround and fails for the tail node.\n4. **Memory**: DLL actually costs *more* memory per node (+1 pointer), not less.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
-        "question": "In a Doubly Linked List, when inserting a new node `N` between existing nodes `A` and `B` (where `A->next == B`), which sequence of pointer assignments is correct to avoid losing references?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "A->next = N; N->prev = A; B->prev = N; N->next = B;",
-            "B": "N->next = B; B->prev = N; A->next = N; N->prev = A;",
-            "C": "Options A, B, and D are all equally correct — the final pointer state is identical regardless of assignment order in this specific case.",
-            "D": "N->prev = A; A->next = N; N->next = B; B->prev = N;"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Core Concern**: Pointer assignment order matters only when a later assignment depends on a value that an earlier assignment would overwrite.\n2. **Analysis of A**: Sets `A->next = N` first. At this point `B` is no longer reachable from `A`, but `B` is still reachable via the original `A->next` stored in `N->next = B` — wait, we haven't set `N->next` yet. This is safe as long as `B` is passed in as a parameter and not looked up through `A->next`.\n3. **All three options (A, B, D)** set all four required pointers without overwriting any pointer that is still needed. Since `B` is held as a direct reference (not through `A->next`), all orderings produce a valid DLL structure.\n4. **Answer C** is correct — all three valid sequences ultimately produce the same correct final state.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
-        "question": "Consider this DLL node deletion logic:\n\n```c\nvoid deleteNode(Node* del) {\n    if (del->prev != NULL)\n        del->prev->next = del->next;\n    if (del->next != NULL)\n        del->next->prev = del->prev;\n    free(del);\n}\n```\n\nWhich structural scenario is NOT handled by this code, potentially leaving the list in a broken state?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "D",
-        "options": {
-            "A": "Deleting a middle node.",
-            "B": "Deleting the tail node.",
-            "C": "Deleting the head node when there are multiple nodes.",
-            "D": "Updating the external `head` pointer when the head node is deleted."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Middle node**: `del->prev->next = del->next` and `del->next->prev = del->prev` reconnect neighbours correctly. ✅\n2. **Tail node**: `del->next == NULL`, so the second `if` is skipped safely. `del->prev->next = NULL` correctly terminates the list. ✅\n3. **Head (multiple nodes)**: `del->prev == NULL`, so the first `if` is skipped. `del->next->prev = NULL` correctly makes the second node the new head *structurally* — but ❌ the caller's `head` variable still points to the freed node.\n4. **Root Cause (D)**: The function manipulates internal node links but has no way to update the external `head` pointer (it would need `Node** head` as a parameter). After deleting the head, the caller's `head` pointer becomes a dangling pointer, causing undefined behaviour on next access.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
-        "question": "What is the exact time complexity of reversing a Doubly Linked List by swapping the `next` and `prev` pointers of every node, and then updating the `head` pointer?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "B",
-        "options": {
-            "A": "O(1) — because only the head and tail pointers need to be swapped.",
-            "B": "O(N) — because every node must be visited exactly once to swap its `next` and `prev` pointers.",
-            "C": "O(N²) — because each swap requires re-traversal from the head.",
-            "D": "O(N log N) — because pointer reconnection follows a divide-and-merge strategy."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Algorithm**: Traverse from `head` to `tail`. At each node, perform `temp = node->next; node->next = node->prev; node->prev = temp;`. Move to the old `next`.\n2. **Visits**: Every node is visited exactly once → `O(N)` operations.\n3. **O(1) is wrong**: Simply swapping head and tail pointers does NOT reverse the internal link structure — traversal would still go in the original direction.\n4. **Conclusion**: `O(N)` is the correct and tight complexity for in-place DLL reversal.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
-        "question": "A Stack is implemented using a Singly Linked List where `push` inserts at the head and `pop` removes from the head. What are the correct time complexities for `push` and `pop` operations?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "push: O(1), pop: O(1)",
-            "B": "push: O(N), pop: O(1)",
-            "C": "push: O(1), pop: O(N)",
-            "D": "push: O(N), pop: O(N)"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Push at head**: Create a new node, set `new_node->next = head`, then `head = new_node`. No traversal needed — strictly `O(1)`.\n2. **Pop from head**: Store `temp = head`, set `head = head->next`, free `temp`. Again, no traversal — strictly `O(1)`.\n3. **Why not O(N)?**: O(N) would apply only if inserting/deleting at the *tail* of an SLL without a tail pointer, which requires full traversal. Head operations bypass this entirely.\n4. **Linked List Stack advantage**: Unlike an array-based stack, it is dynamically sized with no reallocation overhead.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
-        "question": "A Queue is implemented using a Singly Linked List with both a `front` pointer (for dequeue) and a `rear` pointer (for enqueue). If only the `front` pointer is maintained (no `rear`), what is the time complexity of the `enqueue` operation?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "O(1) — insert at the front and treat it as the rear.",
-            "B": "O(log N) — binary search locates the correct position.",
-            "C": "O(N) — must traverse to the end of the list to insert a new rear node.",
-            "D": "O(1) — the linked list tracks the tail implicitly."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Queue FIFO requirement**: Elements must exit from `front` and enter at `rear` — inserting at the front would violate FIFO order.\n2. **No `rear` pointer**: To enqueue, the algorithm must start at `front` and walk every node until `node->next == NULL` to find the tail — `O(N)`.\n3. **`rear` pointer fix**: Maintaining a `rear` pointer makes enqueue `O(1)` by directly doing `rear->next = new_node; rear = new_node;`.\n4. **Lesson**: A proper Linked List Queue always maintains *both* `front` and `rear` for fully `O(1)` enqueue and dequeue.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
-        "question": "Consider a Stack implemented using a Linked List. The following sequence of operations is executed:\n`push(10) → push(20) → push(30) → pop() → push(40) → pop() → pop()`\n\nWhat is the final element returned by the last `pop()`, and what remains in the stack?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "Last pop returns 10; stack contains [20].",
-            "B": "Last pop returns 20; stack contains [10].",
-            "C": "Last pop returns 30; stack contains [10, 20].",
-            "D": "Last pop returns 40; stack contains [10, 20]."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **push(10)** → Stack (top→bottom): [10]\n2. **push(20)** → Stack: [20, 10]\n3. **push(30)** → Stack: [30, 20, 10]\n4. **pop()** → removes 30 → Stack: [20, 10]\n5. **push(40)** → Stack: [40, 20, 10]\n6. **pop()** → removes 40 → Stack: [20, 10]\n7. **pop()** → removes 20 → Stack: [10] ← **returns 20**\n\nLIFO (Last In First Out) principle strictly governs every operation.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567808",
-        "question": "When implementing a Queue using a Linked List, a common mistake is to `free()` the dequeued node *before* reading its data. Consider:\n\n```c\nint dequeue(Queue* q) {\n    Node* temp = q->front;\n    free(temp);               // freed here\n    q->front = temp->next;    // accessing freed memory\n    return temp->data;        // accessing freed memory\n}\n```\n\nWhat is the technical name for this class of bug?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "A",
-        "options": {
-            "A": "Use-After-Free (UAF) — reading from memory that has already been deallocated.",
-            "B": "Double Free — freeing the same memory address twice.",
-            "C": "Buffer Overflow — reading past the allocated memory bounds.",
-            "D": "Memory Leak — forgetting to free allocated memory."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Use-After-Free**: After `free(temp)` is called, the memory `temp` points to is returned to the OS/allocator. Accessing `temp->next` or `temp->data` afterward is undefined behaviour — the memory may have been reused or zeroed.\n2. **Double Free** would occur if `free(temp)` were called again later on the same address.\n3. **Buffer Overflow** means writing/reading beyond allocated array bounds — not applicable here.\n4. **Memory Leak** is the *opposite* — forgetting to call `free` at all.\n5. **Correct fix**: Save data first → `int val = temp->data; q->front = temp->next; free(temp); return val;`",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567809",
-        "question": "In a Doubly Linked List, a `deleteByKey(int key)` function searches for a node by value and deletes it. Which of the following combined edge cases requires the *most* distinct code branches to handle correctly?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "D",
-        "options": {
-            "A": "Deleting a middle node only.",
-            "B": "Deleting the head node only.",
-            "C": "Deleting the tail node only.",
-            "D": "Handling all three: head, tail, and middle node deletion, plus the empty list case."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Empty list**: If `head == NULL`, return immediately — 1 branch.\n2. **Head deletion**: `del->prev == NULL`. Must update `head = del->next`. If `del->next != NULL`, set `del->next->prev = NULL` — 1 branch.\n3. **Tail deletion**: `del->next == NULL`. Must update `del->prev->next = NULL` — 1 branch.\n4. **Middle deletion**: `del->prev->next = del->next` AND `del->next->prev = del->prev` — 1 branch.\n5. **Total**: A complete and correct `deleteByKey` function needs a minimum of **4 distinct conditional branches** covering all structural positions. Options A, B, C each only require 1–2 branches. Option D covers the full combinatorial space.",
-        "language": "C"
-    },
-    {
-        "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567810",
-        "question": "A developer implements a Queue using two Stacks (each stack itself implemented as a Linked List). The enqueue operation always pushes to Stack 1. The dequeue operation pops all elements from Stack 1 into Stack 2, pops from Stack 2, and leaves the remainder in Stack 2. What is the *amortized* time complexity of a single `dequeue` in this design?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "O(N) per dequeue always, regardless of prior operations.",
-            "B": "O(1) amortized — each element is moved at most twice across both stacks over its lifetime.",
-            "C": "O(N²) total — because each dequeue re-pours Stack 1 into Stack 2 completely.",
-            "D": "O(log N) amortized — the two-stack approach applies a binary splitting strategy."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Worst case single dequeue**: If Stack 2 is empty and Stack 1 has `N` items, the transfer is `O(N)`. This looks expensive.\n2. **Amortized analysis**: Each element is *pushed to Stack 1 once* and *transferred to Stack 2 at most once*. Over a sequence of `N` operations the total work is `O(2N) = O(N)`, making each operation `O(1)` amortized.\n3. **Key insight**: Stack 2 is not rebuilt on every dequeue — it retains leftover elements. The O(N) transfer cost is paid only once per element, spread across multiple dequeues.\n4. **This design** is the classic interview-tested 'Queue using two Stacks' pattern with amortized `O(1)` dequeue.",
-        "language": "C"
+        "name": "Week 7:Double Linked Lists",
+        "questions": [
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801",
+                "question": "What is the primary structural advantage of a Doubly Linked List (DLL) over a Singly Linked List (SLL) when performing a deletion of a given node?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "B",
+                "options": {
+                    "A": "A DLL uses less memory per node than an SLL.",
+                    "B": "A DLL allows deletion in O(1) time when a pointer to the node is given, since the previous node is directly accessible via `prev`.",
+                    "C": "A DLL allows deletion in O(1) time by swapping data with the next node.",
+                    "D": "A DLL does not require a head pointer to delete a node."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **SLL Limitation**: In an SLL, to delete node `X`, you must find the node *before* `X` by traversing from `head`, costing `O(N)`.\n2. **DLL Advantage**: Every node in a DLL stores a `prev` pointer. So given a direct pointer to node `X`, you can reach `X->prev` instantly and perform `X->prev->next = X->next; X->next->prev = X->prev;` — all in `O(1)`.\n3. **Why not C?** Swapping data does not actually delete the structural node; it is a workaround and fails for the tail node.\n4. **Memory**: DLL actually costs *more* memory per node (+1 pointer), not less.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802",
+                "question": "In a Doubly Linked List, when inserting a new node `N` between existing nodes `A` and `B` (where `A->next == B`), which sequence of pointer assignments is correct to avoid losing references?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "A->next = N; N->prev = A; B->prev = N; N->next = B;",
+                    "B": "N->next = B; B->prev = N; A->next = N; N->prev = A;",
+                    "C": "Options A, B, and D are all equally correct — the final pointer state is identical regardless of assignment order in this specific case.",
+                    "D": "N->prev = A; A->next = N; N->next = B; B->prev = N;"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Core Concern**: Pointer assignment order matters only when a later assignment depends on a value that an earlier assignment would overwrite.\n2. **Analysis of A**: Sets `A->next = N` first. At this point `B` is no longer reachable from `A`, but `B` is still reachable via the original `A->next` stored in `N->next = B` — wait, we haven't set `N->next` yet. This is safe as long as `B` is passed in as a parameter and not looked up through `A->next`.\n3. **All three options (A, B, D)** set all four required pointers without overwriting any pointer that is still needed. Since `B` is held as a direct reference (not through `A->next`), all orderings produce a valid DLL structure.\n4. **Answer C** is correct — all three valid sequences ultimately produce the same correct final state.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803",
+                "question": "Consider this DLL node deletion logic:\n\n```c\nvoid deleteNode(Node* del) {\n    if (del->prev != NULL)\n        del->prev->next = del->next;\n    if (del->next != NULL)\n        del->next->prev = del->prev;\n    free(del);\n}\n```\n\nWhich structural scenario is NOT handled by this code, potentially leaving the list in a broken state?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "D",
+                "options": {
+                    "A": "Deleting a middle node.",
+                    "B": "Deleting the tail node.",
+                    "C": "Deleting the head node when there are multiple nodes.",
+                    "D": "Updating the external `head` pointer when the head node is deleted."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Middle node**: `del->prev->next = del->next` and `del->next->prev = del->prev` reconnect neighbours correctly. ✅\n2. **Tail node**: `del->next == NULL`, so the second `if` is skipped safely. `del->prev->next = NULL` correctly terminates the list. ✅\n3. **Head (multiple nodes)**: `del->prev == NULL`, so the first `if` is skipped. `del->next->prev = NULL` correctly makes the second node the new head *structurally* — but ❌ the caller's `head` variable still points to the freed node.\n4. **Root Cause (D)**: The function manipulates internal node links but has no way to update the external `head` pointer (it would need `Node** head` as a parameter). After deleting the head, the caller's `head` pointer becomes a dangling pointer, causing undefined behaviour on next access.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804",
+                "question": "What is the exact time complexity of reversing a Doubly Linked List by swapping the `next` and `prev` pointers of every node, and then updating the `head` pointer?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "B",
+                "options": {
+                    "A": "O(1) — because only the head and tail pointers need to be swapped.",
+                    "B": "O(N) — because every node must be visited exactly once to swap its `next` and `prev` pointers.",
+                    "C": "O(N²) — because each swap requires re-traversal from the head.",
+                    "D": "O(N log N) — because pointer reconnection follows a divide-and-merge strategy."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Algorithm**: Traverse from `head` to `tail`. At each node, perform `temp = node->next; node->next = node->prev; node->prev = temp;`. Move to the old `next`.\n2. **Visits**: Every node is visited exactly once → `O(N)` operations.\n3. **O(1) is wrong**: Simply swapping head and tail pointers does NOT reverse the internal link structure — traversal would still go in the original direction.\n4. **Conclusion**: `O(N)` is the correct and tight complexity for in-place DLL reversal.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805",
+                "question": "A Stack is implemented using a Singly Linked List where `push` inserts at the head and `pop` removes from the head. What are the correct time complexities for `push` and `pop` operations?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "push: O(1), pop: O(1)",
+                    "B": "push: O(N), pop: O(1)",
+                    "C": "push: O(1), pop: O(N)",
+                    "D": "push: O(N), pop: O(N)"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Push at head**: Create a new node, set `new_node->next = head`, then `head = new_node`. No traversal needed — strictly `O(1)`.\n2. **Pop from head**: Store `temp = head`, set `head = head->next`, free `temp`. Again, no traversal — strictly `O(1)`.\n3. **Why not O(N)?**: O(N) would apply only if inserting/deleting at the *tail* of an SLL without a tail pointer, which requires full traversal. Head operations bypass this entirely.\n4. **Linked List Stack advantage**: Unlike an array-based stack, it is dynamically sized with no reallocation overhead.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567806",
+                "question": "A Queue is implemented using a Singly Linked List with both a `front` pointer (for dequeue) and a `rear` pointer (for enqueue). If only the `front` pointer is maintained (no `rear`), what is the time complexity of the `enqueue` operation?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "O(1) — insert at the front and treat it as the rear.",
+                    "B": "O(log N) — binary search locates the correct position.",
+                    "C": "O(N) — must traverse to the end of the list to insert a new rear node.",
+                    "D": "O(1) — the linked list tracks the tail implicitly."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Queue FIFO requirement**: Elements must exit from `front` and enter at `rear` — inserting at the front would violate FIFO order.\n2. **No `rear` pointer**: To enqueue, the algorithm must start at `front` and walk every node until `node->next == NULL` to find the tail — `O(N)`.\n3. **`rear` pointer fix**: Maintaining a `rear` pointer makes enqueue `O(1)` by directly doing `rear->next = new_node; rear = new_node;`.\n4. **Lesson**: A proper Linked List Queue always maintains *both* `front` and `rear` for fully `O(1)` enqueue and dequeue.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567807",
+                "question": "Consider a Stack implemented using a Linked List. The following sequence of operations is executed:\n`push(10) → push(20) → push(30) → pop() → push(40) → pop() → pop()`\n\nWhat is the final element returned by the last `pop()`, and what remains in the stack?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "Last pop returns 10; stack contains [20].",
+                    "B": "Last pop returns 20; stack contains [10].",
+                    "C": "Last pop returns 30; stack contains [10, 20].",
+                    "D": "Last pop returns 40; stack contains [10, 20]."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **push(10)** → Stack (top→bottom): [10]\n2. **push(20)** → Stack: [20, 10]\n3. **push(30)** → Stack: [30, 20, 10]\n4. **pop()** → removes 30 → Stack: [20, 10]\n5. **push(40)** → Stack: [40, 20, 10]\n6. **pop()** → removes 40 → Stack: [20, 10]\n7. **pop()** → removes 20 → Stack: [10] ← **returns 20**\n\nLIFO (Last In First Out) principle strictly governs every operation.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567808",
+                "question": "When implementing a Queue using a Linked List, a common mistake is to `free()` the dequeued node *before* reading its data. Consider:\n\n```c\nint dequeue(Queue* q) {\n    Node* temp = q->front;\n    free(temp);               // freed here\n    q->front = temp->next;    // accessing freed memory\n    return temp->data;        // accessing freed memory\n}\n```\n\nWhat is the technical name for this class of bug?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "A",
+                "options": {
+                    "A": "Use-After-Free (UAF) — reading from memory that has already been deallocated.",
+                    "B": "Double Free — freeing the same memory address twice.",
+                    "C": "Buffer Overflow — reading past the allocated memory bounds.",
+                    "D": "Memory Leak — forgetting to free allocated memory."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Use-After-Free**: After `free(temp)` is called, the memory `temp` points to is returned to the OS/allocator. Accessing `temp->next` or `temp->data` afterward is undefined behaviour — the memory may have been reused or zeroed.\n2. **Double Free** would occur if `free(temp)` were called again later on the same address.\n3. **Buffer Overflow** means writing/reading beyond allocated array bounds — not applicable here.\n4. **Memory Leak** is the *opposite* — forgetting to call `free` at all.\n5. **Correct fix**: Save data first → `int val = temp->data; q->front = temp->next; free(temp); return val;`",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567809",
+                "question": "In a Doubly Linked List, a `deleteByKey(int key)` function searches for a node by value and deletes it. Which of the following combined edge cases requires the *most* distinct code branches to handle correctly?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "D",
+                "options": {
+                    "A": "Deleting a middle node only.",
+                    "B": "Deleting the head node only.",
+                    "C": "Deleting the tail node only.",
+                    "D": "Handling all three: head, tail, and middle node deletion, plus the empty list case."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Empty list**: If `head == NULL`, return immediately — 1 branch.\n2. **Head deletion**: `del->prev == NULL`. Must update `head = del->next`. If `del->next != NULL`, set `del->next->prev = NULL` — 1 branch.\n3. **Tail deletion**: `del->next == NULL`. Must update `del->prev->next = NULL` — 1 branch.\n4. **Middle deletion**: `del->prev->next = del->next` AND `del->next->prev = del->prev` — 1 branch.\n5. **Total**: A complete and correct `deleteByKey` function needs a minimum of **4 distinct conditional branches** covering all structural positions. Options A, B, C each only require 1–2 branches. Option D covers the full combinatorial space.",
+                "language": "C"
+            },
+            {
+                "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567810",
+                "question": "A developer implements a Queue using two Stacks (each stack itself implemented as a Linked List). The enqueue operation always pushes to Stack 1. The dequeue operation pops all elements from Stack 1 into Stack 2, pops from Stack 2, and leaves the remainder in Stack 2. What is the *amortized* time complexity of a single `dequeue` in this design?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "O(N) per dequeue always, regardless of prior operations.",
+                    "B": "O(1) amortized — each element is moved at most twice across both stacks over its lifetime.",
+                    "C": "O(N²) total — because each dequeue re-pours Stack 1 into Stack 2 completely.",
+                    "D": "O(log N) amortized — the two-stack approach applies a binary splitting strategy."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Worst case single dequeue**: If Stack 2 is empty and Stack 1 has `N` items, the transfer is `O(N)`. This looks expensive.\n2. **Amortized analysis**: Each element is *pushed to Stack 1 once* and *transferred to Stack 2 at most once*. Over a sequence of `N` operations the total work is `O(2N) = O(N)`, making each operation `O(1)` amortized.\n3. **Key insight**: Stack 2 is not rebuilt on every dequeue — it retains leftover elements. The O(N) transfer cost is paid only once per element, spread across multiple dequeues.\n4. **This design** is the classic interview-tested 'Queue using two Stacks' pattern with amortized `O(1)` dequeue.",
+                "language": "C"
+            }
+        ]
     }
 ]

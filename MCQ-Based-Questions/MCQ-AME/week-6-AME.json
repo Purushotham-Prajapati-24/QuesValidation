@@ -1,162 +1,167 @@
 [
     {
-        "id": "9af9ac5a-2099-4bbb-838b-3a8aae9bec69",
-        "question": "When implementing a Stack using a Linked List, which end of the list is used as the TOP of the stack, and why?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "A",
-        "options": {
-            "A": "The HEAD (front) is used as the TOP, because insertion and deletion at the head are O(1).",
-            "B": "The TAIL (end) is used as the TOP, because it is easier to access the last element.",
-            "C": "A separate middle pointer is maintained for O(1) push and pop.",
-            "D": "Either end can be used — both give O(1) push and pop operations."
-        },
-        "test_cases": null,
-        "solution_explanation": "In a singly linked list, insertion and deletion at the **head** (front) are O(1) — no traversal required. This makes the head the natural choice for the TOP of the stack:\n- **push()**: Create a new node and set `newNode->next = head; head = newNode;`\n- **pop()**: Save `head`, move `head = head->next`, then free the saved node.\n\nUsing the **tail** as the TOP would require O(N) traversal for deletion since there is no backward pointer in a singly linked list. Option D is incorrect — using the tail requires O(N) for pop in a singly linked list.",
-        "language": "General"
-    },
-    {
-        "id": "2d5ce97b-82d6-4d81-afb1-3c834b8d2a08",
-        "question": "One key advantage of implementing a Stack using a Linked List over an array-based Stack is:",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "C",
-        "options": {
-            "A": "Faster push() and pop() operations due to cache locality.",
-            "B": "Less memory usage since no extra pointer field is stored.",
-            "C": "Dynamic size — the stack can grow or shrink as needed without a predefined capacity.",
-            "D": "Better performance with random access to any element in the stack."
-        },
-        "test_cases": null,
-        "solution_explanation": "An **array-based stack** suffers from a fixed capacity — you must declare the maximum size upfront, risking overflow or wasted memory. A **linked list-based stack** allocates each node dynamically (heap), so it grows/shrinks on demand (bounded only by available memory).\n\n- Option A is **wrong**: Arrays have better cache locality than linked lists due to contiguous memory.\n- Option B is **wrong**: Each node stores an extra `next` pointer (4 or 8 bytes), so memory usage is actually higher per element.\n- Option D is **wrong**: Linked lists only support sequential access, not random O(1) indexing.",
-        "language": "General"
-    },
-    {
-        "id": "5a835a8e-9a08-4a95-8b70-0e63160717ab",
-        "question": "Analyze the following C code for pushing an element onto a linked list stack. What is wrong?\n\n```c\nvoid push(struct Node** top, int data) {\n    struct Node* newNode = malloc(sizeof(struct Node));\n    newNode->data = data;\n    *top = newNode;           // Line X\n    newNode->next = *top;     // Line Y\n}\n```",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "The malloc() call is missing a NULL check for allocation failure.",
-            "B": "Lines X and Y are in the wrong order — Line X overwrites `*top` before linking newNode to the old stack, causing a memory leak and a self-referencing loop.",
-            "C": "The `data` field should be assigned after updating the `top` pointer.",
-            "D": "The function should not use a double pointer; a single pointer suffices."
-        },
-        "test_cases": null,
-        "solution_explanation": "The correct push order must be:\n1. `newNode->next = *top;` — Link the new node to the existing top.\n2. `*top = newNode;` — Update top to the new node.\n\nIn the given code, **Line X runs first**: `*top = newNode` makes `top` point to the newly created (still unlinked) node. Then **Line Y** runs: `newNode->next = *top` which is now `newNode` itself — creating a **self-referencing cycle** and losing the original stack. A NULL check (option A) is good practice but not the logical bug here. A double pointer is required to persist changes to `top` across function calls (option D is wrong).",
-        "language": "C"
-    },
-    {
-        "id": "de8af8c9-b035-40ba-abc6-6f677af3ec98",
-        "question": "In a linked list-based Stack, what should the `pop()` function return and do when the stack is empty (`top == NULL`)?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "D",
-        "options": {
-            "A": "It should return 0, since 0 is the default integer value.",
-            "B": "It should set `top = NULL` again and proceed normally.",
-            "C": "It should automatically allocate a new dummy node and return its data.",
-            "D": "It should signal an underflow condition (e.g., print an error or return a sentinel value like -1) and NOT attempt to dereference `top`."
-        },
-        "test_cases": null,
-        "solution_explanation": "Popping from an empty stack is a **stack underflow** error. Attempting `top->data` when `top == NULL` causes a **NULL pointer dereference** (segmentation fault). The correct approach:\n1. Check if `top == NULL`.\n2. If yes, print `\"Stack Underflow\"` and return a sentinel (e.g., `-1` or `INT_MIN`, or use a boolean flag).\n3. Only proceed with popping if the stack is non-empty.\n\nOption A is dangerous — what if 0 is a valid data value? There's no way to distinguish underflow from a legitimate pop of 0.",
-        "language": "General"
-    },
-    {
-        "id": "7bc5afa0-ef80-4a71-ae35-5dac73c0c99e",
-        "question": "In a Queue implemented using a Linked List, two pointers are maintained: `front` and `rear`. Which of the following correctly maps operations to pointer usage?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "Enqueue adds at `rear`; Dequeue removes from `front`.",
-            "B": "Enqueue adds at `front`; Dequeue removes from `rear`.",
-            "C": "Both Enqueue and Dequeue operate at `front`.",
-            "D": "Both Enqueue and Dequeue operate at `rear`."
-        },
-        "test_cases": null,
-        "solution_explanation": "A Queue follows **FIFO (First In, First Out)** semantics:\n- **Enqueue** adds new elements at the **rear** end. The `rear->next` is set to the new node, then `rear` is updated to the new node.\n- **Dequeue** removes the oldest element from the **front**. The `front` pointer is moved to `front->next`.\n\nThis design ensures both Enqueue and Dequeue are **O(1)** operations — no traversal needed. This is the main advantage over the single-pointer approach which would require O(N) for one of the operations.",
-        "language": "General"
-    },
-    {
-        "id": "993f2cd0-96c2-4eb4-b89b-fc7142650a26",
-        "question": "Consider a Queue implemented using a linked list. After performing: Enqueue(10), Enqueue(20), Enqueue(30), Dequeue(), Enqueue(40). What are the current `front->data` and `rear->data` values?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "`front->data = 10`, `rear->data = 40`",
-            "B": "`front->data = 20`, `rear->data = 40`",
-            "C": "`front->data = 30`, `rear->data = 40`",
-            "D": "`front->data = 20`, `rear->data = 30`"
-        },
-        "test_cases": null,
-        "solution_explanation": "Let's trace the operations step by step:\n1. **Enqueue(10)**: List = `10`. front=10, rear=10.\n2. **Enqueue(20)**: List = `10 -> 20`. front=10, rear=20.\n3. **Enqueue(30)**: List = `10 -> 20 -> 30`. front=10, rear=30.\n4. **Dequeue()**: Removes front (10). List = `20 -> 30`. front=20, rear=30.\n5. **Enqueue(40)**: List = `20 -> 30 -> 40`. front=20, rear=40.\n\n**Final state**: `front->data = 20`, `rear->data = 40`.",
-        "language": "General"
-    },
-    {
-        "id": "1e794375-9bc6-415a-b26a-9f9e784e1f84",
-        "question": "In a linked list-based Queue, what is the key condition that must be handled specially during **Dequeue** to prevent `front` and `rear` from becoming dangling pointers?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "When `front == rear`, both pointers must be set to a new dummy node.",
-            "B": "When `rear == NULL`, the `front` pointer must be reset to the head of the list.",
-            "C": "When the queue has exactly one element, after dequeueing, both `front` and `rear` must be set to NULL.",
-            "D": "When `front->next == NULL`, `rear` must point to `front` to avoid orphan nodes."
-        },
-        "test_cases": null,
-        "solution_explanation": "When the queue has **exactly one node**, `front == rear` both point to it. Upon Dequeue:\n1. We free that node.\n2. We move `front = front->next` → `front = NULL`.\n3. However, `rear` still points to the now-freed memory — a **dangling pointer**.\n\nThe fix: **check if `front == rear` before dequeuing**. If so, after freeing, set **both `front = NULL`** and **`rear = NULL`**. Failing to reset `rear` will cause undefined behavior on the next Enqueue, which tries `rear->next = newNode` on freed memory.",
-        "language": "General"
-    },
-    {
-        "id": "b78fb841-4d79-4bb9-904b-36829efb03c1",
-        "question": "A linked list Stack and a linked list Queue both use `struct Node* top` and `struct Node* front`/`rear` respectively, with no size limit. Which of the following statements comparing the two is TRUE?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "D",
-        "options": {
-            "A": "Stack requires two pointers (top and bottom), while Queue only needs one pointer (front).",
-            "B": "Queue operations are O(N) on average while Stack operations are O(1).",
-            "C": "Both Stack and Queue using linked lists have O(N) insertion in the worst case.",
-            "D": "Stack uses one pointer (`top`) for both push and pop; Queue needs two pointers (`front` and `rear`) to achieve O(1) enqueue and dequeue."
-        },
-        "test_cases": null,
-        "solution_explanation": "**Stack**: A single `top` pointer suffices. Push inserts at `top` (O(1)); pop removes from `top` (O(1)).\n**Queue**: Needs `front` for dequeue (O(1)) AND `rear` for enqueue (O(1)). Without `rear`, every enqueue would need O(N) traversal to reach the last node.\n\n- Option A is wrong: Stack only needs one pointer (`top`), not two.\n- Option B is wrong: Both have O(1) average operations with the correct pointer design.\n- Option C is wrong: Both have O(1) insertion, not O(N).",
-        "language": "General"
-    },
-    {
-        "id": "635d63bb-8c1a-4868-8069-72b95316e2a5",
-        "question": "The following C code represents an `isEmpty` check. For which data structure and implementation is this check syntactically valid AND semantically correct?\n\n```c\nint isEmpty(struct Node* ptr) {\n    return (ptr == NULL);\n}\n```",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "Linked list-based Stack — called as `isEmpty(top)`; empty when `top == NULL`.",
-            "B": "Array-based Stack — called as `isEmpty(stack[top])`; empty when the top element is NULL.",
-            "C": "Linked list-based Queue — called as `isEmpty(rear)` only; sufficiently checks both front and rear.",
-            "D": "Circular Queue using array — called as `isEmpty(front)`; empty when front is NULL."
-        },
-        "test_cases": null,
-        "solution_explanation": "For a **linked list Stack**, the stack is empty if and only if `top == NULL`. So `isEmpty(top)` returning `(top == NULL)` is perfectly valid.\n\n- Option B: Array-based stacks use an integer index `top` (not a pointer), so `isEmpty` should check `top == -1`, not pointer comparison.\n- Option C: For a Queue, checking only `rear == NULL` is insufficient on its own; both `front == NULL` and `rear == NULL` should be verified (though in practice they go NULL together). Passing only `rear` is incomplete.\n- Option D: Circular queue indices are integers, not pointers — `NULL` comparison is meaningless.",
-        "language": "C"
-    },
-    {
-        "id": "cf8e7d31-edf4-480d-96db-af0c46735eaa",
-        "question": "**[HARD]** A linked list Queue is implemented using `front` and `rear` pointers. Consider the following C function:\n\n```c\nvoid enqueue(struct Node** front, struct Node** rear, int data) {\n    struct Node* newNode = malloc(sizeof(struct Node));\n    newNode->data = data;\n    newNode->next = NULL;\n    if (*rear != NULL)\n        (*rear)->next = newNode;\n    *rear = newNode;\n    if (*front == NULL)\n        *front = *rear;\n}\n```\nAfter calling `enqueue(&front, &rear, 5)` on an **empty** queue (both `front` and `rear` are NULL), which of the following statements is TRUE about the state of memory?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "C",
-        "options": {
-            "A": "`front` and `rear` both remain NULL because `*rear` is NULL initially, so the assignment is skipped.",
-            "B": "`rear` points to the new node but `front` remains NULL because the `if (*front == NULL)` condition updates `front` to `*rear` which is NULL at that point.",
-            "C": "Both `front` and `rear` point to the same new node containing value 5, and `newNode->next == NULL`.",
-            "D": "`front` points to the new node, but `rear` is still NULL because `*rear->next` was never set."
-        },
-        "test_cases": null,
-        "solution_explanation": "Let's trace the code carefully with an empty queue (`front = NULL`, `rear = NULL`):\n\n1. `newNode` is allocated; `newNode->data = 5`; `newNode->next = NULL`.\n2. **`if (*rear != NULL)`** → `*rear` is `NULL` → condition is **FALSE** → the line `(*rear)->next = newNode` is **skipped** (correctly — no old rear to link from).\n3. **`*rear = newNode`** → `rear` now points to the new node with data=5.\n4. **`if (*front == NULL)`** → `*front` is `NULL` → condition is **TRUE** → `*front = *rear` → `front` also points to the same new node.\n\n**Final state**: Both `front` and `rear` point to the same single node (data=5, next=NULL).\n\n- Option B is wrong: By the time `*front = *rear` executes, `*rear` has already been updated to `newNode` in step 3.\n- This execution order is the critical insight — many students assume `*rear` is still NULL when `front` is set.",
-        "language": "C"
+        "name": "Week 6: Stacks and Queues using Linked List",
+        "questions": [
+            {
+                "id": "9af9ac5a-2099-4bbb-838b-3a8aae9bec69",
+                "question": "When implementing a Stack using a Linked List, which end of the list is used as the TOP of the stack, and why?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "A",
+                "options": {
+                    "A": "The HEAD (front) is used as the TOP, because insertion and deletion at the head are O(1).",
+                    "B": "The TAIL (end) is used as the TOP, because it is easier to access the last element.",
+                    "C": "A separate middle pointer is maintained for O(1) push and pop.",
+                    "D": "Either end can be used — both give O(1) push and pop operations."
+                },
+                "test_cases": null,
+                "solution_explanation": "In a singly linked list, insertion and deletion at the **head** (front) are O(1) — no traversal required. This makes the head the natural choice for the TOP of the stack:\n- **push()**: Create a new node and set `newNode->next = head; head = newNode;`\n- **pop()**: Save `head`, move `head = head->next`, then free the saved node.\n\nUsing the **tail** as the TOP would require O(N) traversal for deletion since there is no backward pointer in a singly linked list. Option D is incorrect — using the tail requires O(N) for pop in a singly linked list.",
+                "language": "General"
+            },
+            {
+                "id": "2d5ce97b-82d6-4d81-afb1-3c834b8d2a08",
+                "question": "One key advantage of implementing a Stack using a Linked List over an array-based Stack is:",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "C",
+                "options": {
+                    "A": "Faster push() and pop() operations due to cache locality.",
+                    "B": "Less memory usage since no extra pointer field is stored.",
+                    "C": "Dynamic size — the stack can grow or shrink as needed without a predefined capacity.",
+                    "D": "Better performance with random access to any element in the stack."
+                },
+                "test_cases": null,
+                "solution_explanation": "An **array-based stack** suffers from a fixed capacity — you must declare the maximum size upfront, risking overflow or wasted memory. A **linked list-based stack** allocates each node dynamically (heap), so it grows/shrinks on demand (bounded only by available memory).\n\n- Option A is **wrong**: Arrays have better cache locality than linked lists due to contiguous memory.\n- Option B is **wrong**: Each node stores an extra `next` pointer (4 or 8 bytes), so memory usage is actually higher per element.\n- Option D is **wrong**: Linked lists only support sequential access, not random O(1) indexing.",
+                "language": "General"
+            },
+            {
+                "id": "5a835a8e-9a08-4a95-8b70-0e63160717ab",
+                "question": "Analyze the following C code for pushing an element onto a linked list stack. What is wrong?\n\n```c\nvoid push(struct Node** top, int data) {\n    struct Node* newNode = malloc(sizeof(struct Node));\n    newNode->data = data;\n    *top = newNode;           // Line X\n    newNode->next = *top;     // Line Y\n}\n```",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "The malloc() call is missing a NULL check for allocation failure.",
+                    "B": "Lines X and Y are in the wrong order — Line X overwrites `*top` before linking newNode to the old stack, causing a memory leak and a self-referencing loop.",
+                    "C": "The `data` field should be assigned after updating the `top` pointer.",
+                    "D": "The function should not use a double pointer; a single pointer suffices."
+                },
+                "test_cases": null,
+                "solution_explanation": "The correct push order must be:\n1. `newNode->next = *top;` — Link the new node to the existing top.\n2. `*top = newNode;` — Update top to the new node.\n\nIn the given code, **Line X runs first**: `*top = newNode` makes `top` point to the newly created (still unlinked) node. Then **Line Y** runs: `newNode->next = *top` which is now `newNode` itself — creating a **self-referencing cycle** and losing the original stack. A NULL check (option A) is good practice but not the logical bug here. A double pointer is required to persist changes to `top` across function calls (option D is wrong).",
+                "language": "C"
+            },
+            {
+                "id": "de8af8c9-b035-40ba-abc6-6f677af3ec98",
+                "question": "In a linked list-based Stack, what should the `pop()` function return and do when the stack is empty (`top == NULL`)?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "D",
+                "options": {
+                    "A": "It should return 0, since 0 is the default integer value.",
+                    "B": "It should set `top = NULL` again and proceed normally.",
+                    "C": "It should automatically allocate a new dummy node and return its data.",
+                    "D": "It should signal an underflow condition (e.g., print an error or return a sentinel value like -1) and NOT attempt to dereference `top`."
+                },
+                "test_cases": null,
+                "solution_explanation": "Popping from an empty stack is a **stack underflow** error. Attempting `top->data` when `top == NULL` causes a **NULL pointer dereference** (segmentation fault). The correct approach:\n1. Check if `top == NULL`.\n2. If yes, print `\"Stack Underflow\"` and return a sentinel (e.g., `-1` or `INT_MIN`, or use a boolean flag).\n3. Only proceed with popping if the stack is non-empty.\n\nOption A is dangerous — what if 0 is a valid data value? There's no way to distinguish underflow from a legitimate pop of 0.",
+                "language": "General"
+            },
+            {
+                "id": "7bc5afa0-ef80-4a71-ae35-5dac73c0c99e",
+                "question": "In a Queue implemented using a Linked List, two pointers are maintained: `front` and `rear`. Which of the following correctly maps operations to pointer usage?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "Enqueue adds at `rear`; Dequeue removes from `front`.",
+                    "B": "Enqueue adds at `front`; Dequeue removes from `rear`.",
+                    "C": "Both Enqueue and Dequeue operate at `front`.",
+                    "D": "Both Enqueue and Dequeue operate at `rear`."
+                },
+                "test_cases": null,
+                "solution_explanation": "A Queue follows **FIFO (First In, First Out)** semantics:\n- **Enqueue** adds new elements at the **rear** end. The `rear->next` is set to the new node, then `rear` is updated to the new node.\n- **Dequeue** removes the oldest element from the **front**. The `front` pointer is moved to `front->next`.\n\nThis design ensures both Enqueue and Dequeue are **O(1)** operations — no traversal needed. This is the main advantage over the single-pointer approach which would require O(N) for one of the operations.",
+                "language": "General"
+            },
+            {
+                "id": "993f2cd0-96c2-4eb4-b89b-fc7142650a26",
+                "question": "Consider a Queue implemented using a linked list. After performing: Enqueue(10), Enqueue(20), Enqueue(30), Dequeue(), Enqueue(40). What are the current `front->data` and `rear->data` values?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "`front->data = 10`, `rear->data = 40`",
+                    "B": "`front->data = 20`, `rear->data = 40`",
+                    "C": "`front->data = 30`, `rear->data = 40`",
+                    "D": "`front->data = 20`, `rear->data = 30`"
+                },
+                "test_cases": null,
+                "solution_explanation": "Let's trace the operations step by step:\n1. **Enqueue(10)**: List = `10`. front=10, rear=10.\n2. **Enqueue(20)**: List = `10 -> 20`. front=10, rear=20.\n3. **Enqueue(30)**: List = `10 -> 20 -> 30`. front=10, rear=30.\n4. **Dequeue()**: Removes front (10). List = `20 -> 30`. front=20, rear=30.\n5. **Enqueue(40)**: List = `20 -> 30 -> 40`. front=20, rear=40.\n\n**Final state**: `front->data = 20`, `rear->data = 40`.",
+                "language": "General"
+            },
+            {
+                "id": "1e794375-9bc6-415a-b26a-9f9e784e1f84",
+                "question": "In a linked list-based Queue, what is the key condition that must be handled specially during **Dequeue** to prevent `front` and `rear` from becoming dangling pointers?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "When `front == rear`, both pointers must be set to a new dummy node.",
+                    "B": "When `rear == NULL`, the `front` pointer must be reset to the head of the list.",
+                    "C": "When the queue has exactly one element, after dequeueing, both `front` and `rear` must be set to NULL.",
+                    "D": "When `front->next == NULL`, `rear` must point to `front` to avoid orphan nodes."
+                },
+                "test_cases": null,
+                "solution_explanation": "When the queue has **exactly one node**, `front == rear` both point to it. Upon Dequeue:\n1. We free that node.\n2. We move `front = front->next` → `front = NULL`.\n3. However, `rear` still points to the now-freed memory — a **dangling pointer**.\n\nThe fix: **check if `front == rear` before dequeuing**. If so, after freeing, set **both `front = NULL`** and **`rear = NULL`**. Failing to reset `rear` will cause undefined behavior on the next Enqueue, which tries `rear->next = newNode` on freed memory.",
+                "language": "General"
+            },
+            {
+                "id": "b78fb841-4d79-4bb9-904b-36829efb03c1",
+                "question": "A linked list Stack and a linked list Queue both use `struct Node* top` and `struct Node* front`/`rear` respectively, with no size limit. Which of the following statements comparing the two is TRUE?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "D",
+                "options": {
+                    "A": "Stack requires two pointers (top and bottom), while Queue only needs one pointer (front).",
+                    "B": "Queue operations are O(N) on average while Stack operations are O(1).",
+                    "C": "Both Stack and Queue using linked lists have O(N) insertion in the worst case.",
+                    "D": "Stack uses one pointer (`top`) for both push and pop; Queue needs two pointers (`front` and `rear`) to achieve O(1) enqueue and dequeue."
+                },
+                "test_cases": null,
+                "solution_explanation": "**Stack**: A single `top` pointer suffices. Push inserts at `top` (O(1)); pop removes from `top` (O(1)).\n**Queue**: Needs `front` for dequeue (O(1)) AND `rear` for enqueue (O(1)). Without `rear`, every enqueue would need O(N) traversal to reach the last node.\n\n- Option A is wrong: Stack only needs one pointer (`top`), not two.\n- Option B is wrong: Both have O(1) average operations with the correct pointer design.\n- Option C is wrong: Both have O(1) insertion, not O(N).",
+                "language": "General"
+            },
+            {
+                "id": "635d63bb-8c1a-4868-8069-72b95316e2a5",
+                "question": "The following C code represents an `isEmpty` check. For which data structure and implementation is this check syntactically valid AND semantically correct?\n\n```c\nint isEmpty(struct Node* ptr) {\n    return (ptr == NULL);\n}\n```",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "Linked list-based Stack — called as `isEmpty(top)`; empty when `top == NULL`.",
+                    "B": "Array-based Stack — called as `isEmpty(stack[top])`; empty when the top element is NULL.",
+                    "C": "Linked list-based Queue — called as `isEmpty(rear)` only; sufficiently checks both front and rear.",
+                    "D": "Circular Queue using array — called as `isEmpty(front)`; empty when front is NULL."
+                },
+                "test_cases": null,
+                "solution_explanation": "For a **linked list Stack**, the stack is empty if and only if `top == NULL`. So `isEmpty(top)` returning `(top == NULL)` is perfectly valid.\n\n- Option B: Array-based stacks use an integer index `top` (not a pointer), so `isEmpty` should check `top == -1`, not pointer comparison.\n- Option C: For a Queue, checking only `rear == NULL` is insufficient on its own; both `front == NULL` and `rear == NULL` should be verified (though in practice they go NULL together). Passing only `rear` is incomplete.\n- Option D: Circular queue indices are integers, not pointers — `NULL` comparison is meaningless.",
+                "language": "C"
+            },
+            {
+                "id": "cf8e7d31-edf4-480d-96db-af0c46735eaa",
+                "question": "**[HARD]** A linked list Queue is implemented using `front` and `rear` pointers. Consider the following C function:\n\n```c\nvoid enqueue(struct Node** front, struct Node** rear, int data) {\n    struct Node* newNode = malloc(sizeof(struct Node));\n    newNode->data = data;\n    newNode->next = NULL;\n    if (*rear != NULL)\n        (*rear)->next = newNode;\n    *rear = newNode;\n    if (*front == NULL)\n        *front = *rear;\n}\n```\nAfter calling `enqueue(&front, &rear, 5)` on an **empty** queue (both `front` and `rear` are NULL), which of the following statements is TRUE about the state of memory?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "C",
+                "options": {
+                    "A": "`front` and `rear` both remain NULL because `*rear` is NULL initially, so the assignment is skipped.",
+                    "B": "`rear` points to the new node but `front` remains NULL because the `if (*front == NULL)` condition updates `front` to `*rear` which is NULL at that point.",
+                    "C": "Both `front` and `rear` point to the same new node containing value 5, and `newNode->next == NULL`.",
+                    "D": "`front` points to the new node, but `rear` is still NULL because `*rear->next` was never set."
+                },
+                "test_cases": null,
+                "solution_explanation": "Let's trace the code carefully with an empty queue (`front = NULL`, `rear = NULL`):\n\n1. `newNode` is allocated; `newNode->data = 5`; `newNode->next = NULL`.\n2. **`if (*rear != NULL)`** → `*rear` is `NULL` → condition is **FALSE** → the line `(*rear)->next = newNode` is **skipped** (correctly — no old rear to link from).\n3. **`*rear = newNode`** → `rear` now points to the new node with data=5.\n4. **`if (*front == NULL)`** → `*front` is `NULL` → condition is **TRUE** → `*front = *rear` → `front` also points to the same new node.\n\n**Final state**: Both `front` and `rear` point to the same single node (data=5, next=NULL).\n\n- Option B is wrong: By the time `*front = *rear` executes, `*rear` has already been updated to `newNode` in step 3.\n- This execution order is the critical insight — many students assume `*rear` is still NULL when `front` is set.",
+                "language": "C"
+            }
+        ]
     }
 ]

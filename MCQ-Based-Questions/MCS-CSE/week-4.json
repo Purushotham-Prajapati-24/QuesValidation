@@ -1,162 +1,167 @@
 [
     {
-        "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
-        "question": "Which of the following data structures allows insertion and deletion of elements at both the front and rear ends?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "D",
-        "options": {
-            "A": "Stack",
-            "B": "Queue",
-            "C": "Priority Queue",
-            "D": "Deque"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Stack**: Allows insertion and deletion at only one end (Top).\n2. **Queue**: Allows insertion at one end (Rear) and deletion at the other (Front).\n3. **Priority Queue**: Elements are deleted based on priority, not purely by position.\n4. **Deque**: A Double-Ended Queue allows both insertion and deletion at both the Front and Rear ends. Therefore, D is the correct answer.",
-        "language": "C"
-    },
-    {
-        "id": "3b0190ba-06f1-4131-9c60-3162b7161b9a",
-        "question": "In an array-based implementation of a Deque (using a circular array), what is the time complexity of the `insertFront()` and `deleteRear()` operations?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "O(1) for both",
-            "B": "O(n) for both",
-            "C": "O(1) for insertFront(), O(n) for deleteRear()",
-            "D": "O(n) for insertFront(), O(1) for deleteRear()"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Circular Array Logic**: In a circular array implementation, we maintain two pointers: `front` and `rear`.\n2. **insertFront()**: To insert at the front, we simply decrement the `front` pointer (wrapping around to `N-1` if it becomes less than 0) and place the element. This requires no shifting of elements, hence O(1).\n3. **deleteRear()**: To delete at the rear, we simply access the element at the `rear` pointer and decrement it (wrapping around if necessary). Again, no shifting is required, making it O(1).\n4. Therefore, both operations run in constant time O(1).",
-        "language": "C"
-    },
-    {
-        "id": "8d5314e3-85f0-4384-9ce4-e0a5c48b29bd",
-        "question": "Assume a Deque is implemented using a circular array of size `N`, with variables `front` and `rear` initially set to -1. Which of the following conditions correctly identifies that the Deque is Full?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "front == 0 && rear == N - 1",
-            "B": "front == rear + 1",
-            "C": "(front == 0 && rear == N - 1) || (front == rear + 1)",
-            "D": "rear == front + 1"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Normal Full Condition**: If elements are inserted sequentially, `front` remains 0 and `rear` reaches `N - 1`. Here, the array is physically full from start to end.\n2. **Wrapped Full Condition**: If elements are deleted from the front and new elements are inserted at the rear (wrapping around to the beginning of the array), the `rear` pointer will eventually catch up to the `front` pointer from behind. This happens when `front == rear + 1`.\n3. Combining both scenarios, the Deque is full if either `(front == 0 && rear == N - 1)` OR `(front == rear + 1)`. Thus, C is the correct logical condition.",
-        "language": "C"
-    },
-    {
-        "id": "1a6c1ab4-17de-4be5-a226-e179e830a84f",
-        "question": "When implementing an `insertFront(val)` operation in a circular array-based Deque of size `N`, which of the following is the correct logic to update `front` before placing the value? Assume the Deque is not full and not initially empty, and `front` is currently at index 0.",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "front = 1",
-            "B": "front = N - 1",
-            "C": "front = -1",
-            "D": "front = (front + 1) % N"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **insertFront Logic**: Inserting at the front means we need to move the `front` pointer one step backward before inserting the new element.\n2. **Current State**: We are given that `front == 0`.\n3. **Wrap-around Case**: Moving backward from index 0 in a standard array would lead to index -1, which is out of bounds. In a circular array, the position immediately preceding index 0 is the last valid index of the array, which is `N - 1`.\n4. Therefore, the `front` pointer must wrap around to `N - 1`.",
-        "language": "C"
-    },
-    {
-        "id": "23c4a169-83c9-4a0b-bc17-3bfce5cb082e",
-        "question": "Analyze the following C code snippet for `deleteRear()` in a circular array-based Deque.\n\n```c\nint deleteRear() {\n    if (front == -1) { return -1; } // Empty check\n    int val = deque[rear];\n    if (front == rear) {\n        front = -1;\n        rear = -1;\n    } else if (rear == 0) {\n        rear = N - 1;\n    } else {\n        rear = rear - 1;\n    }\n    return val;\n}\n```\n\nWhat is the purpose of the condition `if (rear == 0)`?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "It checks if the deque is empty after deletion.",
-            "B": "It handles the wrap-around case when the rear pointer is at the beginning of the array.",
-            "C": "It resets the deque to its initial state.",
-            "D": "It prevents array index out of bounds by moving the front pointer."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Code Analysis**: The `deleteRear` function extracts the element at the `rear` pointer and then decrements `rear` to effectively delete it.\n2. **Special Cases**: \n   - `front == rear`: The deque had only one element, so we reset both pointers to -1.\n   - `rear == 0`: If the `rear` pointer is currently at the first index (0) of the array, decrementing it would result in -1, which is out of bounds. Because it is a circular array, the element that preceded index 0 conceptually is at `N - 1`.\n3. Thus, `rear = N - 1;` handles this wrap-around correctly. Option B perfectly describes this behavior.",
-        "language": "C"
-    },
-    {
-        "id": "b9b78e24-cccd-41e9-82f5-47eacac41d99",
-        "question": "You are tasked with checking if a given string is a palindrome. You decide to use a Deque data structure. Which of the following strategies efficiently describes how a Deque can be used to verify a palindrome?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "Insert all characters sequentially. Repeatedly remove and compare characters from both the front and the rear. If all pairs match, it's a palindrome.",
-            "B": "Insert half the characters at the front and half at the rear, then compare the corresponding halves.",
-            "C": "Insert all characters at the front, then sequentially remove them from the front and check if they reverse the string.",
-            "D": "Insert characters at the rear, then remove them from the front. If the removed sequence matches the original, it's a palindrome."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Palindrome Definition**: A string is a palindrome if it reads the same forwards and backwards.\n2. **Deque Characteristics**: A Deque allows extracting elements from both ends efficiently.\n3. **Optimal Strategy**: If we push the entire string into the Deque character by character, the first character is at the `front` and the last character is at the `rear`.\n4. By popping from both `front` and `rear` simultaneously and comparing them, we are effectively comparing the outermost characters and moving inwards. If there's ever a mismatch, it's not a palindrome. If we empty the deque without mismatches, it is a palindrome. Option A perfectly corresponds to this.",
-        "language": "C"
-    },
-    {
-        "id": "d795b306-0565-4f51-bcca-76813264421b",
-        "question": "Consider a Deque of maximum size 5, initially empty. The following operations are performed in sequence:\n`insertRear(10)`\n`insertFront(20)`\n`insertRear(30)`\n`deleteFront()`\n`insertFront(40)`\n`deleteRear()`\nWhat are the elements in the Deque from front to rear after these operations?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "A",
-        "options": {
-            "A": "40, 10",
-            "B": "20, 10, 30",
-            "C": "40, 10, 30",
-            "D": "10, 40"
-        },
-        "test_cases": null,
-        "solution_explanation": "Let's trace the operations step by step:\n1. **Initially**: Empty Deque `[]`\n2. **`insertRear(10)`**: Adds 10 to the rear. Deque is now `[10]` (Front is 10, Rear is 10).\n3. **`insertFront(20)`**: Adds 20 to the front. Deque is now `[20, 10]`.\n4. **`insertRear(30)`**: Adds 30 to the rear. Deque is now `[20, 10, 30]`.\n5. **`deleteFront()`**: Removes the element at the front (20). Deque becomes `[10, 30]`.\n6. **`insertFront(40)`**: Adds 40 to the front. Deque becomes `[40, 10, 30]`.\n7. **`deleteRear()`**: Removes the element at the rear (30). Deque becomes `[40, 10]`, where 40 is at the front and 10 is at the rear.\nTherefore, the final state from front to rear is 40, 10.",
-        "language": "C"
-    },
-    {
-        "id": "6e34360b-8cf0-42fe-bd1c-10874e508892",
-        "question": "How can an input-restricted Deque (where insertion is permitted at only one end, but deletion allows at both ends) be utilized to simulate standard data structures?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "It can simulate the behavior of both a Stack and a Queue.",
-            "B": "It can simulate only a Stack.",
-            "C": "It can simulate only a Queue.",
-            "D": "It cannot simulate either a Stack or a Queue."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Input-Restricted Deque**: Assume insertion is only allowed at the `Rear`. Deletion is allowed at both `Front` and `Rear`.\n2. **Simulating a Stack (LIFO)**: To behave like a stack, insertions and deletions must happen at the same end. We can use `insertRear` for pushing and `deleteRear` for popping. This accurately models a Stack.\n3. **Simulating a Queue (FIFO)**: To behave like a queue, elements must enter at one end and leave at the other. We can use `insertRear` for enqueuing and `deleteFront` for dequeuing. This accurately models a Queue.\n4. Since it can effectively perform both behaviors by choosing the appropriate deletion method, option A is correct.",
-        "language": "C"
-    },
-    {
-        "id": "a9d1502f-b4de-40ab-a5a4-cf0066ba7b8a",
-        "question": "Analyze the following C snippet for inserting an element at the rear of a circular array deque of size `N`:\n\n```c\nvoid insertRear(int key) {\n    if (isFull()) return;\n    if (front == -1) {\n        front = 0;\n        rear = 0;\n    } else if (rear == N - 1) {\n        rear = 0;\n    } else {\n        rear = rear + 1;\n    }\n    deque[rear] = key;\n}\n```\nIf `N = 5`, `front = 2`, and `rear = 4`. We call `insertRear(50)`. What will be the new values of `front` and `rear` after the execution?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "front = 2, rear = 5",
-            "B": "front = 2, rear = 0",
-            "C": "front = 3, rear = 0",
-            "D": "front = 0, rear = 0"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Initial State**: `N = 5`, `front = 2`, `rear = 4`.\n2. **isFull Check**: Since `front (2) != 0` and `front (2) != rear + 1 (5)`, the deque is not full.\n3. **First if**: `front != -1`, so it falls through.\n4. **else if statement**: It checks if `rear == N - 1`. Since `rear is 4` and `N - 1 is 4`, this condition is true.\n   - This represents the wrap-around case where the array physically ends, but logically there is still space at the beginning of the array.\n5. **Block Execution**: The code executes `rear = 0;`, wrapping the pointer to the start of the array. The `front` pointer is completely untouched and remains `2`.\n6. **Final State**: `front = 2`, `rear = 0`. Thus, B is correct.",
-        "language": "C"
-    },
-    {
-        "id": "9cf8b196-1cda-4cf4-9de6-83bc84dbbe5a",
-        "question": "A Deque is used to computationally check whether the string \"RADAR\" is a palindrome. What rigorous sequence of operations accurately models inserting the string and performing the comparison logic?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "A",
-        "options": {
-            "A": "insertRear('R'), insertRear('A'), insertRear('D'), insertRear('A'), insertRear('R'). Compare deleteFront() with deleteRear() repeatedly.",
-            "B": "insertFront('R'), insertFront('A'), insertFront('D'), insertFront('A'), insertFront('R'). Compare deleteFront() with deleteFront() repeatedly.",
-            "C": "insertRear('R'), insertFront('A'), insertRear('D'), insertFront('A'), insertRear('R'). Compare deleteFront() with deleteRear() repeatedly.",
-            "D": "insertRear(\"RADAR\"). Output the elements using deleteFront()."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Goal**: The simplest way to load a string into a Deque is chronologically from left to right, using `insertRear()` for each character. This preserves the string's order entirely, laying it out from `Front` to `Rear` within the Deque.\n2. **Comparison Step**: To check if it's a palindrome, we must constantly compare the outermost unsampled characters. The frontmost character is retrieved computationally via `deleteFront()`, and the rear-most character is retrieved via `deleteRear()`.\n3. **Validation**: Option A correctly represents sequential loading, followed by the specific symmetry check fundamental to palindromes.",
-        "language": "C"
+        "name": "Week 4: Deque",
+        "questions": [
+            {
+                "id": "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+                "question": "Which of the following data structures allows insertion and deletion of elements at both the front and rear ends?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "D",
+                "options": {
+                    "A": "Stack",
+                    "B": "Queue",
+                    "C": "Priority Queue",
+                    "D": "Deque"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Stack**: Allows insertion and deletion at only one end (Top).\n2. **Queue**: Allows insertion at one end (Rear) and deletion at the other (Front).\n3. **Priority Queue**: Elements are deleted based on priority, not purely by position.\n4. **Deque**: A Double-Ended Queue allows both insertion and deletion at both the Front and Rear ends. Therefore, D is the correct answer.",
+                "language": "C"
+            },
+            {
+                "id": "3b0190ba-06f1-4131-9c60-3162b7161b9a",
+                "question": "In an array-based implementation of a Deque (using a circular array), what is the time complexity of the `insertFront()` and `deleteRear()` operations?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "O(1) for both",
+                    "B": "O(n) for both",
+                    "C": "O(1) for insertFront(), O(n) for deleteRear()",
+                    "D": "O(n) for insertFront(), O(1) for deleteRear()"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Circular Array Logic**: In a circular array implementation, we maintain two pointers: `front` and `rear`.\n2. **insertFront()**: To insert at the front, we simply decrement the `front` pointer (wrapping around to `N-1` if it becomes less than 0) and place the element. This requires no shifting of elements, hence O(1).\n3. **deleteRear()**: To delete at the rear, we simply access the element at the `rear` pointer and decrement it (wrapping around if necessary). Again, no shifting is required, making it O(1).\n4. Therefore, both operations run in constant time O(1).",
+                "language": "C"
+            },
+            {
+                "id": "8d5314e3-85f0-4384-9ce4-e0a5c48b29bd",
+                "question": "Assume a Deque is implemented using a circular array of size `N`, with variables `front` and `rear` initially set to -1. Which of the following conditions correctly identifies that the Deque is Full?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "front == 0 && rear == N - 1",
+                    "B": "front == rear + 1",
+                    "C": "(front == 0 && rear == N - 1) || (front == rear + 1)",
+                    "D": "rear == front + 1"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Normal Full Condition**: If elements are inserted sequentially, `front` remains 0 and `rear` reaches `N - 1`. Here, the array is physically full from start to end.\n2. **Wrapped Full Condition**: If elements are deleted from the front and new elements are inserted at the rear (wrapping around to the beginning of the array), the `rear` pointer will eventually catch up to the `front` pointer from behind. This happens when `front == rear + 1`.\n3. Combining both scenarios, the Deque is full if either `(front == 0 && rear == N - 1)` OR `(front == rear + 1)`. Thus, C is the correct logical condition.",
+                "language": "C"
+            },
+            {
+                "id": "1a6c1ab4-17de-4be5-a226-e179e830a84f",
+                "question": "When implementing an `insertFront(val)` operation in a circular array-based Deque of size `N`, which of the following is the correct logic to update `front` before placing the value? Assume the Deque is not full and not initially empty, and `front` is currently at index 0.",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "front = 1",
+                    "B": "front = N - 1",
+                    "C": "front = -1",
+                    "D": "front = (front + 1) % N"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **insertFront Logic**: Inserting at the front means we need to move the `front` pointer one step backward before inserting the new element.\n2. **Current State**: We are given that `front == 0`.\n3. **Wrap-around Case**: Moving backward from index 0 in a standard array would lead to index -1, which is out of bounds. In a circular array, the position immediately preceding index 0 is the last valid index of the array, which is `N - 1`.\n4. Therefore, the `front` pointer must wrap around to `N - 1`.",
+                "language": "C"
+            },
+            {
+                "id": "23c4a169-83c9-4a0b-bc17-3bfce5cb082e",
+                "question": "Analyze the following C code snippet for `deleteRear()` in a circular array-based Deque.\n\n```c\nint deleteRear() {\n    if (front == -1) { return -1; } // Empty check\n    int val = deque[rear];\n    if (front == rear) {\n        front = -1;\n        rear = -1;\n    } else if (rear == 0) {\n        rear = N - 1;\n    } else {\n        rear = rear - 1;\n    }\n    return val;\n}\n```\n\nWhat is the purpose of the condition `if (rear == 0)`?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "It checks if the deque is empty after deletion.",
+                    "B": "It handles the wrap-around case when the rear pointer is at the beginning of the array.",
+                    "C": "It resets the deque to its initial state.",
+                    "D": "It prevents array index out of bounds by moving the front pointer."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Code Analysis**: The `deleteRear` function extracts the element at the `rear` pointer and then decrements `rear` to effectively delete it.\n2. **Special Cases**: \n   - `front == rear`: The deque had only one element, so we reset both pointers to -1.\n   - `rear == 0`: If the `rear` pointer is currently at the first index (0) of the array, decrementing it would result in -1, which is out of bounds. Because it is a circular array, the element that preceded index 0 conceptually is at `N - 1`.\n3. Thus, `rear = N - 1;` handles this wrap-around correctly. Option B perfectly describes this behavior.",
+                "language": "C"
+            },
+            {
+                "id": "b9b78e24-cccd-41e9-82f5-47eacac41d99",
+                "question": "You are tasked with checking if a given string is a palindrome. You decide to use a Deque data structure. Which of the following strategies efficiently describes how a Deque can be used to verify a palindrome?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "Insert all characters sequentially. Repeatedly remove and compare characters from both the front and the rear. If all pairs match, it's a palindrome.",
+                    "B": "Insert half the characters at the front and half at the rear, then compare the corresponding halves.",
+                    "C": "Insert all characters at the front, then sequentially remove them from the front and check if they reverse the string.",
+                    "D": "Insert characters at the rear, then remove them from the front. If the removed sequence matches the original, it's a palindrome."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Palindrome Definition**: A string is a palindrome if it reads the same forwards and backwards.\n2. **Deque Characteristics**: A Deque allows extracting elements from both ends efficiently.\n3. **Optimal Strategy**: If we push the entire string into the Deque character by character, the first character is at the `front` and the last character is at the `rear`.\n4. By popping from both `front` and `rear` simultaneously and comparing them, we are effectively comparing the outermost characters and moving inwards. If there's ever a mismatch, it's not a palindrome. If we empty the deque without mismatches, it is a palindrome. Option A perfectly corresponds to this.",
+                "language": "C"
+            },
+            {
+                "id": "d795b306-0565-4f51-bcca-76813264421b",
+                "question": "Consider a Deque of maximum size 5, initially empty. The following operations are performed in sequence:\n`insertRear(10)`\n`insertFront(20)`\n`insertRear(30)`\n`deleteFront()`\n`insertFront(40)`\n`deleteRear()`\nWhat are the elements in the Deque from front to rear after these operations?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "A",
+                "options": {
+                    "A": "40, 10",
+                    "B": "20, 10, 30",
+                    "C": "40, 10, 30",
+                    "D": "10, 40"
+                },
+                "test_cases": null,
+                "solution_explanation": "Let's trace the operations step by step:\n1. **Initially**: Empty Deque `[]`\n2. **`insertRear(10)`**: Adds 10 to the rear. Deque is now `[10]` (Front is 10, Rear is 10).\n3. **`insertFront(20)`**: Adds 20 to the front. Deque is now `[20, 10]`.\n4. **`insertRear(30)`**: Adds 30 to the rear. Deque is now `[20, 10, 30]`.\n5. **`deleteFront()`**: Removes the element at the front (20). Deque becomes `[10, 30]`.\n6. **`insertFront(40)`**: Adds 40 to the front. Deque becomes `[40, 10, 30]`.\n7. **`deleteRear()`**: Removes the element at the rear (30). Deque becomes `[40, 10]`, where 40 is at the front and 10 is at the rear.\nTherefore, the final state from front to rear is 40, 10.",
+                "language": "C"
+            },
+            {
+                "id": "6e34360b-8cf0-42fe-bd1c-10874e508892",
+                "question": "How can an input-restricted Deque (where insertion is permitted at only one end, but deletion allows at both ends) be utilized to simulate standard data structures?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "It can simulate the behavior of both a Stack and a Queue.",
+                    "B": "It can simulate only a Stack.",
+                    "C": "It can simulate only a Queue.",
+                    "D": "It cannot simulate either a Stack or a Queue."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Input-Restricted Deque**: Assume insertion is only allowed at the `Rear`. Deletion is allowed at both `Front` and `Rear`.\n2. **Simulating a Stack (LIFO)**: To behave like a stack, insertions and deletions must happen at the same end. We can use `insertRear` for pushing and `deleteRear` for popping. This accurately models a Stack.\n3. **Simulating a Queue (FIFO)**: To behave like a queue, elements must enter at one end and leave at the other. We can use `insertRear` for enqueuing and `deleteFront` for dequeuing. This accurately models a Queue.\n4. Since it can effectively perform both behaviors by choosing the appropriate deletion method, option A is correct.",
+                "language": "C"
+            },
+            {
+                "id": "a9d1502f-b4de-40ab-a5a4-cf0066ba7b8a",
+                "question": "Analyze the following C snippet for inserting an element at the rear of a circular array deque of size `N`:\n\n```c\nvoid insertRear(int key) {\n    if (isFull()) return;\n    if (front == -1) {\n        front = 0;\n        rear = 0;\n    } else if (rear == N - 1) {\n        rear = 0;\n    } else {\n        rear = rear + 1;\n    }\n    deque[rear] = key;\n}\n```\nIf `N = 5`, `front = 2`, and `rear = 4`. We call `insertRear(50)`. What will be the new values of `front` and `rear` after the execution?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "front = 2, rear = 5",
+                    "B": "front = 2, rear = 0",
+                    "C": "front = 3, rear = 0",
+                    "D": "front = 0, rear = 0"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Initial State**: `N = 5`, `front = 2`, `rear = 4`.\n2. **isFull Check**: Since `front (2) != 0` and `front (2) != rear + 1 (5)`, the deque is not full.\n3. **First if**: `front != -1`, so it falls through.\n4. **else if statement**: It checks if `rear == N - 1`. Since `rear is 4` and `N - 1 is 4`, this condition is true.\n   - This represents the wrap-around case where the array physically ends, but logically there is still space at the beginning of the array.\n5. **Block Execution**: The code executes `rear = 0;`, wrapping the pointer to the start of the array. The `front` pointer is completely untouched and remains `2`.\n6. **Final State**: `front = 2`, `rear = 0`. Thus, B is correct.",
+                "language": "C"
+            },
+            {
+                "id": "9cf8b196-1cda-4cf4-9de6-83bc84dbbe5a",
+                "question": "A Deque is used to computationally check whether the string \"RADAR\" is a palindrome. What rigorous sequence of operations accurately models inserting the string and performing the comparison logic?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "A",
+                "options": {
+                    "A": "insertRear('R'), insertRear('A'), insertRear('D'), insertRear('A'), insertRear('R'). Compare deleteFront() with deleteRear() repeatedly.",
+                    "B": "insertFront('R'), insertFront('A'), insertFront('D'), insertFront('A'), insertFront('R'). Compare deleteFront() with deleteFront() repeatedly.",
+                    "C": "insertRear('R'), insertFront('A'), insertRear('D'), insertFront('A'), insertRear('R'). Compare deleteFront() with deleteRear() repeatedly.",
+                    "D": "insertRear(\"RADAR\"). Output the elements using deleteFront()."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Goal**: The simplest way to load a string into a Deque is chronologically from left to right, using `insertRear()` for each character. This preserves the string's order entirely, laying it out from `Front` to `Rear` within the Deque.\n2. **Comparison Step**: To check if it's a palindrome, we must constantly compare the outermost unsampled characters. The frontmost character is retrieved computationally via `deleteFront()`, and the rear-most character is retrieved via `deleteRear()`.\n3. **Validation**: Option A correctly represents sequential loading, followed by the specific symmetry check fundamental to palindromes.",
+                "language": "C"
+            }
+        ]
     }
 ]

@@ -1,162 +1,167 @@
 [
     {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567901",
-        "question": "What is the defining property of a Min-Heap used to implement a Priority Queue?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "B",
-        "options": {
-            "A": "Every node's value is greater than both its children.",
-            "B": "Every node's value is less than or equal to both its children, with the minimum always at the root.",
-            "C": "The heap is a sorted array from index 0 to N.",
-            "D": "Leaf nodes always contain the smallest values."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Min-Heap property**: For every node `i`, `value[i] <= value[left_child]` and `value[i] <= value[right_child]`.\n2. **Root**: The root always holds the globally minimum element — enabling O(1) peek and O(log N) extract-min.\n3. **Why not D?**: Leaf nodes can hold any value; it is the structural (parent ≤ child) property that defines a min-heap, not leaf placement.\n4. **Why not C?**: A heap is NOT a fully sorted array — only the parent-child ordering property holds.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567902",
-        "question": "In a Priority Queue implemented using a Max-Heap array, if the current heap has N elements, at which 0-indexed array position is the highest-priority (maximum) element always found?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "A",
-        "options": {
-            "A": "Index 0 — the root of the heap.",
-            "B": "Index N-1 — the last inserted element.",
-            "C": "Index N/2 — the midpoint of the array.",
-            "D": "It varies — must be searched linearly."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Heap is a complete binary tree** stored in an array where the root sits at index 0.\n2. **Max-Heap**: The root is always the maximum. Accessing `arr[0]` is `O(1)`.\n3. **Index N-1** is the last leaf — it holds the recently inserted or smallest remaining element after heapification.\n4. This is the fundamental advantage of heaps over unsorted arrays for priority queues: guaranteed O(1) access to the top-priority element.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567903",
-        "question": "After calling `extractMax()` on a Max-Heap, the algorithm swaps the root with the last element and then calls `heapifyDown()`. What is the time complexity of `heapifyDown()` and why?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "O(1) — the swap immediately restores heap property.",
-            "B": "O(N) — every element must be checked.",
-            "C": "O(log N) — the element sinks at most the height of the heap, which is ⌊log₂N⌋ levels.",
-            "D": "O(N log N) — because heap sort requires full re-sorting."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **After swap**: The new root (formerly the last leaf) likely violates the max-heap property.\n2. **heapifyDown**: Compares the node with its larger child; swaps if necessary and recurses downward.\n3. **Height of a complete binary tree with N nodes**: h = ⌊log₂N⌋. The element descends at most `h` levels.\n4. **Result**: Each level requires O(1) comparisons × O(log N) levels = **O(log N)** total.\n5. O(N) would apply to `buildHeap`, not a single heapifyDown.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567904",
-        "question": "A Deque (Double-Ended Queue) is implemented using a Doubly Linked List with both `head` and `tail` pointers. What are the time complexities for `insertFront` and `deleteFront` operations?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "D",
-        "options": {
-            "A": "insertFront: O(N), deleteFront: O(1)",
-            "B": "insertFront: O(1), deleteFront: O(N)",
-            "C": "insertFront: O(N), deleteFront: O(N)",
-            "D": "insertFront: O(1), deleteFront: O(1)"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **insertFront**: Create node, set `node->next = head`, `node->prev = NULL`, `head->prev = node`, `head = node`. No traversal — **O(1)**.\n2. **deleteFront**: `temp = head`, `head = head->next`, `head->prev = NULL`, `free(temp)`. No traversal — **O(1)**.\n3. **DLL advantage**: Both `head` and `tail` are maintained, making all four Deque operations (insertFront, insertRear, deleteFront, deleteRear) **O(1)**.\n4. This is why DLL is the canonical data structure for Deque implementation.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567905",
-        "question": "A priority queue is used in Dijkstra's shortest path algorithm. Why is a Min-Heap preferred over a sorted linked list for this use case?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "A Min-Heap stores elements in fully sorted order, making linear traversal faster.",
-            "B": "A Min-Heap gives O(log N) insert and O(log N) extract-min versus O(N) insert or O(N) search for a sorted linked list.",
-            "C": "A sorted linked list cannot hold duplicate priority values.",
-            "D": "A Min-Heap uses less memory than a sorted linked list."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Sorted Linked List**: Inserting in sorted order requires O(N) traversal to find the correct position. Extract-min is O(1) (remove head), but insertion bottleneck dominates.\n2. **Min-Heap**: Insert uses `heapifyUp` — O(log N). Extract-min uses `heapifyDown` — O(log N). Both are logarithmic.\n3. **Dijkstra's complexity**: With a Min-Heap, the algorithm runs in O((V + E) log V). With a sorted list, it degrades to O(V²).\n4. **Memory**: Both use O(N) space — no memory advantage for heaps.\n5. The critical advantage is **insert efficiency**, not memory.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567906",
-        "question": "A Deque implemented as a DLL supports both stack and queue behaviours. Which combination of operations emulates a **Stack** using only the front of the Deque?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "push → insertFront; pop → deleteFront (LIFO: always operate on the same end).",
-            "B": "push → insertFront; pop → deleteRear (FIFO: insert one end, remove other).",
-            "C": "push → insertRear; pop → deleteFront (Queue behaviour).",
-            "D": "push → insertRear; pop → insertFront (invalid operation mix)."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Stack = LIFO**: Last inserted element is the first removed.\n2. **Front-only Deque Stack**: `insertFront` adds to the top; `deleteFront` removes from the top — both same end → LIFO ✅.\n3. **Option B**: insertFront + deleteRear gives FIFO (Queue), not a Stack.\n4. **Option C**: insertRear + deleteFront is exactly Queue behaviour.\n5. **Key insight**: A Deque is a generalised structure — restrict to one end for Stack behaviour, or use both ends for Queue behaviour.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567907",
-        "question": "Consider building a Max-Heap from the array `[3, 1, 6, 5, 2, 4]` using the `buildHeap` (heapify from bottom) algorithm. What is the resulting root value and what is the time complexity of `buildHeap`?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "Root = 5; time complexity O(N log N).",
-            "B": "Root = 4; time complexity O(N log N).",
-            "C": "Root = 6; time complexity O(N).",
-            "D": "Root = 6; time complexity O(N log N)."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **buildHeap**: Apply `heapifyDown` from index N/2-1 down to 0. For `[3,1,6,5,2,4]`, the maximum element 6 will always bubble to the root.\n2. **Root = 6** ✅ (largest element is always the root of a Max-Heap).\n3. **Time complexity**: Although each heapifyDown is O(log N), most nodes are near the bottom (height 0 or 1). Mathematical summation Σ(N/2^h × h) = **O(N)** — a tighter bound than the naive O(N log N) estimate.\n4. **O(N log N)** applies to heap *sort* (N extract-max operations), not the initial buildHeap.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567908",
-        "question": "In a priority queue supporting `insert`, `extractMin`, and `decreaseKey` operations, why does `decreaseKey` require `heapifyUp` (bubbling upward) rather than `heapifyDown`?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "A",
-        "options": {
-            "A": "Decreasing a key makes it potentially smaller than its parent, violating the min-heap property upward — so the node must bubble up to restore order.",
-            "B": "Decreasing a key makes it larger than its children, so it must sink downward via heapifyDown.",
-            "C": "decreaseKey always sets the value to 0, placing it directly at the root.",
-            "D": "heapifyUp and heapifyDown are interchangeable for decreaseKey."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Min-Heap rule**: Every parent ≤ its children.\n2. **decreaseKey effect**: Reducing node `i`'s value means `arr[i]` may now be *less than* `arr[parent(i)]` — violating the rule *above* node `i`.\n3. **heapifyUp**: Repeatedly compare node with its parent and swap if smaller — moves the node upward until the heap property is restored. O(log N).\n4. **heapifyDown** fixes violations *downward* (parent > child). Since the key was *decreased*, it cannot be greater than its children — heapifyDown is not applicable.\n5. `decreaseKey` is critical for algorithms like Dijkstra's and Prim's — correctly using heapifyUp ensures O(log N) correctness.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567909",
-        "question": "A Deque using DLL implements a sliding window maximum algorithm. A window of size `k` slides over an array and the maximum of each window is recorded. Why is a Deque (not a simple Queue) the optimal structure for this O(N) algorithm?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "A Deque allows random access by index, enabling direct element comparison.",
-            "B": "The algorithm needs to remove outdated elements from the front (out-of-window indices) AND remove smaller elements from the rear (they can never be the maximum), requiring both-end deletion.",
-            "C": "A Deque sorts elements automatically, so the front always holds the maximum.",
-            "D": "A Deque stores elements in descending order inherently, avoiding comparisons entirely."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Algorithm logic**: The Deque stores *indices* of potentially useful elements in decreasing order of their values.\n2. **Rear deletion**: Before inserting index `i`, remove all indices from the rear whose values are ≤ `arr[i]` (they can never be the window max while `arr[i]` is present). This requires `deleteRear`.\n3. **Front deletion**: The front always holds the current window maximum. If `front index < i - k + 1`, it is out-of-window — remove via `deleteFront`.\n4. **Both ends**: This dual-direction access is *only* possible with a Deque — a simple queue or stack supports only one-end removal.\n5. **O(N)**: Each element is inserted and deleted at most once → O(N) overall.",
-        "language": "C"
-    },
-    {
-        "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567910",
-        "question": "A Min-Heap based priority queue has 7 elements stored as: `[1, 3, 2, 7, 5, 9, 6]` (0-indexed). After calling `extractMin()`, which array correctly represents the heap state after the extract and heapifyDown?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "C",
-        "options": {
-            "A": "[2, 3, 9, 7, 5, 6]",
-            "B": "[2, 5, 6, 7, 3, 9]",
-            "C": "[2, 3, 6, 7, 5, 9]",
-            "D": "[3, 5, 2, 7, 6, 9]"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **extractMin step 1**: Swap root (index 0, value=1) with last element (index 6, value=6) → array becomes `[6, 3, 2, 7, 5, 9, 1]`.\n2. **Remove last**: Heap shrinks to N=6 → `[6, 3, 2, 7, 5, 9]`.\n3. **heapifyDown from root (index 0, value=6)**:\n   - Left child idx 1 = value 3; Right child idx 2 = value 2. Smaller = idx 2 (value 2).\n   - 6 > 2 → swap(0,2) → `[2, 3, 6, 7, 5, 9]`.\n4. **heapifyDown continues from index 2 (value=6)**:\n   - Left child idx 5 = value 9. 6 < 9 → no swap needed. Done.\n5. **Final Min-Heap**: `[2, 3, 6, 7, 5, 9]` ✅.\n   - Option A `[2,3,9,7,5,6]` is wrong — that would require swapping index 2 with index 5, but 6 < 9 so no swap.\n   - Option D `[3,5,2,7,6,9]` is wrong — root should be 2, the new minimum.",
-        "language": "C"
+        "name": "Week 9:Priority Queues",
+        "questions": [
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567901",
+                "question": "What is the defining property of a Min-Heap used to implement a Priority Queue?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "B",
+                "options": {
+                    "A": "Every node's value is greater than both its children.",
+                    "B": "Every node's value is less than or equal to both its children, with the minimum always at the root.",
+                    "C": "The heap is a sorted array from index 0 to N.",
+                    "D": "Leaf nodes always contain the smallest values."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Min-Heap property**: For every node `i`, `value[i] <= value[left_child]` and `value[i] <= value[right_child]`.\n2. **Root**: The root always holds the globally minimum element — enabling O(1) peek and O(log N) extract-min.\n3. **Why not D?**: Leaf nodes can hold any value; it is the structural (parent ≤ child) property that defines a min-heap, not leaf placement.\n4. **Why not C?**: A heap is NOT a fully sorted array — only the parent-child ordering property holds.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567902",
+                "question": "In a Priority Queue implemented using a Max-Heap array, if the current heap has N elements, at which 0-indexed array position is the highest-priority (maximum) element always found?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "A",
+                "options": {
+                    "A": "Index 0 — the root of the heap.",
+                    "B": "Index N-1 — the last inserted element.",
+                    "C": "Index N/2 — the midpoint of the array.",
+                    "D": "It varies — must be searched linearly."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Heap is a complete binary tree** stored in an array where the root sits at index 0.\n2. **Max-Heap**: The root is always the maximum. Accessing `arr[0]` is `O(1)`.\n3. **Index N-1** is the last leaf — it holds the recently inserted or smallest remaining element after heapification.\n4. This is the fundamental advantage of heaps over unsorted arrays for priority queues: guaranteed O(1) access to the top-priority element.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567903",
+                "question": "After calling `extractMax()` on a Max-Heap, the algorithm swaps the root with the last element and then calls `heapifyDown()`. What is the time complexity of `heapifyDown()` and why?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "O(1) — the swap immediately restores heap property.",
+                    "B": "O(N) — every element must be checked.",
+                    "C": "O(log N) — the element sinks at most the height of the heap, which is ⌊log₂N⌋ levels.",
+                    "D": "O(N log N) — because heap sort requires full re-sorting."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **After swap**: The new root (formerly the last leaf) likely violates the max-heap property.\n2. **heapifyDown**: Compares the node with its larger child; swaps if necessary and recurses downward.\n3. **Height of a complete binary tree with N nodes**: h = ⌊log₂N⌋. The element descends at most `h` levels.\n4. **Result**: Each level requires O(1) comparisons × O(log N) levels = **O(log N)** total.\n5. O(N) would apply to `buildHeap`, not a single heapifyDown.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567904",
+                "question": "A Deque (Double-Ended Queue) is implemented using a Doubly Linked List with both `head` and `tail` pointers. What are the time complexities for `insertFront` and `deleteFront` operations?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "D",
+                "options": {
+                    "A": "insertFront: O(N), deleteFront: O(1)",
+                    "B": "insertFront: O(1), deleteFront: O(N)",
+                    "C": "insertFront: O(N), deleteFront: O(N)",
+                    "D": "insertFront: O(1), deleteFront: O(1)"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **insertFront**: Create node, set `node->next = head`, `node->prev = NULL`, `head->prev = node`, `head = node`. No traversal — **O(1)**.\n2. **deleteFront**: `temp = head`, `head = head->next`, `head->prev = NULL`, `free(temp)`. No traversal — **O(1)**.\n3. **DLL advantage**: Both `head` and `tail` are maintained, making all four Deque operations (insertFront, insertRear, deleteFront, deleteRear) **O(1)**.\n4. This is why DLL is the canonical data structure for Deque implementation.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567905",
+                "question": "A priority queue is used in Dijkstra's shortest path algorithm. Why is a Min-Heap preferred over a sorted linked list for this use case?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "A Min-Heap stores elements in fully sorted order, making linear traversal faster.",
+                    "B": "A Min-Heap gives O(log N) insert and O(log N) extract-min versus O(N) insert or O(N) search for a sorted linked list.",
+                    "C": "A sorted linked list cannot hold duplicate priority values.",
+                    "D": "A Min-Heap uses less memory than a sorted linked list."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Sorted Linked List**: Inserting in sorted order requires O(N) traversal to find the correct position. Extract-min is O(1) (remove head), but insertion bottleneck dominates.\n2. **Min-Heap**: Insert uses `heapifyUp` — O(log N). Extract-min uses `heapifyDown` — O(log N). Both are logarithmic.\n3. **Dijkstra's complexity**: With a Min-Heap, the algorithm runs in O((V + E) log V). With a sorted list, it degrades to O(V²).\n4. **Memory**: Both use O(N) space — no memory advantage for heaps.\n5. The critical advantage is **insert efficiency**, not memory.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567906",
+                "question": "A Deque implemented as a DLL supports both stack and queue behaviours. Which combination of operations emulates a **Stack** using only the front of the Deque?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "push → insertFront; pop → deleteFront (LIFO: always operate on the same end).",
+                    "B": "push → insertFront; pop → deleteRear (FIFO: insert one end, remove other).",
+                    "C": "push → insertRear; pop → deleteFront (Queue behaviour).",
+                    "D": "push → insertRear; pop → insertFront (invalid operation mix)."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Stack = LIFO**: Last inserted element is the first removed.\n2. **Front-only Deque Stack**: `insertFront` adds to the top; `deleteFront` removes from the top — both same end → LIFO ✅.\n3. **Option B**: insertFront + deleteRear gives FIFO (Queue), not a Stack.\n4. **Option C**: insertRear + deleteFront is exactly Queue behaviour.\n5. **Key insight**: A Deque is a generalised structure — restrict to one end for Stack behaviour, or use both ends for Queue behaviour.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567907",
+                "question": "Consider building a Max-Heap from the array `[3, 1, 6, 5, 2, 4]` using the `buildHeap` (heapify from bottom) algorithm. What is the resulting root value and what is the time complexity of `buildHeap`?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "Root = 5; time complexity O(N log N).",
+                    "B": "Root = 4; time complexity O(N log N).",
+                    "C": "Root = 6; time complexity O(N).",
+                    "D": "Root = 6; time complexity O(N log N)."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **buildHeap**: Apply `heapifyDown` from index N/2-1 down to 0. For `[3,1,6,5,2,4]`, the maximum element 6 will always bubble to the root.\n2. **Root = 6** ✅ (largest element is always the root of a Max-Heap).\n3. **Time complexity**: Although each heapifyDown is O(log N), most nodes are near the bottom (height 0 or 1). Mathematical summation Σ(N/2^h × h) = **O(N)** — a tighter bound than the naive O(N log N) estimate.\n4. **O(N log N)** applies to heap *sort* (N extract-max operations), not the initial buildHeap.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567908",
+                "question": "In a priority queue supporting `insert`, `extractMin`, and `decreaseKey` operations, why does `decreaseKey` require `heapifyUp` (bubbling upward) rather than `heapifyDown`?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "A",
+                "options": {
+                    "A": "Decreasing a key makes it potentially smaller than its parent, violating the min-heap property upward — so the node must bubble up to restore order.",
+                    "B": "Decreasing a key makes it larger than its children, so it must sink downward via heapifyDown.",
+                    "C": "decreaseKey always sets the value to 0, placing it directly at the root.",
+                    "D": "heapifyUp and heapifyDown are interchangeable for decreaseKey."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Min-Heap rule**: Every parent ≤ its children.\n2. **decreaseKey effect**: Reducing node `i`'s value means `arr[i]` may now be *less than* `arr[parent(i)]` — violating the rule *above* node `i`.\n3. **heapifyUp**: Repeatedly compare node with its parent and swap if smaller — moves the node upward until the heap property is restored. O(log N).\n4. **heapifyDown** fixes violations *downward* (parent > child). Since the key was *decreased*, it cannot be greater than its children — heapifyDown is not applicable.\n5. `decreaseKey` is critical for algorithms like Dijkstra's and Prim's — correctly using heapifyUp ensures O(log N) correctness.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567909",
+                "question": "A Deque using DLL implements a sliding window maximum algorithm. A window of size `k` slides over an array and the maximum of each window is recorded. Why is a Deque (not a simple Queue) the optimal structure for this O(N) algorithm?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "A Deque allows random access by index, enabling direct element comparison.",
+                    "B": "The algorithm needs to remove outdated elements from the front (out-of-window indices) AND remove smaller elements from the rear (they can never be the maximum), requiring both-end deletion.",
+                    "C": "A Deque sorts elements automatically, so the front always holds the maximum.",
+                    "D": "A Deque stores elements in descending order inherently, avoiding comparisons entirely."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Algorithm logic**: The Deque stores *indices* of potentially useful elements in decreasing order of their values.\n2. **Rear deletion**: Before inserting index `i`, remove all indices from the rear whose values are ≤ `arr[i]` (they can never be the window max while `arr[i]` is present). This requires `deleteRear`.\n3. **Front deletion**: The front always holds the current window maximum. If `front index < i - k + 1`, it is out-of-window — remove via `deleteFront`.\n4. **Both ends**: This dual-direction access is *only* possible with a Deque — a simple queue or stack supports only one-end removal.\n5. **O(N)**: Each element is inserted and deleted at most once → O(N) overall.",
+                "language": "C"
+            },
+            {
+                "id": "b1c2d3e4-f5a6-7890-bcde-fa1234567910",
+                "question": "A Min-Heap based priority queue has 7 elements stored as: `[1, 3, 2, 7, 5, 9, 6]` (0-indexed). After calling `extractMin()`, which array correctly represents the heap state after the extract and heapifyDown?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "C",
+                "options": {
+                    "A": "[2, 3, 9, 7, 5, 6]",
+                    "B": "[2, 5, 6, 7, 3, 9]",
+                    "C": "[2, 3, 6, 7, 5, 9]",
+                    "D": "[3, 5, 2, 7, 6, 9]"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **extractMin step 1**: Swap root (index 0, value=1) with last element (index 6, value=6) → array becomes `[6, 3, 2, 7, 5, 9, 1]`.\n2. **Remove last**: Heap shrinks to N=6 → `[6, 3, 2, 7, 5, 9]`.\n3. **heapifyDown from root (index 0, value=6)**:\n   - Left child idx 1 = value 3; Right child idx 2 = value 2. Smaller = idx 2 (value 2).\n   - 6 > 2 → swap(0,2) → `[2, 3, 6, 7, 5, 9]`.\n4. **heapifyDown continues from index 2 (value=6)**:\n   - Left child idx 5 = value 9. 6 < 9 → no swap needed. Done.\n5. **Final Min-Heap**: `[2, 3, 6, 7, 5, 9]` ✅.\n   - Option A `[2,3,9,7,5,6]` is wrong — that would require swapping index 2 with index 5, but 6 < 9 so no swap.\n   - Option D `[3,5,2,7,6,9]` is wrong — root should be 2, the new minimum.",
+                "language": "C"
+            }
+        ]
     }
 ]

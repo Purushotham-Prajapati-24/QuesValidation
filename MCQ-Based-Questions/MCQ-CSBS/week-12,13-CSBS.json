@@ -1,322 +1,327 @@
 [
     {
-        "id": "cs05a001-0001-4000-a001-000000000001",
-        "question": "What is the time complexity of BFS and DFS on a graph represented as an Adjacency List with V vertices and E edges?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "B",
-        "options": {
-            "A": "BFS: O(V²), DFS: O(V²)",
-            "B": "BFS: O(V+E), DFS: O(V+E) — each vertex and edge is processed exactly once.",
-            "C": "BFS: O(V log V), DFS: O(E log E)",
-            "D": "BFS: O(V*E), DFS: O(V*E)"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **BFS**: Each vertex is enqueued/dequeued once → O(V). Each edge is examined once (from each endpoint) → O(E). Total: **O(V+E)**.\n2. **DFS**: Each vertex is visited once → O(V). Each edge is traversed once → O(E). Total: **O(V+E)**.\n3. **Adjacency Matrix**: Both BFS and DFS require O(V²) — scanning an entire row to find neighbours.\n4. **Adjacency List**: Only actual neighbours are listed → O(degree) per vertex → total O(V+E).\n5. **For dense graphs** (E ≈ V²): O(V+E) ≈ O(V²). For sparse graphs: O(V+E) ≈ O(V) — much faster.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000002",
-        "question": "Which graph traversal algorithm guarantees finding the shortest path (minimum number of edges) in an UNWEIGHTED graph?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "A",
-        "options": {
-            "A": "BFS — it explores vertices level by level (by edge count), so the first time it reaches a vertex is via the shortest edge-count path.",
-            "B": "DFS — it explores as deep as possible first.",
-            "C": "Dijkstra's — it uses a priority queue for shortest paths.",
-            "D": "Bellman-Ford — it handles all edge weights."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **BFS**: Explores all vertices at distance 1 before distance 2, distance 2 before distance 3, etc. The first time BFS reaches a vertex, it's via the minimum-edge path.\n2. **DFS**: No shortest-path guarantee — may find a long path to a vertex before discovering the short one.\n3. **Dijkstra's**: Correct for weighted graphs with non-negative weights. On unweighted graphs (all weights = 1), it reduces to BFS.\n4. **Bellman-Ford**: Handles negative weights. O(V*E) — much slower than BFS for unweighted shortest paths.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000003",
-        "question": "Dijkstra's algorithm fails for graphs with negative edge weights. Why?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "C",
-        "options": {
-            "A": "Dijkstra's uses BFS internally, which cannot handle weights.",
-            "B": "Negative weights cause infinite loops in the priority queue.",
-            "C": "Dijkstra's greedy assumption — once a vertex is settled with distance d, no shorter path can be found later — fails when a negative edge can provide a shorter path after the vertex has been settled.",
-            "D": "Dijkstra's algorithm cannot represent negative weights in its data structures."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Dijkstra's greedy**: When a vertex u is extracted from the priority queue (with minimum distance), it is marked 'settled' — its final shortest distance.\n2. **With negative edges**: A later-discovered path through a negative edge could yield a shorter distance to u, even after u was settled. The algorithm misses this.\n3. **Bellman-Ford fix**: Repeatedly relaxes ALL edges V-1 times — no greedy assumption. Handles negative weights correctly. O(V*E).\n4. **Negative cycle detection**: Bellman-Ford also detects negative-weight cycles (a path of negative total weight that can be traversed infinitely to reduce distance to -∞).",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000004",
-        "question": "Prim's and Kruskal's algorithms both find the Minimum Spanning Tree (MST). What is the key algorithmic difference in their approach?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "Prim's works on directed graphs; Kruskal's works on undirected graphs.",
-            "B": "Prim's grows the MST greedily from a starting vertex, always adding the minimum-weight edge connecting the current tree to a non-tree vertex. Kruskal's sorts all edges by weight and adds them if they don't create a cycle (using Union-Find).",
-            "C": "Prim's is better for dense graphs and Kruskal's for sparse — but they use the same internal algorithm.",
-            "D": "Kruskal's always produces a different MST than Prim's."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Prim's (vertex-centric)**: Maintain a priority queue of edges crossing the cut between tree and non-tree vertices. Always pick the minimum-weight crossing edge. O((V+E) log V) with a binary heap.\n2. **Kruskal's (edge-centric)**: Sort all E edges by weight. Iterate through sorted edges; add edge if its endpoints are in different components (no cycle). Use Union-Find for O(E log* V) cycle detection. Total: O(E log E).\n3. **Dense graph (E ≈ V²)**: Prim's O(V²) (with simple array) is better than Kruskal's O(V² log V).\n4. **Sparse graph**: Kruskal's is preferred.\n5. **Both produce a valid MST** — may differ in which edges are chosen when tied weights exist.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000005",
-        "question": "Floyd-Warshall algorithm computes all-pairs shortest paths. What is its time complexity and what matrix does it build?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "O(V²) — builds a 1D distance array.",
-            "B": "O(V² log V) — uses priority queues for all vertices.",
-            "C": "O(V³) — builds a V×V distance matrix `dist[i][j]` = shortest path distance from vertex i to vertex j.",
-            "D": "O(V * E) — same as Bellman-Ford from each vertex."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Floyd-Warshall**: Three nested loops over all vertices (k, i, j). For each intermediate vertex k: `dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])`.\n2. **Three loops of V iterations each**: O(V³) total.\n3. **Result**: V×V matrix where `dist[i][j]` = shortest distance from i to j considering all intermediate vertices.\n4. **Comparison**: Running Dijkstra's from every vertex: V × O((V+E) log V). For dense graphs, Floyd-Warshall O(V³) is simpler.\n5. **Negative cycles**: If `dist[i][i] < 0` after the algorithm, vertex i is on a negative cycle.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000006",
-        "question": "Topological Sort is applicable to which type of graph, and what is the output?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "A",
-        "options": {
-            "A": "Directed Acyclic Graphs (DAGs) only — output is a linear ordering of vertices such that for every directed edge u→v, u comes before v in the ordering.",
-            "B": "Undirected graphs only — output is sorted by vertex degree.",
-            "C": "Any graph — output is a BFS traversal order.",
-            "D": "Graphs with negative weights — output is sorted by edge cost."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **DAG requirement**: Topological sort is ONLY possible on DAGs. A cycle means no valid ordering exists (vertex A before B before ... before A — contradiction).\n2. **Output**: A linear sequence of all vertices where every edge u→v has u appearing before v.\n3. **Applications**: Task scheduling with dependencies, course prerequisites, compilation order (Makefile), data pipeline ordering.\n4. **Algorithms**: Kahn's BFS-based (in-degree method) or DFS-based (reverse finish time) — both O(V+E).\n5. **Multiple valid orderings exist** for most DAGs.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000007",
-        "question": "A graph has 5 vertices and the adjacency matrix:\n```\n  1 2 3 4 5\n1[0 1 0 0 1]\n2[1 0 1 1 0]\n3[0 1 0 1 0]\n4[0 1 1 0 1]\n5[1 0 0 1 0]\n```\nStarting BFS from vertex 1, what is the BFS traversal order (using smallest-numbered neighbour first)?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "1, 5, 2, 4, 3",
-            "B": "1, 2, 5, 3, 4",
-            "C": "1, 2, 3, 4, 5",
-            "D": "1, 5, 4, 3, 2"
-        },
-        "test_cases": null,
-        "solution_explanation": "BFS from vertex 1 (smallest neighbour first):\n1. Visit 1. Neighbours: 2, 5. Enqueue [2, 5]. Visited: {1}.\n2. Dequeue 2. Visit 2. Neighbours: 1(visited), 3, 4. Enqueue [5, 3, 4]. Visited: {1,2}.\n3. Dequeue 5. Visit 5. Neighbours: 1(visited), 4(already in queue). Queue: [3, 4]. Visited: {1,2,5}.\n4. Dequeue 3. Visit 3. Neighbours: 2(visited), 4(in queue). Queue: [4]. Visited: {1,2,5,3}.\n5. Dequeue 4. Visit 4. All neighbours visited. Queue: []. Visited: {1,2,5,3,4}.\n\n**BFS order: 1, 2, 5, 3, 4** ✅",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000008",
-        "question": "What is a Minimum Spanning Tree (MST) and how many edges does it have for a connected graph with V vertices?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "D",
-        "options": {
-            "A": "A tree connecting all vertices with maximum total edge weight; has V+1 edges.",
-            "B": "A subset of edges forming a cycle with minimum weight; has V edges.",
-            "C": "A tree connecting all vertices with minimum total edge weight; has V+1 edges.",
-            "D": "A tree connecting all vertices with minimum total edge weight; has exactly V-1 edges."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Spanning Tree**: A subgraph that is a tree (connected, acyclic) containing ALL vertices of the graph.\n2. **V-1 edges**: Any tree with V nodes has exactly V-1 edges — fewer would disconnect, more would create a cycle.\n3. **Minimum**: Among all possible spanning trees, MST has the smallest possible total edge weight.\n4. **Uniqueness**: If all edge weights are distinct, the MST is unique. Ties may produce multiple valid MSTs.\n5. **Application**: Network design (minimum cost to connect all cities/computers with cables).",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000009",
-        "question": "Bellman-Ford algorithm detects negative cycles. After running V-1 relaxation passes, what additional step detects a negative cycle?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "C",
-        "options": {
-            "A": "Check if any vertex has distance = infinity.",
-            "B": "Run DFS from all vertices.",
-            "C": "Run one more (Vth) relaxation pass. If any distance is updated during this additional pass, a negative-weight cycle is reachable from the source.",
-            "D": "Compute the sum of all edge weights; if negative, declare a negative cycle."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Bellman-Ford correctness**: In a graph with no negative cycles, V-1 relaxations are sufficient to find all shortest paths (longest simple path has at most V-1 edges).\n2. **Negative cycle detection**: If a Vth relaxation pass still updates any distance, that vertex is on a negative-weight cycle (or reachable from one). A path through the cycle can always be made shorter by one more traversal.\n3. **Why V-1 suffices without negative cycles**: Any simple path visits at most V vertices → V-1 edges. After V-1 passes, all shortest simple paths are found.\n4. **With negative cycle**: Distances keep decreasing on each pass → never converges → still updating on pass V.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000010",
-        "question": "DFS is used to detect cycles in a directed graph. What tracking mechanism distinguishes between a back edge (indicates a cycle) and a cross edge (does not indicate a cycle)?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "Track visited nodes only — any edge to a visited node is a cycle.",
-            "B": "Track nodes in three states: WHITE (unvisited), GRAY (in current DFS path/stack), BLACK (fully processed). A back edge goes to a GRAY node — indicating a cycle. A cross/forward edge goes to a BLACK node.",
-            "C": "Track the DFS tree depth — cycle if reaching a node at a smaller depth.",
-            "D": "Run BFS in parallel with DFS — cycles are detected by comparing traversal orders."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **WHITE**: Not yet visited.\n2. **GRAY**: Currently in the recursion stack — on the current DFS path.\n3. **BLACK**: Fully processed (all descendants visited).\n4. **Back edge** (u → v where v is GRAY): v is an ancestor of u in the current DFS path → CYCLE detected.\n5. **Cross/Forward edge** (u → v where v is BLACK): v was already fully explored in a different DFS branch — no cycle.\n6. **Undirected graph cycle detection**: Simpler — just track visited. Any edge to a visited non-parent vertex is a cycle (all edges in undirected DFS are either tree edges or back edges).",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000011",
-        "question": "Apply Kruskal's algorithm to find the MST of a graph with edges: (A-B:4), (A-C:2), (B-C:5), (B-D:7), (C-D:1), (C-E:3), (D-E:6). What edges are in the MST and what is its total weight?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "A",
-        "options": {
-            "A": "MST edges: (C-D:1), (A-C:2), (C-E:3), (A-B:4). Total weight = 10.",
-            "B": "MST edges: (A-B:4), (A-C:2), (B-C:5), (C-E:3). Total weight = 14.",
-            "C": "MST edges: (C-D:1), (A-C:2), (C-E:3), (B-D:7). Total weight = 13.",
-            "D": "MST edges: (A-C:2), (C-D:1), (D-E:6), (A-B:4). Total weight = 13."
-        },
-        "test_cases": null,
-        "solution_explanation": "Sort edges: (C-D:1),(A-C:2),(C-E:3),(A-B:4),(B-C:5),(D-E:6),(B-D:7).\n\nKruskal's (add if no cycle, using Union-Find):\n1. (C-D:1) → {C,D} — add ✅\n2. (A-C:2) → {A,C,D} — add ✅\n3. (C-E:3) → {A,C,D,E} — add ✅\n4. (A-B:4) → {A,B,C,D,E} — add ✅ (connects B to the set)\n5. (B-C:5) → B and C in same set → SKIP (cycle)\n6. Done! 4 edges = V-1 = 5-1 ✅\n\nMST: {C-D, A-C, C-E, A-B}. Total = 1+2+3+4 = **10** ✅",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000012",
-        "question": "In Dijkstra's algorithm starting from source S, the tentative distances are: S=0, A=∞, B=∞, C=∞. Edges: S-A:5, S-B:2, B-A:1, B-C:6, A-C:3. After the first extraction (S dequeued), what are the updated distances?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "A=5, B=2, C=6",
-            "B": "A=3, B=2, C=8",
-            "C": "A=5, B=2, C=∞",
-            "D": "A=0, B=2, C=6"
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Initial**: dist[S]=0, dist[A]=∞, dist[B]=∞, dist[C]=∞. Priority Queue: [(S,0)].\n2. **Extract S (dist=0)**: Process S's edges:\n   - S-A: dist[A] = min(∞, 0+5) = **5**. Update A.\n   - S-B: dist[B] = min(∞, 0+2) = **2**. Update B.\n   - S has no edge to C directly.\n3. **After extraction**: dist[A]=5, dist[B]=2, dist[C]=∞.\n4. Priority Queue: [(B,2), (A,5)].\n5. **Next extraction** (B,2) would then update: dist[A] = min(5, 2+1)=3, dist[C] = min(∞, 2+6)=8.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000013",
-        "question": "Kahn's algorithm for topological sort uses in-degrees. What is the significance of any vertex with initial in-degree = 0?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "Vertices with in-degree 0 are disconnected from the graph.",
-            "B": "Vertices with in-degree 0 have no prerequisites — they can appear first in the topological order and are initially enqueued.",
-            "C": "Vertices with in-degree 0 are sink nodes — they always appear last.",
-            "D": "Vertices with in-degree 0 indicate a negative cycle."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **In-degree**: Number of incoming edges to a vertex = number of prerequisites/dependencies.\n2. **In-degree 0**: No incoming edges → no prerequisites → safe to schedule/process first.\n3. **Kahn's step**: Enqueue all in-degree-0 vertices. Dequeue one → add to result → decrement in-degree of its neighbours → if any neighbour reaches 0, enqueue it.\n4. **Cycle detection**: If the final topological order contains fewer than V vertices, a cycle exists (those vertices' in-degrees never reach 0 due to circular dependencies).\n5. **Sink nodes** (out-degree 0): Appear LAST in topological order — they depend on others but nothing depends on them.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000014",
-        "question": "What is the difference between a strongly connected component (SCC) and a weakly connected component in a directed graph?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "A",
-        "options": {
-            "A": "SCC: every vertex is reachable from every other vertex following directed edges. Weakly connected: the graph is connected if edge directions are ignored.",
-            "B": "SCC: no vertex is reachable from any other. Weakly: all vertices have the same in-degree.",
-            "C": "SCC: the subgraph has no edges. Weakly: all edges are bidirectional.",
-            "D": "SCC and weakly connected are identical for undirected graphs only."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **SCC (Strong)**: In the directed graph, for every pair (u,v) in the component, there exists a directed path from u to v AND from v to u.\n2. **Weakly Connected**: If all edge directions are removed (convert to undirected), the resulting graph is connected.\n3. **Key difference**: SCC considers direction; weakly connected ignores direction.\n4. **Every SCC is weakly connected, but not vice versa**: A graph A→B→C is weakly connected (one component) but has 3 SCCs ({A},{B},{C}) since you cannot go from C back to A.\n5. **Kosaraju's / Tarjan's algorithm**: Find SCCs in O(V+E).",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000015",
-        "question": "Iterative DFS uses an explicit stack instead of recursion. In what scenario is iterative DFS preferred over recursive DFS?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "C",
-        "options": {
-            "A": "When the graph is undirected.",
-            "B": "When finding shortest paths.",
-            "C": "On very deep graphs or large N — recursive DFS may exceed the call stack limit (stack overflow). Iterative DFS avoids this by using a heap-allocated explicit stack.",
-            "D": "When the graph has negative weight cycles."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Recursive DFS**: Each recursive call adds a stack frame. For a graph with 1,000,000 nodes in a chain, the recursion depth is 1,000,000 → stack overflow.\n2. **Iterative DFS**: Uses a `stack` data structure (heap-allocated). No operating system call stack limit — can handle arbitrary depths.\n3. **Behaviour difference**: Recursive DFS naturally computes pre- and post-order times. Iterative DFS may visit neighbours in reverse order (pushing all to stack, popping reverses them) — both produce valid DFS trees.\n4. **Real-world**: System stack size is typically 1–8 MB. Deeply nested recursion in large graphs is a known production failure mode.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000016",
-        "question": "Dijkstra's algorithm is run on a weighted graph. The priority queue extracts vertex u with distance d. Should u be processed (relaxing its edges) if u was already extracted before?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "Yes — always reprocess extracted vertices to catch shorter paths.",
-            "B": "No — if u was already settled (extracted before), its shortest distance is final. Skip it to avoid redundant work (the stale entry in the priority queue).",
-            "C": "Yes — necessary for correctness on graphs with many equal-weight edges.",
-            "D": "No — remove u immediately from the graph when first extracted."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Lazy deletion**: Standard binary heap implementations don't efficiently support decrease-key. Instead, insert duplicate entries for updated distances. When extracting, check if already visited.\n2. **Already settled = skip**: The first time u is extracted from the priority queue, its distance is the minimum possible (Dijkstra's greedy property). Later extractions of u are stale entries with larger distances.\n3. **Implementation check**: `if (dist_extracted > dist[u]) continue;` — skip stale entries.\n4. **Correctness**: Processing a stale entry and relaxing would not change any distances (since any path through this stale u is not a valid improvement), but it wastes time.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000017",
-        "question": "For a connected undirected graph with V vertices, how many edges does a DFS tree (DFS spanning tree) have?",
-        "question_type": "MCQ",
-        "difficulty_level": "EASY",
-        "answer": "C",
-        "options": {
-            "A": "E edges — all edges are in the DFS tree.",
-            "B": "V edges — one per vertex.",
-            "C": "V-1 edges — DFS visits every vertex exactly once, generating exactly V-1 tree edges.",
-            "D": "V+E edges — both vertices and edges are counted."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **DFS spanning tree**: DFS on a connected graph produces a tree containing all V vertices.\n2. **Tree property**: A tree with V vertices has exactly V-1 edges.\n3. **DFS tree edges**: Each vertex (except the root) is discovered via one tree edge (the edge traversed when first visiting it). V vertices → V-1 tree edges.\n4. **Back/cross/forward edges**: The remaining E-(V-1) edges in the original graph become non-tree edges (back edges in undirected graphs).\n5. **Same as MST edge count**: Any spanning tree of V vertices has exactly V-1 edges.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000018",
-        "question": "A weighted directed graph has vertices {A,B,C,D} and edges: A→B:1, A→C:4, B→C:2, B→D:5, C→D:1. Find the shortest path from A to D using Dijkstra's.",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "B",
-        "options": {
-            "A": "A→B→D with distance 6.",
-            "B": "A→B→C→D with distance 4.",
-            "C": "A→C→D with distance 5.",
-            "D": "A→D with distance 7."
-        },
-        "test_cases": null,
-        "solution_explanation": "Dijkstra from A:\n1. Initial: dist={A:0, B:∞, C:∞, D:∞}. Extract A(0).\n   - A→B: dist[B]=min(∞,0+1)=1.\n   - A→C: dist[C]=min(∞,0+4)=4.\n   PQ: [(B,1),(C,4)]\n2. Extract B(1). Process B's edges:\n   - B→C: dist[C]=min(4,1+2)=**3**. Update.\n   - B→D: dist[D]=min(∞,1+5)=6.\n   PQ: [(C,3),(C,4-stale),(D,6)]\n3. Extract C(3). Process C's edges:\n   - C→D: dist[D]=min(6,3+1)=**4**. Update.\n   PQ: [(D,4),(C,4-stale),(D,6-stale)]\n4. Extract D(4). Done.\n\n**Shortest path A→D = 4** via A→B→C→D (distances: 0+1+2+1=4) ✅",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000019",
-        "question": "In Prim's algorithm starting from vertex A in the graph:\nEdges: A-B:3, A-D:1, B-C:1, B-D:3, C-D:1, C-E:5, D-E:4.\nWhat is the MST weight and which edge is added second?",
-        "question_type": "MCQ",
-        "difficulty_level": "HARD",
-        "answer": "C",
-        "options": {
-            "A": "MST weight=9; second edge = A-B:3.",
-            "B": "MST weight=10; second edge = B-C:1.",
-            "C": "MST weight=7; second edge = C-D:1.",
-            "D": "MST weight=8; second edge = A-B:3."
-        },
-        "test_cases": null,
-        "solution_explanation": "Prim's from A:\n1. Tree={A}. Edges crossing cut: A-B:3, A-D:1. Min = **A-D:1**. Add D. Tree={A,D}.\n2. Crossing edges: A-B:3, B-D:3, C-D:1, D-E:4. Min = **C-D:1**. Add C. Tree={A,D,C}.\n3. Crossing edges: A-B:3, B-C:1, B-D:3, C-E:5, D-E:4. Min = **B-C:1**. Add B. Tree={A,D,C,B}.\n4. Crossing edges: A-B(B in tree), D-E:4, C-E:5. Min = **D-E:4**. Add E. Tree={A,D,C,B,E}.\n5. All 5 vertices included. V-1=4 edges.\n\nMST edges: A-D:1, C-D:1, B-C:1, D-E:4. Total = **7**. Second edge added is C-D:1.",
-        "language": "C"
-    },
-    {
-        "id": "cs05a001-0001-4000-a001-000000000020",
-        "question": "What is the time complexity of Kruskal's MST algorithm using an efficient Union-Find (with path compression and union by rank) data structure?",
-        "question_type": "MCQ",
-        "difficulty_level": "MEDIUM",
-        "answer": "B",
-        "options": {
-            "A": "O(V²) — need to compare all vertex pairs.",
-            "B": "O(E log E) — dominated by sorting E edges; Union-Find operations are near O(1) amortized per edge.",
-            "C": "O(V * E) — same as Bellman-Ford.",
-            "D": "O(E log V) — edge sorting dominates; E log E ≈ E log V² = 2E log V."
-        },
-        "test_cases": null,
-        "solution_explanation": "1. **Sort E edges**: O(E log E).\n2. **Union-Find operations**: For each edge, one `Find` and (sometimes) one `Union`. With path compression + union by rank, each operation is O(α(V)) where α is the inverse Ackermann function — practically O(1).\n3. **Total Union-Find cost**: O(E × α(V)) ≈ O(E).\n4. **Overall**: O(E log E) + O(E) = **O(E log E)**.\n5. **Note**: O(E log E) = O(E log V²) = O(2E log V) = O(E log V) — so options B and D are mathematically equivalent! Both are correct. B is the standard textbook answer written as O(E log E).",
-        "language": "C"
+        "name": "Week 12 & 13: Graph Algorithms",
+        "questions": [
+            {
+                "id": "cs05a001-0001-4000-a001-000000000001",
+                "question": "What is the time complexity of BFS and DFS on a graph represented as an Adjacency List with V vertices and E edges?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "B",
+                "options": {
+                    "A": "BFS: O(V²), DFS: O(V²)",
+                    "B": "BFS: O(V+E), DFS: O(V+E) — each vertex and edge is processed exactly once.",
+                    "C": "BFS: O(V log V), DFS: O(E log E)",
+                    "D": "BFS: O(V*E), DFS: O(V*E)"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **BFS**: Each vertex is enqueued/dequeued once → O(V). Each edge is examined once (from each endpoint) → O(E). Total: **O(V+E)**.\n2. **DFS**: Each vertex is visited once → O(V). Each edge is traversed once → O(E). Total: **O(V+E)**.\n3. **Adjacency Matrix**: Both BFS and DFS require O(V²) — scanning an entire row to find neighbours.\n4. **Adjacency List**: Only actual neighbours are listed → O(degree) per vertex → total O(V+E).\n5. **For dense graphs** (E ≈ V²): O(V+E) ≈ O(V²). For sparse graphs: O(V+E) ≈ O(V) — much faster.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000002",
+                "question": "Which graph traversal algorithm guarantees finding the shortest path (minimum number of edges) in an UNWEIGHTED graph?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "A",
+                "options": {
+                    "A": "BFS — it explores vertices level by level (by edge count), so the first time it reaches a vertex is via the shortest edge-count path.",
+                    "B": "DFS — it explores as deep as possible first.",
+                    "C": "Dijkstra's — it uses a priority queue for shortest paths.",
+                    "D": "Bellman-Ford — it handles all edge weights."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **BFS**: Explores all vertices at distance 1 before distance 2, distance 2 before distance 3, etc. The first time BFS reaches a vertex, it's via the minimum-edge path.\n2. **DFS**: No shortest-path guarantee — may find a long path to a vertex before discovering the short one.\n3. **Dijkstra's**: Correct for weighted graphs with non-negative weights. On unweighted graphs (all weights = 1), it reduces to BFS.\n4. **Bellman-Ford**: Handles negative weights. O(V*E) — much slower than BFS for unweighted shortest paths.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000003",
+                "question": "Dijkstra's algorithm fails for graphs with negative edge weights. Why?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "C",
+                "options": {
+                    "A": "Dijkstra's uses BFS internally, which cannot handle weights.",
+                    "B": "Negative weights cause infinite loops in the priority queue.",
+                    "C": "Dijkstra's greedy assumption — once a vertex is settled with distance d, no shorter path can be found later — fails when a negative edge can provide a shorter path after the vertex has been settled.",
+                    "D": "Dijkstra's algorithm cannot represent negative weights in its data structures."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Dijkstra's greedy**: When a vertex u is extracted from the priority queue (with minimum distance), it is marked 'settled' — its final shortest distance.\n2. **With negative edges**: A later-discovered path through a negative edge could yield a shorter distance to u, even after u was settled. The algorithm misses this.\n3. **Bellman-Ford fix**: Repeatedly relaxes ALL edges V-1 times — no greedy assumption. Handles negative weights correctly. O(V*E).\n4. **Negative cycle detection**: Bellman-Ford also detects negative-weight cycles (a path of negative total weight that can be traversed infinitely to reduce distance to -∞).",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000004",
+                "question": "Prim's and Kruskal's algorithms both find the Minimum Spanning Tree (MST). What is the key algorithmic difference in their approach?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "Prim's works on directed graphs; Kruskal's works on undirected graphs.",
+                    "B": "Prim's grows the MST greedily from a starting vertex, always adding the minimum-weight edge connecting the current tree to a non-tree vertex. Kruskal's sorts all edges by weight and adds them if they don't create a cycle (using Union-Find).",
+                    "C": "Prim's is better for dense graphs and Kruskal's for sparse — but they use the same internal algorithm.",
+                    "D": "Kruskal's always produces a different MST than Prim's."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Prim's (vertex-centric)**: Maintain a priority queue of edges crossing the cut between tree and non-tree vertices. Always pick the minimum-weight crossing edge. O((V+E) log V) with a binary heap.\n2. **Kruskal's (edge-centric)**: Sort all E edges by weight. Iterate through sorted edges; add edge if its endpoints are in different components (no cycle). Use Union-Find for O(E log* V) cycle detection. Total: O(E log E).\n3. **Dense graph (E ≈ V²)**: Prim's O(V²) (with simple array) is better than Kruskal's O(V² log V).\n4. **Sparse graph**: Kruskal's is preferred.\n5. **Both produce a valid MST** — may differ in which edges are chosen when tied weights exist.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000005",
+                "question": "Floyd-Warshall algorithm computes all-pairs shortest paths. What is its time complexity and what matrix does it build?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "O(V²) — builds a 1D distance array.",
+                    "B": "O(V² log V) — uses priority queues for all vertices.",
+                    "C": "O(V³) — builds a V×V distance matrix `dist[i][j]` = shortest path distance from vertex i to vertex j.",
+                    "D": "O(V * E) — same as Bellman-Ford from each vertex."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Floyd-Warshall**: Three nested loops over all vertices (k, i, j). For each intermediate vertex k: `dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])`.\n2. **Three loops of V iterations each**: O(V³) total.\n3. **Result**: V×V matrix where `dist[i][j]` = shortest distance from i to j considering all intermediate vertices.\n4. **Comparison**: Running Dijkstra's from every vertex: V × O((V+E) log V). For dense graphs, Floyd-Warshall O(V³) is simpler.\n5. **Negative cycles**: If `dist[i][i] < 0` after the algorithm, vertex i is on a negative cycle.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000006",
+                "question": "Topological Sort is applicable to which type of graph, and what is the output?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "A",
+                "options": {
+                    "A": "Directed Acyclic Graphs (DAGs) only — output is a linear ordering of vertices such that for every directed edge u→v, u comes before v in the ordering.",
+                    "B": "Undirected graphs only — output is sorted by vertex degree.",
+                    "C": "Any graph — output is a BFS traversal order.",
+                    "D": "Graphs with negative weights — output is sorted by edge cost."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **DAG requirement**: Topological sort is ONLY possible on DAGs. A cycle means no valid ordering exists (vertex A before B before ... before A — contradiction).\n2. **Output**: A linear sequence of all vertices where every edge u→v has u appearing before v.\n3. **Applications**: Task scheduling with dependencies, course prerequisites, compilation order (Makefile), data pipeline ordering.\n4. **Algorithms**: Kahn's BFS-based (in-degree method) or DFS-based (reverse finish time) — both O(V+E).\n5. **Multiple valid orderings exist** for most DAGs.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000007",
+                "question": "A graph has 5 vertices and the adjacency matrix:\n```\n  1 2 3 4 5\n1[0 1 0 0 1]\n2[1 0 1 1 0]\n3[0 1 0 1 0]\n4[0 1 1 0 1]\n5[1 0 0 1 0]\n```\nStarting BFS from vertex 1, what is the BFS traversal order (using smallest-numbered neighbour first)?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "1, 5, 2, 4, 3",
+                    "B": "1, 2, 5, 3, 4",
+                    "C": "1, 2, 3, 4, 5",
+                    "D": "1, 5, 4, 3, 2"
+                },
+                "test_cases": null,
+                "solution_explanation": "BFS from vertex 1 (smallest neighbour first):\n1. Visit 1. Neighbours: 2, 5. Enqueue [2, 5]. Visited: {1}.\n2. Dequeue 2. Visit 2. Neighbours: 1(visited), 3, 4. Enqueue [5, 3, 4]. Visited: {1,2}.\n3. Dequeue 5. Visit 5. Neighbours: 1(visited), 4(already in queue). Queue: [3, 4]. Visited: {1,2,5}.\n4. Dequeue 3. Visit 3. Neighbours: 2(visited), 4(in queue). Queue: [4]. Visited: {1,2,5,3}.\n5. Dequeue 4. Visit 4. All neighbours visited. Queue: []. Visited: {1,2,5,3,4}.\n\n**BFS order: 1, 2, 5, 3, 4** ✅",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000008",
+                "question": "What is a Minimum Spanning Tree (MST) and how many edges does it have for a connected graph with V vertices?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "D",
+                "options": {
+                    "A": "A tree connecting all vertices with maximum total edge weight; has V+1 edges.",
+                    "B": "A subset of edges forming a cycle with minimum weight; has V edges.",
+                    "C": "A tree connecting all vertices with minimum total edge weight; has V+1 edges.",
+                    "D": "A tree connecting all vertices with minimum total edge weight; has exactly V-1 edges."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Spanning Tree**: A subgraph that is a tree (connected, acyclic) containing ALL vertices of the graph.\n2. **V-1 edges**: Any tree with V nodes has exactly V-1 edges — fewer would disconnect, more would create a cycle.\n3. **Minimum**: Among all possible spanning trees, MST has the smallest possible total edge weight.\n4. **Uniqueness**: If all edge weights are distinct, the MST is unique. Ties may produce multiple valid MSTs.\n5. **Application**: Network design (minimum cost to connect all cities/computers with cables).",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000009",
+                "question": "Bellman-Ford algorithm detects negative cycles. After running V-1 relaxation passes, what additional step detects a negative cycle?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "C",
+                "options": {
+                    "A": "Check if any vertex has distance = infinity.",
+                    "B": "Run DFS from all vertices.",
+                    "C": "Run one more (Vth) relaxation pass. If any distance is updated during this additional pass, a negative-weight cycle is reachable from the source.",
+                    "D": "Compute the sum of all edge weights; if negative, declare a negative cycle."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Bellman-Ford correctness**: In a graph with no negative cycles, V-1 relaxations are sufficient to find all shortest paths (longest simple path has at most V-1 edges).\n2. **Negative cycle detection**: If a Vth relaxation pass still updates any distance, that vertex is on a negative-weight cycle (or reachable from one). A path through the cycle can always be made shorter by one more traversal.\n3. **Why V-1 suffices without negative cycles**: Any simple path visits at most V vertices → V-1 edges. After V-1 passes, all shortest simple paths are found.\n4. **With negative cycle**: Distances keep decreasing on each pass → never converges → still updating on pass V.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000010",
+                "question": "DFS is used to detect cycles in a directed graph. What tracking mechanism distinguishes between a back edge (indicates a cycle) and a cross edge (does not indicate a cycle)?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "Track visited nodes only — any edge to a visited node is a cycle.",
+                    "B": "Track nodes in three states: WHITE (unvisited), GRAY (in current DFS path/stack), BLACK (fully processed). A back edge goes to a GRAY node — indicating a cycle. A cross/forward edge goes to a BLACK node.",
+                    "C": "Track the DFS tree depth — cycle if reaching a node at a smaller depth.",
+                    "D": "Run BFS in parallel with DFS — cycles are detected by comparing traversal orders."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **WHITE**: Not yet visited.\n2. **GRAY**: Currently in the recursion stack — on the current DFS path.\n3. **BLACK**: Fully processed (all descendants visited).\n4. **Back edge** (u → v where v is GRAY): v is an ancestor of u in the current DFS path → CYCLE detected.\n5. **Cross/Forward edge** (u → v where v is BLACK): v was already fully explored in a different DFS branch — no cycle.\n6. **Undirected graph cycle detection**: Simpler — just track visited. Any edge to a visited non-parent vertex is a cycle (all edges in undirected DFS are either tree edges or back edges).",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000011",
+                "question": "Apply Kruskal's algorithm to find the MST of a graph with edges: (A-B:4), (A-C:2), (B-C:5), (B-D:7), (C-D:1), (C-E:3), (D-E:6). What edges are in the MST and what is its total weight?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "A",
+                "options": {
+                    "A": "MST edges: (C-D:1), (A-C:2), (C-E:3), (A-B:4). Total weight = 10.",
+                    "B": "MST edges: (A-B:4), (A-C:2), (B-C:5), (C-E:3). Total weight = 14.",
+                    "C": "MST edges: (C-D:1), (A-C:2), (C-E:3), (B-D:7). Total weight = 13.",
+                    "D": "MST edges: (A-C:2), (C-D:1), (D-E:6), (A-B:4). Total weight = 13."
+                },
+                "test_cases": null,
+                "solution_explanation": "Sort edges: (C-D:1),(A-C:2),(C-E:3),(A-B:4),(B-C:5),(D-E:6),(B-D:7).\n\nKruskal's (add if no cycle, using Union-Find):\n1. (C-D:1) → {C,D} — add ✅\n2. (A-C:2) → {A,C,D} — add ✅\n3. (C-E:3) → {A,C,D,E} — add ✅\n4. (A-B:4) → {A,B,C,D,E} — add ✅ (connects B to the set)\n5. (B-C:5) → B and C in same set → SKIP (cycle)\n6. Done! 4 edges = V-1 = 5-1 ✅\n\nMST: {C-D, A-C, C-E, A-B}. Total = 1+2+3+4 = **10** ✅",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000012",
+                "question": "In Dijkstra's algorithm starting from source S, the tentative distances are: S=0, A=∞, B=∞, C=∞. Edges: S-A:5, S-B:2, B-A:1, B-C:6, A-C:3. After the first extraction (S dequeued), what are the updated distances?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "A=5, B=2, C=6",
+                    "B": "A=3, B=2, C=8",
+                    "C": "A=5, B=2, C=∞",
+                    "D": "A=0, B=2, C=6"
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Initial**: dist[S]=0, dist[A]=∞, dist[B]=∞, dist[C]=∞. Priority Queue: [(S,0)].\n2. **Extract S (dist=0)**: Process S's edges:\n   - S-A: dist[A] = min(∞, 0+5) = **5**. Update A.\n   - S-B: dist[B] = min(∞, 0+2) = **2**. Update B.\n   - S has no edge to C directly.\n3. **After extraction**: dist[A]=5, dist[B]=2, dist[C]=∞.\n4. Priority Queue: [(B,2), (A,5)].\n5. **Next extraction** (B,2) would then update: dist[A] = min(5, 2+1)=3, dist[C] = min(∞, 2+6)=8.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000013",
+                "question": "Kahn's algorithm for topological sort uses in-degrees. What is the significance of any vertex with initial in-degree = 0?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "Vertices with in-degree 0 are disconnected from the graph.",
+                    "B": "Vertices with in-degree 0 have no prerequisites — they can appear first in the topological order and are initially enqueued.",
+                    "C": "Vertices with in-degree 0 are sink nodes — they always appear last.",
+                    "D": "Vertices with in-degree 0 indicate a negative cycle."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **In-degree**: Number of incoming edges to a vertex = number of prerequisites/dependencies.\n2. **In-degree 0**: No incoming edges → no prerequisites → safe to schedule/process first.\n3. **Kahn's step**: Enqueue all in-degree-0 vertices. Dequeue one → add to result → decrement in-degree of its neighbours → if any neighbour reaches 0, enqueue it.\n4. **Cycle detection**: If the final topological order contains fewer than V vertices, a cycle exists (those vertices' in-degrees never reach 0 due to circular dependencies).\n5. **Sink nodes** (out-degree 0): Appear LAST in topological order — they depend on others but nothing depends on them.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000014",
+                "question": "What is the difference between a strongly connected component (SCC) and a weakly connected component in a directed graph?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "A",
+                "options": {
+                    "A": "SCC: every vertex is reachable from every other vertex following directed edges. Weakly connected: the graph is connected if edge directions are ignored.",
+                    "B": "SCC: no vertex is reachable from any other. Weakly: all vertices have the same in-degree.",
+                    "C": "SCC: the subgraph has no edges. Weakly: all edges are bidirectional.",
+                    "D": "SCC and weakly connected are identical for undirected graphs only."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **SCC (Strong)**: In the directed graph, for every pair (u,v) in the component, there exists a directed path from u to v AND from v to u.\n2. **Weakly Connected**: If all edge directions are removed (convert to undirected), the resulting graph is connected.\n3. **Key difference**: SCC considers direction; weakly connected ignores direction.\n4. **Every SCC is weakly connected, but not vice versa**: A graph A→B→C is weakly connected (one component) but has 3 SCCs ({A},{B},{C}) since you cannot go from C back to A.\n5. **Kosaraju's / Tarjan's algorithm**: Find SCCs in O(V+E).",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000015",
+                "question": "Iterative DFS uses an explicit stack instead of recursion. In what scenario is iterative DFS preferred over recursive DFS?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "C",
+                "options": {
+                    "A": "When the graph is undirected.",
+                    "B": "When finding shortest paths.",
+                    "C": "On very deep graphs or large N — recursive DFS may exceed the call stack limit (stack overflow). Iterative DFS avoids this by using a heap-allocated explicit stack.",
+                    "D": "When the graph has negative weight cycles."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Recursive DFS**: Each recursive call adds a stack frame. For a graph with 1,000,000 nodes in a chain, the recursion depth is 1,000,000 → stack overflow.\n2. **Iterative DFS**: Uses a `stack` data structure (heap-allocated). No operating system call stack limit — can handle arbitrary depths.\n3. **Behaviour difference**: Recursive DFS naturally computes pre- and post-order times. Iterative DFS may visit neighbours in reverse order (pushing all to stack, popping reverses them) — both produce valid DFS trees.\n4. **Real-world**: System stack size is typically 1–8 MB. Deeply nested recursion in large graphs is a known production failure mode.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000016",
+                "question": "Dijkstra's algorithm is run on a weighted graph. The priority queue extracts vertex u with distance d. Should u be processed (relaxing its edges) if u was already extracted before?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "Yes — always reprocess extracted vertices to catch shorter paths.",
+                    "B": "No — if u was already settled (extracted before), its shortest distance is final. Skip it to avoid redundant work (the stale entry in the priority queue).",
+                    "C": "Yes — necessary for correctness on graphs with many equal-weight edges.",
+                    "D": "No — remove u immediately from the graph when first extracted."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Lazy deletion**: Standard binary heap implementations don't efficiently support decrease-key. Instead, insert duplicate entries for updated distances. When extracting, check if already visited.\n2. **Already settled = skip**: The first time u is extracted from the priority queue, its distance is the minimum possible (Dijkstra's greedy property). Later extractions of u are stale entries with larger distances.\n3. **Implementation check**: `if (dist_extracted > dist[u]) continue;` — skip stale entries.\n4. **Correctness**: Processing a stale entry and relaxing would not change any distances (since any path through this stale u is not a valid improvement), but it wastes time.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000017",
+                "question": "For a connected undirected graph with V vertices, how many edges does a DFS tree (DFS spanning tree) have?",
+                "question_type": "MCQ",
+                "difficulty_level": "EASY",
+                "answer": "C",
+                "options": {
+                    "A": "E edges — all edges are in the DFS tree.",
+                    "B": "V edges — one per vertex.",
+                    "C": "V-1 edges — DFS visits every vertex exactly once, generating exactly V-1 tree edges.",
+                    "D": "V+E edges — both vertices and edges are counted."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **DFS spanning tree**: DFS on a connected graph produces a tree containing all V vertices.\n2. **Tree property**: A tree with V vertices has exactly V-1 edges.\n3. **DFS tree edges**: Each vertex (except the root) is discovered via one tree edge (the edge traversed when first visiting it). V vertices → V-1 tree edges.\n4. **Back/cross/forward edges**: The remaining E-(V-1) edges in the original graph become non-tree edges (back edges in undirected graphs).\n5. **Same as MST edge count**: Any spanning tree of V vertices has exactly V-1 edges.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000018",
+                "question": "A weighted directed graph has vertices {A,B,C,D} and edges: A→B:1, A→C:4, B→C:2, B→D:5, C→D:1. Find the shortest path from A to D using Dijkstra's.",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "B",
+                "options": {
+                    "A": "A→B→D with distance 6.",
+                    "B": "A→B→C→D with distance 4.",
+                    "C": "A→C→D with distance 5.",
+                    "D": "A→D with distance 7."
+                },
+                "test_cases": null,
+                "solution_explanation": "Dijkstra from A:\n1. Initial: dist={A:0, B:∞, C:∞, D:∞}. Extract A(0).\n   - A→B: dist[B]=min(∞,0+1)=1.\n   - A→C: dist[C]=min(∞,0+4)=4.\n   PQ: [(B,1),(C,4)]\n2. Extract B(1). Process B's edges:\n   - B→C: dist[C]=min(4,1+2)=**3**. Update.\n   - B→D: dist[D]=min(∞,1+5)=6.\n   PQ: [(C,3),(C,4-stale),(D,6)]\n3. Extract C(3). Process C's edges:\n   - C→D: dist[D]=min(6,3+1)=**4**. Update.\n   PQ: [(D,4),(C,4-stale),(D,6-stale)]\n4. Extract D(4). Done.\n\n**Shortest path A→D = 4** via A→B→C→D (distances: 0+1+2+1=4) ✅",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000019",
+                "question": "In Prim's algorithm starting from vertex A in the graph:\nEdges: A-B:3, A-D:1, B-C:1, B-D:3, C-D:1, C-E:5, D-E:4.\nWhat is the MST weight and which edge is added second?",
+                "question_type": "MCQ",
+                "difficulty_level": "HARD",
+                "answer": "C",
+                "options": {
+                    "A": "MST weight=9; second edge = A-B:3.",
+                    "B": "MST weight=10; second edge = B-C:1.",
+                    "C": "MST weight=7; second edge = C-D:1.",
+                    "D": "MST weight=8; second edge = A-B:3."
+                },
+                "test_cases": null,
+                "solution_explanation": "Prim's from A:\n1. Tree={A}. Edges crossing cut: A-B:3, A-D:1. Min = **A-D:1**. Add D. Tree={A,D}.\n2. Crossing edges: A-B:3, B-D:3, C-D:1, D-E:4. Min = **C-D:1**. Add C. Tree={A,D,C}.\n3. Crossing edges: A-B:3, B-C:1, B-D:3, C-E:5, D-E:4. Min = **B-C:1**. Add B. Tree={A,D,C,B}.\n4. Crossing edges: A-B(B in tree), D-E:4, C-E:5. Min = **D-E:4**. Add E. Tree={A,D,C,B,E}.\n5. All 5 vertices included. V-1=4 edges.\n\nMST edges: A-D:1, C-D:1, B-C:1, D-E:4. Total = **7**. Second edge added is C-D:1.",
+                "language": "C"
+            },
+            {
+                "id": "cs05a001-0001-4000-a001-000000000020",
+                "question": "What is the time complexity of Kruskal's MST algorithm using an efficient Union-Find (with path compression and union by rank) data structure?",
+                "question_type": "MCQ",
+                "difficulty_level": "MEDIUM",
+                "answer": "B",
+                "options": {
+                    "A": "O(V²) — need to compare all vertex pairs.",
+                    "B": "O(E log E) — dominated by sorting E edges; Union-Find operations are near O(1) amortized per edge.",
+                    "C": "O(V * E) — same as Bellman-Ford.",
+                    "D": "O(E log V) — edge sorting dominates; E log E ≈ E log V² = 2E log V."
+                },
+                "test_cases": null,
+                "solution_explanation": "1. **Sort E edges**: O(E log E).\n2. **Union-Find operations**: For each edge, one `Find` and (sometimes) one `Union`. With path compression + union by rank, each operation is O(α(V)) where α is the inverse Ackermann function — practically O(1).\n3. **Total Union-Find cost**: O(E × α(V)) ≈ O(E).\n4. **Overall**: O(E log E) + O(E) = **O(E log E)**.\n5. **Note**: O(E log E) = O(E log V²) = O(2E log V) = O(E log V) — so options B and D are mathematically equivalent! Both are correct. B is the standard textbook answer written as O(E log E).",
+                "language": "C"
+            }
+        ]
     }
 ]
