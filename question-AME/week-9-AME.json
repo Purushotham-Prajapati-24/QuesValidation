@@ -1,0 +1,175 @@
+[
+    {
+        "name": "Week 9: BST Traversals",
+        "questions": [
+            {
+                "id": "w9-ame-001",
+                "question_text": "BST Preorder Traversal",
+                "question_description": "Implement a Binary Search Tree (BST). Read N integers to construct the BST. Print the Preorder traversal of the resulting BST.",
+                "input_format": "Integer N, followed by N space-separated integers for insertion.",
+                "output_format": "A single line containing space-separated integers for the Preorder traversal. Print 'Empty' if the tree is empty (N=0).",
+                "constraints": "0 <= N <= 1000",
+                "hints": "For Preorder traversal, process the root node first, then recursively traverse the left subtree, followed by the right subtree.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int data; struct Node *left, *right; } Node;\nNode* insert(Node* root, int val) { if(!root) { Node* nn=malloc(sizeof(Node)); nn->data=val; nn->left=nn->right=NULL; return nn; } if(val<root->data) root->left=insert(root->left, val); else root->right=insert(root->right, val); return root; }\nint first=1;\nvoid pre(Node* root) { if(!root) return; printf(\"%s%d\", first?\"\":\" \", root->data); first=0; pre(root->left); pre(root->right); }\nint main() { int n, v; if(scanf(\"%d\", &n)!=1) return 0; Node* root=NULL; for(int i=0; i<n; i++) { scanf(\"%d\", &v); root=insert(root, v); } if(!root) { printf(\"Empty\\n\"); return 0; } first=1; pre(root); printf(\"\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "5\n5 3 7 2 4",
+                        "expectedOutput": "5 3 2 4 7"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "3\n3 2 1",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "6\n15 10 20 8 12 25",
+                        "expectedOutput": "15 10 8 12 20 25"
+                    },
+                    {
+                        "input": "4\n1 5 2 4",
+                        "expectedOutput": "1 5 2 4"
+                    },
+                    {
+                        "input": "5\n-5 -10 0 -2 5",
+                        "expectedOutput": "-5 -10 0 -2 5"
+                    },
+                    {
+                        "input": "7\n50 30 20 40 70 60 80",
+                        "expectedOutput": "50 30 20 40 70 60 80"
+                    },
+                    {
+                        "input": "5\n10 10 10 10 10",
+                        "expectedOutput": "10 10 10 10 10"
+                    }
+                ],
+                "solution_explanation": "A Node structure is defined, elements are inserted and then Preorder traversal is applied which visits root, left subtree, then right subtree.",
+                "language": "C"
+            },
+            {
+                "id": "w9-ame-002",
+                "question_text": "BST Inorder Traversal",
+                "question_description": "Implement a Binary Search Tree (BST). Read N integers to construct the BST. Print the Inorder traversal of the resulting BST.",
+                "input_format": "Integer N, followed by N space-separated integers for insertion.",
+                "output_format": "A single line containing space-separated integers for the Inorder traversal. Print 'Empty' if the tree is empty (N=0).",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Inorder traversal of a BST always yields elements in sorted order. Recursively traverse the left subtree, then process root node, then right subtree.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int data; struct Node *left, *right; } Node;\nNode* insert(Node* root, int val) { if(!root) { Node* nn=malloc(sizeof(Node)); nn->data=val; nn->left=nn->right=NULL; return nn; } if(val<root->data) root->left=insert(root->left, val); else root->right=insert(root->right, val); return root; }\nint first=1;\nvoid in(Node* root) { if(!root) return; in(root->left); printf(\"%s%d\", first?\"\":\" \", root->data); first=0; in(root->right); }\nint main() { int n, v; if(scanf(\"%d\", &n)!=1) return 0; Node* root=NULL; for(int i=0; i<n; i++) { scanf(\"%d\", &v); root=insert(root, v); } if(!root) { printf(\"Empty\\n\"); return 0; } first=1; in(root); printf(\"\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "5\n5 3 7 2 4",
+                        "expectedOutput": "2 3 4 5 7"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "3\n3 2 1",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "6\n15 10 20 8 12 25",
+                        "expectedOutput": "8 10 12 15 20 25"
+                    },
+                    {
+                        "input": "4\n1 5 2 4",
+                        "expectedOutput": "1 2 4 5"
+                    },
+                    {
+                        "input": "5\n-5 -10 0 -2 5",
+                        "expectedOutput": "-10 -5 -2 0 5"
+                    },
+                    {
+                        "input": "7\n50 30 20 40 70 60 80",
+                        "expectedOutput": "20 30 40 50 60 70 80"
+                    },
+                    {
+                        "input": "5\n10 10 10 10 10",
+                        "expectedOutput": "10 10 10 10 10"
+                    }
+                ],
+                "solution_explanation": "Elements are inserted comparing values and the Inorder traversal is applied visiting left subtree, root, right subtree respectively.",
+                "language": "C"
+            },
+            {
+                "id": "w9-ame-003",
+                "question_text": "BST Postorder Traversal",
+                "question_description": "Implement a Binary Search Tree (BST). Read N integers to construct the BST. Print the Postorder traversal of the resulting BST.",
+                "input_format": "Integer N, followed by N space-separated integers for insertion.",
+                "output_format": "A single line containing space-separated integers for the Postorder traversal. Print 'Empty' if the tree is empty (N=0).",
+                "constraints": "0 <= N <= 1000",
+                "hints": "For Postorder traversal, recursively traverse the left subtree, then the right subtree, and finally process the root node.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { int data; struct Node *left, *right; } Node;\nNode* insert(Node* root, int val) { if(!root) { Node* nn=malloc(sizeof(Node)); nn->data=val; nn->left=nn->right=NULL; return nn; } if(val<root->data) root->left=insert(root->left, val); else root->right=insert(root->right, val); return root; }\nint first=1;\nvoid post(Node* root) { if(!root) return; post(root->left); post(root->right); printf(\"%s%d\", first?\"\":\" \", root->data); first=0; }\nint main() { int n, v; if(scanf(\"%d\", &n)!=1) return 0; Node* root=NULL; for(int i=0; i<n; i++) { scanf(\"%d\", &v); root=insert(root, v); } if(!root) { printf(\"Empty\\n\"); return 0; } first=1; post(root); printf(\"\\n\"); return 0; }",
+                "test_cases": [
+                    {
+                        "input": "5\n5 3 7 2 4",
+                        "expectedOutput": "2 4 3 7 5"
+                    },
+                    {
+                        "input": "0",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "3\n1 2 3",
+                        "expectedOutput": "3 2 1"
+                    },
+                    {
+                        "input": "3\n3 2 1",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "1\n10",
+                        "expectedOutput": "10"
+                    },
+                    {
+                        "input": "6\n15 10 20 8 12 25",
+                        "expectedOutput": "8 12 10 25 20 15"
+                    },
+                    {
+                        "input": "4\n1 5 2 4",
+                        "expectedOutput": "4 2 5 1"
+                    },
+                    {
+                        "input": "5\n-5 -10 0 -2 5",
+                        "expectedOutput": "-10 -2 5 0 -5"
+                    },
+                    {
+                        "input": "7\n50 30 20 40 70 60 80",
+                        "expectedOutput": "20 40 30 60 80 70 50"
+                    },
+                    {
+                        "input": "5\n10 10 10 10 10",
+                        "expectedOutput": "10 10 10 10 10"
+                    }
+                ],
+                "solution_explanation": "Elements are inserted comparing values and the Postorder traversal visits left subtree, right subtree then root.",
+                "language": "C"
+            }
+        ]
+    }
+]

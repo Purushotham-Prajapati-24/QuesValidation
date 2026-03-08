@@ -1,0 +1,223 @@
+[
+    {
+        "name": "Week 14 & 15: Advanced Sorting Techniques",
+        "questions": [
+            {
+                "id": "w1415-csbs-001",
+                "question_text": "Insertion Sort",
+                "question_description": "Write a C program to sort an array of integers using Insertion Sort. To prevent algorithm evasion, you MUST print the entire array state after placing each picked element into its sorted position.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the space-separated array on a new line after each insertion iteration. For N>=2, output N-1 lines. For N=0 output an empty line, and for N=1 output a single line with the element.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Maintain a sorted sub-array at the beginning. Take the next element, 'insert' it, and print the entire array.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    for(int i=1; i<n; i++) {\n        int k=a[i], j=i-1;\n        while(j>=0 && a[j]>k) { a[j+1]=a[j]; j--; }\n        a[j+1]=k;\n        pa(a,n);\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "4 5 3 2 1\n3 4 5 2 1\n2 3 4 5 1\n1 2 3 4 5\n"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 5 4 3 6\n1 2 4 5 3 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2\n"
+                    }
+                ],
+                "solution_explanation": "Intermediate state printing prevents algorithm evasion.",
+                "language": "C"
+            },
+            {
+                "id": "w1415-csbs-002",
+                "question_text": "Selection Sort",
+                "question_description": "Write a C program to sort an array of integers using Selection Sort. To prevent algorithm evasion, you MUST print the entire array state after finding each minimum and swapping it.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the space-separated array on a new line after each outer loop pass. For N>=2, output N-1 lines. For N=0 output an empty line, and for N=1 output a single line with the element.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Find the minimum element in the unsorted portion, swap it with the first unsorted element, then print the array.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    for(int i=0; i<n-1; i++) {\n        int m=i;\n        for(int j=i+1; j<n; j++) if(a[j]<a[m]) m=j;\n        int t=a[i]; a[i]=a[m]; a[m]=t;\n        pa(a,n);\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "1 4 3 2 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5\n"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 5 4 3 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2\n"
+                    }
+                ],
+                "solution_explanation": "Intermediate state printing prevents algorithm evasion.",
+                "language": "C"
+            },
+            {
+                "id": "w1415-csbs-003",
+                "question_text": "Shell Sort",
+                "question_description": "Write a C program to sort an array of integers using Shell Sort. Use a standard gap sequence halving the distance each time (N/2, N/4, ... 1). Print the array after completing all shifts for a specific gap size.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the space-separated array on a new line after entirely processing each gap size. For N<=1, behave identically to standard edge case outputs.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Loop `for(int gap=n/2; gap>0; gap/=2)`, perform an insertion sort variant for that phase, and print the array.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    for(int gap=n/2; gap>0; gap/=2) {\n        for(int i=gap; i<n; i++) {\n            int temp=a[i], j;\n            for(j=i; j>=gap && a[j-gap]>temp; j-=gap) a[j]=a[j-gap];\n            a[j]=temp;\n        }\n        pa(a,n);\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "1 2 3 4 5\n1 2 3 4 5\n"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 3 2 4 5 6\n1 2 3 4 5 6\n"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-1 -5 0 2\n-5 -1 0 2\n"
+                    }
+                ],
+                "solution_explanation": "Intermediate state printing enforces Shell Sort gaps.",
+                "language": "C"
+            },
+            {
+                "id": "w1415-csbs-004",
+                "question_text": "Merge Sort",
+                "question_description": "Write a C program to sort an array using the Merge Sort algorithm (Divide and Conquer approach). You MUST print the entire array state immediately after every sub-array merge operation finishes.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the full space-separated array on a new line after each successful `merge`.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Divide the array into halves, sort them recursively, and merge. Print the global array at the very end of your `merge` function.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\nint n;\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nvoid merge(int arr[], int l, int m, int r) {\n    int i, j, k; int n1 = m - l + 1; int n2 = r - m;\n    int L[n1], R[n2];\n    for (i = 0; i < n1; i++) L[i] = arr[l + i];\n    for (j = 0; j < n2; j++) R[j] = arr[m + 1 + j];\n    i = 0; j = 0; k = l;\n    while (i < n1 && j < n2) {\n        if (L[i] <= R[j]) { arr[k] = L[i]; i++; }\n        else { arr[k] = R[j]; j++; } k++;\n    }\n    while (i < n1) { arr[k] = L[i]; i++; k++; }\n    while (j < n2) { arr[k] = R[j]; j++; k++; }\n    pa(arr, n);\n}\nvoid mergeSort(int arr[], int l, int r) {\n    if (l < r) {\n        int m = l + (r - l) / 2;\n        mergeSort(arr, l, m);\n        mergeSort(arr, m + 1, r);\n        merge(arr, l, m, r);\n    }\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    mergeSort(a, 0, n - 1);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "4 5 3 2 1\n3 4 5 2 1\n3 4 5 1 2\n1 2 3 4 5\n"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 5 4 3 6\n1 2 5 3 4 6\n1 2 5 3 4 6\n1 2 3 4 5 6\n"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2\n"
+                    }
+                ],
+                "solution_explanation": "Merge sort relies on printing after the merge step is completely finished, leaving an exact execution fingerprint.",
+                "language": "C"
+            },
+            {
+                "id": "w1415-csbs-005",
+                "question_text": "Quick Sort",
+                "question_description": "Write a C program to sort an array using Quick Sort with a pivot element. Pick the last element as your pivot. You MUST print the entire array state immediately after every successful partition operation.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the full space-separated array on a new line after each `partition`.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Pick a pivot (last element), partition the array, and IMMEDIATELY print the global array state before recursing into the lower and upper halves.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\nint n;\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nvoid swap(int* a, int* b) { int t = *a; *a = *b; *b = t; }\nint partition(int arr[], int low, int high) {\n    int pivot = arr[high]; int i = (low - 1);\n    for (int j = low; j <= high - 1; j++) {\n        if (arr[j] < pivot) { i++; swap(&arr[i], &arr[j]); }\n    }\n    swap(&arr[i + 1], &arr[high]);\n    pa(arr, n);\n    return (i + 1);\n}\nvoid quickSort(int arr[], int low, int high) {\n    if (low < high) {\n        int pi = partition(arr, low, high);\n        quickSort(arr, low, pi - 1);\n        quickSort(arr, pi + 1, high);\n    }\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    quickSort(a, 0, n - 1);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "1 4 3 2 5\n1 4 3 2 5\n1 2 3 4 5\n1 2 3 4 5\n"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-1 -5 0 2\n-1 -5 0 2\n-5 -1 0 2\n"
+                    }
+                ],
+                "solution_explanation": "Printing after the partition routine locks the student into a strict subset of Quick Sort algorithm steps.",
+                "language": "C"
+            },
+            {
+                "id": "w1415-csbs-006",
+                "question_text": "Heap Sort",
+                "question_description": "Write a C program to sort an array of integers using Heap Sort by first building a heap and then extracting elements. You MUST print the initial fully built max heap array in one line, and then print the array state after EACH element extraction.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the max heap structure first. Then print the array after every max element is bubbled to the end.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Build a Max Heap and print it. Then repeatedly extract the maximum element (root), swap it with the last element of the remaining heap, re-heapify, and PRINT the array.",
+                "question_type": "CODING",
+                "difficulty": "HARD",
+                "answer": "#include <stdio.h>\nint n;\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nvoid swap(int* a, int* b) { int t = *a; *a = *b; *b = t; }\nvoid heapify(int arr[], int sz, int i) {\n    int largest = i; int l = 2 * i + 1; int r = 2 * i + 2;\n    if (l < sz && arr[l] > arr[largest]) largest = l;\n    if (r < sz && arr[r] > arr[largest]) largest = r;\n    if (largest != i) { swap(&arr[i], &arr[largest]); heapify(arr, sz, largest); }\n}\nvoid heapSort(int arr[], int sz) {\n    for (int i = sz / 2 - 1; i >= 0; i--) heapify(arr, sz, i);\n    pa(arr, n); \n    for (int i = sz - 1; i > 0; i--) {\n        swap(&arr[0], &arr[i]);\n        heapify(arr, i, 0);\n        pa(arr, n); \n    }\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    heapSort(a, n);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "5 4 3 2 1\n4 2 3 1 5\n3 2 1 4 5\n2 1 3 4 5\n1 2 3 4 5\n"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "6 5 2 4 3 1\n5 4 2 1 3 6\n4 3 2 1 5 6\n3 1 2 4 5 6\n2 1 3 4 5 6\n1 2 3 4 5 6\n"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "2 -1 0 -5\n0 -1 -5 2\n-1 -5 0 2\n-5 -1 0 2\n"
+                    }
+                ],
+                "solution_explanation": "Printing after extraction shows the gradual assembly of the sorted subarray at the end of the heap.",
+                "language": "C"
+            }
+        ]
+    }
+]

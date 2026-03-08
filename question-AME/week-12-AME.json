@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Week 12: Sorting Techniques III",
+        "questions": [
+            {
+                "id": "w12-ame-001",
+                "question_text": "Heap Sort (Intermediate Steps)",
+                "question_description": "Implement Heap Sort to sort an array of integers in ascending order. You MUST print the initial fully built max heap array in one line, and then print the array state after EACH element extraction.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the max heap structure first. Then print the array after every max element is bubbled to the end.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Build a Max Heap and print it. Then repeatedly extract the maximum element (root), swap it with the last element of the remaining heap, re-heapify, and PRINT the array.",
+                "question_type": "CODING",
+                "difficulty": "HARD",
+                "answer": "#include <stdio.h>\nint n;\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nvoid swap(int* a, int* b) { int t = *a; *a = *b; *b = t; }\nvoid heapify(int arr[], int sz, int i) {\n    int largest = i; int l = 2 * i + 1; int r = 2 * i + 2;\n    if (l < sz && arr[l] > arr[largest]) largest = l;\n    if (r < sz && arr[r] > arr[largest]) largest = r;\n    if (largest != i) { swap(&arr[i], &arr[largest]); heapify(arr, sz, largest); }\n}\nvoid heapSort(int arr[], int sz) {\n    for (int i = sz / 2 - 1; i >= 0; i--) heapify(arr, sz, i);\n    pa(arr, n); \n    for (int i = sz - 1; i > 0; i--) {\n        swap(&arr[0], &arr[i]);\n        heapify(arr, i, 0);\n        pa(arr, n); \n    }\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    heapSort(a, n);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "5 4 3 2 1\n4 2 3 1 5\n3 2 1 4 5\n2 1 3 4 5\n1 2 3 4 5"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "6 5 2 4 3 1\n5 4 2 1 3 6\n4 3 2 1 5 6\n3 1 2 4 5 6\n2 1 3 4 5 6\n1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "2 -1 0 -5\n0 -1 -5 2\n-1 -5 0 2\n-5 -1 0 2"
+                    }
+                ],
+                "solution_explanation": "Printing after extraction shows the gradual assembly of the sorted subarray at the end of the heap.",
+                "language": "C"
+            },
+            {
+                "id": "w12-ame-002",
+                "question_text": "Radix Sort (Intermediate Steps)",
+                "question_description": "Implement Radix Sort to sort an array of non-negative integers in ascending order. You MUST print the entire array state after each digit-place (1s, 10s, 100s, etc.) is fully sorted.",
+                "input_format": "Integer N, followed by N space-separated non-negative integers.",
+                "output_format": "Print the full array after the 1s place is sorted, then 10s place, etc.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Sort by individual digits starting from the least significant digit to the most significant digit, printing the main array at the very end of your counting sort subroutine.",
+                "question_type": "CODING",
+                "difficulty": "HARD",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\nint n;\nvoid pa(int a[], int sz) { for(int i=0; i<sz; i++) printf(\"%d%c\", a[i], i==sz-1?'\\n':' '); }\nint getMax(int arr[], int sz) { int mx = arr[0]; for (int i = 1; i < sz; i++) if (arr[i] > mx) mx = arr[i]; return mx; }\nvoid countSort(int arr[], int sz, int exp) {\n    int* output = (int*)malloc(sz * sizeof(int)); int i, count[10] = { 0 };\n    for (i = 0; i < sz; i++) count[(arr[i] / exp) % 10]++;\n    for (i = 1; i < 10; i++) count[i] += count[i - 1];\n    for (i = sz - 1; i >= 0; i--) { output[count[(arr[i] / exp) % 10] - 1] = arr[i]; count[(arr[i] / exp) % 10]--; }\n    for (i = 0; i < sz; i++) arr[i] = output[i];\n    pa(arr, sz);\n    free(output);\n}\nvoid radixSort(int arr[], int sz) {\n    if(sz <= 0) return;\n    int m = getMax(arr, sz);\n    int exp = 1;\n    do {\n        countSort(arr, sz, exp);\n        exp *= 10;\n    } while(m / exp > 0);\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    radixSort(a, n);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n170 45 75 90 802",
+                        "expectedOutput": "170 90 802 45 75\n802 45 170 75 90\n45 75 90 170 802"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "8\n10 10 10 10 10 1 1 1",
+                        "expectedOutput": "10 10 10 10 10 1 1 1\n1 1 1 10 10 10 10 10"
+                    },
+                    {
+                        "input": "4\n100 2 0 45",
+                        "expectedOutput": "100 0 2 45\n100 0 2 45\n0 2 45 100"
+                    }
+                ],
+                "solution_explanation": "Printing layer by digit ensures students use Radix extraction and counting sort.",
+                "language": "C"
+            }
+        ]
+    }
+]

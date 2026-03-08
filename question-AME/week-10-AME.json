@@ -1,0 +1,115 @@
+[
+    {
+        "name": "Week 10: Sorting Techniques I",
+        "questions": [
+            {
+                "id": "w10-ame-001",
+                "question_text": "Bubble Sort (Intermediate Steps)",
+                "question_description": "Implement Bubble Sort to sort an array of integers in ascending order. You MUST print the entire array state after each complete pass of the outer loop.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the space-separated array on a new line after each pass. For N>=2, output N-1 lines. For N=0 output an empty line, and for N=1 output a single line with the element.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Compare adjacent elements and swap them if they are in the wrong order. Use an outer loop running N-1 times, and print the array at the end of it.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    for(int i=0; i<n-1; i++) {\n        for(int j=0; j<n-i-1; j++) {\n            if(a[j]>a[j+1]) {\n                int t=a[j]; a[j]=a[j+1]; a[j+1]=t;\n            }\n        }\n        pa(a,n);\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "4 3 2 1 5\n3 2 1 4 5\n2 1 3 4 5\n1 2 3 4 5"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 2 4 3 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2"
+                    }
+                ],
+                "solution_explanation": "Intermediate state printing prevents algorithm evasion.",
+                "language": "C"
+            },
+            {
+                "id": "w10-ame-002",
+                "question_text": "Insertion Sort (Intermediate Steps)",
+                "question_description": "Implement Insertion Sort to sort an array of integers in ascending order. You MUST print the entire array state after placing each picked element into its sorted position.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the space-separated array on a new line after each insertion iteration. For N>=2, output N-1 lines. For N=0 output an empty line, and for N=1 output a single line with the element.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Maintain a sorted sub-array at the beginning. Take the next element, 'insert' it, and print the entire array.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    for(int i=1; i<n; i++) {\n        int k=a[i], j=i-1;\n        while(j>=0 && a[j]>k) { a[j+1]=a[j]; j--; }\n        a[j+1]=k;\n        pa(a,n);\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "4 5 3 2 1\n3 4 5 2 1\n2 3 4 5 1\n1 2 3 4 5"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 5 4 3 6\n1 2 4 5 3 6\n1 2 3 4 5 6\n1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2"
+                    }
+                ],
+                "solution_explanation": "Intermediate state printing prevents algorithm evasion.",
+                "language": "C"
+            },
+            {
+                "id": "w10-ame-003",
+                "question_text": "Selection Sort (Intermediate Steps)",
+                "question_description": "Implement Selection Sort to sort an array of integers in ascending order. You MUST print the entire array state after each minimum-finding and swap pass.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the space-separated array on a new line after each outer loop pass. For N>=2, output N-1 lines. For N=0 output an empty line, and for N=1 output a single line with the element.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Find the minimum element in the unsorted portion, swap it with the first unsorted element, then print the array.",
+                "question_type": "CODING",
+                "difficulty": "EASY",
+                "answer": "#include <stdio.h>\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nint main() {\n    int n; if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    for(int i=0; i<n-1; i++) {\n        int m=i;\n        for(int j=i+1; j<n; j++) if(a[j]<a[m]) m=j;\n        int t=a[i]; a[i]=a[m]; a[m]=t;\n        pa(a,n);\n    }\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "1 4 3 2 5\n1 2 3 4 5\n1 2 3 4 5\n1 2 3 4 5"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 5 4 3 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2"
+                    }
+                ],
+                "solution_explanation": "Intermediate state printing prevents algorithm evasion.",
+                "language": "C"
+            }
+        ]
+    }
+]

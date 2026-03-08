@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Week 11: Sorting Techniques II",
+        "questions": [
+            {
+                "id": "w11-ame-001",
+                "question_text": "Merge Sort (Intermediate Steps)",
+                "question_description": "Implement Merge Sort to sort an array of integers in ascending order. You MUST print the entire array state immediately after every sub-array merge operation finishes.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the full space-separated array on a new line after each successful `merge`.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Divide the array into halves, sort them recursively, and merge. Print the global array at the very end of your `merge` function.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\nint n;\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nvoid merge(int arr[], int l, int m, int r) {\n    int i, j, k; int n1 = m - l + 1; int n2 = r - m;\n    int L[n1], R[n2];\n    for (i = 0; i < n1; i++) L[i] = arr[l + i];\n    for (j = 0; j < n2; j++) R[j] = arr[m + 1 + j];\n    i = 0; j = 0; k = l;\n    while (i < n1 && j < n2) {\n        if (L[i] <= R[j]) { arr[k] = L[i]; i++; }\n        else { arr[k] = R[j]; j++; } k++;\n    }\n    while (i < n1) { arr[k] = L[i]; i++; k++; }\n    while (j < n2) { arr[k] = R[j]; j++; k++; }\n    pa(arr, n);\n}\nvoid mergeSort(int arr[], int l, int r) {\n    if (l < r) {\n        int m = l + (r - l) / 2;\n        mergeSort(arr, l, m);\n        mergeSort(arr, m + 1, r);\n        merge(arr, l, m, r);\n    }\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    mergeSort(a, 0, n - 1);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "4 5 3 2 1\n3 4 5 2 1\n3 4 5 1 2\n1 2 3 4 5"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 5 4 3 6\n1 2 5 3 4 6\n1 2 5 3 4 6\n1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-5 -1 0 2\n-5 -1 0 2\n-5 -1 0 2"
+                    }
+                ],
+                "solution_explanation": "Merge sort relies on printing after the merge step is completely finished, leaving an exact execution fingerprint.",
+                "language": "C"
+            },
+            {
+                "id": "w11-ame-002",
+                "question_text": "Quick Sort (Intermediate Steps)",
+                "question_description": "Implement Quick Sort to sort an array of integers in ascending order. You MUST print the entire array state immediately after every successful partition operation.",
+                "input_format": "Integer N, followed by N space-separated integers.",
+                "output_format": "Print the full space-separated array on a new line after each `partition`.",
+                "constraints": "0 <= N <= 1000",
+                "hints": "Pick a pivot (last element), partition the array, and IMMEDIATELY print the global array state before recursing into the lower and upper halves.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\nint n;\nvoid pa(int a[], int n) { for(int i=0; i<n; i++) printf(\"%d%c\", a[i], i==n-1?'\\n':' '); }\nvoid swap(int* a, int* b) { int t = *a; *a = *b; *b = t; }\nint partition(int arr[], int low, int high) {\n    int pivot = arr[high]; int i = (low - 1);\n    for (int j = low; j <= high - 1; j++) {\n        if (arr[j] < pivot) { i++; swap(&arr[i], &arr[j]); }\n    }\n    swap(&arr[i + 1], &arr[high]);\n    pa(arr, n);\n    return (i + 1);\n}\nvoid quickSort(int arr[], int low, int high) {\n    if (low < high) {\n        int pi = partition(arr, low, high);\n        quickSort(arr, low, pi - 1);\n        quickSort(arr, pi + 1, high);\n    }\n}\nint main() {\n    if(scanf(\"%d\",&n)!=1) return 0;\n    if(n==0) { printf(\"\\n\"); return 0; }\n    int a[1005]; for(int i=0; i<n; i++) scanf(\"%d\", &a[i]);\n    if(n==1) { pa(a,n); return 0; }\n    quickSort(a, 0, n - 1);\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "5\n5 4 3 2 1",
+                        "expectedOutput": "1 4 3 2 5\n1 4 3 2 5\n1 2 3 4 5\n1 2 3 4 5"
+                    },
+                    {
+                        "input": "0\n",
+                        "expectedOutput": "\n"
+                    },
+                    {
+                        "input": "1\n42",
+                        "expectedOutput": "42"
+                    },
+                    {
+                        "input": "6\n1 5 2 4 3 6",
+                        "expectedOutput": "1 5 2 4 3 6\n1 2 3 4 5 6\n1 2 3 4 5 6\n1 2 3 4 5 6"
+                    },
+                    {
+                        "input": "4\n-1 -5 0 2",
+                        "expectedOutput": "-1 -5 0 2\n-1 -5 0 2\n-5 -1 0 2"
+                    }
+                ],
+                "solution_explanation": "Printing after the partition routine locks the student into a strict subset of Quick Sort algorithm steps.",
+                "language": "C"
+            }
+        ]
+    }
+]

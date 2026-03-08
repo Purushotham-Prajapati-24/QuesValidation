@@ -9,7 +9,7 @@ const OUTPUT_FILE = process.argv[3] || 'test-fixed.json';
 const COMPILER_API_URL = 'https://c-compiler-fzqcxyx4ma-el.a.run.app/test';
 const SAMBANOVA_API_KEY = process.env.SAMBANOVA_API_KEY;
 const SAMBANOVA_BASE_URL = 'https://api.sambanova.ai/v1';
-const SAMBANOVA_MODEL = 'Meta-Llama-3.1-405B'; // GPT OSS 120B equivalent
+const SAMBANOVA_MODEL = 'Meta-Llama-3.1-405B-Instruct'; // GPT OSS 120B equivalent
 
 if (!SAMBANOVA_API_KEY) {
     console.error('Error: SAMBANOVA_API_KEY environment variable is not set.');

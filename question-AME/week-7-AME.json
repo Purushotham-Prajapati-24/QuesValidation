@@ -1,0 +1,79 @@
+[
+    {
+        "name": "Week 7: Doubly-Linked List",
+        "questions": [
+            {
+                "id": "w7-ame-001",
+                "question_text": "Doubly Linked List Operations - Insertion",
+                "question_description": "Implement a Doubly Linked List supporting creation, insertion at the beginning, middle, and end, as well as displaying the list.",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'ins_beg X', 'ins_mid pos X', 'ins_end X', 'display'.",
+                "output_format": "For 'display', print space-separated elements. Print 'Empty' if empty or 'Invalid' for bad insertions.",
+                "constraints": "1 <= N <= 1000",
+                "hints": "Maintain 'head' and 'tail' pointers to allow O(1) insertions at the end. For middle insertions, traverse to pos-1.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node *p, *n; } Node;\nNode *h=NULL, *t=NULL;\nint sz=0;\nvoid ib(int v) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=h; nn->p=NULL; if(h) h->p=nn; else t=nn; h=nn; sz++; }\nvoid ie(int v) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; nn->p=t; if(t) t->n=nn; else h=nn; t=nn; sz++; }\nvoid im(int pos, int v) { if(pos<1 || pos>sz+1) { printf(\"Invalid\\n\"); return; } if(pos==1) { ib(v); return; } if(pos==sz+1) { ie(v); return; } Node* nn=malloc(sizeof(Node)); nn->d=v; Node* c=h; for(int i=1; i<pos-1; i++) c=c->n; nn->n=c->n; nn->p=c; if(c->n) c->n->p=nn; c->n=nn; sz++; }\nvoid disp() { if(!h) { printf(\"Empty\\n\"); return; } Node* c=h; while(c) { printf(\"%d%c\", c->d, c->n?' ':'\\n'); c=c->n; } }\nint main() { int n, v, p; char op[20]; if(scanf(\"%d\", &n)!=1) return 0; while(n--) { scanf(\"%s\", op); if(!strcmp(op, \"ins_beg\")) { scanf(\"%d\", &v); ib(v); } else if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); } else if(!strcmp(op, \"ins_mid\")) { scanf(\"%d%d\", &p, &v); im(p, v); } else if(!strcmp(op, \"display\")) disp(); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "5\nins_end 10\nins_beg 5\nins_end 20\nins_mid 2 15\ndisplay",
+                        "expectedOutput": "5 15 10 20"
+                    },
+                    {
+                        "input": "3\nins_beg 1\nins_mid 3 2\ndisplay",
+                        "expectedOutput": "Invalid\n1"
+                    },
+                    {
+                        "input": "1\ndisplay",
+                        "expectedOutput": "Empty"
+                    },
+                    {
+                        "input": "4\nins_end 1\nins_end 2\nins_end 3\ndisplay",
+                        "expectedOutput": "1 2 3"
+                    },
+                    {
+                        "input": "6\nins_beg 10\nins_beg 20\nins_mid 1 30\nins_end 40\nins_mid 5 50\ndisplay",
+                        "expectedOutput": "30 20 10 40 50"
+                    }
+                ],
+                "solution_explanation": "A complete doubly-linked list focused on creation and insertion operations only (beginning, middle, and end).",
+                "language": "C"
+            },
+            {
+                "id": "w7-ame-002",
+                "question_text": "Doubly Linked List Operations - Deletion",
+                "question_description": "Implement a Doubly Linked List supporting creation, deletion at the beginning, middle, and end, as well as displaying the list.",
+                "input_format": "Integer N (number of operations), followed by N lines of commands: 'ins_end X', 'del_beg', 'del_mid pos', 'del_end', 'display'.",
+                "output_format": "For 'display', print space-separated elements. Print 'Empty' if empty or 'Underflow'/'Invalid' for bad deletions.",
+                "constraints": "1 <= N <= 1000",
+                "hints": "First generate a list using 'ins_end X'. For 'del_mid', carefully connect the previous node's next pointer to the next node, and vice versa.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { int d; struct Node *p, *n; } Node;\nNode *h=NULL, *t=NULL;\nint sz=0;\nvoid ie(int v) { Node* nn=malloc(sizeof(Node)); nn->d=v; nn->n=NULL; nn->p=t; if(t) t->n=nn; else h=nn; t=nn; sz++; }\nvoid db() { if(!h) { printf(\"Underflow\\n\"); return; } Node* tm=h; h=h->n; if(h) h->p=NULL; else t=NULL; free(tm); sz--; }\nvoid de() { if(!t) { printf(\"Underflow\\n\"); return; } Node* tm=t; t=t->p; if(t) t->n=NULL; else h=NULL; free(tm); sz--; }\nvoid dm(int pos) { if(pos<1 || pos>sz) { printf(\"Invalid\\n\"); return; } if(pos==1) { db(); return; } if(pos==sz) { de(); return; } Node* c=h; for(int i=1; i<pos; i++) c=c->n; c->p->n=c->n; if(c->n) c->n->p=c->p; free(c); sz--; }\nvoid disp() { if(!h) { printf(\"Empty\\n\"); return; } Node* c=h; while(c) { printf(\"%d%c\", c->d, c->n?' ':'\\n'); c=c->n; } }\nint main() { int n, v, p; char op[20]; if(scanf(\"%d\", &n)!=1) return 0; while(n--) { scanf(\"%s\", op); if(!strcmp(op, \"ins_end\")) { scanf(\"%d\", &v); ie(v); } else if(!strcmp(op, \"del_beg\")) db(); else if(!strcmp(op, \"del_end\")) de(); else if(!strcmp(op, \"del_mid\")) { scanf(\"%d\", &p); dm(p); } else if(!strcmp(op, \"display\")) disp(); } return 0; }",
+                "test_cases": [
+                    {
+                        "input": "7\nins_end 10\nins_end 20\nins_end 30\ndisplay\ndel_beg\ndel_end\ndisplay",
+                        "expectedOutput": "10 20 30\n20"
+                    },
+                    {
+                        "input": "6\nins_end 1\nins_end 2\nins_end 3\ndel_mid 2\ndel_mid 2\ndisplay",
+                        "expectedOutput": "1"
+                    },
+                    {
+                        "input": "3\ndel_beg\ndisplay\ndel_mid 1",
+                        "expectedOutput": "Underflow\nEmpty\nInvalid"
+                    },
+                    {
+                        "input": "4\nins_end 5\nins_end 10\ndel_mid 10\ndisplay",
+                        "expectedOutput": "Invalid\n5 10"
+                    },
+                    {
+                        "input": "9\nins_end 1\nins_end 2\nins_end 3\nins_end 4\nins_end 5\ndel_mid 3\ndisplay\ndel_mid 1\ndisplay",
+                        "expectedOutput": "1 2 4 5\n2 4 5"
+                    }
+                ],
+                "solution_explanation": "A complete doubly-linked list focusing on deletion limits (beginning, middle, and end). It populates data utilizing a basic end-insertion.",
+                "language": "C"
+            }
+        ]
+    }
+]

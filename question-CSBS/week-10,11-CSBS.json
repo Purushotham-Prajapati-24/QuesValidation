@@ -1,0 +1,399 @@
+[
+    {
+        "name": "Week 10 & 11: Expression Trees",
+        "questions": [
+            {
+                "id": "w1011-expr-001",
+                "question_text": "Construct Expression Tree from Postfix",
+                "question_description": "Write a C program to build an expression tree from a postfix expression using a stack. Each operator becomes an internal node and each operand becomes a leaf node.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { char v; struct Node *l, *r; } Node;\nNode* stack[105]; int top=-1;\nvoid push(Node* n) { stack[++top]=n; }\nNode* pop() { return stack[top--]; }\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'||c=='^'; }\nvoid in(Node* r) { if(r) { in(r->l); printf(\"%c\", r->v); in(r->r); } }\nint main() {\n    char s[105]; if(scanf(\"%s\", s)!=1) return 0;\n    for(int i=0; s[i]; i++) {\n        Node* nn=malloc(sizeof(Node)); nn->v=s[i]; nn->l=nn->r=NULL;\n        if(isOp(s[i])) { nn->r=pop(); nn->l=pop(); push(nn); } else push(nn);\n    }\n    in(stack[top]); printf(\"\\n\"); return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "ab+",
+                        "expectedOutput": "a+b"
+                    },
+                    {
+                        "input": "ab+c*",
+                        "expectedOutput": "a+b*c"
+                    },
+                    {
+                        "input": "ab*cd/+",
+                        "expectedOutput": "a*b+c/d"
+                    },
+                    {
+                        "input": "abc*+",
+                        "expectedOutput": "a+b*c"
+                    },
+                    {
+                        "input": "xyzpq/*-+",
+                        "expectedOutput": "x+y-z*p/q"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "a"
+                    },
+                    {
+                        "input": "xy-z+",
+                        "expectedOutput": "x-y+z"
+                    },
+                    {
+                        "input": "ab+c-d*",
+                        "expectedOutput": "a+b-c*d"
+                    },
+                    {
+                        "input": "pq/r-s+",
+                        "expectedOutput": "p/q-r+s"
+                    },
+                    {
+                        "input": "AB*C/D+E-",
+                        "expectedOutput": "A*B/C+D-E"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            },
+            {
+                "id": "w1011-expr-002",
+                "question_text": "Construct Expression Tree from Prefix",
+                "question_description": "Write a C program to create an expression tree from a prefix expression by processing the expression.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\ntypedef struct Node { char v; struct Node *l, *r; } Node;\nNode* stack[105]; int top=-1;\nvoid push(Node* n) { stack[++top]=n; }\nNode* pop() { return stack[top--]; }\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'||c=='^'; }\nvoid in(Node* r) { if(r) { in(r->l); printf(\"%c\", r->v); in(r->r); } }\nint main() {\n    char s[105]; if(scanf(\"%s\", s)!=1) return 0;\n    int len=strlen(s);\n    for(int i=len-1; i>=0; i--) {\n        Node* nn=malloc(sizeof(Node)); nn->v=s[i]; nn->l=nn->r=NULL;\n        if(isOp(s[i])) { nn->l=pop(); nn->r=pop(); push(nn); } else push(nn);\n    }\n    in(stack[top]); printf(\"\\n\"); return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "+ab",
+                        "expectedOutput": "a+b"
+                    },
+                    {
+                        "input": "*+abc",
+                        "expectedOutput": "a+b*c"
+                    },
+                    {
+                        "input": "+*ab/cd",
+                        "expectedOutput": "a*b+c/d"
+                    },
+                    {
+                        "input": "+a*bc",
+                        "expectedOutput": "a+b*c"
+                    },
+                    {
+                        "input": "+-*xyz/pq",
+                        "expectedOutput": "x*y-z+p/q"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "a"
+                    },
+                    {
+                        "input": "+-xyz",
+                        "expectedOutput": "x-y+z"
+                    },
+                    {
+                        "input": "*-+abcd",
+                        "expectedOutput": "a+b-c*d"
+                    },
+                    {
+                        "input": "+-/pqrs",
+                        "expectedOutput": "p/q-r+s"
+                    },
+                    {
+                        "input": "-+/*ABCDE",
+                        "expectedOutput": "A*B/C+D-E"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            },
+            {
+                "id": "w1011-expr-003",
+                "question_text": "Evaluate Expression Tree",
+                "question_description": "Write a C program to evaluate the value of an arithmetic expression using an expression tree. Traverse the tree and compute the result.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { char v; struct Node *l, *r; } Node;\nNode* stack[105]; int top=-1;\nvoid push(Node* n) { stack[++top]=n; }\nNode* pop() { return stack[top--]; }\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'; }\nint eval(Node* r) {\n    if(!r) return 0;\n    if(!r->l && !r->r) return r->v-'0';\n    int lv=eval(r->l), rv=eval(r->r);\n    if(r->v=='+') return lv+rv; if(r->v=='-') return lv-rv;\n    if(r->v=='*') return lv*rv; return rv==0?0:lv/rv;\n}\nint main() {\n    char s[105]; if(scanf(\"%s\", s)!=1) return 0;\n    for(int i=0; s[i]; i++) {\n        Node* nn=malloc(sizeof(Node)); nn->v=s[i]; nn->l=nn->r=NULL;\n        if(isOp(s[i])) { nn->r=pop(); nn->l=pop(); push(nn); } else push(nn);\n    }\n    printf(\"%d\\n\", eval(stack[top])); return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "53+",
+                        "expectedOutput": "8"
+                    },
+                    {
+                        "input": "82/",
+                        "expectedOutput": "4"
+                    },
+                    {
+                        "input": "23+4*",
+                        "expectedOutput": "20"
+                    },
+                    {
+                        "input": "95-2*",
+                        "expectedOutput": "8"
+                    },
+                    {
+                        "input": "3",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "54*2+6-",
+                        "expectedOutput": "16"
+                    },
+                    {
+                        "input": "23*45*+",
+                        "expectedOutput": "26"
+                    },
+                    {
+                        "input": "82/4*",
+                        "expectedOutput": "16"
+                    },
+                    {
+                        "input": "72+9-",
+                        "expectedOutput": "0"
+                    },
+                    {
+                        "input": "93/2*1+",
+                        "expectedOutput": "7"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            },
+            {
+                "id": "w1011-expr-004",
+                "question_text": "Convert Expression Tree to Infix",
+                "question_description": "Write a C program that prints the fully parenthesized infix form of an expression from an expression tree.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { char v; struct Node *l, *r; } Node;\nNode* stack[105]; int top=-1;\nvoid push(Node* n) { stack[++top]=n; }\nNode* pop() { return stack[top--]; }\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'||c=='^'; }\nvoid in(Node* r) {\n    if(!r) return;\n    if(isOp(r->v)) printf(\"(\");\n    in(r->l); printf(\"%c\", r->v); in(r->r);\n    if(isOp(r->v)) printf(\")\");\n}\nint main() {\n    char s[105]; if(scanf(\"%s\", s)!=1) return 0;\n    for(int i=0; s[i]; i++) {\n        Node* nn=malloc(sizeof(Node)); nn->v=s[i]; nn->l=nn->r=NULL;\n        if(isOp(s[i])) { nn->r=pop(); nn->l=pop(); push(nn); } else push(nn);\n    }\n    in(stack[top]); printf(\"\\n\"); return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "ab+",
+                        "expectedOutput": "(a+b)"
+                    },
+                    {
+                        "input": "ab+c*",
+                        "expectedOutput": "((a+b)*c)"
+                    },
+                    {
+                        "input": "ab*cd/+",
+                        "expectedOutput": "((a*b)+(c/d))"
+                    },
+                    {
+                        "input": "abc*+",
+                        "expectedOutput": "(a+(b*c))"
+                    },
+                    {
+                        "input": "xyzpq/*-+",
+                        "expectedOutput": "(x+(y-(z*(p/q))))"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "a"
+                    },
+                    {
+                        "input": "xy-z+",
+                        "expectedOutput": "((x-y)+z)"
+                    },
+                    {
+                        "input": "ab+c-d*",
+                        "expectedOutput": "(((a+b)-c)*d)"
+                    },
+                    {
+                        "input": "pq/r-s+",
+                        "expectedOutput": "(((p/q)-r)+s)"
+                    },
+                    {
+                        "input": "AB*C/D+E-",
+                        "expectedOutput": "((((A*B)/C)+D)-E)"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            },
+            {
+                "id": "w1011-expr-005",
+                "question_text": "Convert to Prefix and Postfix",
+                "question_description": "Write a C program to traverse an expression tree and display the expression in prefix and postfix formats.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { char v; struct Node *l, *r; } Node;\nNode* stack[105]; int top=-1;\nvoid push(Node* n) { stack[++top]=n; }\nNode* pop() { return stack[top--]; }\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'||c=='^'; }\nvoid pre(Node* r) { if(r) { printf(\"%c\", r->v); pre(r->l); pre(r->r); } }\nvoid post(Node* r) { if(r) { post(r->l); post(r->r); printf(\"%c\", r->v); } }\nint main() {\n    char s[105]; if(scanf(\"%s\", s)!=1) return 0;\n    for(int i=0; s[i]; i++) {\n        Node* nn=malloc(sizeof(Node)); nn->v=s[i]; nn->l=nn->r=NULL;\n        if(isOp(s[i])) { nn->r=pop(); nn->l=pop(); push(nn); } else push(nn);\n    }\n    pre(stack[top]); printf(\"\\n\");\n    post(stack[top]); printf(\"\\n\"); return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "ab+",
+                        "expectedOutput": "+ab\nab+"
+                    },
+                    {
+                        "input": "ab+c*",
+                        "expectedOutput": "*+abc\nab+c*"
+                    },
+                    {
+                        "input": "ab*cd/+",
+                        "expectedOutput": "+*ab/cd\nab*cd/+"
+                    },
+                    {
+                        "input": "abc*+",
+                        "expectedOutput": "+a*bc\nabc*+"
+                    },
+                    {
+                        "input": "xyzpq/*-+",
+                        "expectedOutput": "+x-y*z/pq\nxyzpq/*-+"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "a\na"
+                    },
+                    {
+                        "input": "xy-z+",
+                        "expectedOutput": "+-xyz\nxy-z+"
+                    },
+                    {
+                        "input": "ab+c-d*",
+                        "expectedOutput": "*-+abcd\nab+c-d*"
+                    },
+                    {
+                        "input": "pq/r-s+",
+                        "expectedOutput": "+-/pqrs\npq/r-s+"
+                    },
+                    {
+                        "input": "AB*C/D+E-",
+                        "expectedOutput": "-+/*ABCDE\nAB*C/D+E-"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            },
+            {
+                "id": "w1011-expr-006",
+                "question_text": "Height of an Expression Tree",
+                "question_description": "Write a C program to find the height (maximum depth) of an expression tree.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <stdlib.h>\ntypedef struct Node { char v; struct Node *l, *r; } Node;\nNode* stack[105]; int top=-1;\nvoid push(Node* n) { stack[++top]=n; }\nNode* pop() { return stack[top--]; }\nint max(int a, int b) { return a>b?a:b; }\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'||c=='^'; }\nint height(Node* r) { if(!r) return 0; return 1 + max(height(r->l), height(r->r)); }\nint main() {\n    char s[105]; if(scanf(\"%s\", s)!=1) return 0;\n    for(int i=0; s[i]; i++) {\n        Node* nn=malloc(sizeof(Node)); nn->v=s[i]; nn->l=nn->r=NULL;\n        if(isOp(s[i])) { nn->r=pop(); nn->l=pop(); push(nn); } else push(nn);\n    }\n    printf(\"%d\\n\", height(stack[top])); return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "ab+",
+                        "expectedOutput": "2"
+                    },
+                    {
+                        "input": "ab+c*",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "ab*cd/+",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "abc*+",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "xyzpq/*-+",
+                        "expectedOutput": "5"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "1"
+                    },
+                    {
+                        "input": "xy-z+",
+                        "expectedOutput": "3"
+                    },
+                    {
+                        "input": "ab+c-d*",
+                        "expectedOutput": "4"
+                    },
+                    {
+                        "input": "pq/r-s+",
+                        "expectedOutput": "4"
+                    },
+                    {
+                        "input": "AB*C/D+E-",
+                        "expectedOutput": "5"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            },
+            {
+                "id": "w1011-expr-007",
+                "question_text": "Check Valid Expression Tree",
+                "question_description": "Write a C program to verify whether a binary tree (represented as a level-order string, `#` for null) is a valid expression tree.",
+                "input_format": "A single line containing the expression string.",
+                "output_format": "Expected standard spacing based on the problem. See constraints.",
+                "constraints": "Expression length <= 100. Operands are single characters/digits.",
+                "hints": "Leverage standard tree traversal logic recursively.",
+                "question_type": "CODING",
+                "difficulty": "MEDIUM",
+                "answer": "#include <stdio.h>\n#include <string.h>\n#include <ctype.h>\nint isOp(char c) { return c=='+'||c=='-'||c=='*'||c=='/'||c=='^'; }\nint isOpd(char c) { return isalnum(c); }\nint main() {\n    char s[1005]; if(scanf(\"%s\", s)!=1) return 0;\n    int len=strlen(s), valid=1;\n    for(int i=0; i<len; i++) {\n        if(s[i]=='#') continue;\n        int lc=2*i+1, rc=2*i+2;\n        int hasL = (lc<len && s[lc]!='#');\n        int hasR = (rc<len && s[rc]!='#');\n        if(isOp(s[i])) { if(!hasL || !hasR) valid=0; }\n        else if(isOpd(s[i])) { if(hasL || hasR) valid=0; }\n        else valid=0;\n        if(!valid) break;\n    }\n    printf(\"%s\\n\", valid?\"Valid\":\"Invalid\");\n    return 0;\n}",
+                "test_cases": [
+                    {
+                        "input": "*+eab",
+                        "expectedOutput": "Valid"
+                    },
+                    {
+                        "input": "+a#",
+                        "expectedOutput": "Invalid"
+                    },
+                    {
+                        "input": "*c",
+                        "expectedOutput": "Invalid"
+                    },
+                    {
+                        "input": "+a#b#",
+                        "expectedOutput": "Invalid"
+                    },
+                    {
+                        "input": "a",
+                        "expectedOutput": "Valid"
+                    },
+                    {
+                        "input": "a#b",
+                        "expectedOutput": "Invalid"
+                    },
+                    {
+                        "input": "/ab#c",
+                        "expectedOutput": "Invalid"
+                    },
+                    {
+                        "input": "-12",
+                        "expectedOutput": "Valid"
+                    },
+                    {
+                        "input": "+**",
+                        "expectedOutput": "Invalid"
+                    },
+                    {
+                        "input": "+#*",
+                        "expectedOutput": "Invalid"
+                    }
+                ],
+                "solution_explanation": "Expression trees natively encode operator precedence into their structural branches.",
+                "language": "C"
+            }
+        ]
+    }
+]
