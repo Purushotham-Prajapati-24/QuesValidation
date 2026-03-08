@@ -1,0 +1,162 @@
+[
+    {
+        "id": "e458e0a2-f9d2-4b77-a8a2-118c7c93845c",
+        "question": "When traversing a Circular Singly Linked List to mathematically process every node exactly once, which control structure effectively prevents an infinite loop while structurally ensuring the very first node (`head`) is not accidentally skipped?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Node* temp = head; do { process(temp); temp = temp->next; } while (temp != head);",
+            "B": "Node* temp = head; if (temp != NULL) { while (temp->next != head) { process(temp); temp = temp->next; } process(temp); }",
+            "C": "Both A and B are mathematically sound and structurally valid approaches.",
+            "D": "Node* temp = head; while (temp != NULL) { process(temp); temp = temp->next; }"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **The Circular Problem**: Standard algorithms relying on `while(temp != NULL)` will loop infinitely because the final node points back to `head`, not `NULL`.\n2. **Do-While Logic (A)**: A `do-while` loop executes the body *before* checking the condition. `temp` starts at `head`, processes it, shifts to `head->next`, and then begins strictly checking `temp != head` uniformly terminating correctly after the final node.\n3. **Lookahead Logic (B)**: This explicitly checks mathematical validity, iterates until standard termination `temp->next == head`, and then processes the terminal node standalone. Both uniquely preserve cyclic traversal logic.",
+        "language": "C"
+    },
+    {
+        "id": "b0a51c4a-8742-45e6-b921-b3b28b7ca895",
+        "question": "In a Circular Singly Linked List, if a system exclusively maintains a generic `head` pointer, inserting a new node at the *very beginning* structurally requires O(N) time complexity. By substituting the `head` pointer to maintain strictly a global `tail` pointer instead, what is the exact mathematical time complexity to insert a new node at the *beginning*?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "O(N), because the algorithm inevitably must physically traverse to align the first index.",
+            "B": "O(1), because the topological first node is intrinsically accessed instantaneously via `tail->next`.",
+            "C": "O(N log N), restricted by memory allocation boundaries.",
+            "D": "O(1), but strictly conditionally dependent on if list length is pre-calculated structurally."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Head Pointer Mechanics**: If you only have `head`, any new `head` requires traversing `O(N)` nodes entirely down the list to explicitly re-link the final mathematical node back to the new head.\n2. **Tail Pointer Independence**: A global `tail` explicitly represents the terminal node. Mathematically, `tail->next` natively references the exact `head`.\n3. **Execution**: Inserting a new head is as instantaneous as `new_node->next = tail->next; tail->next = new_node;`. This pointer-swap calculation operates in exact constant speed, dropping computational drag to `O(1)`.",
+        "language": "C"
+    },
+    {
+        "id": "2e7a2b91-1c58-45e0-bee5-681bcf799a4c",
+        "question": "A system structurally maintains an explicit `tail` pointer for a Circular Singly Linked List deliberately to achieve uniform O(1) front/rear insertions. If the goal mathematically shifts to executing a deletion on the *last* node (`tail` itself), what is the resulting algorithmic time complexity?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "O(1), because the exact memory address is directly accessible via the established `tail` pointer.",
+            "B": "O(N), because mathematical pointer deletion uniquely necessitates traversing forward from head to locate the node immediately preceding the \tail` to locate the node immediately preceding the `tail` to re-link structural continuity.",
+            "C": "O(1), achieved seamlessly by swapping adjacent data directly with the head node parameter.",
+            "D": "O(N/2), because bidirectional calculation halves traversal parameters natively."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Singly Linked Constraint**: Singly referenced lists strictly mandate unidirectional forward iteration (`temp = temp->next`). There is physically no `prev` pointer geometrically supporting backward referencing.\n2. **Deletion Mechanics**: To delete the final `tail` physically, the algorithm MUST update the node situated logically preceding it (`tail - 1`) to inherit the terminal wrapper `node->next = tail->next`.\n3. **Result**: Attaining the preceding node enforces initializing `temp = tail->next` (the head) and sequentially iterating through `O(N)` components spanning the entire circularity until `temp->next == tail`.",
+        "language": "C"
+    },
+    {
+        "id": "713bc49a-67fc-42ed-a8b2-32b70fbbdfca",
+        "question": "Observe the following standard logic to linearly count nodes utilizing generic Circular SLL methodology:\n```c\nint count = 0; Node* temp = head;\ndo { \n    count++; \n    temp = temp->next; \n} while (temp != head);\nreturn count;\n```\nWhich functional structural state structurally forces a catastrophic Segmentation Fault actively bypassing standard loop conditionals when utilizing this specific algorithmic approach?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "An initialized list geometrically containing exactly one node actively pointing immediately back to itself.",
+            "B": "A totally empty mathematical list structurally characterized directly by `head == NULL`.",
+            "C": "A valid list containing exclusively even index variables mathematically wrapping perfectly.",
+            "D": "A localized generic string list exceeding maximum dynamic allocation properties natively."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Execution Reality**: A `do-while` loop executes its internal operational block definitively fully before examining the `while` gate verification parameter.\n2. **Empty List Integrity**: If a list is perfectly void, `head` geometrically intrinsically evaluates strictly to `NULL`. Consequently, `temp` binds to mathematical `NULL`.\n3. **The Fault Occurrence**: Internally, the block calculates `temp = temp->next`. Calling structural properties (`->next`) dynamically on a referenced absolute `0x0` null-pointer inherently triggers system violation access logic commonly generating a complete Segmentation Fault. A separate `if(head == NULL)` guard proves algorithmically mandatory.",
+        "language": "C"
+    },
+    {
+        "id": "f8a9d18c-3e2b-4567-9d1a-2e3b1c4a5f6e",
+        "question": "A custom traversal mathematically explores an unverified dynamic Singly Linked List exclusively from reference pointer `head`. To structurally determine algorithmically if the topology fundamentally models a strict Circular Linked List (where the terminal geometric node rigidly reconnects back to `head`), what definitive absolute verification proves the linked list is NOT strictly mathematically circular?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "The recursive traversal iteration inevitably evaluates perfectly uniformly to geometric `NULL`.",
+            "B": "The referenced iteration path cycles recursively but topologically anchors into a prior node intrinsically distinct from structural `head`.",
+            "C": "Both absolute conditions securely and mathematically verify topology is explicitly structurally non-circular relative to explicitly referencing the anchor `head`.",
+            "D": "Whenever functional Tortoise and Hare tracking properties explicitly collide together at dynamic indexes."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Strict Circularity Check**: A formally strict \"Circular Linked List\" natively requires the ultimate terminal variable mathematically pointing completely around to explicit `head`.\n2. **Break Condition A**: Encountering a valid terminating `NULL` guarantees the iteration operates as a generic sequential structural list exclusively.\n3. **Break Condition B**: In specific malformed geometries (a 'P' or '6' shaped logical layout), the tail path links arbitrarily into a midpoint node (e.g. node 4 connects mathematically to node 2). While it constitutes a physical geometric \"cycle\", it structurally violates defining mathematical Circularity regarding the system anchor referencing `head`. Thus, both uniquely prove it is mathematically non-circular.",
+        "language": "C"
+    },
+    {
+        "id": "c16d5e9a-7b3c-482a-bc12-f45a86d2e7b1",
+        "question": "When generating explicit localized algorithmic modifications to execute `deleteHead()` securely upon a Circular Singly Linked List, calculating sequential updates mapping the final terminal node geometrically to direct `head->next` inherently operates normally. Which extreme mathematical state actively shatters this generic behavior requiring completely uncoupled internal validation conditionals?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "Initiating localized algorithmic updates on explicit indices mathematically exceeding allocated dynamic length properties.",
+            "B": "When evaluating calculations where the total geometric topology encompasses practically exactly one isolated mathematical node (`head->next == head`).",
+            "C": "Deleting explicit properties internally housing strictly geometric values equating effectively to internal mathematical null values.",
+            "D": "Operating logic structures natively where the internal index is numerically distinctly perfectly even."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Generic Operation**: Normal cyclic deletion shifts `head` forward and updates the rear terminal bound specifically pointing to structural `new_head`.\n2. **Solitary Node Violation**: If specifically only $1$ node statically exists, `last` implicitly equates geometrically identically to `head`. \n3. **Catastrophe Resolution**: Updating the geometric link $new\\_head$ calculates uniformly to itself. Rather than properly emptying the data object natively, standard updates erroneously map the pointer infinitely circularly directly backwards unto itself again cleanly preserving computational allocation. You legitimately must independently explicitly override this exact situation checking `if(head->next == head){ free(head); head = NULL; }` instead.",
+        "language": "C"
+    },
+    {
+        "id": "97d643a2-11a5-47e1-b845-a9b2c3de1f6b",
+        "question": "Upon mathematically exploring a verified cyclic array strictly modeling a Circular Singly Linked List, algorithmically locating an unverified geometric Target Key value `K` potentially induces cyclic runtime infinity logic inherently. Which explicit relational geometry establishes absolute boundary closure correctly arresting infinity conditions when iterating statically from root `head`?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Iterating uniformly establishing boundary closures intrinsically terminating natively evaluating `if (temp->next == NULL)`.",
+            "B": "Operating logical checks directly determining topological bounds strictly evaluating internally `if (temp->next == temp)` indefinitely.",
+            "C": "Evaluating strictly when cyclic index structures ultimately functionally revolve resolving precisely `if (temp->next == head)` checking completion bounds.",
+            "D": "Dynamically executing structural data evaluation parameters establishing closure strictly matching `if (temp->data == 0)` generically."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Cyclic Infinite Processing**: Because mathematical arrays lacking explicit boundaries cycle endlessly dynamically, searching purely checking `while(temp->data != K)` risks algorithmic permanent execution functionally unless verified closure boundaries specifically evaluate.\n2. **Null Failure**: Checking `NULL` natively generates invalid conditions explicitly because structural values inherently wrap topologies referencing `head` exclusively.\n3. **Perfect Boundary Mathematical Checks**: Evaluating bounds exactly tracking properties strictly determining structurally if the iterating path `temp->next` actively resolves accurately natively matching precisely referenced absolute geometric `head` guarantees exhaustive exact topological search closure verifying unverified Target properties intrinsically correctly natively.",
+        "language": "C"
+    },
+    {
+        "id": "4e8dc13b-82a1-43e7-a7eb-6b5d9bc238fa",
+        "question": "Evaluating topological operations mathematically inserting localized geometric target nodes actively executing perfectly internally at standard mathematical arbitrary array index values `P` structurally (where $P > 0$ logically explicitly avoiding geometric edge definitions), why does this computational calculation algorithm exclusively functionally operate perfectly generically strictly matching Standard Linear SLL pointer modifications?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Because structural internal dynamic insertions generically explicitly bypass topological wrapper bounds completely mathematically effectively intrinsically isolating exactly pure internal pointer topology modification variables uniformly naturally (`new_node->next = temp->next`).",
+            "B": "Because generic structural circularity statically effectively inherently transforms mathematically directly automatically natively parsing strictly sequentially arrays actively at generic operational compilation parameters.",
+            "C": "Because compiler operations actively explicitly strictly functionally uncouple localized geometric properties independently statically generating generic native evaluation behaviors automatically universally universally.",
+            "D": "Because geometric topological evaluation generically executes directly actively dynamically calculating internally cyclic properties physically sequentially executing iterations generically infinitely natively."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Boundary Geometries**: Circular Single Linked Lists explicitly diverge functionally mathematically intrinsically solely exactly at localized boundaries explicitly exclusively natively (`head` and `terminal` topology nodes).\n2. **Internal Geometry Isolation**: For explicit functional internal geometries structurally positioned fundamentally functionally mathematically separated directly natively distinctly (like generic index geometries explicitly exclusively avoiding bounds natively inherently), geometric cyclic topological connections generically functionally hold exactly completely natively dynamically irrelevant structurally.\n3. **Pure Execution Output**: Modification natively resolves explicitly natively logically mathematically intrinsically exactly mimicking purely standard topology explicitly effectively (`new_node->next = temp->next; temp->next = new_node`).",
+        "language": "C"
+    },
+    {
+        "id": "a17f254e-6b9c-48d1-93fa-1e5b29c9a7b4",
+        "question": "A mathematical structural task dictates strictly exclusively functionally sequentially deleting explicit localized structural exact Target Key data uniformly accurately structurally matching specific `X` parameters globally inherently natively dynamically within explicit topological cyclic memory arrays natively generically dynamically. Why strictly is functionally executing specific explicitly explicit deletions dynamically universally significantly algorithmically heavier computationally determining targeted nodes physically located purely exactly actively at strict boundary `head` values compared perfectly against exact interior arbitrary operations functionally intrinsically?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Because `head` geometries mathematically explicitly generically structurally typically allocate effectively universally significantly deeper algorithmic memory allocation payloads locally statically fundamentally.",
+            "B": "Because structurally relocating absolute cyclic `head` identifiers algorithmically rigorously strictly explicitly mandates globally exhaustive topological full-geometric O(N) structural traversals exclusively functionally identifying ultimate geometric terminals purely directly accurately dynamically explicitly dynamically repairing boundary properties natively intrinsically.",
+            "C": "Generating specific exclusive boundary head topological updates exclusively essentially strictly natively evaluates purely purely structurally uniformly natively universally evaluating perfectly dynamically resolving exactly completely O(1) mathematically constantly functionally statically entirely.",
+            "D": "Because executing explicit geometry deletion operations exclusively functionally directly inherently algorithmically strictly natively corrupts fundamental static property indexing globally universally uniformly permanently natively strictly universally."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Target Structural Relocation**: To fully rigorously systematically structurally logically delete explicit specific geometric variable data exactly uniformly accurately functioning uniquely purely at extreme structural absolute algorithmic boundary `head` natively efficiently universally, geometric updates exclusively structurally completely structurally mathematically mandate algorithmically calculating topological shifts referencing specific `new_head` coordinates purely directly dynamically efficiently.\n2. **Terminal Integrity Constraints**: Explicitly functionally structurally preserving absolute geometric cyclic wrap boundaries universally uniquely logically strictly mathematically exact operations inherently accurately universally calculating sequentially rigorously uniquely exhaustive purely structural dynamic completely topological iteration O(N) functionally strictly uniformly natively purely explicitly hooking effectively purely purely accurately terminal boundaries completely perfectly efficiently mapping precisely exactly locally `new_head`.\n3. **Result Output**: Interior targeted localized modifications completely bypass globally cyclic terminal properties completely.",
+        "language": "C"
+    },
+    {
+        "id": "f5c1d3e8-ab9a-4c9c-b1a1-9a7c3b1a8f9c",
+        "question": "The 'Josephus Problem' is a famous theoretical counting puzzle classically solved computationally using a Circular Linked List. Why mathematically does a Circular Linked List natively represent the absolute optimal data structure for simulating this specific elimination algorithm?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "Because the cyclic structural connection natively mimics continuous geometric counting without demanding computationally inefficient array-modulo recalculations or index shifting after every single geometric deletion.",
+            "B": "Because it inherently natively calculates explicit mathematical properties defining prime functional coordinates uniquely.",
+            "C": "Because standard linear Linked Lists functionally collapse exclusively when evaluating dynamic interior target variables uniformly.",
+            "D": "Because geometric structures mathematically functionally isolate interior topology correctly independently generating exact functional calculations."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Josephus Definition**: You iteratively eliminate variables sequentially within a continuously cyclic unbroken group.\n2. **Array Problem**: If you use an array, deleting someone in the middle logically means dragging every subsequent person mathematically backward one index ($O(N)$ shift) to close the spatial gap, then mathematically recalculating your current array bounds using modulo operators repeatedly.\n3. **CLL Solution**: A Circular Linked List inherently physically mirrors a circle. Iterating infinitely forward is natural via `temp->next`, and deleting essentially involves bridging purely adjacent node pointers `prev->next = curr->next` instantaneously isolating the deleted participant without linearly shifting any other node topologically.",
+        "language": "C"
+    }
+]

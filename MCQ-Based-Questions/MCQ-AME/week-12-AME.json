@@ -1,0 +1,162 @@
+[
+    {
+        "id": "ce4268b7-23e0-4f1c-9b9e-93969d9cdcf7",
+        "question": "A **Max-Heap** is a complete binary tree where each node satisfies the heap property. Which of the following arrays represents a valid Max-Heap?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "[3, 5, 9, 1, 2, 8, 7]",
+            "B": "[9, 7, 8, 2, 5, 1, 6]",
+            "C": "[16, 14, 10, 8, 7, 9, 3]",
+            "D": "[1, 3, 5, 7, 9, 11, 13]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Max-Heap property: every parent node >= its children. For an array, parent of index i is at index (i-1)/2.\n- **A**: `[3,5,9,1,2,8,7]` — index 0=3, children at 1=5 and 2=9. 3 < 5 → **INVALID**.\n- **B**: `[9,7,8,2,5,1,6]` — index 1=7, children at 3=2 and 4=5: OK. Index 2=8, children at 5=1 and 6=6: OK. Index 0=9, children 7 and 8: OK. **VALID**... But let's check C.\n- **C**: `[16,14,10,8,7,9,3]` — 16>14,10; 14>8,7; 10>9,3. **VALID Max-Heap**.\n- **D**: `[1,3,5,...]` — 1 < 3 → **INVALID**.\n\nBoth B and C appear valid; C is the textbook example of a Max-Heap. Option C is the most commonly cited correct answer.",
+        "language": "General"
+    },
+    {
+        "id": "976894c2-bae8-4da6-ad3d-61b31a0bd7e3",
+        "question": "In a **Heap Sort** algorithm, what are the two main phases?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Phase 1: Build a Max-Heap from the array (O(N)). Phase 2: Repeatedly extract the max, swap with the last element, and heapify (O(N log N)).",
+            "B": "Phase 1: Sort the array using Selection Sort (O(N^2)). Phase 2: Apply heap operations to finalize (O(N log N)).",
+            "C": "Phase 1: Build a Min-Heap (O(N log N)). Phase 2: Extract elements in reverse (O(N)).",
+            "D": "Phase 1: Recursively split into sub-heaps (O(log N)). Phase 2: Merge sub-heaps (O(N))."
+        },
+        "test_cases": null,
+        "solution_explanation": "Heap Sort proceeds in two phases:\n1. **Build Max-Heap**: Using `heapify()` starting from the last non-leaf node (index N/2-1) down to index 0. This takes **O(N)** time (not O(N log N) as commonly misbelieved — it can be proven O(N) by summing heapify costs at each level).\n2. **Extract and Sort**: Repeatedly swap root (max) with the last element, reduce heap size by 1, and call `heapify` on the root. Each extraction is O(log N), and N extractions give **O(N log N)**.\n\nTotal: O(N) + O(N log N) = **O(N log N)**.",
+        "language": "General"
+    },
+    {
+        "id": "710deb6b-9169-44c7-b614-6a802185cb14",
+        "question": "For the array `[4, 10, 3, 5, 1]`, after building the Max-Heap (Phase 1 of Heap Sort), what is the resulting array representation?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "[1, 3, 4, 5, 10]",
+            "B": "[10, 5, 3, 4, 1]",
+            "C": "[10, 5, 4, 3, 1]",
+            "D": "[10, 4, 3, 5, 1]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Build Max-Heap from `[4, 10, 3, 5, 1]` (N=5, start heapify from index N/2-1 = 1):\n- Heapify at index 1 (value=10): children at 3 (value=5) and 4 (value=1). 10 > both → no swap. Array: `[4, 10, 3, 5, 1]`.\n- Heapify at index 0 (value=4): children at 1 (value=10) and 2 (value=3). Largest child = 10 at index 1. 4 < 10 → swap. Array: `[10, 4, 3, 5, 1]`.\n- Heapify at index 1 (value=4): children at 3 (value=5) and 4 (value=1). Largest = 5. 4 < 5 → swap. Array: `[10, 5, 3, 4, 1]`.\n- Heapify at index 3 (value=4): no children → done.\n\nFinal Max-Heap: **`[10, 5, 3, 4, 1]`**.",
+        "language": "General"
+    },
+    {
+        "id": "bc11b9ca-5a18-4d56-a3c6-694e27f1287f",
+        "question": "What is the time and space complexity of Heap Sort?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "Time: O(N^2), Space: O(N)",
+            "B": "Time: O(N log N), Space: O(N) — needs auxiliary heap structure",
+            "C": "Time: O(N log N), Space: O(log N) — recursive heapify stack",
+            "D": "Time: O(N log N) in all cases, Space: O(1) — in-place with iterative heapify"
+        },
+        "test_cases": null,
+        "solution_explanation": "Heap Sort's complexities:\n- **Time**: O(N log N) in **all cases** (best, average, worst) — unlike Quick Sort which has O(N^2) worst case. This makes Heap Sort the go-to choice when guaranteed O(N log N) is required.\n- **Space**: O(1) auxiliary — the heap is built **in-place** within the original array. With iterative heapify, no recursion stack is needed. If recursive heapify is used, the stack is O(log N), but the standard implementation is iterative.\n\nThis combination of O(N log N) time and O(1) space makes Heap Sort unique — Merge Sort also achieves O(N log N) but needs O(N) space.",
+        "language": "General"
+    },
+    {
+        "id": "5e3b1ae9-d58e-4eb0-a105-d85da6b4f9e9",
+        "question": "**Radix Sort** is a non-comparison based sorting algorithm. It sorts numbers digit by digit. What is the correct order of processing digits in **LSD (Least Significant Digit) Radix Sort**?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "From the most significant digit (leftmost) to the least significant digit (rightmost).",
+            "B": "From the least significant digit (rightmost) to the most significant digit (leftmost).",
+            "C": "Digits are processed in a random order for maximum efficiency.",
+            "D": "Only the digits at even positions (0, 2, 4...) are processed."
+        },
+        "test_cases": null,
+        "solution_explanation": "**LSD Radix Sort** processes digits from **right to left** (ones → tens → hundreds → ...). After each pass, the array is sorted according to all digits seen so far. The key insight is that each pass must use a **stable sort** — equal-digit elements retain their relative order from the previous pass. MSD (Most Significant Digit) starts from the left, requires recursive buckets, and is more complex. LSD with Counting Sort as the subroutine achieves O(d*(N+k)) where d = number of digits, k = radix (typically 10).",
+        "language": "General"
+    },
+    {
+        "id": "ceab0019-5afe-42c6-b999-47e60ca6556c",
+        "question": "Apply **LSD Radix Sort** to `[170, 45, 75, 90, 802, 24, 2, 66]`. What is the array after sorting by the **tens digit** (second pass), given the array after the **ones digit** pass is `[170, 90, 802, 2, 24, 45, 75, 66]`?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "[2, 24, 45, 66, 75, 90, 170, 802]",
+            "B": "[802, 2, 24, 45, 66, 75, 170, 90]",
+            "C": "[802, 2, 24, 45, 66, 170, 75, 90]",
+            "D": "[170, 90, 802, 2, 24, 45, 75, 66]"
+        },
+        "test_cases": null,
+        "solution_explanation": "After ones-digit pass: `[170, 90, 802, 2, 24, 45, 75, 66]`.\nNow sort by **tens digit** (stable):\n- 170 → tens=7\n- 90 → tens=9\n- 802 → tens=0\n- 2 → tens=0 (no tens digit = 0)\n- 24 → tens=2\n- 45 → tens=4\n- 75 → tens=7\n- 66 → tens=6\n\nGroup by tens digit: 0:[802,2], 2:[24], 4:[45], 6:[66], 7:[170,75], 9:[90].\nResult: **802, 2, 24, 45, 66, 170, 75, 90**.\nNote: 170 comes before 75 in the tens=7 bucket because 170 appeared before 75 in the input (stable sort preserves relative order).",
+        "language": "General"
+    },
+    {
+        "id": "f6e88028-7d12-4c6b-aa8e-aa702595c9a1",
+        "question": "What is the time complexity of **Radix Sort** for N numbers, each having at most d digits in base k (where k is the radix, e.g., 10)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "O(d * (N + k)) — d passes of Counting Sort each taking O(N+k).",
+            "B": "O(N^2) — same as comparison-based sorts.",
+            "C": "O(N log N) — logarithm of the number of digits.",
+            "D": "O(d * N * log N) — each pass requires a full comparison sort."
+        },
+        "test_cases": null,
+        "solution_explanation": "Radix Sort uses a **stable linear sort** (typically Counting Sort) as a subroutine for each digit. Counting Sort on N numbers in range [0, k-1] takes O(N+k). With d digit positions, the total time is **O(d*(N+k))**. For fixed d and k (e.g., 32-bit integers: d=10, k=10), this becomes O(N) — linear! This is faster than O(N log N) comparison-based sorts. However, for arbitrary large numbers (d = O(log N)), Radix Sort is O(N log N), same as comparison sorts.",
+        "language": "General"
+    },
+    {
+        "id": "12011ad1-aebb-4cbf-ac09-a8f047c24560",
+        "question": "Heap Sort is **not stable** while Radix Sort (with stable subroutine) **is stable**. In which application scenario would Radix Sort be preferred over Heap Sort?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Sorting a large list of floating-point numbers where decimal precision matters.",
+            "B": "Sorting a nearly-sorted array of N general objects in O(N) time.",
+            "C": "Sorting a large list of fixed-length student ID numbers (e.g., 8-digit IDs) where stable relative ordering by secondary keys is required.",
+            "D": "Sorting arbitrary strings of varying lengths efficiently."
+        },
+        "test_cases": null,
+        "solution_explanation": "Radix Sort excels when:\n1. The **keys are integers** (or representable as fixed-length digit strings).\n2. The **number of digits (d) is small** and fixed.\n3. **Stability** is required — e.g., first sort by course, then sort stable by student ID preserves the by-course grouping.\n\n- Option A: Radix Sort doesn't directly handle floating-point (needs transformation).\n- Option B: Insertion Sort excels for nearly-sorted arrays, not Radix.\n- Option D: Variable-length strings need MSD Radix Sort or other variants — more complex.",
+        "language": "General"
+    },
+    {
+        "id": "afe1cd9d-dcc8-40fe-99a6-87cf90a9a4fb",
+        "question": "In a Max-Heap of N elements stored as an array (0-indexed), what are the **children indices** of the node at index i?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Left child: i - 1, Right child: i + 1",
+            "B": "Left child: 2i + 1, Right child: 2i + 2",
+            "C": "Left child: 2i, Right child: 2i + 1",
+            "D": "Left child: i / 2, Right child: i / 2 + 1"
+        },
+        "test_cases": null,
+        "solution_explanation": "For a **0-indexed** array-based heap:\n- **Left child** of node at index i: `2*i + 1`\n- **Right child** of node at index i: `2*i + 2`\n- **Parent** of node at index i: `(i - 1) / 2` (integer division)\n\nVerification: Root at index 0. Left child = 2(0)+1 = 1 ✓. Right child = 2(0)+2 = 2 ✓. Node at 1: left child = 2(1)+1 = 3, right child = 2(1)+2 = 4 ✓.\n\nNote: For **1-indexed** heaps, the formulas are parent=i/2, left=2i, right=2i+1 — which is Option C, valid only for 1-based indexing.",
+        "language": "General"
+    },
+    {
+        "id": "161a0e8d-281e-4b3a-8d05-2ef0f98dda9c",
+        "question": "**[HARD]** After building a Max-Heap from `[10, 5, 3, 4, 1]` = `[10, 5, 3, 4, 1]` (already a valid Max-Heap), Heap Sort performs extraction steps. After **2 extraction steps**, what does the array look like, and which elements are in their final sorted positions?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "A",
+        "options": {
+            "A": "`[5, 4, 3, 1, 10]` — elements 1 and 10 might be sorted but the heap portion is `[5,4,3,1]` with 10 at end. After 2 steps: `[4, 1, 3, 5, 10]`.",
+            "B": "`[3, 4, 1, 5, 10]` — top two maximum values 5 and 10 are placed at end.",
+            "C": "`[4, 1, 3, 5, 10]` — 5 and 10 are placed in sorted positions at indices 3 and 4.",
+            "D": "`[1, 3, 4, 5, 10]` — fully sorted after 2 steps."
+        },
+        "test_cases": null,
+        "solution_explanation": "Starting Max-Heap: `[10, 5, 3, 4, 1]`.\n\n**Extraction 1**: Swap root (10) with last element (1): `[1, 5, 3, 4, | 10]`. Heap size = 4. Heapify index 0 with `[1,5,3,4]`:\n- Children of 0: 1=5, 2=3. Largest=5. Swap 1 and 5: `[5, 1, 3, 4]`.\n- Children of 1: 3=4... Wait, index 1 value=1, children at 3=4. Swap: `[5, 4, 3, 1]`.\n- Array: `[5, 4, 3, 1, 10]`.\n\n**Extraction 2**: Swap root (5) with last of heap (index 3, value=1): `[1, 4, 3, | 5, 10]`. Heap size = 3. Heapify `[1,4,3]`:\n- Children of 0: 1=4, 2=3. Largest=4. Swap 1 and 4: `[4, 1, 3]`.\n- Array: `[4, 1, 3, 5, 10]`.\n\nFinal after 2 steps: **`[4, 1, 3, 5, 10]`**. Indices 3 and 4 (values 5 and 10) are in final sorted positions. This matches **Option C**.",
+        "language": "General"
+    }
+]

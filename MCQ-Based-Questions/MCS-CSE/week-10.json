@@ -1,0 +1,162 @@
+[
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567101",
+        "question": "What is the best-case time complexity of Quick Sort, and what input arrangement causes it?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "O(N) — when the array is already sorted.",
+            "B": "O(N log N) — when the pivot always divides the array into two equal halves.",
+            "C": "O(N log N) — when the array is sorted in reverse order.",
+            "D": "O(N²) — when all elements are equal."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Best case pivot**: If the pivot always lands at the exact median, both partitions have N/2 elements. This gives the recurrence T(N) = 2T(N/2) + O(N) → **O(N log N)**.\n2. **Already sorted array**: With a naïve pivot (first or last element), a sorted array makes one partition empty and the other N-1 elements → worst case O(N²), not O(N).\n3. **All elements equal**: Every partition is unbalanced (0 vs N-1) → O(N²) worst case.\n4. **O(N) is never achievable for a comparison-based sort on unordered data.**",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567102",
+        "question": "What is the worst-case time complexity of Merge Sort, and is it stable?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "O(N log N) worst case; Yes, Merge Sort is stable.",
+            "B": "O(N²) worst case; Yes, Merge Sort is stable.",
+            "C": "O(N log N) worst case; No, Merge Sort is not stable.",
+            "D": "O(N) worst case; Yes, Merge Sort is stable."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Merge Sort complexity**: Always divides into 2 halves (log N levels) and merges each level in O(N) → T(N) = 2T(N/2) + O(N) → **O(N log N)** in ALL cases (best, average, worst).\n2. **Stability**: Merge Sort is stable — equal elements maintain their original relative order because the merge step picks the left element first on ties.\n3. **O(N²)** applies to Bubble/Insertion/Selection Sort worst cases — not Merge Sort.\n4. **Practical note**: Merge Sort requires O(N) extra space for the auxiliary array used during merging.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567103",
+        "question": "In Heap Sort, after building a Max-Heap from an unsorted array, what is the next step and why does it produce a sorted array?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "Traverse the heap left-to-right — the heap is already sorted.",
+            "B": "Apply Merge Sort on the heap array for final sorted output.",
+            "C": "Repeatedly swap the root (maximum) with the last heap element, reduce heap size by 1, and call heapifyDown — placing the maximum at the end each time.",
+            "D": "Insert all heap elements into a sorted linked list."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **After buildHeap**: `arr[0]` is the maximum of all N elements.\n2. **Swap + shrink**: Swap `arr[0]` with `arr[N-1]`. This places the max at its correct sorted position. Decrement heap size to N-1.\n3. **heapifyDown**: Restores Max-Heap property for the remaining N-1 elements.\n4. **Repeat N-1 times**: Each iteration extracts the next largest, building the sorted array in-place from right to left.\n5. **Result**: O(N log N) total time, O(1) extra space — Heap Sort is in-place but NOT stable.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567104",
+        "question": "During the merge step of Merge Sort on arrays `L = [2, 5, 8]` and `R = [3, 6, 7]`, in what order are elements written to the output array?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "[2, 5, 8, 3, 6, 7] — left array copied first, then right.",
+            "B": "[2, 3, 5, 6, 7, 8]",
+            "C": "[3, 2, 5, 6, 7, 8] — smaller starting element's array goes first.",
+            "D": "[2, 3, 6, 5, 7, 8] — elements alternate between L and R arrays."
+        },
+        "test_cases": null,
+        "solution_explanation": "Merge step comparing L=[2,5,8] and R=[3,6,7] element by element:\n1. L[0]=2 vs R[0]=3 → pick 2. Output: [2]\n2. L[1]=5 vs R[0]=3 → pick 3. Output: [2,3]\n3. L[1]=5 vs R[1]=6 → pick 5. Output: [2,3,5]\n4. L[2]=8 vs R[1]=6 → pick 6. Output: [2,3,5,6]\n5. L[2]=8 vs R[2]=7 → pick 7. Output: [2,3,5,6,7]\n6. L[2]=8 remaining → pick 8. Final output: **[2,3,5,6,7,8]**\n\n- Option A is wrong — simply concatenating L then R ignores interleaved comparison, producing the unsorted concatenation.\n- Option C is wrong — 3 < 2 is false; 2 is smaller.\n- Option D is wrong — the merge picks smaller element, not alternating.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567105",
+        "question": "Quick Sort with the **last element as pivot** is applied to the array `[10, 80, 30, 90, 40, 50, 70]`. After one partition pass, what is the pivot's final position (0-indexed) and which elements are on each side?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Pivot 70 lands at index 3; left = [10,30,40,50], right = [80,90].",
+            "B": "Pivot 70 lands at index 5; left = [10,80,30,40,50], right = [90].",
+            "C": "Pivot 70 lands at index 4; left = [10,30,40,50], right = [90,80].",
+            "D": "Pivot 70 lands at index 3; left = [10,30,40], right = [80,90,50]."
+        },
+        "test_cases": null,
+        "solution_explanation": "Pivot = 70 (last element). Run partition with i = -1:\n- j=0: arr[0]=10 ≤ 70 → i=0, swap(0,0) → [10,80,30,90,40,50,70]\n- j=1: arr[1]=80 > 70 → skip\n- j=2: arr[2]=30 ≤ 70 → i=1, swap(1,2) → [10,30,80,90,40,50,70]\n- j=3: arr[3]=90 > 70 → skip\n- j=4: arr[4]=40 ≤ 70 → i=2, swap(2,4) → [10,30,40,90,80,50,70]\n- j=5: arr[5]=50 ≤ 70 → i=3, swap(3,5) → [10,30,40,50,80,90,70]\n\nFinal swap pivot: swap(i+1=4, 6) → **[10,30,40,50,70,90,80]**\nPivot 70 at **index 4**; left = [10,30,40,50]; right = [90,80] ✅",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567106",
+        "question": "Why is Quick Sort generally faster than Merge Sort in practice despite having the same average-case time complexity of O(N log N)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "Quick Sort has a better worst-case complexity than Merge Sort.",
+            "B": "Quick Sort is stable, making comparisons more efficient.",
+            "C": "Quick Sort uses O(N) extra memory, giving it a space advantage.",
+            "D": "Quick Sort is in-place and has better cache performance — elements within a partition are spatially contiguous in memory, reducing cache misses."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Same asymptotic complexity**: Both O(N log N) average. Asymptotic analysis ignores constant factors.\n2. **Cache performance**: Quick Sort operates on contiguous subarrays in-place. Modern CPUs prefetch nearby memory (cache lines), making sequential access very fast.\n3. **Merge Sort**: Requires an O(N) auxiliary array. Copying to and from this array causes more cache misses and memory writes.\n4. **In-place**: Quick Sort needs only O(log N) stack space for recursion vs. O(N) for Merge Sort's auxiliary array.\n5. **Stability**: Quick Sort is NOT stable — this is a disadvantage, not an advantage.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567107",
+        "question": "What is the worst-case space complexity of Quick Sort's recursion stack, and what input triggers it?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "O(log N) stack space; triggered by a randomly shuffled array.",
+            "B": "O(N) stack space; triggered when the pivot is always the smallest or largest element (e.g., sorted array with first/last-element pivot).",
+            "C": "O(N log N) stack space; triggered when all elements are equal.",
+            "D": "O(1) stack space; Quick Sort is fully iterative."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Worst-case partitioning**: If the pivot is always the min or max (e.g., sorted array with naïve pivot choice), one partition has 0 elements and the other has N-1.\n2. **Recursion depth**: For N, then N-1, then N-2, ... → N levels deep → **O(N)** call stack.\n3. **Stack overflow risk**: On large N (e.g., 100,000), O(N) recursion depth can cause a stack overflow.\n4. **Mitigation**: Use randomised pivot selection or median-of-three pivot — reduces worst case to O(log N) expected stack depth.\n5. **O(log N)** is the best-case/average-case stack depth with balanced partitioning.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567108",
+        "question": "Heap Sort is NOT stable. Consider the array `[4a, 4b, 3]` where `4a` and `4b` are equal values. After Heap Sort, which statement about the relative order of `4a` and `4b` is correct?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "4a will always appear before 4b — Heap Sort preserves original order for equal keys.",
+            "B": "4b will always appear before 4a — Heap Sort reverses equal keys.",
+            "C": "The relative order of 4a and 4b is undefined — Heap Sort may produce either [3, 4a, 4b] or [3, 4b, 4a].",
+            "D": "Both 4a and 4b will always be adjacent, but position relative to each other is input-dependent."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Stability definition**: A sort is stable if equal elements maintain their original relative order.\n2. **Heap Sort mechanism**: The heapifyDown operation swaps elements based only on value comparisons, without considering original indices. This can move `4a` behind `4b` or vice versa depending on tree structure.\n3. **Result**: Heap Sort does NOT guarantee that `4a` stays before `4b`. The final order of equal elements is **implementation and input dependent**.\n4. **Practical implication**: When sort stability matters (e.g., sorting records by secondary key), choose Merge Sort or Timsort instead.\n5. **D is wrong**: Adjacent placement is also not guaranteed — positions depend on full heap dynamics.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567109",
+        "question": "Merge Sort on Linked Lists is preferred over Quick Sort. What is the primary technical reason?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "A",
+        "options": {
+            "A": "Linked Lists lack O(1) random access; Quick Sort's partition step requires index-based element swapping which degrades to O(N²) on linked lists, while Merge Sort only needs sequential traversal.",
+            "B": "Merge Sort uses less memory on linked lists than Quick Sort.",
+            "C": "Quick Sort cannot sort linked lists — it only works on arrays.",
+            "D": "Merge Sort is faster than Quick Sort on all data types regardless of structure."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Quick Sort on arrays**: Partition works efficiently because swapping `arr[i]` and `arr[j]` is O(1) via random index access.\n2. **Quick Sort on Linked Lists**: To swap two non-adjacent nodes efficiently, you need their predecessor pointers. Finding a node at index `j` costs O(N). The partitioning step becomes O(N) per element → O(N²) total.\n3. **Merge Sort on Linked Lists**: Merging requires only forward traversal (sequential access), which is natural for linked lists. Splitting uses the slow/fast pointer trick (O(N)). Overall O(N log N).\n4. **No auxiliary array**: Merge Sort on linked lists can merge *in-place* by relinking nodes — no extra O(N) memory required (unlike array Merge Sort).\n5. **Conclusion**: Merge Sort is the canonical O(N log N) sort for Linked Lists.",
+        "language": "C"
+    },
+    {
+        "id": "c1d2e3f4-a5b6-7890-cdef-ab1234567110",
+        "question": "Given the recurrence relation for Merge Sort: T(N) = 2T(N/2) + O(N), T(1) = O(1), what does the `O(N)` term represent and what does the Master Theorem yield?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "O(N) represents the cost of splitting; Master Theorem gives O(N).",
+            "B": "O(N) represents pivot selection; Master Theorem gives O(N log N).",
+            "C": "O(N) represents comparison cost; Master Theorem gives O(N²).",
+            "D": "O(N) represents the cost of merging two sorted halves at each level; Master Theorem gives O(N log N)."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **T(N) = 2T(N/2) + O(N)**: The two subproblems T(N/2) are the recursive sorts of each half. The `O(N)` non-recursive work at each level is the **merge operation** — scanning through two halves of combined size N.\n2. **Splitting** is just finding the midpoint: O(1) for arrays, O(N) for linked lists — but the dominant term here is the merge.\n3. **Master Theorem** (Case 2): a=2, b=2, f(N)=N. log_b(a) = log₂(2) = 1. f(N) = N = N^1 = N^{log_b a} → Case 2 → T(N) = **O(N log N)**.\n4. There are log N levels of recursion, each costing O(N) for merging → O(N log N) total.",
+        "language": "C"
+    }
+]

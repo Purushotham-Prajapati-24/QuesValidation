@@ -1,0 +1,162 @@
+[
+    {
+        "id": "54a7ac07-d30e-4879-8445-74e847813166",
+        "question": "Merge Sort follows the **Divide and Conquer** strategy. How does it divide the array at each step?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "Divides the array around a pivot element such that smaller elements go left and larger go right.",
+            "B": "Splits the array into two equal halves regardless of element values, then recursively sorts and merges.",
+            "C": "Divides by finding the median and placing it at the center.",
+            "D": "Selects every other element index to form two interleaved halves."
+        },
+        "test_cases": null,
+        "solution_explanation": "Merge Sort blindly splits the array at the **midpoint** (index N/2) into two halves — it does NOT care about element values during the split. It then recursively sorts each half and **merges** the two sorted halves. This contrasts with Quick Sort, which splits around a **pivot** based on element values. The merge step is where the real comparison work happens.",
+        "language": "General"
+    },
+    {
+        "id": "4dc9af69-3712-41ee-99db-f3b2cf7ca0a2",
+        "question": "Merge Sort applied to `[38, 27, 43, 3]`. After the complete recursive split and the first merge step (merging the two innermost pairs), what are the intermediate sorted sub-arrays before the final merge?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "[27, 38] and [3, 43]",
+            "B": "[3, 27] and [38, 43]",
+            "C": "[27, 43] and [3, 38]",
+            "D": "[38, 43] and [3, 27]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Split sequence:\n- `[38,27,43,3]` → `[38,27]` and `[43,3]`\n- `[38,27]` → `[38]` and `[27]` → merge → `[27, 38]`\n- `[43,3]` → `[43]` and `[3]` → merge → `[3, 43]`\n\nThe two intermediate sorted sub-arrays before the final merge are **`[27, 38]`** and **`[3, 43]`**. Final merge produces `[3, 27, 38, 43]`.",
+        "language": "General"
+    },
+    {
+        "id": "71c9806c-853e-4e7d-9266-69e100b8200a",
+        "question": "What is the **space complexity** of the standard (non-in-place) Merge Sort for an array of N elements?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "O(1) — Merge Sort always sorts in-place.",
+            "B": "O(N) — an auxiliary array of size N is needed for merging.",
+            "C": "O(N log N) — space grows proportionally to the time complexity.",
+            "D": "O(log N) — only the recursion stack is used."
+        },
+        "test_cases": null,
+        "solution_explanation": "The **merge** step requires a temporary array to hold the merged result before copying back. In the worst case, merging requires O(N) extra space (auxiliary array). The **recursion stack** adds O(log N) space (tree height). Total space: O(N) + O(log N) = **O(N)**. This extra space requirement is Merge Sort's main disadvantage compared to Quick Sort (O(log N) space). In-place Merge Sort exists but is much more complex and rarely used in practice.",
+        "language": "General"
+    },
+    {
+        "id": "d4605832-0517-462b-a561-836dcfedb4f4",
+        "question": "In **Quick Sort**, the **worst case** occurs when the chosen pivot is always the maximum or minimum element. What is the time complexity in this case and when does it typically happen?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "O(N log N) — worst case; happens when the array is already sorted with median pivot.",
+            "B": "O(N^2) — happens only with random input arrays.",
+            "C": "O(N^2) — happens with already sorted/reverse-sorted arrays when using the first/last element as pivot.",
+            "D": "O(N) — worst case with three-way partitioning."
+        },
+        "test_cases": null,
+        "solution_explanation": "When the pivot is always the smallest or largest element, partitioning creates **unbalanced splits** — one partition of size 0 and one of size N-1. This creates N recursive calls (instead of log N), each doing O(N) work → **O(N^2)** total. This worst case happens when:\n- Using first or last element as pivot on **already sorted or reverse-sorted** input.\n- All elements are equal.\n\nSolution: Use **random pivot** or **median-of-three** pivot to avoid worst case with high probability. Randomized Quick Sort has expected O(N log N) for all inputs.",
+        "language": "General"
+    },
+    {
+        "id": "a5aac860-fc52-4cc5-ae08-c7056fe839ea",
+        "question": "Quick Sort on `[10, 7, 8, 9, 1, 5]` using the **last element (5) as pivot**. After one partition step, which of the following correctly shows the partitioned array with 5 in its correct position?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "[1, 5, 7, 8, 9, 10]",
+            "B": "[1, 5, 8, 9, 10, 7]",
+            "C": "[5, 1, 7, 8, 9, 10]",
+            "D": "[1, 5, 8, 7, 10, 9]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Trace Lomuto partition with pivot = 5 (last element), array `[10, 7, 8, 9, 1, 5]`:\n- i = -1, j scans from 0 to 4:\n  - j=0: arr[0]=10 > 5, no swap.\n  - j=1: arr[1]=7 > 5, no swap.\n  - j=2: arr[2]=8 > 5, no swap.\n  - j=3: arr[3]=9 > 5, no swap.\n  - j=4: arr[4]=1 ≤ 5, i=0, swap arr[0] and arr[4]: `[1, 7, 8, 9, 10, 5]`.\n- Final swap: swap arr[i+1]=arr[1] with pivot arr[5]: `[1, 5, 8, 9, 10, 7]`.\n\nPivot 5 is now at **index 1**. Left partition (index 0): `[1]`. Right partition (indices 2-5): `[8, 9, 10, 7]`. The closest to the expected result is Option B.",
+        "language": "General"
+    },
+    {
+        "id": "6877a402-8116-415a-bfe1-52bb375b6c7c",
+        "question": "Which of the following statements correctly compares **Merge Sort** and **Quick Sort**?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "Merge Sort is faster than Quick Sort in all cases.",
+            "B": "Quick Sort always uses O(N) extra space due to partitioning.",
+            "C": "Both Merge Sort and Quick Sort are stable sorting algorithms.",
+            "D": "Merge Sort guarantees O(N log N) in all cases; Quick Sort has O(N^2) worst case but is faster in practice on average."
+        },
+        "test_cases": null,
+        "solution_explanation": "Key comparison:\n- **Merge Sort**: Always O(N log N) in all cases (best/average/worst). Stable. O(N) extra space.\n- **Quick Sort**: Average O(N log N), worst case O(N^2). NOT stable (standard Lomuto/Hoare partition). O(log N) extra space (recursion stack).\n\nIn practice, Quick Sort is often faster than Merge Sort due to smaller constants, better cache performance (in-place), and the fact that worst case rarely occurs with randomized pivots. Option B is wrong — Quick Sort is (nearly) in-place, O(log N) stack space. Option C is wrong — standard Quick Sort is not stable.",
+        "language": "General"
+    },
+    {
+        "id": "5f7aa97b-769a-4c7e-8fd7-059533c1e1a0",
+        "question": "Merge Sort is **stable** while standard Quick Sort is **not stable**. Which of the following scenarios demonstrates Quick Sort's instability?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Sorting `[(3,a), (1,b), (3,c)]` by first element: Quick Sort may produce `[(1,b), (3,c), (3,a)]`, reversing the relative order of the two 3s.",
+            "B": "Sorting `[5, 3, 1]` results in `[5, 3, 1]` (unchanged), which is unstable.",
+            "C": "Quick Sort always produces a different output than Merge Sort for the same input.",
+            "D": "Quick Sort is unstable only when the array has negative numbers."
+        },
+        "test_cases": null,
+        "solution_explanation": "Stability matters when sorting objects with equal **keys** — the original relative order of equal-key elements should be preserved. In the example `[(3,a), (1,b), (3,c)]` sorted by the number: stable sort gives `[(1,b), (3,a), (3,c)]` — preserving the original order of the two 3s. Quick Sort's partition can swap a later equal element before an earlier one, possibly producing `[(1,b), (3,c), (3,a)]` — reversing 3a and 3c. This matters in multi-level sorting (e.g., sort by column A, then by column B while keeping column A order).",
+        "language": "General"
+    },
+    {
+        "id": "45c15e55-f2d8-4878-9738-0e91b481c0fa",
+        "question": "What is the maximum number of levels of recursion (recursion depth) in Merge Sort applied to an array of N = 32 elements?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "4 levels",
+            "B": "5 levels",
+            "C": "6 levels",
+            "D": "32 levels"
+        },
+        "test_cases": null,
+        "solution_explanation": "Merge Sort recursively halves the array. Starting with N=32:\n- Level 0: arrays of size 32\n- Level 1: arrays of size 16\n- Level 2: arrays of size 8\n- Level 3: arrays of size 4\n- Level 4: arrays of size 2\n- Level 5: arrays of size 1 (base case)\n\nTotal levels = **5** = log₂(32) = log₂(2^5). In general, the recursion depth is **⌈log₂(N)⌉**. This also equals the number of merge passes needed, and explains why the time complexity is O(N log N) — N work per level × log N levels.",
+        "language": "General"
+    },
+    {
+        "id": "e0b5df2a-de1b-444b-800f-47a51d4785d7",
+        "question": "Both Merge Sort and Quick Sort use recursion. A company processes arrays of 10 million elements and cares about **memory usage**. Which sort should they prefer and why?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Merge Sort — it uses only O(log N) memory.",
+            "B": "Quick Sort — it uses O(N) memory, which is fine for large arrays.",
+            "C": "Quick Sort — it is nearly in-place (O(log N) recursion stack), using far less memory than Merge Sort's O(N) auxiliary array.",
+            "D": "Both use identical O(N log N) memory; choice doesn't matter."
+        },
+        "test_cases": null,
+        "solution_explanation": "For 10 million (10^7) integers at 4 bytes each:\n- **Merge Sort**: Requires an auxiliary array of ~40 MB (O(N) space)\n- **Quick Sort**: Requires only O(log N) stack space ≈ log₂(10^7) ≈ 23 stack frames, roughly negligible.\n\nFor memory-constrained environments (embedded systems, large datasets), **Quick Sort** is preferred. Merge Sort's O(N) auxiliary space becomes a real problem at scale. However, if stability is required or worst-case guarantee matters, Merge Sort is preferred.",
+        "language": "General"
+    },
+    {
+        "id": "1efdf386-5ec8-4dbc-ba52-256813533f69",
+        "question": "**[HARD]** During **Quick Sort** with the Lomuto partition scheme on array `[2, 8, 7, 1, 3, 5, 6, 4]` with pivot chosen as the first element (pivot = 2), after the first complete partition call returns, what is the partition index and what does the array look like?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Partition index = 0; array: `[2, 8, 7, 1, 3, 5, 6, 4]` (unchanged, pivot already at front).",
+            "B": "Partition index = 1; array: `[1, 2, 7, 8, 3, 5, 6, 4]` — 2 is at index 1.",
+            "C": "Partition index = 2; array: `[1, 2, 3, 8, 7, 5, 6, 4]`.",
+            "D": "Partition index = 4; array: `[1, 2, 3, 4, 5, 6, 7, 8]`."
+        },
+        "test_cases": null,
+        "solution_explanation": "Using **Lomuto partition** (commonly taught as 'Quick Sort partition'):\n- Pivot = arr[0] = 2, last element = 4.\n- Rearrange: elements ≤ pivot go left of pivot, elements > pivot go right.\n- Scan: 8>2, 7>2, 1≤2 → swap arr[0] and arr[3]: swap 8 and 1 = `[2,1,7,8,3,5,6,4]`... \n\nUsing **Lomuto with last element as pivot** is more common. With **first element as pivot** using Lomuto:\n- Move pivot to end first: swap arr[0] and arr[7]: `[4,8,7,1,3,5,6,2]`, pivot=2.\n- i=-1, j scans 0 to 6: none of 4,8,7,1,3,5,6 ≤ 2 except... 1≤2: i=0, swap arr[0]&arr[3]: `[1,8,7,4,3,5,6,2]`.\n- j=4: 3>2, j=5: 5>2, j=6: 6>2.\n- Place pivot: swap arr[i+1]=arr[1] with arr[7]: `[1,2,7,4,3,5,6,8]`... pivot at index 1.\n\nFinal: `[1, 2, 7, 8, 3, 5, 6, 4]` with pivot 2 at **index 1** — matches Option B. Elements to left of index 1: `[1]` (< 2), elements to right: `[7,8,3,5,6,4]` (> 2).",
+        "language": "General"
+    }
+]

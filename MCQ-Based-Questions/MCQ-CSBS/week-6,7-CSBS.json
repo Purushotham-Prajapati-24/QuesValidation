@@ -1,0 +1,322 @@
+[
+    {
+        "id": "cs02a001-0001-4000-a001-000000000001",
+        "question": "What is the key structural difference between a Singly Linked List (SLL) and a Doubly Linked List (DLL)?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "An SLL can store more data per node than a DLL.",
+            "B": "A DLL has both `next` and `prev` pointers in each node, enabling bidirectional traversal; an SLL has only `next`, allowing traversal in one direction.",
+            "C": "A DLL is always sorted; an SLL is unsorted.",
+            "D": "An SLL supports random access in O(1); a DLL does not."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **SLL node**: `data` + `next` pointer only. Traversal: head → tail only.\n2. **DLL node**: `data` + `next` + `prev` pointers. Traversal: head → tail AND tail → head.\n3. **DLL advantage**: O(1) deletion when a pointer to the node is given (access `prev` directly). O(1) insertBefore any node.\n4. **DLL cost**: +1 pointer per node → more memory. More pointer updates for each insertion/deletion.\n5. **Neither** supports O(1) random access — both require O(N) traversal to reach index k.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000002",
+        "question": "In a Circular Linked List (CLL), how can you determine that you have traversed the entire list starting from a node `start`?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "When `temp->next == NULL`.",
+            "B": "When `temp->data == start->data`.",
+            "C": "When `temp->next == start` (the traversal pointer has wrapped back to the starting node).",
+            "D": "When `temp == NULL`."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **CLL property**: The last node's `next` points back to the head — there is no NULL anywhere in the chain.\n2. **Correct termination**: Use a `do-while` loop: `do { temp = temp->next; } while (temp != start);`.\n3. **Option A** (`temp->next == NULL`): Will never be true in a properly formed CLL — infinite loop.\n4. **Option B** (data comparison): Fails if duplicate values exist — you might stop early at a different node.\n5. **Option D** (`temp == NULL`): Same as A — NULL never appears in CLL traversal.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000003",
+        "question": "To insert a node at the BEGINNING of a Singly Linked List, which of the following steps is correct?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "Create new_node, set new_node->next = head, then head = new_node.",
+            "B": "Create new_node, set head->next = new_node, then head = new_node.",
+            "C": "Create new_node, traverse to the tail, then link tail->next = new_node.",
+            "D": "Create new_node, set new_node->next = NULL, then head = new_node."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Correct**: `new_node->next = head` links the new node to the current head. Then `head = new_node` makes the new node the new head.\n2. **Option B**: `head->next = new_node` overwrites the `next` pointer of the old head — the entire rest of the list is now lost (memory leak + data loss).\n3. **Option C**: That inserts at the END, not the beginning.\n4. **Option D**: `new_node->next = NULL` discards the entire existing list — the new node becomes a standalone list.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000004",
+        "question": "Which operation has a different time complexity between a Singly Linked List and a Doubly Linked List when given a direct pointer to the node to be deleted?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "Insertion at head — O(1) for both.",
+            "B": "Insertion at tail — O(1) for both if tail pointer maintained.",
+            "C": "Search by value — O(N) for both.",
+            "D": "Deletion given a direct node pointer — O(1) for DLL (access prev directly), O(N) for SLL (need to find predecessor by traversal)."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **DLL deletion** given pointer `del`: `del->prev->next = del->next; del->next->prev = del->prev; free(del);` — 3 pointer updates, O(1).\n2. **SLL deletion** given pointer `del`: Must traverse from head to find the node whose `next == del`. No `prev` pointer exists — O(N) traversal.\n3. **All other operations listed** (A, B, C) are the same complexity for both SLL and DLL.\n4. **This asymmetry** is the primary motivation for using a DLL when frequent mid-list deletions (given node pointers) are needed.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000005",
+        "question": "Merging two sorted Singly Linked Lists L1 and L2 into a single sorted list: which approach achieves O(N+M) time and O(1) extra space (no auxiliary array)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Copy all elements to an array, sort the array, rebuild the linked list.",
+            "B": "Repeatedly find the minimum of L1 and L2 heads and copy it into a new list — O(N×M).",
+            "C": "Use two pointers, one for each list. At each step, compare heads and link the smaller node into the result by relinking `next` pointers — no copying, O(N+M) time, O(1) space.",
+            "D": "Append L2 to the tail of L1, then apply bubble sort — O((N+M)²)."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Two-pointer merge**: Maintain a `current` result pointer. Compare `p1->data` vs `p2->data`. Link the smaller node to `current->next`, advance the smaller pointer. Repeat until one list is exhausted, then link the remaining list.\n2. **O(N+M) time**: Each node is visited and linked exactly once.\n3. **O(1) space**: No new nodes created — existing nodes are relinked.\n4. **Option A**: O((N+M) log(N+M)) sort + O(N+M) space for array — not the optimal approach.\n5. **Option B**: Each minimum search is O(N+M) per element → O(N×M) total — far worse.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000006",
+        "question": "In polynomial representation using a linked list, each node stores `(coefficient, exponent)`. To add two polynomials P1 and P2, what is the correct step when `P1->exp == P2->exp`?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Copy P1's node to the result and skip P2's node.",
+            "B": "Create a new result node with `coeff = P1->coeff + P2->coeff` and `exp = P1->exp`. Advance both pointers. Skip the result node if the combined coefficient is zero.",
+            "C": "Create two separate result nodes, one from each polynomial.",
+            "D": "Multiply the coefficients and add to the result."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Same exponent**: The terms are like terms — coefficients must be added.\n2. **Zero coefficient**: If `P1->coeff + P2->coeff == 0`, the term vanishes — do NOT add a node for it.\n3. **Algorithm**: Traverse both lists simultaneously (both sorted by descending exponent):\n   - `P1->exp > P2->exp`: copy P1 node to result, advance P1.\n   - `P1->exp < P2->exp`: copy P2 node to result, advance P2.\n   - `P1->exp == P2->exp`: sum coefficients (Option B), advance both.\n4. **Option D** (multiply): That is polynomial multiplication, not addition.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000007",
+        "question": "Represent polynomial P = 5x⁴ + 0x³ + 3x² + 0x + 7 using a linked list. How many nodes should it have and why?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "5 nodes — one per term including zero-coefficient terms.",
+            "B": "3 nodes — store only non-zero terms: (5,4), (3,2), (7,0).",
+            "C": "4 nodes — skip the constant term.",
+            "D": "1 node — store only the highest-degree term."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Sparse polynomial representation**: Linked lists represent polynomials by storing ONLY non-zero coefficient terms.\n2. **P = 5x⁴ + 3x² + 7**: Non-zero terms: coefficient 5 at exp 4, coefficient 3 at exp 2, coefficient 7 at exp 0 → **3 nodes**.\n3. **Advantage over array**: An array of size 5 would waste 2 slots for zero coefficients. For sparse polynomials (e.g., x¹⁰⁰ + 1), an array of 101 entries vs 2 linked list nodes.\n4. **Zero-coefficient terms are omitted** — the exponent field on each node precisely identifies the degree.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000008",
+        "question": "Which algorithm detects a cycle in a Singly Linked List in O(N) time and O(1) extra space?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Floyd's Cycle Detection (Tortoise and Hare): use two pointers — slow moves one step, fast moves two steps; if they meet, a cycle exists.",
+            "B": "Hash set: store visited node addresses; duplicate means cycle — O(N) time, O(N) space.",
+            "C": "Reverse the list and compare with original — O(N) time but modifies the list.",
+            "D": "Count nodes until NULL or count exceeds N²."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Floyd's**: slow = head; fast = head. Each step: slow = slow->next, fast = fast->next->next. If fast or fast->next becomes NULL — no cycle. If slow == fast — cycle detected.\n2. **Why they meet**: In a cycle of length C, fast gains 1 step per iteration on slow. They meet within C iterations inside the cycle.\n3. **O(N) time, O(1) space**: Only 2 pointers used — no auxiliary storage.\n4. **Hash set (B)**: Correct but O(N) space — not optimal.\n5. **Option C**: Reversing modifies the list — destructive and incorrect for cycle detection.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000009",
+        "question": "A Doubly Linked List is used to implement a browser's back/forward navigation history. When the user navigates to a new page from a non-tail position (after pressing Back), what happens to the forward history?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "The new page is appended at the end; forward history is preserved.",
+            "B": "The new page replaces only the current node.",
+            "C": "All nodes after the current position are deleted (forward history is discarded) before inserting the new page as the new next node.",
+            "D": "The DLL is converted to a circular structure."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Situation**: History = [A, B, C, D]. User is at C (pressed Back from D). User navigates to new page E.\n2. **Forward history truncation**: D (and any pages after C) must be removed — you've branched off from the forward path.\n3. **Result**: History becomes [A, B, C, E]. Forward button is now disabled.\n4. **DLL operation**: From node C, set `C->next = new_node_E`, `E->prev = C`, `E->next = NULL`. Then free D (and any further nodes).\n5. **This is standard browser behaviour** — entering a new URL after pressing Back discards the forward stack.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000010",
+        "question": "Given two polynomials P1 = 3x³ + 5x + 2 and P2 = 4x³ + 2x² + 1, what is their sum P1 + P2 expressed as a linked list (nodes in descending exponent order)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "(7,3) → (2,2) → (5,1) → (3,0)",
+            "B": "(7,3) → (5,2) → (2,1) → (3,0)",
+            "C": "(12,6) → (10,2) → (2,0)",
+            "D": "(7,3) → (2,2) → (5,1) → (2,0) → (1,0)"
+        },
+        "test_cases": null,
+        "solution_explanation": "P1 = 3x³ + 0x² + 5x + 2 → nodes: (3,3),(5,1),(2,0)\nP2 = 4x³ + 2x² + 0x + 1 → nodes: (4,3),(2,2),(1,0)\n\nMerge by exponent:\n- exp 3: 3+4 = **7** → (7,3)\n- exp 2: 0+2 = **2** → (2,2)\n- exp 1: 5+0 = **5** → (5,1)\n- exp 0: 2+1 = **3** → (3,0)\n\nResult: **(7,3) → (2,2) → (5,1) → (3,0)**",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000011",
+        "question": "What is the time complexity of reversing a Singly Linked List iteratively (using three pointers: prev, current, next)?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "O(1) — only the head pointer is reversed.",
+            "B": "O(N) — every node is visited exactly once to reverse its `next` pointer.",
+            "C": "O(N²) — each reversal requires re-traversal from the head.",
+            "D": "O(N log N) — the list is sorted during reversal."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Three-pointer iterative reversal**: Initialize prev=NULL, curr=head. Each step: save next=curr->next, reverse curr->next=prev, advance prev=curr, curr=next.\n2. **Each node visited once**: N iterations → O(N).\n3. **O(1) extra space**: Only 3 pointer variables used.\n4. **O(1) reversal** is impossible — at minimum every node's link must be changed.\n5. **Recursive reversal**: Also O(N) time but O(N) stack space — the iterative version is superior.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000012",
+        "question": "In a Circular Linked List, inserting a new node at the BEGINNING requires updating the `next` pointer of which existing node?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "The head node's `next` pointer.",
+            "B": "The new node's `next` pointer only.",
+            "C": "No existing node — just update the head pointer.",
+            "D": "The last node's `next` pointer — it must point to the new node (which becomes the new head)."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **CLL insertion at beginning**:\n   a. Create new_node.\n   b. Find the last node (traverse until `last->next == head`).\n   c. Set `new_node->next = head`.\n   d. Set `last->next = new_node` ← this maintains circularity.\n   e. Update `head = new_node`.\n2. **Without step d**: The last node still points to the old head — the new node is orphaned from the circular chain.\n3. **This is the key difference** from SLL insertion at beginning — in SLL, only step c and e are needed.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000013",
+        "question": "Find the middle node of a Singly Linked List with N nodes in ONE PASS (O(N) time, O(1) space). Which technique is correct?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Count nodes (first pass), divide by 2, traverse again to that index (second pass) — O(N), but two passes.",
+            "B": "Tortoise and Hare: slow moves 1 step, fast moves 2 steps; when fast reaches the tail, slow is at the middle.",
+            "C": "Use a stack to store all nodes, then pop N/2 times.",
+            "D": "Access index N/2 directly — O(1) like an array."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Slow/Fast pointer**: Both start at head. Each cycle: slow = slow->next, fast = fast->next->next. When fast->next == NULL (odd N) or fast->next->next == NULL (even N, first of two midpoints), slow is the middle.\n2. **One pass**: N traversal steps for fast, N/2 for slow — all in a single loop.\n3. **O(1) space**: Only two pointer variables.\n4. **Option A**: Correct result but two passes — the question specifically asks for one pass.\n5. **Option D**: Linked lists have no random access — reaching index k requires O(k) traversal.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000014",
+        "question": "Two polynomials are multiplied using linked lists. P1 = 2x² + 3x and P2 = x + 4. What is the correct result P1 × P2?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "2x³ + 3x²",
+            "B": "2x³ + 11x + 12",
+            "C": "2x³ + 11x² + 12x",
+            "D": "2x³ + 8x² + 3x² + 12x"
+        },
+        "test_cases": null,
+        "solution_explanation": "P1 = 2x² + 3x; P2 = x + 4\n\nMultiply each term:\n- 2x² × x  = 2x³\n- 2x² × 4  = 8x²\n- 3x  × x  = 3x²\n- 3x  × 4  = 12x\n\nCombine like terms:\n- x³: 2x³\n- x²: 8x² + 3x² = **11x²**\n- x: **12x**\n- constant: 0\n\n**P1 × P2 = 2x³ + 11x² + 12x**\n\nOption D shows the un-combined terms — valid as intermediate step but not simplified final answer.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000015",
+        "question": "A Skip List is an alternative to a sorted linked list. What is its average-case time complexity for search, insert, and delete?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "O(N) for all — same as a sorted linked list.",
+            "B": "O(log N) average for all — multiple levels of express lanes allow binary-search-like skipping.",
+            "C": "O(1) for all — achieved via direct pointer computation.",
+            "D": "O(N log N) — sorted structure requires merge-sort-style operations."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Skip List structure**: Multiple levels, each a sparser linked list. Level 0 = full list; level k contains ~N/2^k elements.\n2. **Search**: Start at the topmost level (fewest nodes). At each node, either advance on the same level or drop down a level — like binary search. Expected O(log N) comparisons.\n3. **Insert**: Search for position O(log N), then add node to random levels (geometric distribution) — O(log N).\n4. **Comparison with BST**: Skip List achieves the same O(log N) asymptotically with simpler lock-free concurrent implementation.\n5. **Real use**: Redis uses a skip list for its sorted set (ZSET) data structure.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000016",
+        "question": "When deleting a node by VALUE from a Singly Linked List, which edge case requires special handling beyond the standard `prev->next = curr->next` bridge?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "D",
+        "options": {
+            "A": "Deleting a node in the middle.",
+            "B": "Deleting the tail node.",
+            "C": "Deleting when the list has more than 10 nodes.",
+            "D": "Deleting the head node — the external `head` pointer must be updated to `head->next`."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Middle deletion**: `prev->next = curr->next; free(curr);` — standard case, works correctly.\n2. **Tail deletion**: `prev->next = NULL; free(curr);` — handled by standard case since `curr->next == NULL`.\n3. **Head deletion**: There is no `prev` node. Must specifically handle: `head = head->next; free(old_head);`. The caller's `head` pointer must be updated.\n4. **Why it's special**: The `prev->next = ...` bridge requires a previous node — head has no previous node.\n5. **Fix**: Check `if (curr == head)` before the general deletion logic.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000017",
+        "question": "A memory allocator maintains a free list as a linked list of free memory blocks. When a block is freed, it is inserted in sorted order by address. Why sorted insertion?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Sorted order allows O(1) block allocation.",
+            "B": "Sorted order enables efficient coalescing — adjacent free blocks can be merged in O(1) by checking neighbouring nodes in the sorted list.",
+            "C": "Sorted order prevents memory fragmentation entirely.",
+            "D": "Sorted order is required by the OS kernel."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Coalescing**: When freeing block B, if the previous free block ends exactly where B starts (or B ends where the next free block starts), they can be merged into one larger block.\n2. **Sorted list advantage**: Adjacent nodes in the sorted-by-address free list correspond to adjacent memory regions — O(1) check of neighbours determines if merging is possible.\n3. **Without sorting**: Finding adjacent free blocks requires O(N) scan of the entire free list for each coalesce check.\n4. **Fragmentation**: Sorted insertion + coalescing *reduces* external fragmentation but does not eliminate it — internal fragmentation still exists.\n5. **Real-world**: glibc's `free()` uses this strategy in its boundary tag allocator.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000018",
+        "question": "Deleting from a Doubly Linked List when the node to delete is the ONLY node in the list (head == tail == node). What is the correct final state?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "head = NULL, tail = NULL — the list is now empty.",
+            "B": "head = NULL, tail unchanged — tail still points to freed memory.",
+            "C": "head = node->next (= NULL), tail unchanged — invalid state.",
+            "D": "The node is not deleted — cannot delete the only node."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Only node**: `head == tail == del`. `del->prev == NULL` and `del->next == NULL`.\n2. **After delete**: Both `head` and `tail` must be set to NULL. Leaving `tail` pointing to the freed node creates a dangling pointer.\n3. **Next enqueue/insert**: Would use `tail->next = new_node` — writing to freed memory → undefined behaviour.\n4. **Correct code**:\n```c\nif (head == tail) { free(head); head = tail = NULL; }\n```\n5. This is one of the most common bugs in DLL/queue implementations.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000019",
+        "question": "Polynomial evaluation using Horner's method on a linked list representation of P(x) = aₙxⁿ + ... + a₀ at x=k. What is the time complexity?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "O(N²) — requires N multiplications per term.",
+            "B": "O(N log N) — uses divide and conquer.",
+            "C": "O(N) — Horner's method processes each term in O(1) using accumulated result: result = result*k + coeff.",
+            "D": "O(1) — constant time evaluation for any polynomial."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Horner's method**: Rewrite P(x) = a₀ + x(a₁ + x(a₂ + ... + x(aₙ)...)). Evaluate inside-out.\n2. **Algorithm**: `result = 0; for each term (coeff, exp) from highest to lowest: result = result * k + coeff;`\n3. **Each step**: One multiply + one add = O(1). N terms → **O(N) total**.\n4. **Naive evaluation**: Each term aᵢxⁱ requires i multiplications → 0+1+2+...+(N-1) = O(N²) multiplications total.\n5. **Horner's advantage**: N multiplications vs naive O(N²) — twice as efficient for dense polynomials.",
+        "language": "C"
+    },
+    {
+        "id": "cs02a001-0001-4000-a001-000000000020",
+        "question": "A Josephus Problem variant: N people stand in a circle; every Kth person is eliminated. Which data structure provides the most natural and efficient implementation?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Array — random access allows O(1) counting, but deletion shifts elements O(N) each time.",
+            "B": "Circular Linked List — the circular structure mirrors the problem's circular elimination; deletion is O(1) given a predecessor pointer, and wrapping is inherent.",
+            "C": "Binary Search Tree — sorted structure ensures O(log N) elimination per step.",
+            "D": "Stack — LIFO eliminates from the top naturally."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Circular Linked List**: Perfectly models the circle of N people. Traverse K-1 steps from current position, delete the Kth node by relinking `prev->next = curr->next`.\n2. **Array deletion**: After deleting one element, all subsequent elements must shift left — O(N) per elimination → O(N²) total for N people.\n3. **CLL elimination**: Traverse K steps (O(K) per elimination), delete O(1) → O(N×K) total — much better than array for small K.\n4. **BST**: Useful mathematically (Josephus formula), but not the direct simulation structure.\n5. **CLL is the standard answer** for Josephus simulation problems.",
+        "language": "C"
+    }
+]

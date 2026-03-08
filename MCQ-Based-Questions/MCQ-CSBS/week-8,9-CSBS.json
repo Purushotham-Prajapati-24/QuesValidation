@@ -1,0 +1,322 @@
+[
+    {
+        "id": "cs03a001-0001-4000-a001-000000000001",
+        "question": "What property distinguishes a Binary Search Tree (BST) from a general Binary Tree?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "A BST always has exactly two children per node.",
+            "B": "A BST stores elements in sorted order in an array.",
+            "C": "For every node N in a BST: all values in N's left subtree < N's value < all values in N's right subtree (recursively).",
+            "D": "A BST is always perfectly balanced."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **BST property**: Left subtree < node < right subtree — applies recursively to every subtree.\n2. **General Binary Tree**: No ordering constraint on values — children can have any values.\n3. **BST advantage**: Ordering enables O(log N) search in balanced trees — at each node, half the values are eliminated.\n4. **Not always balanced**: A BST can degenerate (sorted insertion creates a chain).\n5. **Not always 2 children**: BST nodes can have 0, 1, or 2 children.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000002",
+        "question": "What is the key property of an AVL Tree that differentiates it from a standard BST?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "An AVL Tree stores all data in leaves only.",
+            "B": "An AVL Tree maintains the Balance Factor (BF = height(left) - height(right)) as -1, 0, or +1 for every node, ensuring O(log N) height.",
+            "C": "An AVL Tree allows duplicate keys in both subtrees.",
+            "D": "An AVL Tree rebalances only at the root."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Balance Factor**: BF = height(left subtree) - height(right subtree) for each node.\n2. **AVL constraint**: |BF| ≤ 1 at every node. If |BF| becomes 2 after insertion/deletion, rotations restore balance.\n3. **Height guarantee**: With balanced BF, height ≤ 1.44 × log₂(N) — O(log N) for all operations.\n4. **Standard BST**: No balance constraint — can degrade to O(N) height.\n5. **Rotations**: LL, RR, LR, RL — four rotation cases handle all imbalance scenarios.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000003",
+        "question": "In a B-Tree of order M (maximum M children per node), what is the minimum number of keys a non-root internal node must have?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "1 key",
+            "B": "M/2 keys",
+            "C": "⌈M/2⌉ - 1 keys",
+            "D": "M - 1 keys"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **B-Tree properties**: A node with K keys has K+1 children pointers.\n2. **Maximum keys per node**: M-1 keys (M children).\n3. **Minimum for non-root internal node**: ⌈M/2⌉ - 1 keys (⌈M/2⌉ children). This ensures the tree stays balanced after deletions.\n4. **Root**: Can have as few as 1 key (2 children).\n5. **Example**: B-Tree of order 5 → non-root internal nodes must have ≥ ⌈5/2⌉-1 = 2 keys, ≤ 4 keys.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000004",
+        "question": "What is the height of a complete binary tree with N nodes expressed in terms of N?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "N - 1",
+            "B": "⌊log₂N⌋",
+            "C": "N/2",
+            "D": "2^N"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Complete binary tree**: All levels filled except possibly the last, which is filled left to right.\n2. **Height h**: A complete binary tree of height h has between 2^h and 2^(h+1)-1 nodes.\n3. **Solving for h**: 2^h ≤ N → h ≤ log₂N → h = ⌊log₂N⌋.\n4. **Verification**: N=7 → h=⌊log₂7⌋=2 ✅ (3 levels: 1+2+4=7 nodes). N=8 → h=3 ✅ (4 levels needed).\n5. This is the foundation for heap and BST complexity analysis.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000005",
+        "question": "After inserting key 30 into the AVL Tree:\n```\n    20\n   /  \\\n  10   25\n         \\\n          30  ← just inserted\n```\nThe balance factor of node 20 is -2 (right-heavy). What rotation restores balance?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "LL Rotation (single right rotation at node 20).",
+            "B": "RR Rotation (single left rotation at node 20) — 25 becomes the new root.",
+            "C": "LR Rotation (left rotate on left child, then right rotate at node 20).",
+            "D": "RL Rotation (right rotate on right child, then left rotate at node 20)."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Imbalance check**: Compute balance factors. Node 25 is right-heavy with BF = -1. Node 20 is right-heavy with BF = -2.\n2. **Right-Right (RR) case**: The imbalance is on the right and the right child (25) is right-heavy. This is the RR case.\n3. **RR Rotation**: Perform a single left rotation at node 20. Result: 25 becomes root, 20 becomes left child of 25, 30 remains right child of 25.\n4. **Result tree**: `25 / 20 \\ 30` with 10 as left child of 20 — balanced ✅.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000006",
+        "question": "In a B+ Tree, what is the key structural difference from a B-Tree regarding data storage?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "In a B+ Tree, all actual data records are stored ONLY in the leaf nodes; internal nodes store only keys as routing/separator values. Leaf nodes are linked as a sorted doubly-linked list.",
+            "B": "In a B+ Tree, data is stored in internal nodes only; leaf nodes are empty.",
+            "C": "B+ Trees and B-Trees store data identically — only the names differ.",
+            "D": "In a B+ Tree, leaf nodes store only keys; internal nodes store the full records."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **B-Tree**: Every node (internal and leaf) stores key-value data records.\n2. **B+ Tree**: Internal nodes store only keys (for routing/search). All actual data is in leaf nodes.\n3. **Leaf linked list**: All leaf nodes are connected left-to-right, enabling efficient range queries (scan leaf list without going back up the tree).\n4. **Advantage**: Because internal nodes store only keys, they can hold more keys → fewer levels → shallower tree → fewer disk I/Os.\n5. **Usage**: Databases (MySQL InnoDB, PostgreSQL) use B+ Tree indexes — range queries benefit from the leaf-level linked list.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000007",
+        "question": "In a Threaded Binary Tree (using Morris traversal threads), what do the NULL right pointers of leaf/left-heavy nodes point to?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "NULL — threads are always null in a threaded tree.",
+            "B": "The in-order successor of the node — enabling in-order traversal without a stack or recursion.",
+            "C": "The root of the entire tree.",
+            "D": "The parent node of the current node."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Threaded Binary Tree**: Replaces NULL pointers with threads pointing to in-order predecessors/successors.\n2. **Right thread**: A NULL right pointer is replaced with a pointer to the node's in-order successor.\n3. **Left thread**: A NULL left pointer is replaced with a pointer to the in-order predecessor.\n4. **Morris In-Order traversal**: Exploits right threads to traverse without O(N) stack space — O(1) extra space.\n5. **Identification**: A boolean flag `isThread` distinguishes whether `right` is a real child or a thread pointer.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000008",
+        "question": "Deleting a node with two children from a BST. To find the In-Order Successor, from the deleted node you go: right once, then left as far as possible. For the BST:\n```\n        50\n       /  \\\n      30   70\n     /  \\  / \\\n    20  40 60  80\n```\nDeleting 50 — what is the In-Order Successor and the resulting tree root?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "In-Order Successor = 70; new root = 70.",
+            "B": "In-Order Successor = 40; new root = 40.",
+            "C": "In-Order Successor = 60; new root = 60.",
+            "D": "In-Order Successor = 80; new root = 80."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Delete 50 (two children)**: Go right to 70, then go left as far as possible → 60 (70's left child, which has no left child).\n2. **In-Order Successor = 60** ✅ — the smallest value in the right subtree of 50.\n3. **Procedure**: Copy 60 into node 50's position. Delete the original node 60 (which has no left child; right subtree if any goes to 70's left).\n4. **Result tree**: root = 60, left = 30, right = 70. 70's left = NULL (60 was moved), 70's right = 80.\n5. **BST property preserved**: 60 > all left subtree values (30,20,40) ✅ and 60 < 70 < 80 ✅.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000009",
+        "question": "The LR rotation in an AVL tree is a double rotation. In what imbalance situation is it applied?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "The root is right-heavy and the right child is right-heavy.",
+            "B": "The root is left-heavy and the left child is left-heavy.",
+            "C": "The root is right-heavy and the right child is left-heavy.",
+            "D": "The root is left-heavy and the left child is right-heavy — a new node was inserted in the right subtree of the left child."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Four AVL cases** based on where imbalance occurs:\n   - **LL**: Left-heavy root, left-heavy child → single right rotation.\n   - **RR**: Right-heavy root, right-heavy child → single left rotation.\n   - **LR**: Left-heavy root, RIGHT-heavy left child → left rotate left child, then right rotate root.\n   - **RL**: Right-heavy root, LEFT-heavy right child → right rotate right child, then left rotate root.\n2. **LR case trigger**: New node inserted in the right subtree of the left child → creates a 'zigzag' imbalance that a single rotation cannot fix.\n3. **Double rotation**: First normalises the zigzag to a straight line (LL case), then applies the appropriate single rotation.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000010",
+        "question": "A B-Tree of order 5 is used as a database index. A node currently has 4 keys [10, 20, 30, 40] and is full. When key 25 is inserted, what happens?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Key 25 is appended after 40 — the node now holds 5 keys.",
+            "B": "The node splits: [10, 20] in the left child, [30, 40] in the right child, and the median key 25 is promoted to the parent.",
+            "C": "Key 25 replaces the median key 20.",
+            "D": "Key 25 is stored in a linked overflow block."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **B-Tree of order 5**: Max keys per node = 4 (M-1). The node [10,20,30,40] is full.\n2. **Insertion triggers split**: Insert 25 into [10,20,30,40] → [10,20,25,30,40] (5 keys — overflow).\n3. **Split rule**: Find median = 25 (index M/2 = 2). Left node gets [10,20], right node gets [30,40]. Median **25 is promoted** to the parent.\n4. **Result**: Parent gains key 25; two children are created with 2 keys each — within bounds [⌈M/2⌉-1=2, M-1=4].\n5. **This split can propagate** upward if the parent was also full — potentially creating a new root.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000011",
+        "question": "Inorder traversal of a valid BST produces a sequence. What property does this sequence always have?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "Strictly increasing (sorted ascending) — because the BST property ensures left < node < right at every level.",
+            "B": "Strictly decreasing (sorted descending).",
+            "C": "Alternating odd and even values.",
+            "D": "The sequence is unsorted — inorder traversal of a BST gives values in insertion order."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Inorder (Left-Root-Right)**: Always visits nodes in the order: all left subtree values, then root, then all right subtree values.\n2. **BST property**: left subtree values < root < right subtree values → inorder visits smaller values first, then root, then larger values.\n3. **Result**: Strictly ascending sorted sequence (assuming no duplicates).\n4. **Useful application**: Inorder traversal of a BST gives sorted output in O(N) — an O(N) sorted array from a BST without any sorting algorithm.\n5. **Inverse**: If you want descending order, do Reverse-Inorder (Right-Root-Left).",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000012",
+        "question": "A B+ Tree is used to index a database table with 1,000,000 records. Each internal node holds 100 keys. Approximately how many levels does the B+ Tree have?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "1,000,000 levels — one per record.",
+            "B": "100 levels.",
+            "C": "Approximately 3 levels — log₁₀₁(1,000,000) ≈ 3.",
+            "D": "10 levels."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Fan-out**: Each node holds 100 keys → 101 children pointers.\n2. **Level 0 (root)**: 1 node → 101¹ ≈ 101 child pointers.\n3. **Level 1**: 101 nodes → 101² ≈ 10,201 leaf pointers.\n4. **Level 2 (leaves)**: 101² ≈ 10,201 leaf nodes. If each leaf stores 100 records: 10,201 × 100 ≈ 1,020,100 records. ✅\n5. **Answer**: ~3 levels (root + 1 internal + leaves). Disk I/Os to find any record = 3 — extremely efficient vs. linear scan of 1,000,000 records.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000013",
+        "question": "In an AVL Tree, after an RL (Right-Left) double rotation, which node becomes the new subtree root?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "The original root of the imbalanced subtree.",
+            "B": "The left child of the imbalanced node's right child (the 'middle' node in the zig-zag).",
+            "C": "The right child of the imbalanced node.",
+            "D": "The deepest newly inserted node."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **RL scenario**: Root Z is right-heavy; its right child X is left-heavy. The new node is inserted in the left subtree of X.\n2. **Step 1 (Right Rotation on X)**: X's left child Y is rotated up → Y becomes Z's right child, X becomes Y's right child.\n3. **Step 2 (Left Rotation on Z)**: Y is rotated up to become the subtree root, Z becomes Y's left child.\n4. **New root = Y** — the left child of the original right child X.\n5. **Height balanced**: After rotation, Y's balance factor = 0; Z and X become children of Y with |BF| ≤ 1.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000014",
+        "question": "What is the maximum number of keys a B-Tree of order M at height H can hold?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "A",
+        "options": {
+            "A": "(M^(H+1) - 1) × (M-1) / (M-1) = M^(H+1) - 1 keys — each of the M^(H+1) possible nodes (at all levels) has M-1 keys maximum.",
+            "B": "H × (M-1) keys",
+            "C": "M^H keys",
+            "D": "(M-1) keys — only the root matters."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Nodes per level**: Level 0: 1 node, Level 1: M nodes, Level 2: M² nodes, ..., Level H: M^H nodes.\n2. **Total nodes**: 1 + M + M² + ... + M^H = (M^(H+1) - 1) / (M - 1).\n3. **Keys per node (max)**: M-1 keys.\n4. **Total max keys**: [(M^(H+1) - 1) / (M - 1)] × (M-1) = **M^(H+1) - 1**.\n5. **Example**: Order 3, Height 2 → max keys = 3³-1 = 26. Levels: 1+3+9=13 nodes × 2 keys = 26 ✅",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000015",
+        "question": "A Threaded Binary Tree eliminates the need for a stack in iterative inorder traversal. If a right pointer is threaded (points to in-order successor), how do you distinguish a thread from a real right child pointer?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Thread pointers are always NULL.",
+            "B": "Thread pointers always point to the root.",
+            "C": "Each node has a boolean flag `rightThread` (or `isThread`). If `rightThread == true`, the right pointer is a thread; otherwise it is a real child pointer.",
+            "D": "The value at the threaded-to node is always smaller than the current node."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Problem**: Both threads and real children use the same pointer field (`right`). A mechanism must distinguish them.\n2. **Solution**: Add a boolean `rightThread` flag per node. `true` = thread (in-order successor link), `false` = real right child.\n3. **Traversal logic**: If `node->rightThread == true`, follow `node->right` directly to the successor. If `false`, go right and then find the leftmost node in the right subtree.\n4. **Single-threaded tree**: Only right pointers are threaded. Double-threaded: both left and right pointers may be threaded.\n5. **Alternative**: Use a sentinel/dummy header node — but the flag approach is simpler.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000016",
+        "question": "Inserting keys [10, 20, 30, 40, 50] in order into an empty AVL Tree. After all insertions, what is the height of the resulting AVL Tree?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "Height 4 — same as a degenerate BST from sorted insertion.",
+            "B": "Height 1 — always balanced to one level.",
+            "C": "Height 2 — rotations keep the AVL tree at ⌊log₂5⌋ = 2.",
+            "D": "Height 3"
+        },
+        "test_cases": null,
+        "solution_explanation": "Insertions with AVL rebalancing:\n1. Insert 10 → [10] height=0\n2. Insert 20 → [10→20] height=1\n3. Insert 30 → RR imbalance at 10 → Left rotate → **20**(10,30) height=1\n4. Insert 40 → 30→40, BF at 20 = -1 → ok. Height=2\n5. Insert 50 → RR imbalance at 30 → Left rotate at 30 → 40(30,50). Tree: 20(10, 40(30,50)). BF at 20 = -1 → ok.\n\n**Final height = 2** (root 20, children 10 and 40, grandchildren 30 and 50).\n\nFinal tree height ⌊log₂5⌋ = 2 confirms AVL's O(log N) height guarantee.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000017",
+        "question": "In a B+ Tree traversal for a range query [25, 60], which is the most efficient approach?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Find leaf node containing 25 via top-down traversal, then follow the leaf-level linked list rightward until key 60 is passed — O(log N + K) where K is the number of results.",
+            "B": "Traverse the entire tree level by level collecting all values, then filter those in [25,60].",
+            "C": "Perform two separate root-to-leaf searches for 25 and 60, returning everything in between.",
+            "D": "Use binary search on the root array — O(log N) per record."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Find start**: Search root-to-leaf for 25 → O(log N) tree traversal.\n2. **Scan leaf chain**: Starting from the leaf containing 25, follow `next` pointers across the leaf-level doubly linked list, collecting every key ≤ 60 → O(K) additional steps.\n3. **Total**: O(log N + K) — optimal for range queries.\n4. **B-Tree (no leaf links)**: Would require tree traversal for each record or in-order traversal — O(N) worst case for wide ranges.\n5. **This is why B+ Trees dominate in databases**: Range scans (e.g., `SELECT ... WHERE age BETWEEN 25 AND 60`) are extremely efficient.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000018",
+        "question": "Binary Tree traversal: Pre-Order sequence = [8, 5, 1, 7, 10, 12], In-Order sequence = [1, 5, 7, 8, 10, 12]. Reconstruct the tree. What is its Post-Order traversal?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "[7, 1, 5, 10, 12, 8]",
+            "B": "[1, 7, 5, 12, 10, 8]",
+            "C": "[1, 5, 7, 10, 12, 8]",
+            "D": "[7, 1, 5, 12, 10, 8]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Pre: [8,5,1,7,10,12] → Root = 8.\nIn-Order: [1,5,7,**8**,10,12] → Left subtree = [1,5,7], Right subtree = [10,12].\n\nLeft (Pre: [5,1,7], In: [1,5,7]):\n- Root = 5. Left = [1], Right = [7].\n\nRight (Pre: [10,12], In: [10,12]):\n- Root = 10. Right = [12].\n\nTree:\n```\n       8\n      / \\\n     5   10\n    / \\    \\\n   1   7   12\n```\n\nPost-Order (L-R-Root): 1, 7, 5, 12, 10, 8 ✅",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000019",
+        "question": "What is the worst-case time complexity of search, insert, and delete operations in an AVL Tree?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "O(log N) for all three — AVL balancing guarantees O(log N) height.",
+            "B": "O(N) — rotations can cascade through the entire tree.",
+            "C": "O(N log N) — each operation requires a full traversal plus sorting.",
+            "D": "O(1) — direct access via balance factors."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **AVL height bound**: An AVL tree of N nodes has height ≤ ~1.44 × log₂(N) = O(log N).\n2. **Search**: Traverses root-to-leaf → O(height) = O(log N).\n3. **Insert**: Find position O(log N) + rotations. Rotations cascade at most O(log N) levels upward, each O(1) → total O(log N).\n4. **Delete**: Find node O(log N) + possible rotations O(log N) → O(log N).\n5. **vs BST worst case**: Unbalanced BST → O(N). AVL's rotation cost is the price paid for guaranteed O(log N) — typically worth it for lookup-heavy workloads.",
+        "language": "C"
+    },
+    {
+        "id": "cs03a001-0001-4000-a001-000000000020",
+        "question": "Consider a B-Tree of order 3 (max 2 keys, max 3 children per node). After inserting keys [5, 3, 21, 9, 1, 13, 2, 7, 10, 12, 4, 8] one by one using the standard B-Tree split algorithm, what is the height of the resulting tree?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "Height 1 (root + leaves only).",
+            "B": "Height 4.",
+            "C": "Height 2 (root + 1 internal level + leaves).",
+            "D": "Height 6."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **B-Tree order 3**: Max 2 keys, min 1 key (non-root). Splits occur when a node reaches 3 keys.\n2. **Progressive splits**: As 12 keys are inserted, splits propagate upward. With 12 keys in a B-Tree of order 3, the tree height stabilises.\n3. **Max keys at height 2**: root(2) + internal(2×3=6) + leaves(up to 9×2=18) → sufficient for 12 keys.\n4. **Min keys at height 2**: Minimum B-Tree has root(1 key), 2 internal nodes(1 key each), each with 2 leaf children(1 key each) = 1+2+4 = 7 nodes holding 7 keys minimum → height 2 can hold 12.\n5. **Height 2 is correct** for 12 keys in a B-Tree of order 3 — 12 keys exceed what a height-1 tree (max 6 keys in leaves) can hold.",
+        "language": "C"
+    }
+]

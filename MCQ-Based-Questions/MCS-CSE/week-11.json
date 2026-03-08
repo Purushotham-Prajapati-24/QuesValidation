@@ -1,0 +1,162 @@
+[
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567111",
+        "question": "What is the fundamental ordering property that every node in a Binary Search Tree (BST) must satisfy?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "The left subtree contains only nodes greater than the current node; the right subtree contains nodes smaller.",
+            "B": "All nodes at even depth are smaller than all nodes at odd depth.",
+            "C": "For every node N: all values in N's left subtree are strictly less than N's value, and all values in N's right subtree are strictly greater than N's value.",
+            "D": "The root is always the median of all stored values."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **BST property**: For node `N` with value `V`: `left subtree values < V < right subtree values`. This applies recursively to every subtree.\n2. **Option A** reverses the left/right convention — that would be a mirrored BST.\n3. **The root being the median** only holds for a perfectly balanced BST — not a defining property.\n4. This ordering enables binary search: at each node, comparisons eliminate half the remaining space → O(log N) for balanced trees.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567112",
+        "question": "What is the In-Order traversal output of the following BST?\n```\n        50\n       /  \\\n      30   70\n     /  \\    \\\n    20   40   80\n```",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "20, 30, 40, 50, 70, 80",
+            "B": "50, 30, 70, 20, 40, 80",
+            "C": "20, 40, 30, 80, 70, 50",
+            "D": "50, 20, 40, 30, 80, 70"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **In-Order**: Left → Root → Right applied recursively.\n2. Left of 50 → left of 30 → 20 → back to 30 → right of 30 → 40 → Root 50 → right of 50 → 70 → right of 70 → 80.\n3. Result: **20, 30, 40, 50, 70, 80** — In-Order of a valid BST always yields sorted ascending output.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567113",
+        "question": "What is the time complexity of search in a balanced BST versus a degenerate (right-skewed) BST with N nodes?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "Balanced: O(N); Skewed: O(log N)",
+            "B": "Balanced: O(log N); Skewed: O(N)",
+            "C": "Balanced: O(1); Skewed: O(N)",
+            "D": "Both: O(N log N)"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Balanced BST**: Height = O(log N). Search visits at most `height` nodes → O(log N).\n2. **Skewed BST**: Sorted insertions (e.g., 1,2,3,...) produce a right-only chain of height N-1. Search degrades to O(N) — equivalent to a linked list scan.\n3. **O(N log N)** never applies to a single BST search.\n4. **Fix**: Use self-balancing trees (AVL, Red-Black) to guarantee O(log N) always.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567114",
+        "question": "When deleting a node with two children from a BST, which replacement strategy correctly preserves the BST property?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Replace with any leaf node from either subtree.",
+            "B": "Replace with the In-Order Successor (leftmost node of right subtree) or In-Order Predecessor (rightmost of left subtree).",
+            "C": "Directly attach both children to the deleted node's parent.",
+            "D": "Replace with the right child and discard the left subtree."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **In-Order Successor**: Smallest value in the right subtree. It is greater than all left-subtree values and smaller than remaining right-subtree values — perfectly slots into the deleted position.\n2. **In-Order Predecessor**: Largest in the left subtree — symmetrically valid.\n3. **Procedure**: Copy successor value to the deleted node, then delete the successor node (which has at most one child — the easier case).\n4. **Option D** discards the entire left subtree — catastrophic data loss.\n5. **Option C** creates a node with three children — impossible in a binary tree.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567115",
+        "question": "A BST is built by inserting [50, 25, 75, 10, 35, 60, 85] in order. How many node comparisons does searching for value 35 require?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "1 comparison — found at root.",
+            "B": "2 comparisons — found at depth 1.",
+            "C": "3 comparisons — path: 50 → 25 → 35.",
+            "D": "4 comparisons — found at depth 3."
+        },
+        "test_cases": null,
+        "solution_explanation": "Tree after insertions:\n```\n        50\n       /  \\\n      25   75\n     /  \\  / \\\n    10  35 60  85\n```\n1. Compare 35 vs 50: 35 < 50 → go left.\n2. Compare 35 vs 25: 35 > 25 → go right.\n3. Compare 35 vs 35: match → **found!**\n\nTotal = **3 comparisons** (path length = depth + 1 = 2 + 1 = 3).",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567116",
+        "question": "Which BST traversal, when combined with In-Order traversal, uniquely reconstructs the original tree structure?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Pre-Order — its first element is always the root, enabling recursive left/right partitioning using In-Order.",
+            "B": "In-Order alone — the sorted sequence uniquely identifies the tree.",
+            "C": "Level-Order alone — breadth-first layout encodes the full structure.",
+            "D": "Post-Order alone — last element is the root."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **In-Order alone**: Any sorted sequence corresponds to infinitely many BST shapes — insufficient.\n2. **Pre-Order + In-Order**: Pre-Order gives root first. Locate the root in In-Order to split left/right subtrees. Recurse on each half → unique reconstruction.\n3. **Post-Order + In-Order** also works (last element of Post-Order is root).\n4. **Level-Order alone** cannot reconstruct without explicit NULL markers.\n5. **Correct answer**: Pre-Order combined with In-Order uniquely identifies the BST.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567117",
+        "question": "Inserting elements [1, 2, 3, 4, 5, 6, 7] in sorted order into an empty BST produces a skewed tree of height 6. How does this compare to the height of a balanced BST holding the same 7 elements?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "Skewed height = 3; balanced height = 6.",
+            "B": "Both have height 3.",
+            "C": "Skewed height = 7; balanced height = 3.",
+            "D": "Skewed height = 6 (N-1); balanced height = 2 (⌊log₂7⌋)."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Sorted insertion [1..7]**: Each element becomes the right child of the previous. Structure is a single right-chain with height = N-1 = **6**.\n2. **Balanced BST with 7 nodes**: A perfect binary tree of height h holds 2^(h+1)-1 nodes. For 7 nodes: h = 2 → 2³-1 = 7. Minimum height = ⌊log₂7⌋ = **2**.\n3. **Search cost comparison**: Skewed → up to 7 comparisons. Balanced → at most 3 comparisons.\n4. **Lesson**: Insertion order critically impacts BST performance — random order produces near-balanced trees on average.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567118",
+        "question": "What is the maximum number of nodes a BST of height `h` (where a single-node tree has height 0) can contain?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "D",
+        "options": {
+            "A": "h + 1 nodes",
+            "B": "h² nodes",
+            "C": "2^h nodes",
+            "D": "2^(h+1) - 1 nodes"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Perfect binary tree**: Every level is fully filled. Level i (0-indexed) has exactly 2^i nodes.\n2. **Total for height h**: Sum from i=0 to h of 2^i = 2^0 + 2^1 + ... + 2^h = **2^(h+1) - 1** (geometric series).\n3. **Verification**: h=0 → 2^1-1=1 ✅; h=1 → 2^2-1=3 ✅; h=2 → 2^3-1=7 ✅; h=3 → 15 ✅.\n4. **Why not C (2^h)?**: 2^h only counts the nodes at the *last level* of a perfect binary tree — not the total.\n5. **Why not A (h+1)?**: h+1 is the minimum node count — the degenerate/skewed chain with height h has only h+1 nodes.\n6. This formula is foundational for analysing heap storage and BST capacity.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567119",
+        "question": "A BST deletion function deletes a node with one child using: `parent->left = del->right; free(del);`. What critical general case does this single-line approach fail to handle?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "It fails when del->right is NULL (empty subtree).",
+            "B": "It fails when the deleted node is the deepest leaf.",
+            "C": "It fails when the deleted node is the right child of its parent (should use parent->right, not parent->left), and also when del is the root.",
+            "D": "It always works correctly for any single-child node."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Hard-coded `parent->left`**: If `del` is actually the *right* child of its parent, writing `parent->left = del->right` corrupts the tree — it detaches `parent->right` and incorrectly links `del->right` as the left child.\n2. **Root case**: If `del` has no parent (it is the root), `parent` is NULL → NULL dereference → crash.\n3. **Correct implementation**: Check whether `del` is `parent->left` or `parent->right` before linking, and handle the root separately by updating the caller's `head` pointer.\n4. **Always works** is false — this implementation has at least two structural failure cases.",
+        "language": "C"
+    },
+    {
+        "id": "d1e2f3a4-b5c6-7890-defa-bc1234567120",
+        "question": "A BST stores distinct integers. After inserting N elements, what is the exact number of distinct BST structures that can be formed from N distinct keys, and what does this imply about insertion order?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "N! structures — one per permutation, all distinct.",
+            "B": "Catalan(N) = C(2N,N)/(N+1) distinct structures — different insertion orders can yield the same shape.",
+            "C": "2^N structures — one per binary decision.",
+            "D": "N² structures — quadratic in the number of elements."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Catalan numbers**: The number of structurally distinct BSTs with N nodes is the Nth Catalan number: C(N) = C(2N,N) / (N+1).\n2. **Values**: C(1)=1, C(2)=2, C(3)=5, C(4)=14, C(5)=42.\n3. **N! permutations exist** but many permutations produce the same BST structure (e.g., [2,1,3] and [2,3,1] both give the same balanced tree with 2 at root).\n4. **Implication**: BST structure (and thus height, and thus performance) depends critically on insertion order. Among N! orderings, only C(N) unique shapes exist.\n5. This is why average-case BST height analysis uses random permutation models.",
+        "language": "C"
+    }
+]

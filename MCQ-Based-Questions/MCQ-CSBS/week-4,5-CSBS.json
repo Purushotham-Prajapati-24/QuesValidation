@@ -1,0 +1,322 @@
+[
+    {
+        "id": "cs01a001-0001-4000-a001-000000000001",
+        "question": "In a circular queue implemented using an array of size N, the condition for the queue being FULL is:",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "(rear + 1) % N == front — 1",
+            "B": "(rear + 1) % N == front",
+            "C": "rear == front",
+            "D": "rear == N - 1"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Circular queue**: Uses modulo arithmetic to wrap indices.\n2. **Full condition**: `(rear + 1) % N == front` — one slot is intentionally kept empty to distinguish FULL from EMPTY.\n3. **Option C** (`rear == front`) is the EMPTY condition, not full.\n4. **Option D** (`rear == N-1`) is the linear queue full condition — doesn't account for the wrap-around in circular queues.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000002",
+        "question": "What is the time complexity of the enqueue and dequeue operations in a Queue implemented using a Singly Linked List with both `front` and `rear` pointers?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "Enqueue: O(1), Dequeue: O(1)",
+            "B": "Enqueue: O(N), Dequeue: O(1)",
+            "C": "Enqueue: O(1), Dequeue: O(N)",
+            "D": "Enqueue: O(N), Dequeue: O(N)"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Enqueue**: Add node at rear → `rear->next = new_node; rear = new_node;`. No traversal — O(1).\n2. **Dequeue**: Remove from front → `temp = front; front = front->next; free(temp);`. No traversal — O(1).\n3. Both pointers maintained explicitly, so no traversal is needed for either operation.\n4. O(N) dequeue would only happen if no `front` pointer existed (must scan to find the element).",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000003",
+        "question": "A Queue is implemented using an array of size 5. After the operations: Enqueue(10), Enqueue(20), Enqueue(30), Dequeue(), Enqueue(40), Enqueue(50), Enqueue(60) — what is the state of the queue in a linear (non-circular) implementation?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "D",
+        "options": {
+            "A": "Queue contains [20, 30, 40, 50, 60]; full.",
+            "B": "Queue contains [10, 20, 30, 40, 50]; full.",
+            "C": "Queue overflow — Enqueue(60) fails because rear == N-1 even though there is a free slot at index 0.",
+            "D": "Queue overflow at Enqueue(60) since rear reaches index 4 (N-1) in a linear array, wasting the freed index 0 slot."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. Array size = 5; indices 0–4. front=0, rear=-1 initially.\n2. Enqueue(10)→rear=0, Enqueue(20)→rear=1, Enqueue(30)→rear=2.\n3. Dequeue()→front=1 (index 0 freed but rear still at 2).\n4. Enqueue(40)→rear=3, Enqueue(50)→rear=4.\n5. Enqueue(60): rear+1 = 5 = N → **overflow** even though index 0 is empty.\n6. **This is the key flaw of a simple linear queue** — wasted memory. Circular queues fix this.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000004",
+        "question": "In a circular queue of capacity N (array size N, one slot wasted), what is the formula to compute the number of elements currently in the queue given `front` and `rear` indices?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "(rear - front + 1) % N",
+            "B": "(rear - front) % N",
+            "C": "(rear - front + N) % N",
+            "D": "(rear + front) % N"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Without wrap**: if rear ≥ front, count = rear - front.\n2. **With wrap**: if rear < front (wrapped around), count = N - front + rear.\n3. **Unified formula**: `(rear - front + N) % N` handles both cases.\n   - No wrap: (5-2+10)%10 = 13%10 = 3 ✅\n   - Wrap: rear=1, front=8, N=10 → (1-8+10)%10 = 3%10 = 3 ✅\n4. **Option A** adds 1 — would overcount by 1 because `rear` points to the last filled slot, not one past it.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000005",
+        "question": "A Double-Ended Queue (Deque) supports insertFront, insertRear, deleteFront, and deleteRear. Which of the following application requires BOTH ends to be actively used for insertion AND deletion?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Implementing a simple FIFO printer queue.",
+            "B": "Sliding window maximum — elements are added at rear and removed from both front (out-of-window) and rear (smaller elements).",
+            "C": "Implementing a LIFO stack using only one end.",
+            "D": "BFS traversal of a graph."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Sliding window maximum**: New elements enter from the rear. Elements outside the window are removed from the front. Elements smaller than the new element are removed from the rear (they can never be the max).\n2. **FIFO printer queue**: Only needs one end for insert and the other for delete — a plain queue suffices.\n3. **LIFO stack**: Uses only one end (front or rear) — doesn't need a deque.\n4. **BFS**: Uses a simple queue — enqueue at rear, dequeue from front.\n5. Sliding window is the canonical use case that demands both-end insertions AND deletions.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000006",
+        "question": "Implement a Queue using two stacks (S1 for enqueue, S2 for dequeue). After the operations: enqueue(1), enqueue(2), enqueue(3), dequeue(), enqueue(4), dequeue() — what is the correct output sequence and what remains in the queue?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "Dequeue outputs: 1, then 2. Remaining queue (front to rear): [3, 4].",
+            "B": "Dequeue outputs: 3, then 2. Remaining queue: [1, 4].",
+            "C": "Dequeue outputs: 1, then 3. Remaining queue: [2, 4].",
+            "D": "Dequeue outputs: 3, then 4. Remaining queue: [1, 2]."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **enqueue(1,2,3)**: S1=[1,2,3] (3 on top), S2=[].\n2. **dequeue()**: S2 is empty → pour S1 into S2: S2=[3,2,1] (1 on top), S1=[].\n   Pop S2 → returns **1**. S2=[3,2].\n3. **enqueue(4)**: S1=[4], S2=[3,2].\n4. **dequeue()**: S2 not empty → pop S2 → returns **2**. S2=[3], S1=[4].\n5. Remaining (front→rear): next from S2 is 3, then from S1 is 4 → **[3, 4]**.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000007",
+        "question": "In a Priority Queue implemented using an unsorted array, what are the time complexities of `insert` and `extractMax` operations?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "insert: O(log N), extractMax: O(log N)",
+            "B": "insert: O(1), extractMax: O(N)",
+            "C": "insert: O(N), extractMax: O(1)",
+            "D": "insert: O(N), extractMax: O(N log N)"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Unsorted array**: Insert simply appends to the end — O(1).\n2. **extractMax**: Must scan all N elements to find the maximum — O(N).\n3. **Sorted array**: Insert is O(N) (maintain order), extractMax is O(1) (always at one end).\n4. **Max-Heap**: Both operations are O(log N) — the optimal data structure for priority queues.\n5. The unsorted array is the simplest implementation but has the worst extraction efficiency.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000008",
+        "question": "A queue is used in CPU scheduling (Round Robin). If a process is not finished within its time quantum, it is re-enqueued. Which property of a queue makes it ideal for this?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "LIFO ordering ensures the most recent process always runs next.",
+            "B": "Random access to any process in O(1) time.",
+            "C": "FIFO ordering guarantees every process gets a fair turn in the order it arrived, preventing starvation.",
+            "D": "The queue automatically prioritises processes by their burst time."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Round Robin**: Each process gets equal CPU time slices in rotation.\n2. **FIFO (Queue)**: Processes are served in arrival order — the process waiting longest is served next.\n3. **Fairness**: No process is permanently starved because FIFO ensures every process cycles through regularly.\n4. **LIFO (Stack)**: Would always run the most recently arrived process — deeply unfair to older processes.\n5. **Priority Queue**: Used in Priority Scheduling — a different algorithm where processes are NOT served in strict arrival order.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000009",
+        "question": "A Priority Queue is built using a Min-Heap. Insert operations: 15, 10, 5, 20, 8. After inserting all 5 elements, what is the Min-Heap array representation (0-indexed)?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "[8, 5, 10, 20, 15]",
+            "B": "[5, 8, 10, 20, 15]",
+            "C": "[5, 10, 8, 20, 15]",
+            "D": "[5, 15, 10, 20, 8]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Insert sequence with heapifyUp after each:\n1. Insert 15 → [15]\n2. Insert 10 → [15,10] → 10<15 → swap → [10,15]\n3. Insert 5  → [10,15,5] → 5<10 → swap → [5,15,10]\n4. Insert 20 → [5,15,10,20] → 20>15 → no swap\n5. Insert 8  → [5,15,10,20,8] → 8<15 → swap(idx1,idx4) → [5,8,10,20,15] → 8>5 → stop.\n\n**Final heap: [5, 8, 10, 20, 15]**\n\nParent-child check: 5≤8✅, 5≤10✅, 8≤20✅, 8≤15✅ — valid Min-Heap.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000010",
+        "question": "In a queue implemented using a linked list, what happens to the `front` pointer after dequeuing the ONLY remaining element?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "front becomes NULL; rear is unaffected and still points to the freed node.",
+            "B": "front and rear swap values.",
+            "C": "Both front and rear must be set to NULL — failing to reset rear leaves a dangling pointer causing undefined behaviour on next enqueue.",
+            "D": "The linked list resets to its initial state automatically."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Single element**: front == rear, both point to the one node.\n2. **After dequeue**: `front = front->next` → `front = NULL` (no next node).\n3. **rear problem**: rear still points to the now-freed node. If you enqueue next, `rear->next = new_node` is a use-after-free → undefined behaviour.\n4. **Correct fix**: In the dequeue function, after freeing, check if `front == NULL` and then also set `rear = NULL`.\n5. **This is the most common linked list queue bug** — forgetting to reset `rear` on the last dequeue.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000011",
+        "question": "What is a Priority Queue and how does it differ from a regular Queue?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "A Priority Queue serves elements based on priority (not arrival order); the highest (or lowest) priority element is always dequeued first, regardless of when it was enqueued.",
+            "B": "A Priority Queue serves elements in strict FIFO order, same as a regular queue.",
+            "C": "A Priority Queue only allows elements with unique priorities.",
+            "D": "A Priority Queue is implemented exclusively using a sorted array."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Regular Queue**: FIFO — first enqueued, first dequeued.\n2. **Priority Queue**: Each element has a priority value. The element with the highest priority (or lowest in a min-priority queue) is dequeued first, regardless of insertion order.\n3. **Implementation options**: Sorted/unsorted array, sorted/unsorted linked list, or a heap (most efficient).\n4. **Same priority elements**: Can exist — typically broken by arrival order (FIFO at same priority level).\n5. **Example**: OS process scheduling with priorities — a priority-10 process preempts a priority-1 process.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000012",
+        "question": "A hospital emergency queue assigns priorities: P1 = Critical, P2 = Moderate, P3 = Normal. Arrivals: [P2-A, P1-B, P3-C, P1-D, P2-E]. In what order are patients served?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "A, B, C, D, E (FIFO — ignore priority)",
+            "B": "B, D, A, E, C (P1 first in FIFO order, then P2 in FIFO, then P3)",
+            "C": "D, B, E, A, C (reverse priority then FIFO)",
+            "D": "B, D, E, A, C (P1 first, then all P2 before P3, P2-LIFO)"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **P1 (Critical) patients**: B arrived before D → serve B first, then D.\n2. **P2 (Moderate) patients**: A arrived before E → serve A first, then E.\n3. **P3 (Normal) patients**: Only C → serve C.\n4. **Order**: B → D → A → E → C.\n5. Within the same priority level, FIFO order (arrival order) is the standard tiebreaker.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000013",
+        "question": "A queue is needed to support BFS traversal of a graph. During BFS, what happens when all neighbours of a vertex are enqueued?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "All neighbours are immediately dequeued and processed.",
+            "B": "The current vertex is re-enqueued after its neighbours.",
+            "C": "Neighbours are sorted before enqueuing.",
+            "D": "The current vertex is dequeued first; its unvisited neighbours are enqueued at the rear; the next vertex to process is dequeued from the front — maintaining level-order traversal."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **BFS step**: Dequeue vertex v from front. For each unvisited neighbour u of v: mark u visited, enqueue u at rear.\n2. **FIFO ensures level order**: All distance-k vertices are enqueued before any distance-(k+1) vertex is processed.\n3. **Re-enqueuing**: The current vertex is NOT re-enqueued — it has been processed.\n4. **Sorting**: Neighbours are processed in graph adjacency list order — no sorting needed for standard BFS.\n5. This exact queue behaviour is what guarantees BFS finds shortest paths in unweighted graphs.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000014",
+        "question": "Comparing Priority Queue implementations: for an application requiring frequent insertions and rare extractions (e.g., buffering events), which implementation is most efficient?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Sorted array — O(1) extraction, O(N) insertion.",
+            "B": "Unsorted array or unsorted linked list — O(1) insertion, O(N) extraction.",
+            "C": "Max-Heap — O(log N) insertion, O(log N) extraction.",
+            "D": "Sorted linked list — O(N) insertion, O(1) extraction."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Frequent insert, rare extract**: Minimising insertion cost matters most.\n2. **Unsorted array/LL**: O(1) insert (append), O(N) extractMax — acceptable if extractions are rare.\n3. **Sorted array/LL**: O(N) insert (maintain order) — too expensive for frequent insertions.\n4. **Max-Heap**: O(log N) for both — best balanced option for equal frequency.\n5. **Correct answer B**: When the workload is insert-heavy and extraction is infrequent, O(1) insertion (unsorted) is optimal — the expensive O(N) extraction cost is amortised over many inserts.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000015",
+        "question": "What is the amortized time complexity of enqueue in a dynamic array-based queue that doubles in size when full, starting with capacity 1?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "C",
+        "options": {
+            "A": "O(N) per enqueue — resizing on every operation.",
+            "B": "O(log N) amortized — log N resizing events occur.",
+            "C": "O(1) amortized — each element is copied at most O(log N) times total, averaging O(1) per enqueue over N operations.",
+            "D": "O(N²) total — every resize copies all existing elements."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Doubling strategy**: Sizes 1, 2, 4, 8, ..., 2^k. Resize at insertions 1, 2, 4, 8, ...\n2. **Total copy work**: 1 + 2 + 4 + ... + N/2 = N-1 copies for N insertions.\n3. **Amortized per insertion**: (N-1)/N ≈ O(1) — each element is copied at most twice over its lifetime.\n4. **O(N²)** would be the case with linear growth (+1 each time) — copying 1+2+3+...+N = O(N²).\n5. **Key insight**: The doubling exponent ensures that resizing events are exponentially spaced — most insertions pay O(1).",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000016",
+        "question": "In a queue using a circular array of size N (one slot wasted), what is the maximum number of elements the queue can hold and why?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "N elements — the full array is used.",
+            "B": "N-1 elements — one slot is left empty to distinguish FULL from EMPTY conditions.",
+            "C": "N+1 elements — the circular structure allows an extra slot.",
+            "D": "N/2 elements — the front half is reserved for front pointers."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **FULL condition**: `(rear+1)%N == front`. If all N slots were filled, both EMPTY (`rear==front`) and FULL would be `rear==front` — indistinguishable.\n2. **Wasted slot**: By keeping one slot empty, FULL uniquely means `(rear+1)%N == front` and EMPTY means `rear == front`.\n3. **Maximum capacity**: N-1 usable slots.\n4. **Alternative**: Use a count variable alongside front/rear to track size explicitly — this allows all N slots to be used, but adds overhead.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000017",
+        "question": "A queue stores tasks for a web server. Each incoming request is enqueued; each handled request is dequeued. If requests arrive faster than they are handled for a sustained period, what eventual problem occurs?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "C",
+        "options": {
+            "A": "Queue underflow — dequeue on empty queue.",
+            "B": "Concurrent modification — multiple threads break the sorted order.",
+            "C": "Queue overflow — the bounded queue fills up, causing new requests to be rejected (or memory to grow unboundedly for dynamic queues).",
+            "D": "LIFO inversion — newer requests are served before older ones."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Arrival rate > service rate**: The queue grows continuously.\n2. **Bounded queue (array)**: When full, new enqueues fail — requests are dropped or must wait.\n3. **Dynamic queue (linked list)**: Memory grows until the system runs out of heap memory — OOM (Out Of Memory).\n4. **Solution**: Load balancing, worker thread pools, request rate limiting — all designed to match arrival and service rates.\n5. **Underflow** occurs on an empty queue's dequeue — opposite scenario.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000018",
+        "question": "A priority queue supports insert, extractMin, and decreaseKey. Which data structure achieves O(log N) for ALL three operations simultaneously?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Unsorted linked list.",
+            "B": "Binary Min-Heap with direct node access via an array index map.",
+            "C": "Sorted array.",
+            "D": "AVL Tree."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Unsorted LL**: insert O(1), extractMin O(N), decreaseKey O(1) if pointer given — extractMin is too slow.\n2. **Binary Min-Heap + index map**: insert via heapifyUp O(log N), extractMin via heapifyDown O(log N), decreaseKey via heapifyUp O(log N). ✅\n3. **Sorted array**: insert O(N) (maintain order), extractMin O(1), decreaseKey O(N) — insert too slow.\n4. **AVL Tree**: All three O(log N), but with higher constant factor. decreaseKey requires delete+reinsert.\n5. **Standard answer in algorithms**: Min-Heap with position map is the canonical O(log N)-all-operations priority queue used in Dijkstra's and Prim's algorithms.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000019",
+        "question": "Dijkstra's shortest path algorithm uses a priority queue. What would happen if a regular FIFO queue were used instead?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "A",
+        "options": {
+            "A": "The algorithm would process vertices in arrival order, not minimum-distance order, potentially producing incorrect shortest path results on weighted graphs.",
+            "B": "The algorithm would still produce correct results but be slower.",
+            "C": "The FIFO queue would automatically sort by weight.",
+            "D": "The algorithm would not terminate."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Dijkstra's requirement**: Always process the unvisited vertex with the smallest known distance.\n2. **Priority Queue**: Guarantees extractMin gives the vertex with minimum tentative distance — ensures greedy correctness.\n3. **FIFO Queue**: Processes vertices in the order they were added — NOT by distance. A newly discovered shorter path via a later vertex would be processed after an already-processed longer path.\n4. **Correctness failure**: Without priority ordering, a vertex may be 'settled' with a non-minimum distance — producing wrong results on graphs with varying edge weights.\n5. **Note**: On unweighted graphs (all weights = 1), BFS with FIFO gives correct shortest paths — Dijkstra's reduces to BFS in that case.",
+        "language": "C"
+    },
+    {
+        "id": "cs01a001-0001-4000-a001-000000000020",
+        "question": "A real-time operating system uses a priority queue for task scheduling. Task A (priority 5) has been waiting for 100ms; Task B (priority 3) just arrived. Task C (priority 5) just arrived. In a strict priority queue (no aging), what is the problem and what is the standard fix?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "D",
+        "options": {
+            "A": "No problem — all tasks are served in priority order correctly.",
+            "B": "Task B (lower priority) will starve because it can never run before higher-priority tasks.",
+            "C": "Priority inversion — a high-priority task is blocked by a low-priority task.",
+            "D": "Task B may starve indefinitely if high-priority tasks arrive continuously. Fix: Priority Aging — gradually increase a waiting task's priority over time."
+        },
+        "test_cases": null,
+        "solution_explanation": "1. **Starvation**: Low-priority tasks (B, priority 3) may never run if higher-priority tasks (A, C, priority 5) keep arriving continuously.\n2. **Priority Aging**: Each unit of wait time increases a task's effective priority by 1 (or some increment). After enough waiting, even a low-priority task becomes the highest priority.\n3. **Priority Inversion** (option C) is a different problem — when a low-priority task holds a lock needed by a high-priority task. Not the issue here.\n4. **This is a fundamental OS scheduling challenge** — pure priority scheduling optimises responsiveness for high-priority tasks but risks starvation for low-priority ones.\n5. **Real-world fix**: Linux uses Completely Fair Scheduler (CFS) which tracks virtual runtime to prevent starvation.",
+        "language": "C"
+    }
+]

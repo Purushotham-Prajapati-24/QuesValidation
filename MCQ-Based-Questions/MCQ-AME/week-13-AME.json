@@ -1,0 +1,162 @@
+[
+    {
+        "id": "9ac0fc8d-0e17-42fe-9372-934c2e08be00",
+        "question": "BFS (Breadth-First Search) and DFS (Depth-First Search) use different data structures internally. Which pair correctly matches each algorithm to its data structure?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "A",
+        "options": {
+            "A": "BFS uses a Queue (FIFO); DFS uses a Stack (LIFO) or recursion.",
+            "B": "BFS uses a Stack (LIFO); DFS uses a Queue (FIFO).",
+            "C": "Both BFS and DFS use a Queue.",
+            "D": "Both BFS and DFS use a Stack."
+        },
+        "test_cases": null,
+        "solution_explanation": "- **BFS**: Explores all neighbors of the current vertex before moving to the next level. A **Queue** (FIFO) naturally implements this level-by-level exploration — enqueue all neighbors, then process each in order.\n- **DFS**: Explores as deep as possible before backtracking. A **Stack** (LIFO) implements this — always process the most recently discovered vertex first. Equivalently, recursion uses the system call stack.\n\nThis fundamental difference leads to BFS finding shortest paths (fewest edges) while DFS is better for detecting cycles, topological sorting, and connected components.",
+        "language": "General"
+    },
+    {
+        "id": "6b388d89-bff7-4ffa-829a-d2783cf42823",
+        "question": "Consider the undirected graph with edges: 0-1, 0-2, 1-3, 1-4, 2-5. Starting from vertex 0, what is the **BFS traversal order** (assume neighbors are processed in ascending order)?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "0, 1, 3, 4, 2, 5",
+            "B": "0, 1, 2, 3, 4, 5",
+            "C": "0, 2, 5, 1, 3, 4",
+            "D": "0, 1, 2, 5, 3, 4"
+        },
+        "test_cases": null,
+        "solution_explanation": "BFS from vertex 0:\n1. Visit 0, enqueue neighbors `[1, 2]`. Visited: {0}.\n2. Dequeue 1, visit 1, enqueue neighbors 3,4. Queue: `[2,3,4]`. Visited: {0,1}.\n3. Dequeue 2, visit 2, enqueue neighbor 5. Queue: `[3,4,5]`. Visited: {0,1,2}.\n4. Dequeue 3, visit 3 (no unvisited neighbors). Queue: `[4,5]`.\n5. Dequeue 4, visit 4. Queue: `[5]`.\n6. Dequeue 5, visit 5. Queue: `[]`.\n\nBFS order: **0, 1, 2, 3, 4, 5** — level by level.",
+        "language": "General"
+    },
+    {
+        "id": "2c8bc2a5-582b-40ad-b822-8fa15037f0c5",
+        "question": "Using the same graph (edges: 0-1, 0-2, 1-3, 1-4, 2-5), what is the **DFS traversal order** starting from vertex 0 (neighbors in ascending order, recursive approach)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "0, 1, 3, 4, 2, 5",
+            "B": "0, 1, 2, 3, 4, 5",
+            "C": "0, 2, 5, 1, 4, 3",
+            "D": "0, 2, 1, 3, 4, 5"
+        },
+        "test_cases": null,
+        "solution_explanation": "DFS from vertex 0 (recursive, ascending neighbor order):\n1. Visit 0, recurse into neighbor 1.\n2. Visit 1, recurse into neighbor 3 (smallest unvisited).\n3. Visit 3, no unvisited neighbors → backtrack to 1.\n4. Recurse into neighbor 4 (next of 1).\n5. Visit 4, no unvisited neighbors → backtrack to 1, then to 0.\n6. Recurse into neighbor 2 (next of 0).\n7. Visit 2, recurse into neighbor 5.\n8. Visit 5, no unvisited neighbors → backtrack.\n\nDFS order: **0, 1, 3, 4, 2, 5** — goes deep before exploring siblings.",
+        "language": "General"
+    },
+    {
+        "id": "05da7a2a-04b5-4401-84e6-449723399d7b",
+        "question": "What is the **time complexity** of BFS and DFS on a graph with V vertices and E edges (using an adjacency list representation)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "O(V^2) for both BFS and DFS — each vertex checks all other vertices.",
+            "B": "O(V + E) for both BFS and DFS — each vertex and each edge is processed once.",
+            "C": "O(V * E) — for each vertex, all edges are scanned.",
+            "D": "O(E log V) — due to priority queue usage in both."
+        },
+        "test_cases": null,
+        "solution_explanation": "With an **adjacency list**:\n- Each vertex is enqueued/pushed exactly **once** → O(V) for vertex processing.\n- For each vertex, we scan its adjacency list — total edges scanned across all vertices = E → O(E).\n- Total: **O(V + E)** for both BFS and DFS.\n\nWith an **adjacency matrix**: O(V^2) — for each vertex, we check all V columns to find neighbors. The representation choice significantly impacts performance on sparse graphs (E << V^2).",
+        "language": "General"
+    },
+    {
+        "id": "6b1d687e-e681-4bde-be2a-53d510a1c2ef",
+        "question": "BFS on an **unweighted graph** finds the shortest path (fewest edges) between the source and any reachable vertex. Why does BFS guarantee this but DFS does not?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "BFS visits fewer vertices than DFS, so it finds paths faster.",
+            "B": "DFS uses a stack that reverses the order, making it visit farther vertices first.",
+            "C": "BFS explores vertices level by level — it visits all vertices at distance k before any at distance k+1. The first time a vertex is discovered is necessarily via the shortest path.",
+            "D": "BFS uses a visited array while DFS does not, enabling optimal path tracking."
+        },
+        "test_cases": null,
+        "solution_explanation": "BFS processes vertices in **non-decreasing order of their distance** from the source (distance = number of edges). All vertices at distance 1 are processed before distance 2, distance 2 before distance 3, etc. Therefore, the **first time** BFS discovers a vertex, it has found the path with the fewest edges — any later discovery would have a longer or equal path.\n\nDFS, on the other hand, may dive deep into the graph and discover a vertex via a long path when a shorter path existed via a sibling branch. DFS does NOT guarantee shortest paths in general graphs.",
+        "language": "General"
+    },
+    {
+        "id": "5c1632b9-ba02-4403-9c82-7ca1210db142",
+        "question": "Which of the following graph problems is best solved using **DFS** rather than BFS?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "D",
+        "options": {
+            "A": "Finding the shortest path in an unweighted graph.",
+            "B": "Finding all vertices reachable from a source in the minimum number of steps.",
+            "C": "Level-order traversal of a tree.",
+            "D": "Detecting a cycle in a directed graph or performing topological sorting."
+        },
+        "test_cases": null,
+        "solution_explanation": "**DFS excels** for problems requiring exploration of complete paths:\n- **Cycle detection**: DFS maintains a 'recursion stack' — if we revisit a vertex in the current path, a cycle exists.\n- **Topological sorting**: Only possible for DAGs; DFS post-order gives a valid topological order.\n- **Connected components, SCC (Strongly Connected Components)**: Tarjan's and Kosaraju's algorithms are DFS-based.\n- **Maze solving, backtracking**: DFS explores all possibilities before backtracking.\n\nBFS is preferred for: shortest paths (options A, B), level-order traversal (option C), minimum spanning tree (unweighted).",
+        "language": "General"
+    },
+    {
+        "id": "66816be8-4a0e-4499-8ae3-7b6e30a4a593",
+        "question": "For a **disconnected graph** with V vertices and E edges, how should BFS/DFS be modified to traverse **all** vertices?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Start BFS/DFS from vertex 0 — it will automatically reach all vertices in a disconnected graph.",
+            "B": "Loop through all vertices; for each unvisited vertex, start a new BFS/DFS call from it.",
+            "C": "Add a virtual super-source vertex connected to all vertices and run BFS/DFS once from it.",
+            "D": "Sort vertices by degree and start from the highest-degree vertex to maximize coverage."
+        },
+        "test_cases": null,
+        "solution_explanation": "In a **disconnected graph**, a single BFS/DFS from one vertex can only visit all vertices reachable from that starting vertex — other connected components remain unvisited. The standard solution:\n```\nfor (int v = 0; v < V; v++)\n    if (!visited[v])\n        BFS_or_DFS(v);\n```\nEach call to BFS/DFS explores one connected component. The total number of such calls equals the number of connected components. Adding a virtual super-source (option C) works but is a different technique used in network flow algorithms.",
+        "language": "General"
+    },
+    {
+        "id": "8de92a31-4807-484a-9941-50245a313fec",
+        "question": "What is the **space complexity** of BFS vs. DFS on a graph with V vertices and maximum degree D (max neighbors of any vertex)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "BFS: O(V) in worst case (wide graph, many vertices at same level); DFS: O(H) where H is the height of the DFS tree (O(V) worst case for a path graph).",
+            "B": "BFS: O(E) — stores all edges; DFS: O(1) — no extra space needed.",
+            "C": "BFS: O(D) — only stores one level's neighbors; DFS: O(V) — stores all visited vertices.",
+            "D": "Both always use O(V + E) space."
+        },
+        "test_cases": null,
+        "solution_explanation": "**BFS Space**: The queue can hold at most all vertices in the current frontier. In a wide graph (e.g., star graph with V-1 vertices at one level), the queue holds O(V) vertices simultaneously.\n\n**DFS Space**: The recursion stack (or explicit stack) holds at most the current path length = tree height H. For a balanced tree: O(log V). For a path graph (degenerate): O(V).\n\nIn practice, for **sparse, wide graphs**: BFS uses O(V) frontier space while DFS uses O(log V) stack space. For **deep, narrow graphs**: DFS may use O(V) stack while BFS queue stays small.",
+        "language": "General"
+    },
+    {
+        "id": "0d7fbbb2-64ef-48d7-8a7c-9df83ab3c84a",
+        "question": "A **directed graph** has vertices {A, B, C, D, E} and edges: A→B, A→C, B→D, C→D, D→E. Performing BFS from A, at what **level (distance from A)** is vertex E discovered?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Level 1",
+            "B": "Level 2",
+            "C": "Level 3",
+            "D": "Level 4"
+        },
+        "test_cases": null,
+        "solution_explanation": "BFS from A on directed graph:\n- **Level 0**: A (start).\n- **Level 1**: B, C (directly reachable from A via A→B, A→C).\n- **Level 2**: D (reachable from B via B→D or from C via C→D — first discovered at level 2).\n- **Level 3**: E (reachable from D via D→E).\n\nVertex E is at **level 3** (distance 3 from A). The shortest path is A → B → D → E or A → C → D → E, both of length 3.",
+        "language": "General"
+    },
+    {
+        "id": "46ff9fd4-4313-4cec-9612-c82033be8935",
+        "question": "**[HARD]** Consider a directed graph with 5 vertices (0-4) and edges: 0→1, 0→2, 1→3, 2→3, 3→4. DFS is performed from vertex 0. Vertices are stored with discovery time and finish time. Which vertex has the **latest finish time** and what does this imply in the context of **topological sort**?",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "Vertex 4 has the latest finish time; it should appear first in topological sort.",
+            "B": "Vertex 0 has the latest finish time; it should appear first in topological sort since all other vertices are descendants of 0.",
+            "C": "Vertex 3 has the latest finish time; it is the most connected vertex.",
+            "D": "Vertex 1 has the latest finish time because it is discovered earliest among non-root vertices."
+        },
+        "test_cases": null,
+        "solution_explanation": "DFS from vertex 0 (traversing neighbors in ascending order):\n- Visit 0 (d=1), recurse into 1.\n  - Visit 1 (d=2), recurse into 3.\n    - Visit 3 (d=3), recurse into 4.\n      - Visit 4 (d=4), no unvisited neighbors. **Finish 4 (f=5)**.\n    - **Finish 3 (f=6)**.\n  - **Finish 1 (f=7)**.\n  - Recurse into 2 (from 0's neighbors).\n    - Visit 2 (d=8). Neighbor 3 is already visited. **Finish 2 (f=9)**.\n- **Finish 0 (f=10)**. ← Latest finish time.\n\n**Topological Sort** by DFS: vertices in reverse order of finish time = 0, 2, 1, 3, 4. The vertex with the **latest finish time (vertex 0)** comes first — it has no incoming edges and all others depend on it. In a DAG, the source vertex always has the latest DFS finish time among all reachable vertices.",
+        "language": "General"
+    }
+]

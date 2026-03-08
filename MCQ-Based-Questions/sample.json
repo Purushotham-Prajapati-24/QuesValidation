@@ -1,0 +1,18 @@
+[
+    {
+        "id": "0116ce3c-24e6-42d6-ad46-77bcb6b46b0d",
+        "question": "Analyze the C code below, paying close attention to operator precedence, side effects of increment operators, and short-circuit evaluation. What will be the final values of a, b, and c printed to the console?\nc\n#include <stdio.h>\n\nint main() {\n    int a = 5, b = 10, c = 15;\n    if ((a++ > 5) && (b++ > 10)) {\n        c += a;\n    } else if ((++b > 10) || (c++ > 15)) {\n        c += b;\n    } else {\n        c += 1;\n    }\n    printf(\"a=%d, b=%d, c=%d\\n\", a, b, c);\n    return 0;\n}\n",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "A",
+        "options": {
+            "A": "a=6, b=11, c=26",
+            "B": "a=6, b=11, c=27",
+            "C": "a=6, b=12, c=28",
+            "D": "a=5, b=10, c=16"
+        },
+        "test_cases": null,
+        "solution_explanation": "1. *Initialization: Variables are initialized as a = 5, b = 10, c = 15.\n2. **First if Condition: The condition (a++ > 5) && (b++ > 10) is evaluated.\n   - a++ > 5: The value of a (5) is used in the comparison 5 > 5, which is **false. Then, a is incremented to 6 (post-increment).\n   - **Short-circuiting: Since the left side of the logical AND (&&) is false, the right side (b++ > 10) is **not evaluated. Therefore, b remains 10.\n   - The entire if condition is false.\n3. *else if Condition*: The condition (++b > 10) || (c++ > 15) is evaluated.\n   - ++b > 10: b is first incremented to 11 (pre-increment). Then, the value 11 is used in the comparison 11 > 10, which is **true. b is now 11.\n   - **Short-circuiting: Since the left side of the logical OR (||) is true, the right side (c++ > 15) is **not evaluated. Therefore, c remains 15.\n   - The entire else if condition is true.\n4. *else if Block Execution*: The code inside the else if block is executed: c += b;.\n   - The current value of c is 15 and b is 11. So, c becomes 15 + 11 = 26.\n5. *else Block*: The else block is skipped because the else if condition was true.\n6. **Final Output*: The printf statement prints the final values of the variables.\n   - a is 6.\n   - b is 11.\n   - c is 26.\n   - The output is a=6, b=11, c=26.",
+        "language": "C"
+    }
+]

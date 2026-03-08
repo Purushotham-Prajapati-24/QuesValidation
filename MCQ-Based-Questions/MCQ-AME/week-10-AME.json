@@ -1,0 +1,162 @@
+[
+    {
+        "id": "12018214-cb53-4f4c-bd11-d3484d55926b",
+        "question": "In **Bubble Sort**, after the first complete pass over an array of N elements, which element is guaranteed to be in its correct sorted position?",
+        "question_type": "MCQ",
+        "difficulty_level": "EASY",
+        "answer": "B",
+        "options": {
+            "A": "The smallest element is placed at index 0.",
+            "B": "The largest element is placed at index N-1.",
+            "C": "The median element is placed at its correct position.",
+            "D": "All elements are in their correct positions after one pass."
+        },
+        "test_cases": null,
+        "solution_explanation": "In each pass of Bubble Sort, adjacent elements are compared and swapped if out of order. The largest unsorted element 'bubbles up' (moves right) through each comparison. After the first pass, the **maximum element** has travelled all the way to the last position `N-1`. After the second pass, the second largest is at `N-2`, and so on. This is why N-1 passes are needed in the worst case to fully sort N elements.",
+        "language": "General"
+    },
+    {
+        "id": "c53008c0-ff96-4a53-96c2-6f1322a048a8",
+        "question": "Apply **Bubble Sort** to the array `[64, 34, 25, 12, 22]`. What does the array look like after the **first complete pass**?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "[34, 25, 12, 22, 64]",
+            "B": "[12, 22, 25, 34, 64]",
+            "C": "[25, 34, 12, 22, 64]",
+            "D": "[34, 25, 22, 12, 64]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Trace first pass (compare adjacent, swap if left > right):\n1. Compare 64 & 34: 64>34 → swap → `[34, 64, 25, 12, 22]`\n2. Compare 64 & 25: 64>25 → swap → `[34, 25, 64, 12, 22]`\n3. Compare 64 & 12: 64>12 → swap → `[34, 25, 12, 64, 22]`\n4. Compare 64 & 22: 64>22 → swap → `[34, 25, 12, 22, 64]`\n\nAfter pass 1: `[34, 25, 12, 22, 64]`. The largest element 64 is correctly placed at the end.",
+        "language": "General"
+    },
+    {
+        "id": "50caa8f8-3d6c-4d57-a605-d40f1203128d",
+        "question": "What is the **best-case time complexity** of Bubble Sort when the array is already sorted, given an optimized implementation with an early-exit flag?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "O(N^2) — it always performs N^2/2 comparisons regardless.",
+            "B": "O(N) — it performs one pass, detects no swaps, and exits early.",
+            "C": "O(N log N) — due to the comparison checks at each level.",
+            "D": "O(1) — it immediately detects a sorted array without any comparison."
+        },
+        "test_cases": null,
+        "solution_explanation": "With an **optimized Bubble Sort** that uses a `swapped` flag:\n- If no swaps occur during a complete pass, the array is already sorted.\n- For an already-sorted array, the first pass makes N-1 comparisons with zero swaps → the flag remains false → algorithm exits.\n- Total comparisons: **N-1** → Time complexity: **O(N)**.\n\nWithout the flag (naive implementation): O(N^2) even for sorted input. The flag is the key optimization that improves best-case performance.",
+        "language": "General"
+    },
+    {
+        "id": "1c8046ad-00bd-4038-a32e-8c264df5f293",
+        "question": "In **Selection Sort**, what operation defines each pass: selecting the minimum element of the unsorted portion and placing it at the beginning of the unsorted sub-array. What is the **total number of swaps** performed by Selection Sort on an array of N elements in the worst case?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "N - 1 swaps (at most one swap per pass).",
+            "B": "N^2 / 2 swaps (one swap per comparison).",
+            "C": "N swaps (one extra for the final element).",
+            "D": "0 swaps if the array is already sorted."
+        },
+        "test_cases": null,
+        "solution_explanation": "Selection Sort performs exactly **one swap per pass** — it swaps the minimum element of the unsorted portion to its correct position. For N elements, there are N-1 passes (the last element sorts itself), so there are at most **N-1 swaps** total, regardless of the initial order. This makes Selection Sort superior to Bubble Sort when write operations are expensive (e.g., EEPROM/flash memory), even though both have O(N^2) comparisons.",
+        "language": "General"
+    },
+    {
+        "id": "91140e0c-def0-4e9d-ba32-141eda679d35",
+        "question": "Apply **Selection Sort** to `[64, 25, 12, 22, 11]`. What is the array after **two complete passes**?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "[11, 12, 64, 25, 22]",
+            "B": "[11, 64, 25, 12, 22]",
+            "C": "[11, 12, 25, 22, 64]",
+            "D": "[11, 12, 22, 25, 64]"
+        },
+        "test_cases": null,
+        "solution_explanation": "Pass 1 -> [11, 25, 12, 22, 64] (swapped 64 and 11). Pass 2 -> [11, 12, 25, 22, 64] (swapped 25 and 12).",
+        "language": "General"
+    },
+    {
+        "id": "a92b78b9-e8b1-4385-80ff-c230f7875d75",
+        "question": "In **Insertion Sort**, during the k-th pass, the first k elements are sorted among themselves. What is the maximum number of **comparisons** made during a single pass in the worst case?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "1 comparison (only with the adjacent element).",
+            "B": "k comparisons (key may shift all the way to position 0).",
+            "C": "N comparisons (full array scan per pass).",
+            "D": "log k comparisons (binary search in sorted portion)."
+        },
+        "test_cases": null,
+        "solution_explanation": "In the k-th pass of Insertion Sort, the new element (key) is compared against the k previously sorted elements to find its correct position. In the **worst case** (reverse-sorted input), the key is smaller than all k elements and must be shifted to position 0 — requiring **k comparisons**. Summing over all passes: 1 + 2 + ... + (N-1) = N(N-1)/2 comparisons → O(N^2) worst case. Note: Binary Insertion Sort reduces comparisons to O(log k) per pass, but still needs O(k) shifts.",
+        "language": "General"
+    },
+    {
+        "id": "622c50fb-4a8c-4a64-9d14-bf38342cf690",
+        "question": "Which of the three sorting algorithms — Bubble Sort, Insertion Sort, Selection Sort — is **stable**? (A stable sort preserves the relative order of equal elements.)",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "C",
+        "options": {
+            "A": "Only Selection Sort is stable.",
+            "B": "Only Bubble Sort and Selection Sort are stable.",
+            "C": "Both Bubble Sort and Insertion Sort are stable; Selection Sort is NOT stable.",
+            "D": "All three are stable sorts."
+        },
+        "test_cases": null,
+        "solution_explanation": "**Stability analysis**:\n- **Bubble Sort**: Stable — adjacent swaps only happen when elements are strictly out of order (left > right). Equal elements are never swapped, preserving their relative order.\n- **Insertion Sort**: Stable — when inserting a key, we stop shifting when we find an equal element, so equal elements maintain their original relative order.\n- **Selection Sort**: **NOT stable** — swapping the minimum element with the current position can jump over equal elements and disrupt their order. Example: `[3a, 3b, 1]` → first swap gives `[1, 3b, 3a]` — 3a and 3b are now reversed.",
+        "language": "General"
+    },
+    {
+        "id": "4c070f4d-4ca6-4f84-8e32-631c248af427",
+        "question": "Insertion Sort performs very efficiently on **nearly sorted** arrays. What is its time complexity when the array is 'almost sorted' — specifically when each element is at most k positions away from its sorted position (k << N)?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "A",
+        "options": {
+            "A": "O(N * k) — each element shifts at most k positions.",
+            "B": "O(N^2) — the worst case always applies.",
+            "C": "O(N log N) — same as merge sort in this case.",
+            "D": "O(k * log N) — binary search reduces insertions."
+        },
+        "test_cases": null,
+        "solution_explanation": "When each element is at most **k positions** away from its sorted position, Insertion Sort's inner loop runs at most **k times per element** (not N times). Total work: N elements × k shifts each = **O(N·k)**. For small k (e.g., k = 5), this becomes O(5N) = O(N) — essentially linear! This is one of Insertion Sort's most powerful real-world properties, making it ideal for streaming data or maintaining nearly-sorted lists. Shell Sort is a generalization of this idea.",
+        "language": "General"
+    },
+    {
+        "id": "b1da6af9-5f3f-4f96-a4d4-073e3e42ef3c",
+        "question": "All three sorts — Bubble, Insertion, Selection — have O(N^2) **average** and worst-case complexity. However, their constant factors differ. In practice, which sort tends to perform fastest on small random arrays due to fewer data movements and simpler inner loop?",
+        "question_type": "MCQ",
+        "difficulty_level": "MEDIUM",
+        "answer": "B",
+        "options": {
+            "A": "Bubble Sort — it always swaps adjacent pairs, which is cache-friendly.",
+            "B": "Insertion Sort — it performs fewer comparisons and swaps on average and has excellent cache behavior.",
+            "C": "Selection Sort — exactly N-1 swaps make it fastest on all inputs.",
+            "D": "All three perform identically on random inputs."
+        },
+        "test_cases": null,
+        "solution_explanation": "In practice (empirical benchmarks), **Insertion Sort** is the fastest of the three for small arrays:\n- It has fewer swaps than Bubble Sort.\n- Its inner loop is tight — one comparison and one shift per iteration.\n- It has excellent **cache performance** (accesses sequential memory).\n- Selection Sort minimizes swaps but makes N^2/2 comparisons without early exit.\n\nThis is why standard library sort implementations (like `std::sort` in C++) often switch to Insertion Sort for subarrays of fewer than ~16 elements, combining it with quicksort (Introsort).",
+        "language": "General"
+    },
+    {
+        "id": "ae83350b-d02d-4bef-8735-3b4b4e606e27",
+        "question": "**[HARD]** Consider the following C code for Insertion Sort. What is the exact number of comparisons and shifts performed on the array `[5, 3, 1, 4, 2]`?\n\n```c\nfor (int i = 1; i < n; i++) {\n    int key = arr[i], j = i - 1;\n    while (j >= 0 && arr[j] > key) {\n        arr[j + 1] = arr[j]; j--;\n    }\n    arr[j + 1] = key;\n}\n```",
+        "question_type": "MCQ",
+        "difficulty_level": "HARD",
+        "answer": "B",
+        "options": {
+            "A": "6 comparisons, 4 shifts.",
+            "B": "9 comparisons, 7 shifts.",
+            "C": "10 comparisons, 10 shifts.",
+            "D": "7 comparisons, 5 shifts."
+        },
+        "test_cases": null,
+        "solution_explanation": "Trace each pass (counting only element comparisons arr[j] > key):\n\n**i=1, key=3**: [5,3,1,4,2] — Compare 5>3? YES → shift 5. Insert: [3,5,1,4,2]. (1 comparison)\n**i=2, key=1**: Compare 5>1? YES → shift. Compare 3>1? YES → shift. Insert: [1,3,5,4,2]. (2 comparisons)\n**i=3, key=4**: Compare 5>4? YES → shift. Compare 3>4? NO. Insert: [1,3,4,5,2]. (2 comparisons)\n**i=4, key=2**: Compare 5>2? YES → shift. Compare 4>2? YES → shift. Compare 3>2? YES → shift. Compare 1>2? NO. Insert: [1,2,3,4,5]. (4 comparisons)\n\n**Total**: i=1:1, i=2:2, i=3:2, i=4:4 → Total 9 comparisons and 7 shifts.",
+        "language": "C"
+    }
+]
