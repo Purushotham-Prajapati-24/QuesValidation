@@ -1,0 +1,82 @@
+{
+    "question_text": "<h3>Digit DP - Magic Numbers</h3><p>You are a cryptographer tasked with identifying <b>magic numbers</b> for an ancient cipher system. A number is called <b>magic</b> if the sum of its digits is divisible by a given prime <code>P</code>.</p><p>Given integers <code>L</code>, <code>R</code>, and <code>P</code>, count all magic numbers in the range <code>[L, R]</code> (inclusive). Numbers can be very large, up to <code>10<sup>15</sup></code>.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "This is a Digit DP problem. We count numbers from 1 to N whose digit sum is divisible by P. State: (current position, running digit sum mod P, tight constraint boolean, started boolean). Use memoization. The key recurrence iterates digit by digit, branching for each choice [0..limit]. The 'tight' flag controls whether we are bounded by N's digits. Answer = count_up_to(R) - count_up_to(L-1). Time complexity: O(log(N) * P * 2 * 2 * 10) per evaluation.",
+    "answer": "import sys\ndef solve(lo, hi, mod):\n    from functools import lru_cache\n    def count_up_to(n_val, mod):\n        if n_val < 0: return 0\n        s = str(n_val); L = len(s)\n        @lru_cache(maxsize=None)\n        def dp(pos, rem, tight, started):\n            if pos == L: return 1 if (started and rem == 0) else 0\n            limit = int(s[pos]) if tight else 9\n            total = 0\n            for d in range(0, limit + 1):\n                new_tight = tight and (d == limit)\n                if not started and d == 0: total += dp(pos + 1, rem, new_tight, False)\n                else: total += dp(pos + 1, (rem + d) % mod, new_tight, True)\n            return total\n        return dp(0, 0, True, False)\n    return str(count_up_to(hi, mod) - count_up_to(lo - 1, mod))\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    if not data: sys.exit(0)\n    lo, hi, mod = int(data[0]), int(data[1]), int(data[2])\n    print(solve(lo, hi, mod))",
+    "boilerplate": {
+        "python": "import sys\nfrom functools import lru_cache\n\ndef solve(lo, hi, mod):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    lo, hi, mod = int(data[0]), int(data[1]), int(data[2])\n    print(solve(lo, hi, mod))",
+        "cpp": "#include <iostream>\n#include <string>\n#include <vector>\nusing namespace std;\nstring solve(long long lo, long long hi, int mod) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    long long lo, hi; int mod;\n    cin >> lo >> hi >> mod;\n    cout << solve(lo, hi, mod) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(long lo, long hi, int mod) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        long lo = sc.nextLong(), hi = sc.nextLong();\n        int mod = sc.nextInt();\n        System.out.println(solve(lo, hi, mod));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(lo,hi,mod){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconsole.log(solve(BigInt(inp[0]),BigInt(inp[1]),+inp[2]));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(long long lo, long long hi, int mod){return \"0\";}\nint main(){\n    long long lo, hi; int mod;\n    scanf(\"%lld %lld %d\",&lo,&hi,&mod);\n    printf(\"%s\\n\",solve(lo,hi,mod)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "1 100 3",
+            "expected_output": "33",
+            "is_sample": true
+        },
+        {
+            "input": "1 1000 7",
+            "expected_output": "139",
+            "is_sample": true
+        },
+        {
+            "input": "1 10 5",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "100 200 3",
+            "expected_output": "33",
+            "is_sample": false
+        },
+        {
+            "input": "1 1 1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "1 1000000 9",
+            "expected_output": "111111",
+            "is_sample": false
+        },
+        {
+            "input": "500 505 5",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "12 15 3",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "1 100 11",
+            "expected_output": "8",
+            "is_sample": false
+        },
+        {
+            "input": "1000000000 1000000100 7",
+            "expected_output": "13",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Dynamic Programming",
+        "Digit DP"
+    ],
+    "companyIndex": 6
+}

@@ -1,0 +1,83 @@
+{
+    "question_text": "<h3>Alien Dictionary Reconstruction</h3><p>You are a xenolinguist assigned to decode an alien civilization's written language. You have been handed a <b>sorted dictionary</b> of <code>W</code> alien words, each composed of alien alphabet characters. Using this dictionary, you must reconstruct the <b>lexicographic ordering</b> of the alien characters.</p><p>Given the <code>W</code> words in their correct sorted order, output a single string representing the ordering of all unique alien characters used. If no valid ordering exists (due to a contradictory cycle), output <code>CYCLE</code>. If the input itself is invalid (e.g., a longer word appearing before a prefix of itself), output <code>INVALID</code>.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "This is solved using Topological Sorting on a graph built from adjacent pairs of words. For each consecutive pair of words, iterate character by character to find the first mismatch. The character from the earlier word must appear before the character from the later word in the alien ordering. Add this directed edge. After processing all pairs, run BFS Kahn's algorithm to produce a valid topological order. If the sorted queue ever becomes empty before all nodes are processed, a cycle exists. Note: if a prefix appears before its parent word, the dictionary is INVALID.",
+    "answer": "import sys\ndef solve(words):\n    from collections import defaultdict, deque\n    chars = set(\"\".join(words))\n    graph = defaultdict(set)\n    in_degree = {c: 0 for c in chars}\n    for i in range(len(words) - 1):\n        w1, w2 = words[i], words[i+1]\n        for c1, c2 in zip(w1, w2):\n            if c1 != c2:\n                if c2 not in graph[c1]:\n                    graph[c1].add(c2); in_degree[c2] += 1\n                break\n        else:\n            if len(w1) > len(w2): return \"INVALID\"\n    q = deque(sorted(c for c in chars if in_degree[c] == 0))\n    result = []\n    while q:\n        c = q.popleft(); result.append(c)\n        for nb in sorted(graph[c]):\n            in_degree[nb] -= 1\n            if in_degree[nb] == 0: q.append(nb)\n    if len(result) < len(chars): return \"CYCLE\"\n    return \"\".join(result)\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().splitlines()\n    n = int(input_data[0].strip())\n    words = [input_data[i+1].strip() for i in range(n)]\n    print(solve(words))",
+    "boilerplate": {
+        "python": "import sys\nfrom collections import defaultdict, deque\n\ndef solve(words):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().splitlines()\n    n = int(input_data[0].strip())\n    words = [input_data[i+1].strip() for i in range(n)]\n    print(solve(words))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <map>\n#include <set>\n#include <queue>\nusing namespace std;\n\nstring solve(vector<string>& words) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n; cin.ignore();\n    vector<string> words(n);\n    for (int i = 0; i < n; ++i) getline(cin, words[i]);\n    cout << solve(words) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(String[] words) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(); sc.nextLine();\n        String[] words = new String[n];\n        for (int i = 0; i < n; i++) words[i] = sc.nextLine().trim();\n        System.out.println(solve(words));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(words) {\n    // User logic should be written here\n    return \"\";\n}\nconst lines = fs.readFileSync(0, 'utf8').split('\\n');\nconst n = parseInt(lines[0]);\nconst words = lines.slice(1, 1 + n).map(s => s.trim());\nconsole.log(solve(words));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\nconst char* solve(char** words, int n) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    int n; scanf(\"%d\\n\", &n);\n    char** words = (char**)malloc(n * sizeof(char*));\n    for (int i = 0; i < n; i++) {\n        words[i] = (char*)malloc(200);\n        fgets(words[i], 200, stdin);\n        words[i][strcspn(words[i], \"\\n\")] = 0;\n    }\n    printf(\"%s\\n\", solve(words, n));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\nwrt\nwrf\ner\nett\nrftt",
+            "expected_output": "wertf",
+            "is_sample": true
+        },
+        {
+            "input": "2\nz\nx",
+            "expected_output": "zx",
+            "is_sample": true
+        },
+        {
+            "input": "3\nz\nx\nz",
+            "expected_output": "CYCLE",
+            "is_sample": false
+        },
+        {
+            "input": "2\nabc\nab",
+            "expected_output": "INVALID",
+            "is_sample": false
+        },
+        {
+            "input": "4\na\nb\nca\ncb",
+            "expected_output": "abc",
+            "is_sample": false
+        },
+        {
+            "input": "3\nmzf\nmaz\nmaze",
+            "expected_output": "efmza",
+            "is_sample": false
+        },
+        {
+            "input": "3\nhello\nworld\nword",
+            "expected_output": "ehlorwd",
+            "is_sample": false
+        },
+        {
+            "input": "1\na",
+            "expected_output": "a",
+            "is_sample": false
+        },
+        {
+            "input": "4\nba\nbc\nac\ncab",
+            "expected_output": "bac",
+            "is_sample": false
+        },
+        {
+            "input": "5\nabcd\nabce\nabcf\nabd\nabda",
+            "expected_output": "abcdef",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Graph",
+        "Topological Sort",
+        "BFS"
+    ],
+    "companyIndex": 3
+}

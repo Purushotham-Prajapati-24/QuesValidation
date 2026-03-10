@@ -1,0 +1,94 @@
+{
+    "question_text": "<h3>Interstellar Tree Distances</h3><p>You are managing a hierarchical command tree for a deep-space exploration fleet. The fleet's communication network forms a beautiful tree with <code>N</code> nodes. Mission Control receives <code>Q</code> urgent intelligence queries, each asking for the <b>communication relay distance</b> between two specific fleet vessels (nodes). The relay distance is the number of edges in the unique communication path between them.</p><p>Answer all <code>Q</code> queries efficiently.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "The distance between any two nodes u and v in a tree is depth[u] + depth[v] - 2 * depth[LCA(u, v)], where LCA is the Lowest Common Ancestor. We preprocess the tree with Binary Lifting to answer LCA queries in O(log N) each. First, DFS to compute depths and the LCA sparse table (up[v][j] = 2^j-th ancestor of v). Then for each query, use LCA to compute distance. Preprocessing time: O(N log N). Query time: O(log N) each. Overall: O((N + Q) log N).",
+    "answer": "import sys\n\ndef solve(n, edges, queries):\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges: adj[u].append(v); adj[v].append(u)\n    LOG = 18\n    depth = [0] * (n + 1); up = [[0] * LOG for _ in range(n + 1)]\n    visited = [False] * (n + 1); stack = [(1, 0, 0)]\n    while stack:\n        node, p, d = stack.pop()\n        if visited[node]: continue\n        visited[node] = True; depth[node] = d; up[node][0] = p\n        for i in range(1, LOG): up[node][i] = up[up[node][i-1]][i-1]\n        for nb in adj[node]:\n            if not visited[nb]: stack.append((nb, node, d + 1))\n    def lca(u, v):\n        if depth[u] < depth[v]: u, v = v, u\n        diff = depth[u] - depth[v]\n        for i in range(LOG):\n            if (diff >> i) & 1: u = up[u][i]\n        if u == v: return u\n        for i in range(LOG - 1, -1, -1):\n            if up[u][i] != up[v][i]: u = up[u][i]; v = up[v][i]\n        return up[u][0]\n    res = []\n    for u, v in queries:\n        l = lca(u, v); res.append(str(depth[u] + depth[v] - 2 * depth[l]))\n    return \"\\n\".join(res)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n, m = int(data[idx]), int(data[idx+1]); idx += 2\n    edges = []\n    for _ in range(m): edges.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q): queries.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    print(solve(n, edges, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, edges, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n, m = int(data[idx]), int(data[idx+1]); idx += 2\n    edges = []\n    for _ in range(m): edges.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q): queries.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    print(solve(n, edges, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<pair<int,int>>& edges, vector<pair<int,int>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, m; cin >> n >> m;\n    vector<pair<int,int>> edges(m);\n    for (auto& [u,v]:edges) cin >> u >> v;\n    int q; cin >> q;\n    vector<pair<int,int>> queries(q);\n    for (auto& [u,v]:queries) cin >> u >> v;\n    cout << solve(n, edges, queries) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[][] edges, int[][] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[][] edges = new int[m][2];\n        for (int i = 0; i < m; i++) { edges[i][0] = sc.nextInt(); edges[i][1] = sc.nextInt(); }\n        int q = sc.nextInt();\n        int[][] queries = new int[q][2];\n        for (int i = 0; i < q; i++) { queries[i][0] = sc.nextInt(); queries[i][1] = sc.nextInt(); }\n        System.out.println(solve(n, edges, queries));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(n,edges,queries){return \"\";}\nconst inp = fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++],m=+inp[idx++];\nconst edges=[];\nfor(let i=0;i<m;i++){edges.push([+inp[idx++],+inp[idx++]]);}\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++){queries.push([+inp[idx++],+inp[idx++]]);}\nconsole.log(solve(n,edges,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n, int** edges, int m, int** queries, int q) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    int n, m; scanf(\"%d %d\",&n,&m);\n    int** edges = malloc(m*sizeof(int*));\n    for(int i=0;i<m;i++){edges[i]=malloc(2*sizeof(int));scanf(\"%d %d\",&edges[i][0],&edges[i][1]);}\n    int q; scanf(\"%d\",&q);\n    int** queries = malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){queries[i]=malloc(2*sizeof(int));scanf(\"%d %d\",&queries[i][0],&queries[i][1]);}\n    printf(\"%s\\n\",solve(n,edges,m,queries,q));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1500,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5 4\n1 2\n1 3\n3 4\n3 5\n3\n1 4\n2 5\n4 5",
+            "expected_output": "2\n3\n2",
+            "is_sample": true
+        },
+        {
+            "input": "7 6\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n3\n4 7\n5 6\n1 4",
+            "expected_output": "4\n4\n2",
+            "is_sample": true
+        },
+        {
+            "input": "2 1\n1 2\n1\n1 2",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "6 5\n1 2\n2 3\n3 4\n4 5\n5 6\n3\n1 6\n2 5\n3 4",
+            "expected_output": "5\n3\n1",
+            "is_sample": false
+        },
+        {
+            "input": "10 9\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n3\n1 10\n5 7\n3 8",
+            "expected_output": "9\n2\n5",
+            "is_sample": false
+        },
+        {
+            "input": "5 4\n1 2\n1 3\n1 4\n1 5\n4\n2 3\n3 4\n4 5\n2 5",
+            "expected_output": "2\n2\n2\n2",
+            "is_sample": false
+        },
+        {
+            "input": "7 6\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n3\n1 7\n2 6\n3 5",
+            "expected_output": "6\n4\n2",
+            "is_sample": false
+        },
+        {
+            "input": "6 5\n1 2\n1 3\n2 4\n4 5\n4 6\n3\n3 5\n3 6\n5 6",
+            "expected_output": "4\n4\n2",
+            "is_sample": false
+        },
+        {
+            "input": "8 7\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n7 8\n3\n4 8\n5 6\n6 8",
+            "expected_output": "5\n4\n3",
+            "is_sample": false
+        },
+        {
+            "input": "100 99\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99\n99 100\n3\n1 100\n50 75\n25 80",
+            "expected_output": "99\n25\n55",
+            "is_sample": false
+        },
+        {
+            "input": "150 149\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99\n99 100\n100 101\n101 102\n102 103\n103 104\n104 105\n105 106\n106 107\n107 108\n108 109\n109 110\n110 111\n111 112\n112 113\n113 114\n114 115\n115 116\n116 117\n117 118\n118 119\n119 120\n120 121\n121 122\n122 123\n123 124\n124 125\n125 126\n126 127\n127 128\n128 129\n129 130\n130 131\n131 132\n132 133\n133 134\n134 135\n135 136\n136 137\n137 138\n138 139\n139 140\n140 141\n141 142\n142 143\n143 144\n144 145\n145 146\n146 147\n147 148\n148 149\n149 150\n150\n114 101\n43 59\n4 69\n47 10\n18 149\n127 39\n2 97\n144 81\n147 94\n28 103\n15 44\n42 103\n96 54\n67 35\n61 109\n58 47\n58 24\n79 149\n20 42\n21 112\n23 83\n33 60\n11 115\n94 113\n78 32\n93 2\n125 135\n70 86\n43 140\n109 61\n98 2\n90 149\n109 14\n17 65\n127 103\n24 115\n28 29\n7 41\n53 98\n99 100\n131 104\n72 74\n143 23\n129 108\n43 50\n148 67\n31 135\n23 41\n63 105\n22 58\n138 23\n99 116\n79 37\n121 69\n130 66\n91 120\n10 22\n51 105\n59 134\n146 73\n66 77\n136 51\n29 52\n96 56\n62 76\n105 139\n81 134\n67 131\n62 124\n123 138\n56 132\n16 21\n69 110\n59 60\n47 1\n41 90\n32 102\n18 99\n23 97\n129 127\n143 20\n36 17\n16 88\n138 150\n51 61\n148 52\n140 128\n135 45\n137 2\n132 62\n135 111\n36 21\n13 133\n13 84\n23 66\n58 6\n10 27\n37 24\n95 105\n81 59\n19 4\n144 1\n58 29\n138 4\n27 98\n77 136\n51 50\n150 77\n74 23\n20 84\n120 50\n52 136\n14 53\n86 48\n29 135\n72 42\n33 46\n106 125\n31 6\n74 33\n87 78\n41 129\n102 66\n78 61\n108 130\n8 123\n39 105\n75 136\n44 8\n88 29\n52 87\n70 139\n136 124\n93 107\n55 72\n116 123\n115 90\n144 67\n40 150\n31 60\n144 112\n82 95\n125 147\n98 35\n139 121\n110 49\n95 43\n105 70\n54 10\n76 73",
+            "expected_output": "13\n16\n65\n37\n131\n88\n95\n63\n53\n75\n29\n61\n42\n32\n48\n11\n34\n70\n22\n91\n60\n27\n104\n19\n46\n91\n10\n16\n97\n48\n96\n59\n95\n48\n24\n91\n1\n34\n45\n1\n27\n2\n120\n21\n7\n81\n104\n18\n42\n36\n115\n17\n42\n52\n64\n29\n12\n54\n75\n73\n11\n85\n23\n40\n14\n34\n53\n64\n62\n15\n76\n5\n41\n1\n46\n49\n70\n81\n74\n2\n123\n19\n72\n12\n10\n96\n12\n90\n135\n70\n24\n15\n120\n71\n43\n52\n17\n13\n10\n22\n15\n143\n29\n134\n71\n59\n1\n73\n51\n64\n70\n84\n39\n38\n106\n30\n13\n19\n25\n41\n9\n88\n36\n17\n22\n115\n66\n61\n36\n59\n35\n69\n12\n14\n17\n7\n25\n77\n110\n29\n32\n13\n22\n63\n18\n61\n52\n35\n44\n3",
+            "is_sample": false
+        },
+        {
+            "input": "150 149\n1 2\n1 3\n1 4\n1 5\n1 6\n1 7\n1 8\n1 9\n1 10\n1 11\n1 12\n1 13\n1 14\n1 15\n1 16\n1 17\n1 18\n1 19\n1 20\n1 21\n1 22\n1 23\n1 24\n1 25\n1 26\n1 27\n1 28\n1 29\n1 30\n1 31\n1 32\n1 33\n1 34\n1 35\n1 36\n1 37\n1 38\n1 39\n1 40\n1 41\n1 42\n1 43\n1 44\n1 45\n1 46\n1 47\n1 48\n1 49\n1 50\n1 51\n1 52\n1 53\n1 54\n1 55\n1 56\n1 57\n1 58\n1 59\n1 60\n1 61\n1 62\n1 63\n1 64\n1 65\n1 66\n1 67\n1 68\n1 69\n1 70\n1 71\n1 72\n1 73\n1 74\n1 75\n1 76\n1 77\n1 78\n1 79\n1 80\n1 81\n1 82\n1 83\n1 84\n1 85\n1 86\n1 87\n1 88\n1 89\n1 90\n1 91\n1 92\n1 93\n1 94\n1 95\n1 96\n1 97\n1 98\n1 99\n1 100\n1 101\n1 102\n1 103\n1 104\n1 105\n1 106\n1 107\n1 108\n1 109\n1 110\n1 111\n1 112\n1 113\n1 114\n1 115\n1 116\n1 117\n1 118\n1 119\n1 120\n1 121\n1 122\n1 123\n1 124\n1 125\n1 126\n1 127\n1 128\n1 129\n1 130\n1 131\n1 132\n1 133\n1 134\n1 135\n1 136\n1 137\n1 138\n1 139\n1 140\n1 141\n1 142\n1 143\n1 144\n1 145\n1 146\n1 147\n1 148\n1 149\n1 150\n150\n95 39\n49 21\n114 115\n44 16\n38 117\n92 46\n45 84\n110 124\n33 38\n122 120\n136 131\n7 127\n122 106\n97 20\n144 68\n62 119\n99 6\n66 40\n109 36\n59 63\n108 143\n128 88\n4 147\n30 22\n49 21\n7 76\n126 81\n35 30\n142 64\n47 144\n125 144\n87 84\n63 94\n137 118\n53 116\n43 130\n1 73\n46 5\n5 94\n69 110\n62 89\n40 22\n134 115\n75 10\n75 121\n135 105\n134 79\n112 85\n54 30\n32 82\n83 20\n33 91\n73 32\n42 60\n120 109\n90 124\n101 37\n18 3\n119 21\n47 13\n136 149\n13 28\n32 30\n132 130\n119 100\n76 43\n145 68\n56 61\n78 43\n46 148\n30 124\n108 146\n133 30\n97 110\n109 131\n20 79\n60 94\n28 35\n112 60\n110 91\n78 122\n63 134\n1 139\n137 145\n125 65\n110 58\n46 29\n15 56\n141 149\n138 99\n127 86\n44 87\n100 47\n66 127\n73 13\n84 57\n45 121\n147 37\n46 121\n4 128\n52 69\n73 102\n48 19\n107 97\n100 52\n24 62\n68 117\n22 139\n83 54\n13 134\n93 23\n135 109\n48 16\n16 60\n142 18\n135 20\n55 76\n28 12\n45 128\n48 12\n74 21\n70 137\n111 115\n131 104\n58 14\n89 77\n100 125\n5 120\n132 29\n21 78\n28 49\n31 106\n31 144\n60 78\n66 150\n29 120\n27 147\n25 43\n97 95\n15 125\n143 120\n113 8\n37 115\n45 142\n83 62\n113 100\n62 15\n24 20\n110 61\n98 134",
+            "expected_output": "2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n1\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n1\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2\n2",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Tree",
+        "Binary Lifting",
+        "LCA",
+        "DFS"
+    ],
+    "companyIndex": 4
+}

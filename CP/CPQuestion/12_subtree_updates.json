@@ -1,0 +1,94 @@
+{
+    "question_text": "<h3>Subtree Value Updates and Queries</h3><p>You are maintaining a corporate hierarchy tree with <code>N</code> nodes rooted at node <code>1</code>. Each employee node is assigned an initial <b>performance score</b>. Your HR system needs to handle two types of operations efficiently:</p><p><b>Type 1</b>: <code>1 u x</code> \u2014 Add a bonus of <code>x</code> performance points to every employee in the subtree rooted at node <code>u</code>.</p><p><b>Type 2</b>: <code>2 u</code> \u2014 Query the total sum of all performance scores in the subtree rooted at node <code>u</code>.</p><p>Process all operations in order and print results for all type 2 queries.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "Use Euler Tour (in-time/out-time DFS) to linearize the tree. After the Euler tour, the subtree of any node u is mapped to a contiguous range [tin[u], tout[u]] in the flat array. This transforms the problem into a Range Update + Range Sum query problem, solvable efficiently using BIT (Fenwick Tree with lazy range updates) or Segment Tree with lazy propagation. Operations run in O(log N) each.",
+    "answer": "import sys\n\ndef solve(n, vals, edges, queries):\n    from collections import defaultdict\n    adj = [[] for _ in range(n + 1)]\n    for u, v in edges:\n        adj[u].append(v)\n        adj[v].append(u)\n    \n    tin, tout = [0] * (n + 1), [0] * (n + 1)\n    timer = 0\n    adj_ptr = [0] * (n + 1)\n    path = [1]\n    parent = [0] * (n + 1)\n    timer += 1\n    tin[1] = timer\n    \n    while path:\n        u = path[-1]\n        if adj_ptr[u] < len(adj[u]):\n            v = adj[u][adj_ptr[u]]\n            adj_ptr[u] += 1\n            if v != parent[u]:\n                parent[v] = u\n                timer += 1\n                tin[v] = timer\n                path.append(v)\n        else:\n            tout[u] = timer\n            path.pop()\n            \n    bit1 = [0] * (n + 2)\n    bit2 = [0] * (n + 2)\n    \n    def bit_update(bit, idx, val):\n        while idx <= n:\n            bit[idx] += val\n            idx += idx & (-idx)\n            \n    def bit_query(bit, idx):\n        s = 0\n        while idx > 0:\n            s += bit[idx]\n            idx -= idx & (-idx)\n        return s\n        \n    def range_update(l, r, val):\n        bit_update(bit1, l, val)\n        bit_update(bit1, r + 1, -val)\n        bit_update(bit2, l, val * (l - 1))\n        bit_update(bit2, r + 1, -val * r)\n        \n    def prefix_sum(idx):\n        return bit_query(bit1, idx) * idx - bit_query(bit2, idx)\n        \n    def range_sum(l, r):\n        return prefix_sum(r) - prefix_sum(l - 1)\n        \n    for i in range(1, n + 1):\n        range_update(tin[i], tin[i], vals[i-1])\n        \n    results = []\n    for q in queries:\n        if q[0] == 1:\n            u, x = q[1], q[2]\n            range_update(tin[u], tout[u], x)\n        else:\n            u = q[1]\n            results.append(str(range_sum(tin[u], tout[u])))\n    return \"\\n\".join(results)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    if not data: exit()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    vals = [int(data[idx+i]) for i in range(n)]; idx += n\n    edges = []\n    for _ in range(n-1): edges.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    q_count = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q_count):\n        t = int(data[idx]); u = int(data[idx+1]); idx += 2\n        v = 0\n        if t == 1: v = int(data[idx]); idx += 1\n        queries.append((t, u, v))\n    print(solve(n, vals, edges, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, vals, edges, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    vals = [int(data[idx+i]) for i in range(n)]; idx += n\n    edges = []\n    for _ in range(n-1): edges.append((int(data[idx]),int(data[idx+1]))); idx += 2\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); u = int(data[idx+1]); idx += 2\n        v = int(data[idx]) if t == 1 else None\n        if t == 1: idx += 1\n        queries.append((t, u, v))\n    print(solve(n, vals, edges, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& vals, vector<pair<int,int>>& edges, vector<tuple<int,int,int>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    vector<int> vals(n); for (auto& v : vals) cin >> v;\n    vector<pair<int,int>> edges(n-1);\n    for (auto& [u,v]:edges) cin >> u >> v;\n    int q; cin >> q;\n    vector<tuple<int,int,int>> queries(q);\n    for (auto& [t,u,v]:queries) { cin >> t >> u; if (t==1) cin >> v; else v=0; }\n    cout << solve(n, vals, edges, queries) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] vals, int[][] edges, int[][] queries){\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args){\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] vals = new int[n]; for(int i=0;i<n;i++) vals[i]=sc.nextInt();\n        int[][] edges = new int[n-1][2];\n        for(int i=0;i<n-1;i++){edges[i][0]=sc.nextInt();edges[i][1]=sc.nextInt();}\n        int q = sc.nextInt();\n        int[][] queries = new int[q][3];\n        for(int i=0;i<q;i++){queries[i][0]=sc.nextInt();queries[i][1]=sc.nextInt();if(queries[i][0]==1) queries[i][2]=sc.nextInt();}\n        System.out.println(solve(n,vals,edges,queries));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,vals,edges,queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0;\nconst n=+inp[idx++];\nconst vals=inp.slice(idx,idx+n).map(Number); idx+=n;\nconst edges=[]; for(let i=0;i<n-1;i++) edges.push([+inp[idx++],+inp[idx++]]);\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++){\n    const t=+inp[idx++], u=+inp[idx++];\n    const v = t===1 ? +inp[idx++] : 0;\n    queries.push([t,u,v]);\n}\nconsole.log(solve(n,vals,edges,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n, int* vals, int** edges, int** queries, int q){return \"\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* vals=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&vals[i]);\n    int** edges=malloc((n-1)*sizeof(int*));\n    for(int i=0;i<n-1;i++){edges[i]=malloc(2*sizeof(int));scanf(\"%d %d\",&edges[i][0],&edges[i][1]);}\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){queries[i]=malloc(3*sizeof(int));scanf(\"%d %d\",&queries[i][0],&queries[i][1]);if(queries[i][0]==1) scanf(\"%d\",&queries[i][2]);}\n    printf(\"%s\\n\",solve(n,vals,edges,queries,q));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n1 2 3 4 5\n1 2\n1 3\n3 4\n3 5\n3\n1 1 10\n2 1\n2 3",
+            "expected_output": "65\n42",
+            "is_sample": true
+        },
+        {
+            "input": "6\n1 1 1 1 1 1\n1 2\n1 3\n2 4\n2 5\n3 6\n5\n2 1\n1 2 5\n2 2\n1 1 1\n2 3",
+            "expected_output": "6\n18\n4",
+            "is_sample": true
+        },
+        {
+            "input": "3\n10 20 30\n1 2\n1 3\n3\n2 1\n1 1 5\n2 1",
+            "expected_output": "60\n75",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 2 3 4\n1 2\n2 3\n3 4\n3\n2 3\n1 2 10\n2 3",
+            "expected_output": "7\n27",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 5 5 5 5\n1 2\n2 3\n3 4\n4 5\n3\n1 3 5\n2 3\n2 4",
+            "expected_output": "30\n20",
+            "is_sample": false
+        },
+        {
+            "input": "7\n1 2 3 4 5 6 7\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n3\n2 2\n1 3 10\n2 1",
+            "expected_output": "11\n58",
+            "is_sample": false
+        },
+        {
+            "input": "4\n0 0 0 0\n1 2\n1 3\n1 4\n3\n1 1 100\n2 1\n2 2",
+            "expected_output": "400\n100",
+            "is_sample": false
+        },
+        {
+            "input": "5\n3 3 3 3 3\n1 2\n1 3\n1 4\n1 5\n5\n2 1\n1 2 1\n2 1\n1 1 2\n2 1",
+            "expected_output": "15\n16\n26",
+            "is_sample": false
+        },
+        {
+            "input": "3\n100 200 300\n1 2\n2 3\n3\n1 2 50\n2 1\n2 2",
+            "expected_output": "700\n600",
+            "is_sample": false
+        },
+        {
+            "input": "6\n1 1 1 1 1 1\n1 2\n2 3\n3 4\n4 5\n5 6\n5\n1 2 10\n2 1\n2 5\n1 4 5\n2 4",
+            "expected_output": "56\n22\n48",
+            "is_sample": false
+        },
+        {
+            "input": "150\n435 430 124 345 350 63 10 975 300 315 684 615 75 343 632 491 787 969 8 470 360 505 970 904 942 618 688 592 934 128 191 666 938 821 536 931 770 248 46 640 367 959 984 699 177 160 198 766 757 571 955 284 367 951 457 808 26 854 87 690 205 124 30 64 663 206 700 190 142 78 891 276 458 833 373 290 466 786 79 929 518 350 142 26 452 983 402 754 462 818 438 116 213 800 598 732 167 974 977 628 627 945 679 374 265 367 53 462 635 939 936 313 323 341 832 424 408 994 762 823 455 873 435 899 782 653 206 189 424 225 37 501 137 957 116 238 885 320 480 490 165 439 509 49 99 765 172 628 366 215\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99\n99 100\n100 101\n101 102\n102 103\n103 104\n104 105\n105 106\n106 107\n107 108\n108 109\n109 110\n110 111\n111 112\n112 113\n113 114\n114 115\n115 116\n116 117\n117 118\n118 119\n119 120\n120 121\n121 122\n122 123\n123 124\n124 125\n125 126\n126 127\n127 128\n128 129\n129 130\n130 131\n131 132\n132 133\n133 134\n134 135\n135 136\n136 137\n137 138\n138 139\n139 140\n140 141\n141 142\n142 143\n143 144\n144 145\n145 146\n146 147\n147 148\n148 149\n149 150\n150\n1 83 135\n1 64 367\n2 120\n2 40\n1 131 537\n2 115\n2 83\n2 149\n2 142\n2 5\n2 47\n1 62 990\n1 94 505\n2 83\n1 95 149\n2 59\n1 4 453\n2 113\n1 15 689\n1 107 165\n2 81\n2 63\n2 14\n1 77 366\n1 108 878\n1 10 310\n2 44\n1 136 366\n1 26 622\n1 88 232\n1 11 350\n2 97\n2 115\n1 148 186\n2 98\n2 122\n2 117\n2 111\n1 104 618\n1 90 369\n2 65\n1 67 514\n1 55 447\n1 42 526\n2 95\n1 75 687\n2 11\n1 37 718\n1 123 187\n1 7 847\n1 147 290\n1 77 20\n1 108 510\n1 87 375\n1 135 353\n2 61\n2 33\n2 113\n1 43 364\n1 10 46\n2 99\n1 51 462\n2 127\n2 81\n2 11\n1 7 82\n2 18\n1 5 464\n2 44\n1 14 519\n1 32 464\n2 28\n1 31 842\n1 19 842\n2 102\n2 104\n2 49\n1 73 175\n2 9\n1 131 393\n1 117 991\n1 59 195\n1 51 618\n2 97\n1 17 229\n1 41 697\n2 39\n2 23\n1 123 45\n1 30 94\n2 46\n1 68 409\n1 63 743\n2 19\n1 23 645\n2 133\n2 126\n1 87 298\n1 111 442\n2 127\n2 91\n1 78 502\n2 127\n1 139 163\n1 89 448\n2 134\n1 89 891\n1 3 88\n1 130 561\n2 100\n2 105\n1 120 415\n2 114\n1 135 997\n2 18\n2 42\n2 65\n2 122\n1 56 132\n1 75 44\n2 76\n2 86\n2 133\n1 61 524\n2 74\n2 13\n1 50 645\n1 31 90\n1 137 579\n1 115 581\n1 84 592\n1 12 176\n2 39\n1 148 311\n2 132\n1 22 272\n1 115 171\n2 5\n2 48\n2 1\n1 28 307\n1 134 458\n1 31 953\n1 94 420\n2 55\n2 21\n2 32\n1 29 30\n2 5\n2 150",
+            "expected_output": "29094\n95410\n45764\n78769\n2659\n12593\n125025\n102164\n174874\n220409\n127118\n274000\n326069\n409902\n455901\n367273\n256778\n362496\n209161\n243658\n284093\n568653\n512479\n915476\n965371\n1102914\n496444\n674850\n341832\n881477\n1267314\n1258484\n1202107\n1399161\n822450\n793314\n1444786\n1700570\n989509\n1765390\n1873069\n1713628\n2005701\n413816\n564596\n560748\n1284599\n572796\n422480\n1233080\n1130269\n944378\n2303893\n2130913\n1867028\n770298\n1715465\n1546792\n500502\n1787636\n2386837\n2384242\n585300\n2616803\n2328132\n2618766\n2395619\n2745110\n2666675\n2804310\n34385",
+            "is_sample": false
+        },
+        {
+            "input": "150\n619 889 779 535 763 887 575 643 189 230 983 940 632 795 370 176 363 700 972 870 160 472 426 119 257 505 706 127 186 757 195 92 991 858 977 833 61 820 27 284 581 771 638 565 554 83 627 81 662 331 9 722 702 615 815 683 991 905 288 795 601 256 880 602 801 459 721 155 58 570 530 465 557 167 263 510 970 488 876 840 100 718 451 25 139 183 9 205 561 685 551 590 515 440 813 21 287 275 474 316 441 665 527 472 503 844 985 321 257 570 486 911 728 572 462 217 784 749 1 508 339 339 535 200 271 240 855 86 977 879 110 832 143 134 924 757 821 36 920 975 774 33 889 130 104 697 259 920 319 662\n1 2\n1 3\n1 4\n1 5\n1 6\n1 7\n1 8\n1 9\n1 10\n1 11\n1 12\n1 13\n1 14\n1 15\n1 16\n1 17\n1 18\n1 19\n1 20\n1 21\n1 22\n1 23\n1 24\n1 25\n1 26\n1 27\n1 28\n1 29\n1 30\n1 31\n1 32\n1 33\n1 34\n1 35\n1 36\n1 37\n1 38\n1 39\n1 40\n1 41\n1 42\n1 43\n1 44\n1 45\n1 46\n1 47\n1 48\n1 49\n1 50\n1 51\n1 52\n1 53\n1 54\n1 55\n1 56\n1 57\n1 58\n1 59\n1 60\n1 61\n1 62\n1 63\n1 64\n1 65\n1 66\n1 67\n1 68\n1 69\n1 70\n1 71\n1 72\n1 73\n1 74\n1 75\n1 76\n1 77\n1 78\n1 79\n1 80\n1 81\n1 82\n1 83\n1 84\n1 85\n1 86\n1 87\n1 88\n1 89\n1 90\n1 91\n1 92\n1 93\n1 94\n1 95\n1 96\n1 97\n1 98\n1 99\n1 100\n1 101\n1 102\n1 103\n1 104\n1 105\n1 106\n1 107\n1 108\n1 109\n1 110\n1 111\n1 112\n1 113\n1 114\n1 115\n1 116\n1 117\n1 118\n1 119\n1 120\n1 121\n1 122\n1 123\n1 124\n1 125\n1 126\n1 127\n1 128\n1 129\n1 130\n1 131\n1 132\n1 133\n1 134\n1 135\n1 136\n1 137\n1 138\n1 139\n1 140\n1 141\n1 142\n1 143\n1 144\n1 145\n1 146\n1 147\n1 148\n1 149\n1 150\n150\n1 83 135\n1 64 367\n2 120\n2 40\n1 131 537\n2 115\n2 83\n2 149\n2 142\n2 5\n2 47\n1 62 990\n1 94 505\n2 83\n1 95 149\n2 59\n1 4 453\n2 113\n1 15 689\n1 107 165\n2 81\n2 63\n2 14\n1 77 366\n1 108 878\n1 10 310\n2 44\n1 136 366\n1 26 622\n1 88 232\n1 11 350\n2 97\n2 115\n1 148 186\n2 98\n2 122\n2 117\n2 111\n1 104 618\n1 90 369\n2 65\n1 67 514\n1 55 447\n1 42 526\n2 95\n1 75 687\n2 11\n1 37 718\n1 123 187\n1 7 847\n1 147 290\n1 77 20\n1 108 510\n1 87 375\n1 135 353\n2 61\n2 33\n2 113\n1 43 364\n1 10 46\n2 99\n1 51 462\n2 127\n2 81\n2 11\n1 7 82\n2 18\n1 5 464\n2 44\n1 14 519\n1 32 464\n2 28\n1 31 842\n1 19 842\n2 102\n2 104\n2 49\n1 73 175\n2 9\n1 131 393\n1 117 991\n1 59 195\n1 51 618\n2 97\n1 17 229\n1 41 697\n2 39\n2 23\n1 123 45\n1 30 94\n2 46\n1 68 409\n1 63 743\n2 19\n1 23 645\n2 133\n2 126\n1 87 298\n1 111 442\n2 127\n2 91\n1 78 502\n2 127\n1 139 163\n1 89 448\n2 134\n1 89 891\n1 3 88\n1 130 561\n2 100\n2 105\n1 120 415\n2 114\n1 135 997\n2 18\n2 42\n2 65\n2 122\n1 56 132\n1 75 44\n2 76\n2 86\n2 133\n1 61 524\n2 74\n2 13\n1 50 645\n1 31 90\n1 137 579\n1 115 581\n1 84 592\n1 12 176\n2 39\n1 148 311\n2 132\n1 22 272\n1 115 171\n2 5\n2 48\n2 1\n1 28 307\n1 134 458\n1 31 953\n1 94 420\n2 55\n2 21\n2 32\n1 29 30\n2 5\n2 150",
+            "expected_output": "508\n284\n462\n586\n319\n33\n763\n627\n586\n288\n728\n100\n880\n795\n565\n287\n462\n275\n339\n784\n486\n801\n962\n1333\n601\n991\n728\n474\n855\n100\n1333\n700\n565\n127\n665\n1090\n662\n189\n287\n27\n426\n83\n1814\n143\n240\n855\n551\n855\n134\n316\n503\n572\n700\n1297\n801\n339\n510\n183\n143\n167\n632\n27\n832\n1227\n81\n109473\n1262\n160\n556\n1227\n662",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Tree",
+        "Euler Tour",
+        "Fenwick Tree",
+        "Range Sum Query"
+    ],
+    "companyIndex": 5
+}

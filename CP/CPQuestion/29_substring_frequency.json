@@ -1,0 +1,94 @@
+{
+    "question_text": "<h3>Substring Frequency Analysis</h3><p>You are analyzing genomic sequences in a state-of-the-art bioinformatics laboratory. You have a reference DNA string <code>T</code> and must rapidly answer <code>Q</code> query requests from researchers. Each query asks: how many times does a given pattern string <code>P</code> appear as a substring in <code>T</code> (overlapping occurrences count)?</p><p>Input: First line is text <code>T</code>. Second line is <code>Q</code>. Subsequent <code>Q</code> lines are the query strings. Output one integer per query.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "Efficient solution uses a Suffix Array with LCP array. Build the suffix array of T in O(N log N) using the doubling technique. For each query string P, binary-search on the suffix array to find the leftmost and rightmost suffix that has P as a prefix (lower and upper bounds). The count is upper_bound - lower_bound. Using the LCP array further optimizes the binary search. Preprocessing: O(N log N). Query time: O(|P| log N).",
+    "answer": "import sys\n\ndef solve(text, queries):\n    n = len(text)\n    if not text: return \"\\n\".join([\"0\"] * len(queries))\n    \n    # Build Suffix Array in O(N log N) or O(N log^2 N)\n    sa = list(range(n))\n    rank = [ord(c) for c in text]\n    k = 1\n    while k < n:\n        # Sort suffixes based on (rank[i], rank[i+k] if exists else -1)\n        def get_rank(i):\n            return (rank[i], rank[i+k] if i+k < n else -1)\n        sa.sort(key=get_rank)\n        \n        new_rank = [0] * n\n        for i in range(1, n):\n            new_rank[sa[i]] = new_rank[sa[i-1]] + (1 if get_rank(sa[i]) > get_rank(sa[i-1]) else 0)\n        rank = new_rank\n        if rank[sa[n-1]] == n - 1: break\n        k *= 2\n\n    def count_occurrences(p):\n        m = len(p)\n        # Binary search for range [l, r] in sa\n        # Left bound\n        low, high = 0, n - 1\n        l_idx = n\n        while low <= high:\n            mid = (low + high) // 2\n            if text[sa[mid]:sa[mid]+m] >= p:\n                l_idx = mid\n                high = mid - 1\n            else:\n                low = mid + 1\n        \n        # Right bound\n        low, high = 0, n - 1\n        r_idx = -1\n        while low <= high:\n            mid = (low + high) // 2\n            if text[sa[mid]:sa[mid]+m] <= p:\n                r_idx = mid\n                low = mid + 1\n            else:\n                high = mid - 1\n        \n        if l_idx <= r_idx: return r_idx - l_idx + 1\n        return 0\n\n    return \"\\n\".join([str(count_occurrences(q)) for q in queries])\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    if not lines: sys.exit(0)\n    text = lines[0].strip()\n    q_count = int(lines[1].strip()) if len(lines) > 1 else 0\n    queries = [lines[i+2].strip() for i in range(q_count)]\n    print(solve(text, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(text, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    text = lines[0].strip() if lines else \"\"\n    q = int(lines[1].strip()) if len(lines) > 1 else 0\n    queries = [lines[i+2].strip() for i in range(q)]\n    print(solve(text, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(string& text, vector<string>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    string text; getline(cin, text);\n    int q; cin >> q; cin.ignore();\n    vector<string> queries(q);\n    for (auto& p : queries) getline(cin, p);\n    cout << solve(text, queries) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(String text, String[] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String text = sc.nextLine().trim();\n        int q = Integer.parseInt(sc.nextLine().trim());\n        String[] queries = new String[q];\n        for (int i = 0; i < q; i++) queries[i] = sc.nextLine().trim();\n        System.out.println(solve(text, queries));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(text, queries) {\n    // User logic should be written here\n    return \"\";\n}\nconst lines = fs.readFileSync(0, 'utf8').split('\\n');\nconst text = lines[0].trim();\nconst q = parseInt(lines[1]);\nconst queries = lines.slice(2, 2+q).map(s => s.trim());\nconsole.log(solve(text, queries));",
+        "c": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\nconst char* solve(char* text, char** queries, int q) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    char text[100001];\n    fgets(text, sizeof(text), stdin);\n    text[strcspn(text,\"\\n\")]=0;\n    int q; scanf(\"%d\\n\",&q);\n    char** queries=malloc(q*sizeof(char*));\n    for(int i=0;i<q;i++){queries[i]=malloc(1001);fgets(queries[i],1001,stdin);queries[i][strcspn(queries[i],\"\\n\")]=0;}\n    printf(\"%s\\n\",solve(text,queries,q));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "aababcabc\n3\nab\nabc\na",
+            "expected_output": "3\n2\n4",
+            "is_sample": true
+        },
+        {
+            "input": "mississippi\n4\nissi\nss\np\ni",
+            "expected_output": "2\n2\n2\n4",
+            "is_sample": true
+        },
+        {
+            "input": "abcabc\n3\nabc\nbc\nc",
+            "expected_output": "2\n2\n2",
+            "is_sample": false
+        },
+        {
+            "input": "aaaa\n3\na\naa\naaa",
+            "expected_output": "4\n3\n2",
+            "is_sample": false
+        },
+        {
+            "input": "hello world hello\n3\nhello\nworld\nlo",
+            "expected_output": "2\n1\n2",
+            "is_sample": false
+        },
+        {
+            "input": "abababab\n3\nab\naba\nabab",
+            "expected_output": "4\n3\n3",
+            "is_sample": false
+        },
+        {
+            "input": "xyz\n3\na\nz\nxy",
+            "expected_output": "0\n1\n1",
+            "is_sample": false
+        },
+        {
+            "input": "banana\n3\nan\nna\na",
+            "expected_output": "2\n2\n3",
+            "is_sample": false
+        },
+        {
+            "input": "aaabaaab\n3\naab\naaab\na",
+            "expected_output": "2\n2\n6",
+            "is_sample": false
+        },
+        {
+            "input": "algorithm\n4\nalgo\nith\nm\nz",
+            "expected_output": "1\n1\n1\n0",
+            "is_sample": false
+        },
+        {
+            "input": "bcbbabcabccaabacabbbaccbacccaababcccabccaabaababccaabccccbacccabcabbcbcacbabccbbbcbcbcacbcabcabaabbbbbaabbcacabbccaccacbbbaababbaaccbcaccccbcbccbaacba\n20\naacbc\nbaaaa\naabab\nbcacc\nbbaab\nbbbac\nbabac\nccbab\nccaac\nbcbab\nbcabb\ncabaa\nacaaa\nbcabb\ncbccb\ncaccc\nccacb\ncabab\naccac\ncbbba",
+            "expected_output": "0\n0\n3\n1\n2\n1\n0\n0\n0\n0\n1\n1\n0\n1\n1\n1\n1\n0\n1\n1",
+            "is_sample": false
+        },
+        {
+            "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\n20\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa\naaaaaaaaaa",
+            "expected_output": "141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141\n141",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "String",
+        "Suffix Array",
+        "Binary Search",
+        "LCP"
+    ],
+    "companyIndex": 4
+}

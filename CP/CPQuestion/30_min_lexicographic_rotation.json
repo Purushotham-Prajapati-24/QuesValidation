@@ -1,0 +1,93 @@
+{
+    "question_text": "<h3>Minimum Lexicographic Rotation</h3><p>You are working on a cryptographic normalization system. For input strings, a <b>rotation</b> is formed by moving characters from the front to the back. For example, rotating <code>\"abc\"</code> by 1 gives <code>\"bca\"</code>.</p><p>Given a string <code>S</code>, find and output its <b>lexicographically smallest rotation</b>. All rotations of S have the same length as S.</p>",
+    "difficulty": "HARD",
+    "marks": 20,
+    "explanation": "Booth's Algorithm solves this in O(N). It finds the starting index k of the lexicographically minimum rotation using a failure-function approach similar to KMP on the doubled string S+S. The key state f[j-k] stores the index into the current best rotation candidate's 'failure path'. At the end, k is the starting index of the lexicographically minimum rotation. Output S[k:] + S[:k].",
+    "answer": "import sys\n\ndef solve(s):\n    s2 = s + s; n = len(s2)\n    f = [-1] * n; k = 0\n    for j in range(1, n):\n        sj = s2[j]; i = f[j - k - 1]\n        while i != -1 and sj != s2[k + i + 1]:\n            if sj < s2[k + i + 1]: k = j - i - 1\n            i = f[i]\n        if sj != s2[k + i + 1]:\n            if sj < s2[k]: k = j\n            f[j - k] = -1\n        else: f[j - k] = i + 1\n    return s[k:] + s[:k]\n\nif __name__ == '__main__':\n    s = sys.stdin.read().strip()\n    print(solve(s))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(s):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    s = sys.stdin.read().strip()\n    print(solve(s))",
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nstring solve(string s) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    string s;\n    if (!getline(cin, s)) s = \"\";\n    cout << solve(s) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static String solve(String s) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.hasNextLine() ? sc.nextLine().trim() : \"\";\n        System.out.println(solve(s));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(s) {\n    // User logic should be written here\n    return \"\";\n}\nconst s = fs.readFileSync(0, 'utf8').trim();\nconsole.log(solve(s));",
+        "c": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\nconst char* solve(char* s) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    char s[100001];\n    if (!fgets(s,sizeof(s),stdin)) s[0]='\\0';\n    else s[strcspn(s,\"\\n\")]=0;\n    printf(\"%s\\n\",solve(s));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "bca",
+            "expected_output": "abc",
+            "is_sample": true
+        },
+        {
+            "input": "dcba",
+            "expected_output": "adcb",
+            "is_sample": true
+        },
+        {
+            "input": "a",
+            "expected_output": "a",
+            "is_sample": false
+        },
+        {
+            "input": "aa",
+            "expected_output": "aa",
+            "is_sample": false
+        },
+        {
+            "input": "ba",
+            "expected_output": "ab",
+            "is_sample": false
+        },
+        {
+            "input": "abcabc",
+            "expected_output": "abcabc",
+            "is_sample": false
+        },
+        {
+            "input": "zyxwvutsrqponmlkjihgfedcba",
+            "expected_output": "azyxwvutsrqponmlkjihgfedcb",
+            "is_sample": false
+        },
+        {
+            "input": "abababab",
+            "expected_output": "abababab",
+            "is_sample": false
+        },
+        {
+            "input": "cba",
+            "expected_output": "acb",
+            "is_sample": false
+        },
+        {
+            "input": "mississippi",
+            "expected_output": "imississipp",
+            "is_sample": false
+        },
+        {
+            "input": "uwmbhbwawnuvogaubleoyfddxfnesdbzimkewbyeqncsfhrwdqgjtfrflsdjfpnnmcvkprvdwzkqekfwqckccqamhmtxczphbbusteakfofciybigdzzgqlzfbmhblsrmowaonkhrxdzegjxrwjywf",
+            "expected_output": "akfofciybigdzzgqlzfbmhblsrmowaonkhrxdzegjxrwjywfuwmbhbwawnuvogaubleoyfddxfnesdbzimkewbyeqncsfhrwdqgjtfrflsdjfpnnmcvkprvdwzkqekfwqckccqamhmtxczphbbuste",
+            "is_sample": false
+        },
+        {
+            "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+            "expected_output": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaab",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "String",
+        "Booth's Algorithm",
+        "Rotation"
+    ],
+    "companyIndex": 4
+}

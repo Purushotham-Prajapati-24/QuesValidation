@@ -1,0 +1,83 @@
+{
+    "question_text": "<h3>Secure Node Isolation Protocol</h3><p>You are a network security engineer managing a hierarchical botnet detection tree with <code>N</code> nodes. For maximum coverage of the botnet while minimizing interference, you must select a subset of nodes for deployment of <b>monitoring probes</b>. Two directly connected nodes cannot simultaneously carry probes (they would interfere with each other).</p><p>You need to select the maximum number of monitoring nodes such that no two selected nodes are directly adjacent. Output the size of the <b>maximum independent set</b>.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "Classic Tree DP. Define dp[v][0] = max independent set size in subtree of v, when v is NOT selected. Define dp[v][1] = max size when v IS selected. Recurrence: dp[v][1] = 1 + sum over children c of dp[c][0] (if v is selected, children cannot be). dp[v][0] = sum over children c of max(dp[c][0], dp[c][1]) (children can be either). Process nodes in post-order (leaves up to root) to fill the table. Answer = max(dp[root][0], dp[root][1]).",
+    "answer": "import sys\ndef solve(n, edges):\n    from collections import defaultdict\n    adj = defaultdict(list)\n    for u, v in edges: adj[u].append(v); adj[v].append(u)\n    dp = [[0, 0] for _ in range(n + 1)]\n    visited = [False] * (n + 1)\n    parent = [0] * (n + 1); post_order = []\n    stack = [(1, 0, False)]\n    while stack:\n        node, p, leaving = stack.pop()\n        if leaving: post_order.append(node)\n        elif not visited[node]:\n            visited[node] = True; parent[node] = p\n            stack.append((node, p, True))\n            for nb in adj[node]:\n                if not visited[nb]: stack.append((nb, node, False))\n    for node in post_order:\n        dp[node][1] = 1; dp[node][0] = 0\n        for nb in adj[node]:\n            if nb != parent[node]:\n                dp[node][1] += dp[nb][0]\n                dp[node][0] += max(dp[nb][0], dp[nb][1])\n    return str(max(dp[1][0], dp[1][1]))\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    edges = [(int(data[1+i*2]),int(data[2+i*2])) for i in range(n-1)]\n    print(solve(n, edges))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, edges):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    edges = [(int(data[1+i*2]),int(data[2+i*2])) for i in range(n-1)]\n    print(solve(n, edges))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<pair<int,int>>& edges) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n; cin >> n;\n    vector<pair<int,int>> edges(n-1);\n    for(auto& [u,v]:edges) cin>>u>>v;\n    cout<<solve(n,edges)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[][] edges) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] edges = new int[n-1][2];\n        for(int i=0;i<n-1;i++){edges[i][0]=sc.nextInt();edges[i][1]=sc.nextInt();}\n        System.out.println(solve(n,edges));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,edges){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0];\nconst edges=[];\nfor(let i=0;i<n-1;i++) edges.push([+inp[1+i*2],+inp[2+i*2]]);\nconsole.log(solve(n,edges));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n, int** edges){return \"0\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int** edges=malloc((n-1)*sizeof(int*));\n    for(int i=0;i<n-1;i++){edges[i]=malloc(2*sizeof(int));scanf(\"%d %d\",&edges[i][0],&edges[i][1]);}\n    printf(\"%s\\n\",solve(n,edges)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n1 2\n1 3\n3 4\n3 5",
+            "expected_output": "3",
+            "is_sample": true
+        },
+        {
+            "input": "7\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7",
+            "expected_output": "5",
+            "is_sample": true
+        },
+        {
+            "input": "1\n",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "2\n1 2",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 2\n2 3\n3 4",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "6\n1 2\n2 3\n3 4\n4 5\n5 6",
+            "expected_output": "3",
+            "is_sample": false
+        },
+        {
+            "input": "10\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "7\n1 2\n1 3\n2 4\n4 5\n4 6\n3 7",
+            "expected_output": "4",
+            "is_sample": false
+        },
+        {
+            "input": "8\n1 2\n1 3\n2 4\n2 5\n3 6\n3 7\n6 8",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2\n1 3\n1 4\n1 5",
+            "expected_output": "4",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Tree",
+        "Dynamic Programming",
+        "Independent Set"
+    ],
+    "companyIndex": 5
+}

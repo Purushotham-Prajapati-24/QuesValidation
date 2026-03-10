@@ -1,0 +1,82 @@
+{
+    "question_text": "<h3>Optimal Matrix Chain Multiplication</h3><p>You are leading a team designing a quantum neural processing unit. Your pipeline involves multiplying a chain of <code>N</code> matrices in a specific sequence. The dimensions of consecutive matrices are given as an array of <code>N+1</code> values, where matrix <code>i</code> has dimensions <code>dims[i-1] x dims[i]</code>.</p><p>The cost to multiply two matrices of sizes <code>a\u00d7b</code> and <code>b\u00d7c</code> is exactly <code>a*b*c</code> scalar multiplications. Different parenthesizations yield different total costs. Find the <b>minimum total multiplication cost</b> for computing the chain product.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "This is the classic Matrix Chain Multiplication DP problem. Define dp[i][j] as the minimum multiplications to compute the product of matrices i to j. Base case: dp[i][i] = 0. For length > 1: dp[i][j] = min over all split points k of (dp[i][k] + dp[k+1][j] + dims[i-1]*dims[k]*dims[j]), where dims is the dimensions array. Fill the table bottom-up by increasing chain lengths. Time complexity: O(N^3). Space: O(N^2).",
+    "answer": "import sys\ndef solve(n, dims):\n    # n is number of matrices, dims is n+1\n    # dp[i][j] is min cost for matrices i..j (1-indexed)\n    m = [[0] * (n + 1) for _ in range(n + 1)]\n    for length in range(2, n + 1):\n        for i in range(1, n - length + 2):\n            j = i + length - 1\n            m[i][j] = float('inf')\n            for k in range(i, j):\n                q = m[i][k] + m[k+1][j] + dims[i-1]*dims[k]*dims[j]\n                if q < m[i][j]: m[i][j] = q\n    return str(m[1][n])\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    if not data: sys.exit(0)\n    n = int(data[0])\n    dims = list(map(int, data[1:2+n]))\n    print(solve(n, dims))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, dims):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    dims = list(map(int, data[1:2+n]))\n    print(solve(n, dims))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& dims) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n; cin >> n;\n    vector<int> dims(n+1); for(auto& d:dims) cin>>d;\n    cout<<solve(n,dims)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] dims) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] dims = new int[n+1];\n        for(int i=0;i<=n;i++) dims[i]=sc.nextInt();\n        System.out.println(solve(n,dims));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,dims){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0];\nconst dims=inp.slice(1,2+n).map(Number);\nconsole.log(solve(n,dims));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int* dims){return \"0\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* dims=malloc((n+1)*sizeof(int));\n    for(int i=0;i<=n;i++) scanf(\"%d\",&dims[i]);\n    printf(\"%s\\n\",solve(n,dims)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "3\n10 30 5 60",
+            "expected_output": "4500",
+            "is_sample": true
+        },
+        {
+            "input": "4\n40 20 30 10 30",
+            "expected_output": "26000",
+            "is_sample": true
+        },
+        {
+            "input": "1\n2 3",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "3\n1 2 3 4",
+            "expected_output": "18",
+            "is_sample": false
+        },
+        {
+            "input": "4\n10 100 5 50 1",
+            "expected_output": "1750",
+            "is_sample": false
+        },
+        {
+            "input": "6\n5 10 3 12 5 50 6",
+            "expected_output": "2010",
+            "is_sample": false
+        },
+        {
+            "input": "6\n30 35 15 5 10 20 25",
+            "expected_output": "15125",
+            "is_sample": false
+        },
+        {
+            "input": "4\n2 3 4 5 6",
+            "expected_output": "124",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 1 1 1 1 1",
+            "expected_output": "4",
+            "is_sample": false
+        },
+        {
+            "input": "4\n100 1 100 1 100",
+            "expected_output": "10200",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Dynamic Programming",
+        "Matrix Chain"
+    ],
+    "companyIndex": 3
+}

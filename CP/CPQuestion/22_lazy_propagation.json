@@ -1,0 +1,83 @@
+{
+    "question_text": "<h3>Galactic Subsidy Distribution</h3><p>The galactic government maintains a registry of <code>N</code> planetary colonies with initial economic indices. They process two types of economic operations:</p><p><b>Type 1</b>: <code>1 l r x</code> \u2014 Add an economic subsidy of <code>x</code> to all colonies in the range <code>[l, r]</code> (0-indexed, inclusive).</p><p><b>Type 2</b>: <code>2 l r</code> \u2014 Query the sum of all economic indices in the range <code>[l, r]</code>.</p><p>Handle all operations efficiently and output results for all type 2 queries.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "This requires a Segment Tree with Lazy Propagation. For range updates (add delta to a range), we defer the update by storing pending additions in a lazy array. When descending to a node's children, we first push down the lazy value. For range sum queries, the current node's stored sum includes all previously applied updates. This gives O(log N) per operation and O(N) space.",
+    "answer": "import sys\nsys.setrecursionlimit(200000)\ndef solve(n, arr, queries):\n    size = 1\n    while size < n: size <<= 1\n    tree = [0] * (2 * size); lazy = [0] * (2 * size)\n    for i in range(n): tree[size + i] = arr[i]\n    for i in range(size - 1, 0, -1): tree[i] = tree[2*i] + tree[2*i+1]\n    def push_down(node, ns):\n        if lazy[node]:\n            cs = ns // 2\n            tree[2*node] += lazy[node] * cs; lazy[2*node] += lazy[node]\n            tree[2*node+1] += lazy[node] * cs; lazy[2*node+1] += lazy[node]\n            lazy[node] = 0\n    def update(l, r, val, node=1, nl=0, nr=None):\n        if nr is None: nr = size - 1\n        if r < nl or nr < l: return\n        if l <= nl and nr <= r: tree[node] += val*(nr-nl+1); lazy[node] += val; return\n        push_down(node, nr-nl+1); mid = (nl+nr)//2\n        update(l,r,val,2*node,nl,mid); update(l,r,val,2*node+1,mid+1,nr)\n        tree[node] = tree[2*node] + tree[2*node+1]\n    def query(l, r, node=1, nl=0, nr=None):\n        if nr is None: nr = size - 1\n        if r < nl or nr < l: return 0\n        if l <= nl and nr <= r: return tree[node]\n        push_down(node, nr-nl+1); mid = (nl+nr)//2\n        return query(l,r,2*node,nl,mid) + query(l,r,2*node+1,mid+1,nr)\n    out = []\n    for type_, l, r, *rest in queries:\n        if type_ == 1: update(l, r, rest[0])\n        else: out.append(str(query(l, r)))\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); l = int(data[idx+1]); r = int(data[idx+2]); idx += 3\n        if t == 1: v = int(data[idx]); idx += 1; queries.append((t,l,r,v))\n        else: queries.append((t,l,r))\n    print(solve(n, arr, queries))",
+    "boilerplate": {
+        "python": "import sys\nsys.setrecursionlimit(200000)\n\ndef solve(n, arr, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); l = int(data[idx+1]); r = int(data[idx+2]); idx += 3\n        if t == 1: v = int(data[idx]); idx += 1; queries.append((t,l,r,v))\n        else: queries.append((t,l,r))\n    print(solve(n, arr, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& arr, vector<vector<int>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin>>n;\n    vector<int> arr(n); for(auto& v:arr) cin>>v;\n    int q; cin>>q;\n    vector<vector<int>> queries(q);\n    for(auto& qr:queries) {\n        int t,l,r; cin>>t>>l>>r;\n        qr = {t,l,r};\n        if(t==1){int v;cin>>v;qr.push_back(v);}\n    }\n    cout<<solve(n,arr,queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] arr, int[][] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(); int[] arr=new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int q=sc.nextInt(); List<int[]> qs=new ArrayList<>();\n        for(int i=0;i<q;i++){\n            int t=sc.nextInt(),l=sc.nextInt(),r=sc.nextInt();\n            if(t==1) qs.add(new int[]{t,l,r,sc.nextInt()});\n            else qs.add(new int[]{t,l,r,0});\n        }\n        System.out.println(solve(n,arr,qs.toArray(new int[0][0])));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,arr,queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++];\nconst arr=inp.slice(idx,idx+n).map(Number); idx+=n;\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++){\n    const t=+inp[idx++],l=+inp[idx++],r=+inp[idx++];\n    queries.push(t===1?[t,l,r,+inp[idx++]]:[t,l,r]);\n}\nconsole.log(solve(n,arr,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int* arr,int** queries,int q){return \"\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* arr=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){\n        queries[i]=malloc(4*sizeof(int));\n        scanf(\"%d %d %d\",&queries[i][0],&queries[i][1],&queries[i][2]);\n        if(queries[i][0]==1) scanf(\"%d\",&queries[i][3]);\n    }\n    printf(\"%s\\n\",solve(n,arr,queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1500,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n1 2 3 4 5\n4\n1 1 3 2\n2 0 4\n1 2 4 1\n2 2 4",
+            "expected_output": "21\n19",
+            "is_sample": true
+        },
+        {
+            "input": "4\n1 1 1 1\n3\n2 0 3\n1 0 1 5\n2 0 3",
+            "expected_output": "4\n14",
+            "is_sample": true
+        },
+        {
+            "input": "3\n10 20 30\n2\n2 0 2\n1 0 0 5",
+            "expected_output": "60",
+            "is_sample": false
+        },
+        {
+            "input": "6\n1 2 3 4 5 6\n4\n1 0 5 10\n2 0 5\n1 2 3 100\n2 0 5",
+            "expected_output": "81\n281",
+            "is_sample": false
+        },
+        {
+            "input": "5\n0 0 0 0 0\n3\n2 0 4\n1 0 4 5\n2 0 4",
+            "expected_output": "0\n25",
+            "is_sample": false
+        },
+        {
+            "input": "8\n1 3 5 7 9 11 13 15\n5\n2 0 7\n1 0 7 1\n2 0 7\n1 3 5 10\n2 3 5",
+            "expected_output": "64\n72\n60",
+            "is_sample": false
+        },
+        {
+            "input": "1\n7\n2\n2 0 0\n1 0 0 3",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "5\n2 4 6 8 10\n4\n1 1 3 5\n2 0 4\n1 2 2 10\n2 2 3",
+            "expected_output": "45\n34",
+            "is_sample": false
+        },
+        {
+            "input": "6\n5 5 5 5 5 5\n4\n1 0 2 10\n2 0 5\n1 3 5 20\n2 0 5",
+            "expected_output": "60\n120",
+            "is_sample": false
+        },
+        {
+            "input": "7\n1 2 3 4 5 6 7\n5\n2 0 6\n1 0 6 2\n2 0 6\n1 2 4 3\n2 2 4",
+            "expected_output": "28\n42\n27",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Segment Tree",
+        "Lazy Propagation",
+        "Range Sum Query"
+    ],
+    "companyIndex": 5
+}

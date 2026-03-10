@@ -1,0 +1,93 @@
+{
+    "question_text": "<h3>Maximum XOR Encrypted Pair</h3><p>You are a cryptographer working on a zero-knowledge proof protocol. You have an array of <code>N</code> secret keys. To maximize the protocol's entropy, you must find the pair of keys <code>(A[i], A[j])</code> where <code>i != j</code> that produces the maximum <b>XOR value</b>.</p><p>Given an array of <code>N</code> non-negative integers, find the maximum XOR value achievable from any pair of elements in the array.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "A Trie-based O(N log maxVal) solution. Insert all numbers into a binary trie (bit by bit from MSB to LSB). Then for each number, greedily query the trie to find the number that maximizes XOR. At each bit, try to choose the opposite bit (to set the XOR bit to 1). The maximum of all such queries is the answer.",
+    "answer": "import sys\n\ndef solve(n, arr):\n    trie = {}\n    def insert(num):\n        node = trie\n        for i in range(29, -1, -1):\n            bit = (num >> i) & 1\n            if bit not in node: node[bit] = {}\n            node = node[bit]\n    def query(num):\n        node = trie; val = 0\n        for i in range(29, -1, -1):\n            bit = (num >> i) & 1; want = 1 - bit\n            if want in node: val |= (1 << i); node = node[want]\n            else: node = node.get(bit, {})\n        return val\n    for num in arr: insert(num)\n    return str(max(query(num) for num in arr))\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    arr = list(map(int, data[1:1+n]))\n    print(solve(n, arr))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, arr):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    arr = list(map(int, data[1:1+n]))\n    print(solve(n, arr))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& arr) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n; cin>>n;\n    vector<int> arr(n); for(auto& v:arr) cin>>v;\n    cout<<solve(n,arr)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] arr) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] arr = new int[n]; for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        System.out.println(solve(n,arr));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,arr){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0];\nconst arr=inp.slice(1,1+n).map(Number);\nconsole.log(solve(n,arr));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n, int* arr){return \"0\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* arr=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    printf(\"%s\\n\",solve(n,arr)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "6\n3 10 5 25 2 8",
+            "expected_output": "28",
+            "is_sample": true
+        },
+        {
+            "input": "2\n0 0",
+            "expected_output": "0",
+            "is_sample": true
+        },
+        {
+            "input": "4\n1 2 3 4",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "2\n7 5",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2 4 8 16",
+            "expected_output": "24",
+            "is_sample": false
+        },
+        {
+            "input": "2\n255 0",
+            "expected_output": "255",
+            "is_sample": false
+        },
+        {
+            "input": "12\n14 70 53 83 49 91 36 80 92 51 66 70",
+            "expected_output": "127",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 3 5 7",
+            "expected_output": "6",
+            "is_sample": false
+        },
+        {
+            "input": "2\n0 1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "5\n100 200 300 400 500",
+            "expected_output": "500",
+            "is_sample": false
+        },
+        {
+            "input": "150\n807431464 372114120 717532510 904933896 297876336 753788468 373279567 131378570 327458386 223837534 393046776 235917123 809548799 576943044 36498399 322674625 224528471 226223878 78913691 955133881 940198572 238787443 682534229 839156893 768532026 754369601 397929196 146047014 331426688 575674444 98783069 42186089 739123623 311301817 945673863 733960752 939752315 681309301 142295403 233556118 622085206 154784565 753598132 757026667 602988945 13552325 434238429 697607469 805472735 733777373 673864550 373097129 489373613 209511372 538433556 697814305 665018769 215618007 165904412 827177290 600835251 608039071 797630486 271713415 870904140 705770194 684705261 988508505 606167075 971449805 907332057 368709149 678527332 884229142 51578453 225745936 416538322 874627768 969594800 843982346 437140799 108915461 779119030 355032251 318518437 640464897 617810480 993662598 582451777 962321270 495385857 918013105 442038473 480634854 971911252 528848309 866747564 737654887 615570098 741631451 706699 364577729 861515179 462398701 897255306 916672484 600127849 580607168 298700147 496777489 754025882 768788609 873050525 907091599 602470225 282289579 728659725 499897436 160943187 720232879 698806626 261069653 6242536 678778938 181602824 848717465 350109385 407089198 710014193 394438654 235558362 507898273 920743921 903470268 294204563 352350040 599857040 443917166 559562803 397699742 211641374 875172189 103836456 351959598 387583375 205092631 743729106 841354250 97112605 758799745",
+            "expected_output": "1073695445",
+            "is_sample": false
+        },
+        {
+            "input": "150\n0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149",
+            "expected_output": "255",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Trie",
+        "Bit Manipulation",
+        "Array"
+    ],
+    "companyIndex": 4
+}

@@ -1,0 +1,82 @@
+{
+    "question_text": "<h3>Cosmic Cargo Optimization</h3><p>A spacecraft's hold has a weight capacity of exactly <code>W</code> interstellar units. You have <code>N</code> cargo items, each with a specific <b>weight</b> and a <b>profit value</b>. Each item can be taken at most once.</p><p>Select a subset of items to maximize the total profit without exceeding the cargo capacity <code>W</code>. This is the classic 0/1 Knapsack problem under strict competitive programming constraints: <code>N</code> up to 2000 and item weights from 1 to 10<sup>4</sup>.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "This is the 0/1 Knapsack problem solved with standard DP. Define dp[w] as the maximum profit achievable using a single-dimensional rolling weight array up to capacity w. Process items one by one; for each item, iterate capacity from W down to item weight, ensuring each item is used at most once. Time Complexity: O(N*W). This is feasible for N=2000, W=10000.",
+    "answer": "import sys\ndef solve(n, W, weights, values):\n    dp = [0] * (W + 1)\n    for i in range(n):\n        for w in range(W, weights[i] - 1, -1):\n            dp[w] = max(dp[w], dp[w - weights[i]] + values[i])\n    return str(dp[W])\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n, W = int(data[0]), int(data[1])\n    weights = list(map(int, data[2:2+n]))\n    values = list(map(int, data[2+n:2+2*n]))\n    print(solve(n, W, weights, values))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, W, weights, values):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n, W = int(data[0]), int(data[1])\n    weights = list(map(int, data[2:2+n]))\n    values = list(map(int, data[2+n:2+2*n]))\n    print(solve(n, W, weights, values))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, int W, vector<int>& weights, vector<int>& values) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n, W; cin >> n >> W;\n    vector<int> weights(n), values(n);\n    for(auto& w:weights) cin>>w;\n    for(auto& v:values) cin>>v;\n    cout<<solve(n,W,weights,values)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int W, int[] weights, int[] values) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(), W=sc.nextInt();\n        int[] weights=new int[n], values=new int[n];\n        for(int i=0;i<n;i++) weights[i]=sc.nextInt();\n        for(int i=0;i<n;i++) values[i]=sc.nextInt();\n        System.out.println(solve(n,W,weights,values));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,W,weights,values){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0],W=+inp[1];\nconst weights=inp.slice(2,2+n).map(Number);\nconst values=inp.slice(2+n,2+2*n).map(Number);\nconsole.log(solve(n,W,weights,values));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int W,int* weights,int* values){return \"0\";}\nint main(){\n    int n,W;scanf(\"%d %d\",&n,&W);\n    int* weights=malloc(n*sizeof(int)), *values=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&weights[i]);\n    for(int i=0;i<n;i++) scanf(\"%d\",&values[i]);\n    printf(\"%s\\n\",solve(n,W,weights,values)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "4 5\n1 2 3 5\n1 6 10 16",
+            "expected_output": "16",
+            "is_sample": true
+        },
+        {
+            "input": "3 50\n10 20 30\n60 100 120",
+            "expected_output": "220",
+            "is_sample": true
+        },
+        {
+            "input": "1 10\n5\n100",
+            "expected_output": "100",
+            "is_sample": false
+        },
+        {
+            "input": "5 0\n1 2 3 4 5\n10 20 30 40 50",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "5 7\n3 4 5 6 7\n4 5 6 7 8",
+            "expected_output": "9",
+            "is_sample": false
+        },
+        {
+            "input": "6 10\n2 3 4 5 6 1\n3 4 5 8 9 1",
+            "expected_output": "15",
+            "is_sample": false
+        },
+        {
+            "input": "5 100\n10 20 30 40 50\n6 10 15 21 28",
+            "expected_output": "55",
+            "is_sample": false
+        },
+        {
+            "input": "4 8\n1 3 4 5\n1 4 5 7",
+            "expected_output": "11",
+            "is_sample": false
+        },
+        {
+            "input": "3 6\n1 2 3\n10 15 40",
+            "expected_output": "65",
+            "is_sample": false
+        },
+        {
+            "input": "5 15\n3 4 5 6 7\n4 5 6 7 8",
+            "expected_output": "18",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Dynamic Programming",
+        "Knapsack"
+    ],
+    "companyIndex": 3
+}

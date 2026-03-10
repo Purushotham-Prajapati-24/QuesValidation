@@ -1,0 +1,88 @@
+{
+    "question_text": "<h3>K-th Smallest Signal in Range</h3><p>You are monitoring seismic data arriving through an array of <code>N</code> sensors, each outputting a reading. You receive <code>Q</code> queries of the form <code>l r k</code>, asking: among the sensor readings in the contiguous range <code>[l, r]</code> (1-indexed), what is the <b>k-th smallest value</b>?</p><p>Queries must be answered efficiently without sorting each subarray independently.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "This is solved using a Persistent Segment Tree. First, coordinate-compress the values to ranks [1..M]. Then build a Persistent Segment Tree indexed by value rank, where we insert elements one by one (creating a new version for each prefix). Each tree version counts how many elements with value rank \u2264 v have been inserted so far. For a query [l, r, k], we use version r and version l-1, subtracting prefix counts to simulate a range-indexed segment tree. Binary search on the rank to find the k-th smallest.",
+    "answer": "import sys\n\ndef solve(n, arr, queries):\n    sorted_vals = sorted(set(arr)); rank = {v:i+1 for i,v in enumerate(sorted_vals)}\n    m = len(sorted_vals); arr_r = [rank[v] for v in arr]\n    SIZE = (n+1)*20\n    lc = [0]*SIZE; rc = [0]*SIZE; cnt = [0]*SIZE; nid = [1]\n    def new_node(): n=nid[0]; nid[0]+=1; return n\n    def build(l, r):\n        node = new_node()\n        if l==r: return node\n        mid=(l+r)//2; lc[node]=build(l,mid); rc[node]=build(mid+1,r); return node\n    def update(prev, l, r, pos):\n        node=new_node(); lc[node]=lc[prev]; rc[node]=rc[prev]; cnt[node]=cnt[prev]+1\n        if l==r: return node\n        mid=(l+r)//2\n        if pos<=mid: lc[node]=update(lc[prev],l,mid,pos)\n        else: rc[node]=update(rc[prev],mid+1,r,pos)\n        return node\n    def query(ln, rn, l, r, k):\n        if l==r: return l\n        mid=(l+r)//2; left_cnt=cnt[lc[rn]]-cnt[lc[ln]]\n        if k<=left_cnt: return query(lc[ln],lc[rn],l,mid,k)\n        else: return query(rc[ln],rc[rn],mid+1,r,k-left_cnt)\n    roots=[build(1,m)]\n    for v in arr_r: roots.append(update(roots[-1],1,m,v))\n    out=[]\n    for l,r,k in queries:\n        rank_ans=query(roots[l-1],roots[r],1,m,k)\n        out.append(str(sorted_vals[rank_ans-1]))\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        l,r,k = int(data[idx]),int(data[idx+1]),int(data[idx+2]); idx+=3\n        queries.append((l,r,k))\n    print(solve(n, arr, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, arr, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        l,r,k = int(data[idx]),int(data[idx+1]),int(data[idx+2]); idx+=3\n        queries.append((l,r,k))\n    print(solve(n, arr, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& arr, vector<tuple<int,int,int>>& queries){\n    // User logic should be written here\n    return \"\";\n}\nint main(){\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin>>n;\n    vector<int> arr(n); for(auto& v:arr) cin>>v;\n    int q; cin>>q;\n    vector<tuple<int,int,int>> queries(q);\n    for(auto& [l,r,k]:queries) cin>>l>>r>>k;\n    cout<<solve(n,arr,queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] arr, int[][] queries){\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        int n=sc.nextInt(); int[] arr=new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int q=sc.nextInt(); int[][] queries=new int[q][3];\n        for(int i=0;i<q;i++){queries[i][0]=sc.nextInt();queries[i][1]=sc.nextInt();queries[i][2]=sc.nextInt();}\n        System.out.println(solve(n,arr,queries));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,arr,queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++];\nconst arr=inp.slice(idx,idx+n).map(Number); idx+=n;\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++) queries.push([+inp[idx++],+inp[idx++],+inp[idx++]]);\nconsole.log(solve(n,arr,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int* arr,int** queries,int q){return \"\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* arr=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){queries[i]=malloc(3*sizeof(int));scanf(\"%d %d %d\",&queries[i][0],&queries[i][1],&queries[i][2]);}\n    printf(\"%s\\n\",solve(n,arr,queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 512,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n2 1 4 3 5\n2\n1 4 2\n2 5 3",
+            "expected_output": "2\n4",
+            "is_sample": true
+        },
+        {
+            "input": "7\n7 3 1 4 2 6 5\n3\n1 7 4\n2 5 2\n3 6 1",
+            "expected_output": "4\n2\n1",
+            "is_sample": true
+        },
+        {
+            "input": "1\n1\n1\n1 1 1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 4 3 2 1\n2\n1 5 3\n2 4 2",
+            "expected_output": "3\n3",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2 3 4 5\n2\n2 4 2\n1 5 5",
+            "expected_output": "3\n5",
+            "is_sample": false
+        },
+        {
+            "input": "6\n10 20 30 40 50 60\n3\n1 6 3\n2 5 2\n3 6 4",
+            "expected_output": "30\n30\n60",
+            "is_sample": false
+        },
+        {
+            "input": "8\n3 1 4 1 5 9 2 6\n3\n1 8 4\n3 7 2\n5 8 3",
+            "expected_output": "3\n2\n6",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 5 5 5 5\n2\n1 5 5\n2 4 1",
+            "expected_output": "5\n5",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 3 2 5 4\n3\n1 3 2\n2 4 3\n3 5 1",
+            "expected_output": "2\n5\n2",
+            "is_sample": false
+        },
+        {
+            "input": "5\n100 50 75 25 90\n3\n1 5 1\n1 5 5\n2 4 2",
+            "expected_output": "25\n100\n50",
+            "is_sample": false
+        },
+        {
+            "input": "150\n550105309 197469306 630217955 329568650 227472489 530185448 916342369 801617473 152528387 917636390 372288040 745112862 503393897 848728910 49890941 577122901 380790798 904510844 974811275 255125013 463553263 695598680 389030881 68534966 573126840 178881328 462669472 781697602 909881787 693892967 964385849 593872715 406548674 714043222 33014819 171216026 918815861 314686196 397572406 326631052 988990146 871248395 728760747 559803908 834198178 498085338 397749702 986483054 133824855 95903766 719660681 886208306 724506850 67558825 466104546 714597017 535259006 268781689 531179185 726368448 163132909 302788911 472193144 171506679 769156305 262361154 375307598 347250585 862755354 643476145 383660670 125895455 590863536 625727836 360797594 221985846 872291695 567481101 101992226 528262081 795520812 223730523 37984716 121011750 234879928 784613463 45348896 264323892 713229908 58012721 506533565 663433705 43180413 111311222 26929950 62621517 945683017 728969777 69567616 511692326 117668729 911531631 111107227 587204731 336930859 6170703 603331931 197092855 717081450 623858714 677457205 459018821 734823292 569811455 649478598 405152624 929357317 863790166 401320885 140376354 330098279 314391843 722582323 677572647 64042979 896869153 119659616 10555767 71195543 191434556 316520273 452293718 928000278 430299122 13398233 425334840 898089792 566342546 825610545 595787081 399364682 430801527 752341074 701747368 507637824 926024490 360394018 636674649 963548069 428102971\n150\n94 127 24\n83 116 26\n19 149 86\n55 86 7\n9 51 2\n68 97 7\n8 25 3\n62 77 13\n2 104 25\n85 116 1\n17 124 39\n31 145 67\n96 115 15\n28 123 38\n50 125 53\n62 138 52\n63 101 8\n79 80 1\n49 146 47\n73 98 14\n22 73 2\n66 92 21\n76 148 55\n65 67 3\n76 131 42\n17 102 58\n96 113 2\n54 133 34\n23 25 3\n42 54 2\n2 44 36\n27 130 35\n72 143 64\n58 71 8\n76 146 15\n97 136 33\n35 64 22\n53 113 55\n3 130 118\n42 91 34\n78 122 25\n73 111 24\n47 73 16\n90 106 11\n47 48 1\n50 96 22\n43 62 7\n60 149 66\n48 114 11\n31 126 60\n67 107 15\n40 48 8\n43 49 5\n13 48 17\n45 76 22\n36 117 49\n84 134 23\n38 118 50\n39 79 40\n28 41 11\n56 99 35\n42 86 8\n15 123 59\n64 115 8\n85 94 1\n20 36 2\n82 142 46\n75 145 11\n25 37 6\n16 45 23\n27 115 30\n39 42 2\n93 124 20\n47 139 15\n49 87 3\n94 145 22\n82 103 19\n36 143 12\n65 76 11\n12 92 3\n11 123 25\n72 81 2\n79 138 55\n48 91 35\n41 72 16\n82 127 10\n51 58 1\n30 98 58\n31 104 49\n13 85 27\n45 61 16\n77 108 16\n10 140 101\n47 87 10\n1 69 38\n6 51 8\n54 148 65\n26 115 46\n33 150 61\n74 81 7\n62 62 1\n68 100 18\n25 125 16\n64 102 6\n77 91 3\n74 108 18\n36 95 45\n26 38 13\n97 133 3\n35 96 3\n78 81 3\n95 122 15\n32 55 19\n30 31 1\n77 111 16\n9 114 89\n53 121 16\n4 56 7\n90 98 9\n5 141 81\n5 37 32\n45 134 86\n15 38 22\n38 149 50\n91 143 14\n69 99 24\n77 132 29\n63 77 3\n74 134 3\n65 73 9\n32 105 66\n18 135 106\n49 116 1\n70 108 34\n95 148 18\n29 49 12\n38 102 27\n56 111 30\n8 41 21\n65 105 36\n67 73 6\n77 100 23\n14 106 7\n92 147 23\n60 78 1\n64 66 3\n64 102 22\n26 26 1\n7 139 27\n58 136 7",
+            "expected_output": "677457205\n663433705\n636674649\n221985846\n49890941\n101992226\n152528387\n643476145\n197469306\n6170703\n347250585\n559803908\n677457205\n375307598\n643476145\n590863536\n101992226\n101992226\n430299122\n360797594\n67558825\n643476145\n701747368\n769156305\n677457205\n663433705\n62621517\n330098279\n573126840\n95903766\n904510844\n302788911\n825610545\n383660670\n111311222\n728969777\n724506850\n769156305\n909881787\n625727836\n506533565\n567481101\n531179185\n506533565\n397749702\n347250585\n397749702\n677457205\n101992226\n593872715\n221985846\n986483054\n728760747\n503393897\n625727836\n567481101\n330098279\n587204731\n986483054\n909881787\n713229908\n163132909\n528262081\n69567616\n43180413\n68534966\n677457205\n69567616\n573126840\n834198178\n314686196\n397572406\n603331931\n101992226\n67558825\n405152624\n728969777\n69567616\n769156305\n45348896\n178881328\n125895455\n896869153\n719660681\n498085338\n111107227\n67558825\n784613463\n593872715\n380790798\n886208306\n234879928\n726368448\n171506679\n550105309\n178881328\n623858714\n506533565\n472193144\n795520812\n302788911\n383660670\n117668729\n62621517\n58012721\n264323892\n714597017\n964385849\n64042979\n37984716\n567481101\n511692326\n834198178\n693892967\n234879928\n784613463\n140376354\n152528387\n945683017\n569811455\n964385849\n911531631\n918815861\n405152624\n140376354\n663433705\n405152624\n221985846\n26929950\n862755354\n862755354\n886208306\n6170703\n728969777\n336930859\n693892967\n347250585\n472193144\n693892967\n784613463\n643476145\n872291695\n49890941\n401320885\n125895455\n769156305\n383660670\n178881328\n152528387\n45348896",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Persistent Segment Tree",
+        "Binary Search",
+        "Coordinate Compression"
+    ],
+    "companyIndex": 7
+}

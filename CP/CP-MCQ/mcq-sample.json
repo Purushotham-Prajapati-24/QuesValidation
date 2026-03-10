@@ -1,0 +1,14 @@
+{
+        "question_text": "In the sliding window technique, what happens when the window condition is violated?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "When the window condition is violated, the left pointer is advanced to shrink the window until the condition is restored.",
+        "answer": "o3",
+        "options": [
+            { "text": "The right pointer moves backward", "is_correct": false },
+            { "text": "Both pointers reset to the beginning", "is_correct": false },
+            { "text": "The left pointer advances to shrink the window", "is_correct": true },
+            { "text": "The algorithm terminates", "is_correct": false }
+        ],
+        "topics": ["Sliding Window", "Array"],
+        "companyIndex": 1
+}

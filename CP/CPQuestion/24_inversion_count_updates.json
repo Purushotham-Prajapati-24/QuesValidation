@@ -1,0 +1,88 @@
+{
+    "question_text": "<h3>Inversion Count with Updates</h3><p>An array of <code>N</code> integers is part of a financial anomaly detector. An <b>inversion</b> is a pair of indices <code>(i, j)</code> where <code>i &lt; j</code> but <code>arr[i] &gt; arr[j]</code>, suggesting a market anomaly. You must dynamically maintain the inversion count as individual elements are updated.</p><p>You receive <code>Q</code> operations:</p><p><b>Type 1</b>: <code>1 i x</code> \u2014 Update <code>arr[i]</code> (1-indexed) to value <code>x</code>.</p><p><b>Type 2</b>: <code>2</code> \u2014 Output the current total inversion count.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "For the initial count, use merge sort in O(N log N). For each point update, locally recompute the change in inversions by counting how many elements to the left of the updated position are greater than the new value, and how many to the right are smaller. This gives the delta change in inversions. Using a BIT on coordinate-compressed values can make each query and update O(log N) rather than O(N). Overall time: O(N log N + Q log N).",
+    "answer": "import sys\n\ndef solve(n, arr, queries):\n    arr = list(arr)\n    def count_inv():\n        c = 0\n        for i in range(n):\n            for j in range(i+1, n): c += arr[i] > arr[j]\n        return c\n    inv = count_inv(); out = []\n    for q in queries:\n        if q[0] == 1: arr[q[1]-1] = q[2]; inv = count_inv()\n        else: out.append(str(inv))\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); idx += 1\n        if t == 1:\n            i,x = int(data[idx]),int(data[idx+1]); idx += 2\n            queries.append((t,i,x))\n        else:\n            queries.append((t,))\n    print(solve(n, arr, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, arr, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); idx += 1\n        if t == 1:\n            i,x = int(data[idx]),int(data[idx+1]); idx += 2\n            queries.append((t,i,x))\n        else:\n            queries.append((t,))\n    print(solve(n, arr, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& arr, vector<vector<int>>& queries){\n    // User logic should be written here\n    return \"\";\n}\nint main(){\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin>>n;\n    vector<int> arr(n); for(auto& v:arr) cin>>v;\n    int q; cin>>q;\n    vector<vector<int>> queries(q);\n    for(auto& qr:queries){\n        int t; cin>>t; qr={t};\n        if(t==1){int i,x;cin>>i>>x;qr.push_back(i);qr.push_back(x);}\n    }\n    cout<<solve(n,arr,queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] arr, int[][] queries){\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        int n=sc.nextInt(); int[] arr=new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int q=sc.nextInt(); List<int[]> qs=new ArrayList<>();\n        for(int i=0;i<q;i++){\n            int t=sc.nextInt();\n            if(t==1) qs.add(new int[]{t,sc.nextInt(),sc.nextInt()});\n            else qs.add(new int[]{t});\n        }\n        System.out.println(solve(n,arr,qs.toArray(new int[0][0])));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,arr,queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++];\nconst arr=inp.slice(idx,idx+n).map(Number); idx+=n;\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++){\n    const t=+inp[idx++];\n    if(t===1) queries.push([t,+inp[idx++],+inp[idx++]]);\n    else queries.push([t]);\n}\nconsole.log(solve(n,arr,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int* arr,int** queries,int q){return \"\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* arr=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){\n        queries[i]=malloc(3*sizeof(int));\n        scanf(\"%d\",&queries[i][0]);\n        if(queries[i][0]==1) scanf(\"%d %d\",&queries[i][1],&queries[i][2]);\n    }\n    printf(\"%s\\n\",solve(n,arr,queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n2 4 1 3 5\n3\n2\n1 3 6\n2",
+            "expected_output": "3\n3",
+            "is_sample": true
+        },
+        {
+            "input": "5\n5 3 1 2 4\n3\n2\n1 1 1\n2",
+            "expected_output": "6\n2",
+            "is_sample": true
+        },
+        {
+            "input": "5\n1 2 3 4 5\n1\n2",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 4 3 2 1\n1\n2",
+            "expected_output": "10",
+            "is_sample": false
+        },
+        {
+            "input": "1\n1\n3\n2\n1 1 10\n2",
+            "expected_output": "0\n0",
+            "is_sample": false
+        },
+        {
+            "input": "8\n3 1 4 1 5 9 2 6\n3\n2\n1 6 1\n2",
+            "expected_output": "8\n9",
+            "is_sample": false
+        },
+        {
+            "input": "4\n2 2 2 2\n3\n2\n1 1 3\n2",
+            "expected_output": "0\n3",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 3 2 4\n5\n2\n1 2 5\n2\n1 4 0\n2",
+            "expected_output": "1\n2\n4",
+            "is_sample": false
+        },
+        {
+            "input": "4\n7 3 5 1\n3\n2\n1 1 0\n2",
+            "expected_output": "5\n2",
+            "is_sample": false
+        },
+        {
+            "input": "5\n4 2 3 1 5\n5\n2\n1 5 0\n2\n1 1 6\n2",
+            "expected_output": "5\n9\n9",
+            "is_sample": false
+        },
+        {
+            "input": "150\n723034524 34688121 709967864 719808910 868506885 810747767 252664679 586956511 604179771 272946474 121365432 222539807 604334511 87831655 194127887 290145861 743854900 135518840 698164023 701526470 606364504 375945922 129504692 243171218 731425006 930463545 463484130 14182772 584797467 987636810 230498281 32240819 175137165 817304578 648244203 993014356 727779236 543942478 390870342 477093589 82659894 824918030 681946374 586845509 392945745 55214357 253655696 582143167 765026873 43449660 25177989 613449079 180217568 449899086 402234153 614178035 460450226 373012952 81754785 138402913 483025229 781966339 189779713 118191714 235324938 889278857 712566859 269896054 464348798 765779147 590123978 410622627 231585223 855054653 165122878 423340694 153185145 25548523 380435889 792221867 667583560 570227936 709915081 549915477 258853505 738189262 886858652 828754930 4958512 204882505 549885346 327157054 731742068 892388567 824557910 543168069 952870613 294993811 909458915 697295283 467647361 390148894 464197853 686577173 973887875 415277260 366767408 854787680 246100127 252545472 370367584 797025937 534955583 250914819 130483670 686564956 383873821 373576640 448363131 761701623 15044990 420409940 216167181 256811485 257874915 734196925 830653962 891114140 600657688 917424968 239963252 230597265 293055858 751468464 486053148 535357428 448584096 970408646 829971868 486929386 58481266 344340368 150375806 98608260 995568140 732167603 356734186 537518609 832491619 64646569\n150\n2\n1 31 572531232\n1 6 603134063\n2\n2\n1 5 817155054\n1 135 183620100\n1 141 270040182\n1 11 892521961\n1 4 249930657\n1 32 245486419\n1 61 603963080\n1 10 923389414\n2\n1 59 893648387\n2\n2\n2\n2\n2\n1 129 309477888\n2\n1 131 201219566\n2\n2\n1 46 785976016\n1 105 213483382\n2\n1 31 287101841\n2\n2\n2\n2\n2\n2\n2\n2\n1 69 804943529\n2\n1 33 267161255\n1 42 13633111\n1 2 2462373\n2\n2\n2\n2\n2\n1 26 783500509\n1 5 370899821\n1 9 562304873\n1 149 217245787\n1 114 94548074\n1 89 259060841\n2\n1 101 802196470\n2\n2\n2\n1 13 315869533\n1 126 168194936\n2\n2\n1 2 581696829\n2\n2\n1 57 330185678\n1 50 824850746\n2\n1 28 176066895\n2\n2\n1 111 301299336\n2\n2\n1 39 431627047\n1 116 302464537\n1 3 982826271\n1 145 993253963\n1 56 794670755\n1 100 640732675\n1 14 925059667\n2\n2\n2\n2\n2\n2\n2\n2\n1 150 331632748\n1 144 969369287\n1 25 337772985\n2\n1 62 259134809\n2\n2\n1 77 758314293\n2\n1 125 537137369\n1 28 327489400\n1 30 235094072\n2\n2\n2\n1 138 254725370\n1 114 180020218\n2\n1 91 915979377\n1 22 969213325\n1 17 371630969\n1 96 305131507\n1 63 883435923\n1 44 771302176\n1 82 151677016\n1 10 550554260\n2\n1 78 849594278\n2\n1 60 660967607\n2\n1 111 236198095\n2\n1 24 90681140\n1 70 859121030\n1 111 604209677\n1 86 573017453\n2\n1 113 899492696\n2\n2\n2\n1 82 633554864\n2\n2\n1 56 469440006\n2\n2\n2\n2\n2\n1 136 423058625\n1 140 134338564\n2\n1 109 776492150\n1 86 312872833\n1 70 55181614\n2\n2\n2\n2",
+            "expected_output": "5384\n5402\n5402\n5545\n5577\n5577\n5577\n5577\n5577\n5607\n5611\n5611\n5701\n5667\n5667\n5667\n5667\n5667\n5667\n5667\n5667\n5665\n5615\n5615\n5615\n5615\n5615\n5635\n5607\n5607\n5607\n5639\n5639\n5728\n5728\n5758\n5769\n5769\n5770\n5770\n5958\n5958\n5958\n5958\n5958\n5958\n5958\n5958\n5746\n5737\n5737\n5735\n5660\n5660\n5660\n5751\n5718\n5713\n5731\n5742\n5716\n5673\n5673\n5673\n5670\n5670\n5669\n5669\n5669\n5669\n5669\n5733\n5685\n5685\n5685\n5685",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Fenwick Tree",
+        "Inversion Count",
+        "Merge Sort"
+    ],
+    "companyIndex": 5
+}

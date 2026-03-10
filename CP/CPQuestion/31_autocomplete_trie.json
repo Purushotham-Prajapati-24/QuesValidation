@@ -1,0 +1,88 @@
+{
+    "question_text": "<h3>Auto-Complete Search System</h3><p>You are building the search engine backend for a large scientific database. The system must support two operations:</p><p><b>Type 1</b>: <code>1 word</code> \u2014 Insert a word into the search index.</p><p><b>Type 2</b>: <code>2 prefix k</code> \u2014 Return the first <code>k</code> words in the index that start with the given <code>prefix</code>, in insertion order. Print the count on the first line, followed by each suggestion on its own line. If 0 suggestions, print <code>0</code>.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "Use a Trie with each node storing a list of all words passing through it in insertion order. Insertions traverse the trie character by character, appending the word to each node's list. For prefix queries, traverse to the prefix node and return the first k entries from its stored list. Insertion time: O(L) with O(L * N) space overhead. Query time: O(L + K) where K is the number of results returned.",
+    "answer": "import sys\n\ndef solve(queries):\n    trie = {}\n    def insert(word):\n        node = trie\n        for ch in word:\n            if ch not in node: node[ch] = {}\n            node = node[ch]\n            if '_w' not in node: node['_w'] = []\n            node['_w'].append(word)\n    def suggest(prefix, k):\n        node = trie\n        for ch in prefix:\n            if ch not in node: return []\n            node = node[ch]\n        return node.get('_w', [])[:k]\n    out = []\n    for q in queries:\n        if q[0] == 1: insert(q[1])\n        else:\n            sug = suggest(q[1], q[2])\n            out.append(str(len(sug)) + (\"\\n\" + \"\\n\".join(sug) if sug else \"\"))\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    q = int(lines[0])\n    queries = []\n    for i in range(1, q+1):\n        parts = lines[i].split()\n        t = int(parts[0])\n        if t == 1: queries.append([t, parts[1]])\n        else: queries.append([t, parts[1], int(parts[2])])\n    print(solve(queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    q = int(lines[0])\n    queries = []\n    for i in range(1, q+1):\n        parts = lines[i].split()\n        t = int(parts[0])\n        if t == 1: queries.append([t, parts[1]])\n        else: queries.append([t, parts[1], int(parts[2])])\n    print(solve(queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n#include <sstream>\nusing namespace std;\nstring solve(vector<vector<string>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int q; cin>>q; cin.ignore();\n    vector<vector<string>> queries(q);\n    for(auto& qr:queries){\n        string line; getline(cin,line);\n        istringstream ss(line); string tok;\n        while(ss>>tok) qr.push_back(tok);\n    }\n    cout<<solve(queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(String[][] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int q = sc.nextInt(); sc.nextLine();\n        String[][] queries = new String[q][];\n        for(int i=0;i<q;i++) queries[i] = sc.nextLine().split(\" \");\n        System.out.println(solve(queries));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(queries){return \"\";}\nconst lines=fs.readFileSync(0,'utf8').split('\\n');\nconst q=+lines[0];\nconst queries=lines.slice(1,1+q).map(l=>l.trim().split(' '));\nconsole.log(solve(queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\nconst char* solve(char*** queries, int q){return \"\";}\nint main(){\n    int q; scanf(\"%d\\n\",&q);\n    char*** queries=malloc(q*sizeof(char**));\n    for(int i=0;i<q;i++){\n        queries[i]=malloc(3*sizeof(char*));\n        char buf[1000]; fgets(buf,sizeof(buf),stdin); buf[strcspn(buf,\"\\n\")]=0;\n        char* tok=strtok(buf,\" \"); int j=0;\n        while(tok){queries[i][j]=strdup(tok);j++;tok=strtok(NULL,\" \");}\n    }\n    printf(\"%s\\n\",solve(queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n1 apple\n1 app\n1 apply\n2 app 3\n2 app 2",
+            "expected_output": "3\napple\napp\napply\n2\napple\napp",
+            "is_sample": true
+        },
+        {
+            "input": "6\n1 hello\n1 help\n1 world\n2 hel 3\n2 wor 1\n2 xyz 5",
+            "expected_output": "2\nhello\nhelp\n1\nworld\n0",
+            "is_sample": true
+        },
+        {
+            "input": "1\n2 a 3",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 abc\n1 abcd\n1 ab\n2 ab 2",
+            "expected_output": "2\nabc\nabcd",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 z\n1 zz\n1 zzz\n2 z 10",
+            "expected_output": "3\nz\nzz\nzzz",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 test\n1 testing\n1 tested\n2 test 3",
+            "expected_output": "3\ntest\ntesting\ntested",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 a\n1 b\n1 c\n2 a 5\n2 b 5",
+            "expected_output": "1\na\n1\nb",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 search\n1 sea\n1 seal\n2 sea 2",
+            "expected_output": "2\nsearch\nsea",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 abc\n2 a 1\n1 abd\n2 a 2",
+            "expected_output": "1\nabc\n2\nabc\nabd",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 xyz\n2 x 1\n2 xy 1\n2 xyz 1",
+            "expected_output": "1\nxyz\n1\nxyz\n1\nxyz",
+            "is_sample": false
+        },
+        {
+            "input": "150\n1 bbbbc\n1 aaaca\n1 bbcba\n1 bbacb\n1 ababc\n1 acaab\n1 bcabc\n1 bbbbb\n1 acaaa\n1 bcbac\n1 cbcab\n1 cabbc\n1 bbaba\n1 baaaa\n1 abaac\n1 babba\n1 bbbbc\n1 cbabb\n1 cbcac\n1 cbbaa\n1 aacaa\n1 aacaa\n1 bacca\n1 aacca\n1 bcccc\n1 acbbb\n1 caccb\n1 baacc\n1 ccaac\n1 cabbb\n1 ccaab\n1 bacbc\n1 bbaaa\n1 baccb\n1 bcbbc\n1 bbcab\n1 cabcb\n1 bcbcc\n1 abcca\n1 abacb\n1 bbbbb\n1 baabc\n1 accbb\n1 bbacb\n1 bcabb\n1 aacbc\n1 abcba\n1 aabaa\n1 aabcc\n1 caacc\n1 abaaa\n1 accbb\n1 ccabc\n1 bccac\n1 ccabc\n1 abcba\n1 baaaa\n1 bcabc\n1 acbbb\n1 baaba\n1 cccbb\n1 cbcac\n1 bbcaa\n1 bcbca\n1 aacab\n1 cacaa\n1 bcabb\n1 aabcc\n1 baacc\n1 bbcbb\n1 cbabc\n1 bcabc\n1 bcbba\n1 bcaba\n1 bbcbb\n1 baabc\n1 caabb\n1 ababb\n1 ccbac\n1 acbbb\n1 cabcb\n1 bbbca\n1 abbca\n1 cabaa\n1 cabcb\n1 abbaa\n1 bcccc\n1 bbaab\n1 bccca\n1 cbaba\n1 cbcab\n1 bccaa\n1 bccac\n1 aaabb\n1 bacba\n1 bbbaa\n1 bcbab\n1 cbaca\n1 aaccb\n1 aaabb\n2 bc 10\n2 cc 7\n2 ca 1\n2 ba 9\n2 cc 3\n2 ac 5\n2 cc 5\n2 ac 8\n2 aa 7\n2 cc 4\n2 cb 2\n2 ab 8\n2 bc 5\n2 ab 4\n2 ac 7\n2 ba 9\n2 aa 6\n2 ab 8\n2 aa 7\n2 ab 9\n2 ba 9\n2 aa 4\n2 ca 7\n2 bb 9\n2 ac 6\n2 cb 5\n2 ab 1\n2 ba 3\n2 aa 5\n2 ba 9\n2 ca 6\n2 ba 5\n2 bc 9\n2 bb 2\n2 ca 7\n2 bc 2\n2 aa 7\n2 aa 4\n2 ba 1\n2 aa 5\n2 bc 7\n2 aa 8\n2 ca 5\n2 ac 1\n2 ac 9\n2 cc 10\n2 aa 5\n2 bc 2\n2 cb 3\n2 cc 2",
+            "expected_output": "10\nbcabc\nbcbac\nbcccc\nbcbbc\nbcbcc\nbcabb\nbccac\nbcabc\nbcbca\nbcabb\n6\nccaac\nccaab\nccabc\nccabc\ncccbb\nccbac\n1\ncabbc\n9\nbaaaa\nbabba\nbacca\nbaacc\nbacbc\nbaccb\nbaabc\nbaaaa\nbaaba\n3\nccaac\nccaab\nccabc\n5\nacaab\nacaaa\nacbbb\naccbb\naccbb\n5\nccaac\nccaab\nccabc\nccabc\ncccbb\n7\nacaab\nacaaa\nacbbb\naccbb\naccbb\nacbbb\nacbbb\n7\naaaca\naacaa\naacaa\naacca\naacbc\naabaa\naabcc\n4\nccaac\nccaab\nccabc\nccabc\n2\ncbcab\ncbabb\n8\nababc\nabaac\nabcca\nabacb\nabcba\nabaaa\nabcba\nababb\n5\nbcabc\nbcbac\nbcccc\nbcbbc\nbcbcc\n4\nababc\nabaac\nabcca\nabacb\n7\nacaab\nacaaa\nacbbb\naccbb\naccbb\nacbbb\nacbbb\n9\nbaaaa\nbabba\nbacca\nbaacc\nbacbc\nbaccb\nbaabc\nbaaaa\nbaaba\n6\naaaca\naacaa\naacaa\naacca\naacbc\naabaa\n8\nababc\nabaac\nabcca\nabacb\nabcba\nabaaa\nabcba\nababb\n7\naaaca\naacaa\naacaa\naacca\naacbc\naabaa\naabcc\n9\nababc\nabaac\nabcca\nabacb\nabcba\nabaaa\nabcba\nababb\nabbca\n9\nbaaaa\nbabba\nbacca\nbaacc\nbacbc\nbaccb\nbaabc\nbaaaa\nbaaba\n4\naaaca\naacaa\naacaa\naacca\n7\ncabbc\ncaccb\ncabbb\ncabcb\ncaacc\ncacaa\ncaabb\n9\nbbbbc\nbbcba\nbbacb\nbbbbb\nbbaba\nbbbbc\nbbaaa\nbbcab\nbbbbb\n6\nacaab\nacaaa\nacbbb\naccbb\naccbb\nacbbb\n5\ncbcab\ncbabb\ncbcac\ncbbaa\ncbcac\n1\nababc\n3\nbaaaa\nbabba\nbacca\n5\naaaca\naacaa\naacaa\naacca\naacbc\n9\nbaaaa\nbabba\nbacca\nbaacc\nbacbc\nbaccb\nbaabc\nbaaaa\nbaaba\n6\ncabbc\ncaccb\ncabbb\ncabcb\ncaacc\ncacaa\n5\nbaaaa\nbabba\nbacca\nbaacc\nbacbc\n9\nbcabc\nbcbac\nbcccc\nbcbbc\nbcbcc\nbcabb\nbccac\nbcabc\nbcbca\n2\nbbbbc\nbbcba\n7\ncabbc\ncaccb\ncabbb\ncabcb\ncaacc\ncacaa\ncaabb\n2\nbcabc\nbcbac\n7\naaaca\naacaa\naacaa\naacca\naacbc\naabaa\naabcc\n4\naaaca\naacaa\naacaa\naacca\n1\nbaaaa\n5\naaaca\naacaa\naacaa\naacca\naacbc\n7\nbcabc\nbcbac\nbcccc\nbcbbc\nbcbcc\nbcabb\nbccac\n8\naaaca\naacaa\naacaa\naacca\naacbc\naabaa\naabcc\naacab\n5\ncabbc\ncaccb\ncabbb\ncabcb\ncaacc\n1\nacaab\n7\nacaab\nacaaa\nacbbb\naccbb\naccbb\nacbbb\nacbbb\n6\nccaac\nccaab\nccabc\nccabc\ncccbb\nccbac\n5\naaaca\naacaa\naacaa\naacca\naacbc\n2\nbcabc\nbcbac\n3\ncbcab\ncbabb\ncbcac\n2\nccaac\nccaab",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Trie",
+        "String",
+        "Data Structures"
+    ],
+    "companyIndex": 3
+}

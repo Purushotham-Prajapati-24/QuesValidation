@@ -1,0 +1,88 @@
+{
+    "question_text": "<h3>Static Range Minimum Oracle</h3><p>You are building an ultra-fast oracle for weather anomaly detection. A weather station records a sequence of <code>N</code> temperature readings. Since the array is <b>static</b> (no updates), you need to answer <code>Q</code> range minimum queries <i>extremely fast</i> \u2014 in <b>O(1)</b> per query after preprocessing.</p><p>Given the temperature sequence and <code>Q</code> queries of the form <code>l r</code> (0-indexed, inclusive), output the minimum temperature in each queried range.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "Sparse Table achieves O(N log N) preprocessing and O(1) query time for idempotent operations (like min/max). Precompute sparse[j][i] = min of arr[i..i+2^j-1]. For a query [l, r]: let k = floor(log2(r-l+1)); answer = min(sparse[k][l], sparse[k][r - 2^k + 1]). The two ranges overlap but since min is idempotent (taking min of an element twice doesn't change the result), overlap is fine.",
+    "answer": "import sys\n\ndef solve(n, arr, queries):\n    import math\n    LOG = max(1, math.floor(math.log2(n)) + 1) if n > 0 else 1\n    sparse = [arr[:]] + [[0]*n for _ in range(LOG-1)]\n    for j in range(1, LOG):\n        for i in range(n - (1 << j) + 1):\n            sparse[j][i] = min(sparse[j-1][i], sparse[j-1][i + (1 << (j-1))])\n    def rmq(l, r):\n        k = int(math.log2(r - l + 1))\n        return min(sparse[k][l], sparse[k][r - (1 << k) + 1])\n    return \"\\n\".join(str(rmq(l, r)) for l, r in queries)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = [(int(data[idx+i*2]), int(data[idx+i*2+1])) for i in range(q)]\n    print(solve(n, arr, queries))",
+    "boilerplate": {
+        "python": "import sys\nimport math\n\ndef solve(n, arr, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = [(int(data[idx+i*2]), int(data[idx+i*2+1])) for i in range(q)]\n    print(solve(n, arr, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <cmath>\n#include <string>\nusing namespace std;\nvoid solve(int n, vector<int>& arr, vector<pair<int,int>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin>>n;\n    vector<int> arr(n); for(auto& v:arr) cin>>v;\n    int q; cin>>q;\n    vector<pair<int,int>> queries(q);\n    for(auto& [l,r]:queries) cin>>l>>r;\n    cout<<solve(n,arr,queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] arr, int[][] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(); int[] arr=new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int q=sc.nextInt(); int[][] queries=new int[q][2];\n        for(int i=0;i<q;i++){queries[i][0]=sc.nextInt();queries[i][1]=sc.nextInt();}\n        System.out.println(solve(n,arr,queries));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,arr,queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++];\nconst arr=inp.slice(idx,idx+n).map(Number); idx+=n;\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++) queries.push([+inp[idx++],+inp[idx++]]);\nconsole.log(solve(n,arr,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n#include <math.h>\nvoid solve(int n,int* arr,int** queries,int q){return \"\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* arr=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){queries[i]=malloc(2*sizeof(int));scanf(\"%d %d\",&queries[i][0],&queries[i][1]);}\n    printf(\"%s\\n\",solve(n,arr,queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 500,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "8\n2 4 3 1 6 7 8 9\n3\n0 3\n2 7\n0 7",
+            "expected_output": "1\n1\n1",
+            "is_sample": true
+        },
+        {
+            "input": "8\n5 3 7 1 4 9 2 6\n3\n1 6\n0 4\n3 7",
+            "expected_output": "1\n1\n1",
+            "is_sample": true
+        },
+        {
+            "input": "1\n1\n1\n0 0",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "5\n10 5 3 8 7\n3\n0 4\n1 3\n2 4",
+            "expected_output": "3\n3\n3",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2 3 4 5\n3\n0 4\n0 2\n2 4",
+            "expected_output": "1\n1\n3",
+            "is_sample": false
+        },
+        {
+            "input": "9\n9 8 7 6 5 4 3 2 1\n3\n0 8\n2 6\n4 8",
+            "expected_output": "1\n3\n1",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 5 5 5 5\n3\n0 4\n1 3\n2 2",
+            "expected_output": "5\n5\n5",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 3 2 5 4\n3\n0 2\n1 4\n2 3",
+            "expected_output": "1\n2\n2",
+            "is_sample": false
+        },
+        {
+            "input": "5\n100 1 200 2 300\n3\n0 4\n1 3\n2 4",
+            "expected_output": "1\n1\n2",
+            "is_sample": false
+        },
+        {
+            "input": "10\n10 9 8 7 6 5 4 3 2 1\n3\n0 9\n2 7\n5 9",
+            "expected_output": "1\n3\n1",
+            "is_sample": false
+        },
+        {
+            "input": "150\n525359950 784272166 798262266 617904462 774325818 915434318 273781194 766086744 27117308 983244585 388803688 668007450 254309078 486779849 819926980 789745867 765240611 675056045 716356096 597776873 342308454 201584257 515261479 182080969 403634754 472648114 570799519 461720089 759789604 716259797 126342238 497107473 848200966 967933370 705973219 971976149 32128968 485895258 949117890 718876148 477243126 158804541 358300943 444104907 11203528 751944077 691295582 873479337 98060331 430890758 124616579 943763693 459429231 583557360 626220821 3193439 95428242 525997292 926595822 385951695 327154701 657979058 802505738 152799569 329423658 658444269 915349522 670696980 641363360 656472755 726620699 519465737 160210820 62177523 264499617 566772699 836325476 187046898 593536349 522096060 730793933 43581791 811736851 772974211 321943842 333318913 169857969 45148686 832953419 876077982 836416114 74602060 280555502 405717847 589768582 576253600 219580304 743348951 221399419 652974845 14946882 650079585 323033761 673171778 45335662 317918020 811991179 929095828 46573364 904639219 794190331 828982069 898974038 31324488 667823072 166515485 767300336 341142330 903112541 500344983 161815666 416299997 3816416 246411513 885061358 73491881 771532876 497219015 263849540 792434417 36725996 681290858 57003314 168188792 616851175 608140905 277209958 215069729 17014833 625896690 416095975 159180360 65706063 759152386 214293472 617583714 959985721 622458968 665582693 580415130\n150\n7 12\n99 104\n9 73\n88 120\n36 121\n7 40\n44 145\n97 129\n98 144\n18 62\n22 103\n92 97\n13 71\n74 114\n42 90\n87 148\n89 142\n59 135\n70 95\n16 149\n43 119\n75 89\n42 105\n18 136\n46 61\n19 76\n19 89\n29 80\n59 116\n63 144\n61 120\n32 67\n17 82\n40 130\n84 136\n4 101\n41 117\n73 146\n24 118\n72 115\n88 101\n77 134\n31 47\n97 114\n88 134\n61 64\n51 114\n20 118\n55 82\n67 74\n79 96\n27 76\n0 108\n97 139\n3 136\n28 69\n14 97\n78 139\n97 145\n72 144\n30 34\n7 72\n85 146\n86 140\n77 121\n15 123\n43 133\n71 76\n58 122\n96 109\n59 116\n80 116\n5 101\n92 120\n80 99\n75 130\n86 102\n100 141\n72 132\n30 36\n15 58\n50 129\n75 93\n70 134\n41 74\n2 111\n72 141\n22 123\n7 23\n58 138\n76 132\n17 96\n5 37\n32 64\n14 111\n87 130\n93 142\n64 66\n61 97\n54 76\n41 42\n96 143\n25 68\n62 126\n60 87\n41 118\n34 106\n26 126\n57 123\n25 58\n84 132\n18 110\n23 76\n11 84\n39 48\n31 112\n11 90\n52 116\n81 88\n38 149\n64 138\n9 114\n81 123\n20 32\n46 94\n76 89\n98 123\n51 136\n30 82\n32 53\n5 11\n96 98\n15 39\n60 78\n94 109\n71 114\n61 126\n67 79\n76 99\n79 79\n95 140\n35 69\n43 121\n31 43\n75 104\n82 143\n100 109\n20 25\n16 30\n33 122",
+            "expected_output": "27117308\n14946882\n3193439\n14946882\n3193439\n27117308\n3193439\n3816416\n3816416\n3193439\n3193439\n219580304\n3193439\n14946882\n3193439\n3816416\n3816416\n3816416\n43581791\n3193439\n3193439\n43581791\n3193439\n3193439\n3193439\n3193439\n3193439\n3193439\n14946882\n3816416\n14946882\n3193439\n3193439\n3193439\n3816416\n3193439\n3193439\n3816416\n3193439\n14946882\n14946882\n3816416\n11203528\n14946882\n3816416\n152799569\n3193439\n3193439\n3193439\n62177523\n43581791\n3193439\n3193439\n3816416\n3193439\n3193439\n3193439\n3816416\n3816416\n3816416\n126342238\n3193439\n3816416\n3816416\n14946882\n3193439\n3193439\n62177523\n3816416\n14946882\n14946882\n14946882\n3193439\n14946882\n43581791\n3816416\n14946882\n3816416\n3816416\n32128968\n3193439\n3193439\n43581791\n3816416\n3193439\n3193439\n3816416\n3193439\n27117308\n3816416\n3816416\n3193439\n27117308\n3193439\n3193439\n3816416\n3816416\n329423658\n43581791\n3193439\n158804541\n3816416\n3193439\n3816416\n43581791\n3193439\n3193439\n3193439\n3816416\n3193439\n3816416\n3193439\n3193439\n3193439\n11203528\n3193439\n3193439\n3193439\n43581791\n3193439\n3816416\n3193439\n3816416\n126342238\n3193439\n43581791\n3816416\n3193439\n3193439\n11203528\n27117308\n219580304\n32128968\n62177523\n14946882\n14946882\n3816416\n62177523\n43581791\n522096060\n3816416\n3193439\n3193439\n32128968\n14946882\n3816416\n14946882\n182080969\n126342238\n3193439",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Sparse Table",
+        "Range Minimum Query",
+        "Static Array"
+    ],
+    "companyIndex": 3
+}

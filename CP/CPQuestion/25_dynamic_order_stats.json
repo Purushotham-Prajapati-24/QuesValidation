@@ -1,0 +1,89 @@
+{
+    "question_text": "<h3>Dynamic Order Statistics</h3><p>You are implementing a real-time ranking engine for a high-stakes online tournament. Players' scores arrive and leave dynamically. You need a structure that can efficiently:</p><p><b>Type 1</b>: <code>1 x</code> \u2014 Insert score <code>x</code> into the system.</p><p><b>Type 2</b>: <code>2 x</code> \u2014 Delete score <code>x</code> from the system (guaranteed to exist).</p><p><b>Type 3</b>: <code>3 k</code> \u2014 Report the <b>k-th smallest</b> score currently in the system (1-indexed). If fewer than k scores exist, output <code>-1</code>.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "This requires a dynamic Order Statistics structure. The cleanest approach is an Augmented BST or a Balanced BST (like a policy-based tree in C++, or a Treap/Skip List). Each node stores its subtree size, allowing traversal to the k-th element in O(log N). Insertions and deletions also take O(log N). An alternative approach is to use a BIT with coordinate-compressed or offline-computed values. For online queries with dynamic ordering, balanced BSTs or Segment Trees on value domains are ideal.",
+    "answer": "import sys\n\ndef solve(queries):\n    from bisect import insort, bisect_left\n    arr = []; out = []\n    for q in queries:\n        if q[0] == 1: insort(arr, q[1])\n        elif q[0] == 2:\n            idx = bisect_left(arr, q[1])\n            if idx < len(arr) and arr[idx] == q[1]: arr.pop(idx)\n        else: out.append(str(arr[q[1]-1]) if q[1]-1 < len(arr) else \"-1\")\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); idx += 1\n        if t in (1, 2):\n            queries.append([t, int(data[idx])]); idx += 1\n        else:\n            queries.append([t, int(data[idx])]); idx += 1\n    print(solve(queries))",
+    "boilerplate": {
+        "python": "import sys\nfrom bisect import insort, bisect_left\n\ndef solve(queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t = int(data[idx]); idx += 1\n        if t in (1, 2):\n            queries.append([t, int(data[idx])]); idx += 1\n        else:\n            queries.append([t, int(data[idx])]); idx += 1\n    print(solve(queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(vector<vector<int>>& queries){\n    // User logic should be written here\n    return \"\";\n}\nint main(){\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int q; cin>>q;\n    vector<vector<int>> queries(q);\n    for(auto& qr:queries){int t,x;cin>>t>>x;qr={t,x};}\n    cout<<solve(queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int[][] queries){\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args){\n        Scanner sc=new Scanner(System.in);\n        int q=sc.nextInt();\n        int[][] queries=new int[q][2];\n        for(int i=0;i<q;i++){queries[i][0]=sc.nextInt();queries[i][1]=sc.nextInt();}\n        System.out.println(solve(queries));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const q=+inp[idx++];\nconst queries=[];\nfor(let i=0;i<q;i++) queries.push([+inp[idx++],+inp[idx++]]);\nconsole.log(solve(queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int** queries, int q){return \"\";}\nint main(){\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){queries[i]=malloc(2*sizeof(int));scanf(\"%d %d\",&queries[i][0],&queries[i][1]);}\n    printf(\"%s\\n\",solve(queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1500,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "6\n1 5\n1 3\n1 7\n3 2\n2 3\n3 1",
+            "expected_output": "5\n5",
+            "is_sample": true
+        },
+        {
+            "input": "7\n1 10\n1 20\n1 30\n3 3\n3 1\n2 20\n3 2",
+            "expected_output": "30\n10\n30",
+            "is_sample": true
+        },
+        {
+            "input": "3\n1 1\n3 1\n3 2",
+            "expected_output": "1\n-1",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 5\n1 5\n2 5\n3 1",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "1\n3 1",
+            "expected_output": "-1",
+            "is_sample": false
+        },
+        {
+            "input": "8\n1 1\n1 2\n1 3\n1 4\n1 5\n3 3\n2 3\n3 3",
+            "expected_output": "3\n4",
+            "is_sample": false
+        },
+        {
+            "input": "6\n1 100\n1 50\n1 75\n3 1\n3 2\n3 3",
+            "expected_output": "50\n75\n100",
+            "is_sample": false
+        },
+        {
+            "input": "3\n1 10\n2 10\n3 1",
+            "expected_output": "-1",
+            "is_sample": false
+        },
+        {
+            "input": "8\n1 5\n1 3\n1 1\n1 4\n1 2\n3 5\n2 3\n3 4",
+            "expected_output": "5\n5",
+            "is_sample": false
+        },
+        {
+            "input": "6\n1 7\n1 7\n1 7\n3 2\n2 7\n3 2",
+            "expected_output": "7\n7",
+            "is_sample": false
+        },
+        {
+            "input": "150\n1 620599637\n1 53809269\n1 618782287\n1 571963413\n2 620599637\n3 3\n1 140474102\n1 255205656\n3 1\n2 618782287\n2 255205656\n2 571963413\n3 2\n2 140474102\n3 1\n1 205919605\n3 2\n3 1\n1 695386810\n2 205919605\n1 521800814\n2 521800814\n3 2\n3 1\n1 382122033\n3 2\n1 4990125\n1 873126077\n2 53809269\n2 382122033\n3 2\n3 1\n2 695386810\n3 1\n2 4990125\n2 873126077\n1 178105541\n1 902680994\n2 178105541\n3 1\n1 213844759\n2 902680994\n1 595839707\n3 2\n3 2\n2 213844759\n2 595839707\n1 165067725\n3 1\n1 973851407\n1 164527623\n3 3\n2 165067725\n2 973851407\n1 544066749\n3 2\n2 164527623\n2 544066749\n3 1\n3 1\n1 575118772\n1 187255643\n2 575118772\n2 187255643\n1 106377062\n1 182860249\n2 182860249\n3 1\n2 106377062\n3 1\n3 1\n3 1\n3 1\n1 698808820\n2 698808820\n3 1\n1 265087160\n2 265087160\n3 1\n3 1\n1 684756936\n2 684756936\n3 1\n3 1\n3 1\n3 1\n3 1\n1 561756969\n1 184112520\n1 118834322\n3 1\n1 36863355\n3 2\n3 2\n3 4\n2 36863355\n1 642973368\n2 184112520\n1 318028696\n3 2\n3 3\n2 318028696\n3 3\n1 523492577\n1 167647250\n1 585797778\n2 642973368\n1 356359066\n2 356359066\n1 31593819\n3 1\n3 6\n1 255850615\n1 462552447\n3 1\n1 470551866\n2 470551866\n1 607295219\n1 36612295\n3 10\n2 607295219\n3 5\n1 137468427\n3 4\n2 255850615\n1 178204964\n3 8\n3 6\n3 5\n3 10\n2 137468427\n1 358707158\n2 167647250\n3 2\n1 936942249\n1 952271071\n1 710740542\n3 9\n3 9\n3 7\n2 31593819\n1 224221963\n2 936942249\n3 4\n2 358707158\n1 706904291\n2 952271071\n1 564213488\n2 523492577\n3 6",
+            "expected_output": "618782287\n53809269\n140474102\n53809269\n205919605\n53809269\n695386810\n53809269\n382122033\n695386810\n4990125\n4990125\n902680994\n595839707\n595839707\n165067725\n973851407\n544066749\n-1\n-1\n106377062\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n-1\n118834322\n118834322\n118834322\n561756969\n318028696\n561756969\n642973368\n31593819\n585797778\n31593819\n607295219\n255850615\n137468427\n523492577\n178204964\n167647250\n585797778\n36612295\n585797778\n585797778\n523492577\n224221963\n561756969",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Data Structures",
+        "Order Statistics",
+        "Balanced BST",
+        "BIT"
+    ],
+    "companyIndex": 6
+}

@@ -1,0 +1,94 @@
+{
+    "question_text": "<h3>Multi-Pattern Intrusion Detection</h3><p>You are building an intrusion detection system (IDS) that monitors a large stream of network traffic (represented as a text string <code>T</code>) for a set of known attack <b>signature patterns</b>. Each pattern may appear in the traffic stream multiple times.</p><p>Given <code>K</code> patterns and a text string <code>T</code>, count the number of occurrences of each pattern in <code>T</code> (overlapping occurrences count).</p><p>Input: First line is <code>K</code> (number of patterns). Next <code>K</code> lines are the patterns. Last line is the text <code>T</code>.</p><p>Output <code>K</code> lines, where the i-th line is the count of pattern i in text T.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "This is solved with Aho-Corasick Algorithm. Build a trie from all patterns. Then compute failure links (similar to KMP failure function) via BFS. Each failure link points to the longest proper suffix of the current trie path that is also a prefix of some pattern. During text traversal, follow trie edges (or failure links if edge missing). At each position, emit all patterns that end at the current state via output links. Time Complexity: O(sum of pattern lengths + |T| + total matches).",
+    "answer": "import sys\n\ndef solve(patterns, text):\n    from collections import deque\n    trie = [{}]; fail = [0]; output = [[]]\n    for idx, p in enumerate(patterns):\n        node = 0\n        for ch in p:\n            if ch not in trie[node]: trie[node][ch]=len(trie); trie.append({}); fail.append(0); output.append([])\n            node = trie[node][ch]\n        output[node].append(idx)\n    q = deque()\n    for ch, child in trie[0].items(): fail[child]=0; q.append(child)\n    while q:\n        node = q.popleft()\n        for ch, child in trie[node].items():\n            f=fail[node]\n            while f!=0 and ch not in trie[f]: f=fail[f]\n            fail[child]=trie[f].get(ch,0)\n            if fail[child]==child: fail[child]=0\n            output[child]=output[child]+output[fail[child]]; q.append(child)\n    counts=[0]*len(patterns); node=0\n    for ch in text:\n        while node!=0 and ch not in trie[node]: node=fail[node]\n        node=trie[node].get(ch,0)\n        for pidx in output[node]: counts[pidx]+=1\n    return \"\\n\".join(map(str,counts))\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    k = int(lines[0].strip())\n    patterns = [lines[i+1].strip() for i in range(k)]\n    text = lines[k+1].strip() if k+1 < len(lines) else \"\"\n    print(solve(patterns, text))",
+    "boilerplate": {
+        "python": "import sys\nfrom collections import deque\n\ndef solve(patterns, text):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    k = int(lines[0].strip())\n    patterns = [lines[i+1].strip() for i in range(k)]\n    text = lines[k+1].strip() if k+1 < len(lines) else \"\"\n    print(solve(patterns, text))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(vector<string>& patterns, string& text) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    int k; cin >> k; cin.ignore();\n    vector<string> patterns(k);\n    for (auto& p : patterns) getline(cin, p);\n    string text; getline(cin, text);\n    cout << solve(patterns, text) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(String[] patterns, String text) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int k = Integer.parseInt(sc.nextLine().trim());\n        String[] patterns = new String[k];\n        for (int i = 0; i < k; i++) patterns[i] = sc.nextLine().trim();\n        String text = sc.hasNextLine() ? sc.nextLine().trim() : \"\";\n        System.out.println(solve(patterns, text));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(patterns, text) {\n    // User logic should be written here\n    return \"\";\n}\nconst lines = fs.readFileSync(0, 'utf8').split('\\n');\nconst k = parseInt(lines[0]);\nconst patterns = lines.slice(1, 1+k).map(s => s.trim());\nconst text = lines[1+k] ? lines[1+k].trim() : \"\";\nconsole.log(solve(patterns, text));",
+        "c": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\nconst char* solve(char** patterns, int k, char* text) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    int k; scanf(\"%d\\n\", &k);\n    char** patterns = malloc(k * sizeof(char*));\n    for (int i = 0; i < k; i++) {\n        patterns[i] = malloc(1001);\n        fgets(patterns[i], 1001, stdin);\n        patterns[i][strcspn(patterns[i], \"\\n\")] = 0;\n    }\n    char text[100001];\n    fgets(text, sizeof(text), stdin);\n    text[strcspn(text, \"\\n\")] = 0;\n    printf(\"%s\\n\", solve(patterns, k, text));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1500,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "3\nabc\nbc\nc\nabcbc",
+            "expected_output": "1\n2\n2",
+            "is_sample": true
+        },
+        {
+            "input": "4\nhe\nshe\nhis\nhers\nahishers",
+            "expected_output": "1\n1\n1\n1",
+            "is_sample": true
+        },
+        {
+            "input": "3\na\naa\naaa\naaaa",
+            "expected_output": "4\n3\n2",
+            "is_sample": false
+        },
+        {
+            "input": "3\ntest\ntes\nest\ntesteste",
+            "expected_output": "2\n2\n2",
+            "is_sample": false
+        },
+        {
+            "input": "1\nxyz\nabcdefgh",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "3\nab\nb\nc\nababc",
+            "expected_output": "2\n2\n1",
+            "is_sample": false
+        },
+        {
+            "input": "3\ngo\ngoogol\noo\ngoogol",
+            "expected_output": "2\n1\n1",
+            "is_sample": false
+        },
+        {
+            "input": "1\nab\nabababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababababab",
+            "expected_output": "100",
+            "is_sample": false
+        },
+        {
+            "input": "3\naaa\naa\na\naaaa",
+            "expected_output": "2\n3\n4",
+            "is_sample": false
+        },
+        {
+            "input": "1\npattern\nthis is a pattern matching pattern problem",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "20\nbbbbabaaaa\nbbbaabbaba\nbbaababbba\nbbaaaabaab\nbabaababba\nabbbbaaabb\naabbabbbbb\nabbbaaabbb\nbbabbbabba\nabaabaaabb\nbababaabaa\nbbababbaba\naabaababbb\nabbaabaaab\nabbbaabaaa\naababaaaba\nbabaaabbab\naabbabbbba\nbaaabbaaab\naaabaaabba\nbbbabbbababbbabbbabbaaaaaaaabbaaababaaaaabbaababaaaaabababbbabaabbbabaaaaabbbabaaabbbbbababbbabbbbaaaaabaabaaaabbaaaabbabaabbbaababbabaababbaaabbbaaab",
+            "expected_output": "0\n0\n0\n0\n1\n0\n0\n0\n1\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0\n0",
+            "is_sample": false
+        },
+        {
+            "input": "20\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaa\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "expected_output": "146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146\n146",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "String",
+        "Aho-Corasick",
+        "Trie",
+        "Pattern Matching"
+    ],
+    "companyIndex": 5
+}

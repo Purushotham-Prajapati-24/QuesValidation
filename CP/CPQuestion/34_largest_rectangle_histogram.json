@@ -1,0 +1,93 @@
+{
+    "question_text": "<h3>Largest Defence Shield in Histogram</h3><p>You are an architect designing a protective barrier for a futuristic city. The city's skyline can be modeled as a histogram of <code>N</code> bars, each with a width of <code>1</code> and a specific height. A <b>defence shield</b> is a rectangular region formed by selecting a contiguous set of bars where the rectangle's height does not exceed any bar in the selection.</p><p>Find the area of the <b>largest possible rectangular defence shield</b>. <b>Note:</b> The maximum possible area can exceed the maximum 32-bit signed integer value (<code>INT32_MAX</code>), so ensure your output calculation uses 64-bit integer types (e.g., <code>long long</code> in C/C++, <code>long</code> in Java).</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "Solved by Monotonic Stack in O(N). Maintain an increasing monotonic stack of bar indices. For each bar i, while the current bar is shorter than the stack's top, pop and compute the area of a rectangle using the popped bar as the shortest bar. The width is determined by the current index and the new top of the stack. This ensures each bar acts as the minimum exactly once. Track and return the maximum area seen.",
+    "answer": "import sys\n\ndef solve(n, heights):\n    stack = []; max_area = 0\n    for i in range(n + 1):\n        h = heights[i] if i < n else 0\n        while stack and heights[stack[-1]] > h:\n            height = heights[stack.pop()]\n            width = i if not stack else i - stack[-1] - 1\n            max_area = max(max_area, height * width)\n        stack.append(i)\n    return str(max_area)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    heights = list(map(int, data[1:1+n]))\n    print(solve(n, heights))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, heights):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    heights = list(map(int, data[1:1+n]))\n    print(solve(n, heights))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& heights) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n; cin>>n;\n    vector<int> heights(n); for(auto& h:heights) cin>>h;\n    cout<<solve(n,heights)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] heights) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[] heights = new int[n]; for(int i=0;i<n;i++) heights[i]=sc.nextInt();\n        System.out.println(solve(n,heights));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,heights){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0];\nconst heights=inp.slice(1,1+n).map(Number);\nconsole.log(solve(n,heights));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int* heights){return \"0\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* heights=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&heights[i]);\n    printf(\"%s\\n\",solve(n,heights)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "6\n2 1 5 6 2 3",
+            "expected_output": "10",
+            "is_sample": true
+        },
+        {
+            "input": "2\n2 4",
+            "expected_output": "4",
+            "is_sample": true
+        },
+        {
+            "input": "1\n1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 1 1 1 1",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 4 3 2 1",
+            "expected_output": "9",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2 3 4 5",
+            "expected_output": "9",
+            "is_sample": false
+        },
+        {
+            "input": "7\n6 2 5 4 5 1 6",
+            "expected_output": "12",
+            "is_sample": false
+        },
+        {
+            "input": "6\n2 2 2 2 2 2",
+            "expected_output": "12",
+            "is_sample": false
+        },
+        {
+            "input": "9\n1 2 3 4 5 4 3 2 1",
+            "expected_output": "15",
+            "is_sample": false
+        },
+        {
+            "input": "3\n0 9 0",
+            "expected_output": "9",
+            "is_sample": false
+        },
+        {
+            "input": "150\n249715535 876311061 504199364 964096017 825114967 679473909 9899138 5864981 137874121 236491282 680554984 249396000 525789252 18516055 108837446 172529068 915864335 283017324 826541640 791230691 377543043 100332403 213226195 918762873 936443895 623756085 199467992 993687448 374336087 178979244 681335141 651817845 189175880 526747052 867684567 337129237 550336015 390501529 93333974 289864899 54742663 532935255 354710638 428564464 920607753 892711064 671026021 325085658 696519818 101345624 967982555 552803243 891923467 42311173 449204846 7975774 36711524 175685504 207417265 853773055 208006073 435496753 731580023 247297707 336745274 185332004 776314721 246278590 704509271 551877850 268606531 2433936 60545753 575197700 999911503 307507458 355330097 271510125 810678131 57625680 235304564 380455165 526058121 300348044 717416602 426914752 427096175 269376612 518043057 94274727 936498995 228176312 968812534 237565864 375373785 797631266 721402964 323415720 97727528 823642765 471326821 859004559 862658987 535169019 784575364 214161941 478705820 487256923 967962887 41293864 514339564 15232889 156771161 830322825 777008465 987661168 266442695 438251796 677227898 770367158 516189699 624695828 529346736 376500055 170477051 512417195 26865466 839976246 316343504 363136058 219115164 146859557 180579664 200253428 17769036 985370641 661453097 270385554 632395436 848348529 142324436 204782484 434591600 963908785 406335056 583963547 661689415 226050881 757901772 614528522",
+            "expected_output": "2930869645",
+            "is_sample": false
+        },
+        {
+            "input": "150\n0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149",
+            "expected_output": "5625",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Stack",
+        "Monotonic Stack",
+        "Array"
+    ],
+    "companyIndex": 4
+}

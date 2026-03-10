@@ -1,0 +1,93 @@
+{
+    "question_text": "<h3>Longest Palindromic Signal</h3><p>You are analyzing electromagnetic signals received from deep space. The signal is encoded as a string of characters. Scientists are particularly interested in the <b>longest palindromic segment</b> within the signal, as these appear to carry the most coherent information.</p><p>Given a string <code>S</code>, find the length of the <b>longest palindromic substring</b>.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "Manacher's Algorithm solves this in O(N) time. Transform the string to insert special characters between each character (and at boundaries) to handle even-length palindromes uniformly. Maintain a rightmost palindrome's center C and right edge R. For each position i, use the mirror palindrome's length as a starting value for P[i], then expand. When the palindrome at i extends past R, update C and R. The answer is max(P).",
+    "answer": "import sys\n\ndef solve(s):\n    T = '#'.join(f'^{s}$')\n    n = len(T); P = [0] * n; C = R = 0\n    for i in range(1, n-1):\n        mirror = 2 * C - i\n        if i < R: P[i] = min(R - i, P[mirror])\n        while T[i + P[i] + 1] == T[i - P[i] - 1]: P[i] += 1\n        if i + P[i] > R: C, R = i, i + P[i]\n    return str(max(P))\n\nif __name__ == '__main__':\n    s = sys.stdin.read().strip()\n    print(solve(s))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(s):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    s = sys.stdin.read().strip()\n    print(solve(s))",
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nstring solve(string s) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    string s;\n    if (!getline(cin, s)) s = \"\";\n    cout << solve(s) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static String solve(String s) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String s = sc.hasNextLine() ? sc.nextLine().trim() : \"\";\n        System.out.println(solve(s));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(s) {\n    // User logic should be written here\n    return \"0\";\n}\nconst s = fs.readFileSync(0, 'utf8').trim();\nconsole.log(solve(s));",
+        "c": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\nconst char* solve(char* s) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    char s[100001];\n    if (!fgets(s, sizeof(s), stdin)) s[0]='\\0';\n    else s[strcspn(s,\"\\n\")]=0;\n    printf(\"%s\\n\", solve(s));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "babad",
+            "expected_output": "3",
+            "is_sample": true
+        },
+        {
+            "input": "cbbd",
+            "expected_output": "2",
+            "is_sample": true
+        },
+        {
+            "input": "a",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "aa",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "racecar",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "abacaba",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "amanaplanacanalpanama",
+            "expected_output": "21",
+            "is_sample": false
+        },
+        {
+            "input": "abcdef",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "aaaa",
+            "expected_output": "4",
+            "is_sample": false
+        },
+        {
+            "input": "civilwartestingwhetherthatnaptionoranynartionsoconceivedsooerdedicatedcanlongendure",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "cbacacccacbacabccbcbcbbacbbcabccbbababbcbabcacacbbbbbbabcabbcbcababcbabacabccbcbbbbacbbbbccbaccbaacccbaaaabbbbcaccbbbaabbbbcbbaaabcbbacacccabccccbcaac",
+            "expected_output": "11",
+            "is_sample": false
+        },
+        {
+            "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "expected_output": "150",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "String",
+        "Manacher's Algorithm",
+        "Palindrome"
+    ],
+    "companyIndex": 4
+}

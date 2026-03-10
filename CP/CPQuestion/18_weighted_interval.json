@@ -1,0 +1,83 @@
+{
+    "question_text": "<h3>Weighted Interval Scheduling</h3><p>You are a cloud compute scheduler for a distributed quantum computing cluster. There are <code>N</code> compute jobs, each described by a <b>start time</b>, an <b>end time</b>, and a <b>profit value</b>. Two jobs are considered <b>conflicting</b> if their time intervals overlap (an interval <code>[s1, e1]</code> conflicts with <code>[s2, e2]</code> if and only if they share at least one time unit).</p><p>You must schedule a non-conflicting subset of jobs so that the <b>total profit is maximized</b>. Output the maximum profit achievable.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "This is the Weighted Job Scheduling problem. Sort intervals by end time. Define dp[j] as the maximum profit using the first j intervals. For each interval j, either we skip it (dp[j] = dp[j-1]) or we include it and add its weight to the best non-conflicting previous schedule (dp[j] = weight[j] + dp[p+1] where p is the last interval ending before interval j starts, found via binary search). Time Complexity: O(N log N).",
+    "answer": "import sys\ndef solve(n, intervals):\n    intervals.sort(key=lambda x: x[1])\n    starts = [x[0] for x in intervals]\n    ends = [x[1] for x in intervals]\n    weights = [x[2] for x in intervals]\n    def latest(j):\n        lo, hi = 0, j - 1\n        while lo <= hi:\n            mid = (lo + hi) // 2\n            if ends[mid] <= starts[j]:\n                if mid == j-1 or ends[mid+1] > starts[j]: return mid\n                lo = mid + 1\n            else: hi = mid - 1\n        return -1\n    dp = [0] * (n + 1)\n    for j in range(1, n + 1):\n        p = latest(j - 1)\n        dp[j] = max(dp[j-1], weights[j-1] + (dp[p+1] if p >= 0 else 0))\n    return str(dp[n])\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    intervals = [(int(data[1+i*3]), int(data[2+i*3]), int(data[3+i*3])) for i in range(n)]\n    print(solve(n, intervals))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, intervals):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n = int(data[0])\n    intervals = [(int(data[1+i*3]), int(data[2+i*3]), int(data[3+i*3])) for i in range(n)]\n    print(solve(n, intervals))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<tuple<int,int,int>>& intervals) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n; cin >> n;\n    vector<tuple<int,int,int>> intervals(n);\n    for(auto& [s,e,w]:intervals) cin>>s>>e>>w;\n    cout<<solve(n,intervals)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[][] intervals) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt();\n        int[][] intervals = new int[n][3];\n        for(int i=0;i<n;i++){intervals[i][0]=sc.nextInt();intervals[i][1]=sc.nextInt();intervals[i][2]=sc.nextInt();}\n        System.out.println(solve(n,intervals));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,intervals){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0];\nconst intervals=[];\nfor(let i=0;i<n;i++) intervals.push([+inp[1+i*3],+inp[2+i*3],+inp[3+i*3]]);\nconsole.log(solve(n,intervals));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n, int** intervals){return \"0\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int** intervals=malloc(n*sizeof(int*));\n    for(int i=0;i<n;i++){intervals[i]=malloc(3*sizeof(int));scanf(\"%d %d %d\",&intervals[i][0],&intervals[i][1],&intervals[i][2]);}\n    printf(\"%s\\n\",solve(n,intervals)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "5\n1 3 50\n2 5 20\n4 6 100\n3 8 200\n6 9 70",
+            "expected_output": "250",
+            "is_sample": true
+        },
+        {
+            "input": "3\n1 2 10\n2 3 20\n1 4 30",
+            "expected_output": "30",
+            "is_sample": true
+        },
+        {
+            "input": "1\n1 2 5",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "3\n1 3 10\n2 4 5\n3 5 20",
+            "expected_output": "30",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2 1\n2 3 1\n3 4 1\n4 5 1\n5 6 1",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 10 100\n2 3 40\n4 6 50\n6 8 70",
+            "expected_output": "160",
+            "is_sample": false
+        },
+        {
+            "input": "6\n1 4 20\n3 5 30\n0 6 5\n5 7 40\n3 9 50\n5 10 10",
+            "expected_output": "70",
+            "is_sample": false
+        },
+        {
+            "input": "3\n1 2 100\n1 2 50\n1 2 75",
+            "expected_output": "100",
+            "is_sample": false
+        },
+        {
+            "input": "10\n1 2 5\n2 3 10\n3 4 15\n4 5 20\n5 6 25\n6 7 30\n7 8 35\n8 9 40\n9 10 45\n10 11 50",
+            "expected_output": "275",
+            "is_sample": false
+        },
+        {
+            "input": "4\n1 5 100\n2 6 200\n5 8 50\n6 9 30",
+            "expected_output": "230",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Dynamic Programming",
+        "Binary Search",
+        "Interval Scheduling"
+    ],
+    "companyIndex": 4
+}

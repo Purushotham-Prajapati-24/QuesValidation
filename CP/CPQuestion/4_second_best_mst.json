@@ -1,0 +1,84 @@
+{
+    "question_text": "<h3>Minimum Spanning Tree with Forbidden Edges</h3><p>You are engineering an automated planetary colonization structural grid. There are <code>N</code> atmospheric pods and <code>M</code> potential reinforced struts extending between them. Due to resource allocation constraints, the primary grid must be absolutely optimal in material cost (a Minimum Spanning Tree).</p><p>However, AI safety regulations dictate maintaining a distinct <b>Second-Order Backup Protocol</b>. You must compute the absolute minimum cost of a planetary grid that successfully connects all <code>N</code> pods, given that this structural grid must differ from the absolute minimum cost grid by <b>at least one strut</b>.</p><p>Identify the cost of this <b>strictly second best</b> minimum spanning tree. Return <code>-1</code> if the required network cannot be formed whatsoever.</p>",
+    "difficulty": "MEDIUM-HARD",
+    "marks": 25,
+    "explanation": "This is solving the 'Strictly Second Best MST' problem. First, build the primary Minimum Spanning Tree utilizing Kruskal's Algorithm. To force the tree to differ by at least one edge, we evaluate adding each unselected edge `E(u, v)` from the original graph. By adding `E`, it will form precisely one cycle within the current MST. To return to a valid tree, we must eject an edge from this cycle. Clearly, to keep the resulting tree's weight as low as possible, we should eject the maximally weighted edge on the MST path existing between `u` and `v`. This max-edge query across paths on a tree can be accelerated effectively to O(log V) by using Binary Lifting (LCA). The min across all such candidate configurations forms our Second Best MST. Time Complexity: O(E log V).",
+    "answer": "import sys\nsys.setrecursionlimit(200005)\ndef solve(n, m, edges):\n    edges.sort(key=lambda x: x[2])\n    parent = list(range(n))\n    \n    def find(i):\n        if parent[i] == i: return i\n        parent[i] = find(parent[i])\n        return parent[i]\n        \n    def union(i, j):\n        root_i, root_j = find(i), find(j)\n        if root_i != root_j:\n            parent[root_i] = root_j\n            return True\n        return False\n\n    mst_weight = 0\n    mst_edges = []\n    used_edges = [False] * m\n    \n    for i in range(m):\n        u, v, w = edges[i]\n        u -= 1; v -= 1\n        if union(u, v):\n            mst_weight += w\n            mst_edges.append((u, v, w))\n            used_edges[i] = True\n\n    if len(mst_edges) != n - 1: return \"-1\"\n        \n    adj = [[] for _ in range(n)]\n    for u, v, w in mst_edges:\n        adj[u].append((v, w)); adj[v].append((u, w))\n        \n    LOG = 18\n    up = [[-1] * LOG for _ in range(n)]\n    max_w = [[-1] * LOG for _ in range(n)]\n    depth = [0] * n\n    \n    def dfs(node, p, d, w_p):\n        depth[node] = d\n        up[node][0] = p\n        max_w[node][0] = w_p\n        \n        for i in range(1, LOG):\n            if up[node][i-1] != -1:\n                up[node][i] = up[up[node][i-1]][i-1]\n                max_w[node][i] = max(max_w[node][i-1], max_w[up[node][i-1]][i-1])\n            else:\n                up[node][i] = -1; max_w[node][i] = -1\n                \n        for neighbor, weight in adj[node]:\n            if neighbor != p: dfs(neighbor, node, d + 1, weight)\n\n    dfs(0, -1, 0, -1)\n    \n    def get_max_edge(u, v):\n        res = -1\n        if depth[u] < depth[v]: u, v = v, u\n        \n        diff = depth[u] - depth[v]\n        for i in range(LOG):\n            if (diff >> i) & 1:\n                res = max(res, max_w[u][i])\n                u = up[u][i]\n                \n        if u == v: return res\n            \n        for i in range(LOG - 1, -1, -1):\n            if up[u][i] != up[v][i]:\n                res = max(res, max_w[u][i])\n                res = max(res, max_w[v][i])\n                u = up[u][i]; v = up[v][i]\n                \n        res = max(res, max_w[u][0])\n        res = max(res, max_w[v][0])\n        return res\n\n    ans = float('inf')\n    for i in range(m):\n        if not used_edges[i]:\n            u, v, w = edges[i]\n            u -= 1; v -= 1\n            max_e = get_max_edge(u, v)\n            if max_e != -1:\n                ans = min(ans, mst_weight - max_e + w)\n                \n    if ans == float('inf'): return \"-1\"\n    return str(ans)\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().split()\n    if not input_data: exit()\n    n, m = int(input_data[0]), int(input_data[1])\n    edges = []\n    idx = 2\n    for _ in range(m):\n        edges.append([int(input_data[idx]), int(input_data[idx+1]), int(input_data[idx+2])])\n        idx += 3\n    print(solve(n, m, edges))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, m, edges):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().split()\n    if not input_data: exit()\n    n, m = int(input_data[0]), int(input_data[1])\n    edges = []\n    idx = 2\n    for _ in range(m):\n        edges.append([int(input_data[idx]), int(input_data[idx+1]), int(input_data[idx+2])])\n        idx += 3\n    print(solve(n, m, edges))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n\nusing namespace std;\n\nstring solve(int n, int m, vector<vector<int>>& edges) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, m;\n    if (!(cin >> n >> m)) return 0;\n    vector<vector<int>> edges(m, vector<int>(3));\n    for (int i = 0; i < m; ++i) {\n        cin >> edges[i][0] >> edges[i][1] >> edges[i][2];\n    }\n    cout << solve(n, m, edges) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\n\npublic class Main {\n    public static String solve(int n, int m, int[][] edges) {\n        // User logic should be written here\n        return \"\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int m = sc.nextInt();\n        int[][] edges = new int[m][3];\n        for (int i = 0; i < m; i++) {\n            edges[i][0] = sc.nextInt();\n            edges[i][1] = sc.nextInt();\n            edges[i][2] = sc.nextInt();\n        }\n        System.out.println(solve(n, m, edges));\n    }\n}",
+        "javascript": "const fs = require('fs');\n\nfunction solve(n, m, edges) {\n    // User logic should be written here\n    return \"\";\n}\n\nconst input = fs.readFileSync(0, 'utf8').trim().split(/\\s+/);\nif (input.length >= 2) {\n    let n = parseInt(input[0]);\n    let m = parseInt(input[1]);\n    let edges = [];\n    let idx = 2;\n    for (let i = 0; i < m; i++) {\n        edges.push([parseInt(input[idx]), parseInt(input[idx+1]), parseInt(input[idx+2])]);\n        idx += 3;\n    }\n    console.log(solve(n, m, edges));\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\nchar* solve(int n, int m, int** edges) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    int n, m;\n    if (scanf(\"%d %d\", &n, &m) != 2) return 0;\n    int** edges = (int**)malloc(m * sizeof(int*));\n    for (int i = 0; i < m; ++i) {\n        edges[i] = (int*)malloc(3 * sizeof(int));\n        scanf(\"%d %d %d\", &edges[i][0], &edges[i][1], &edges[i][2]);\n    }\n    char* res = solve(n, m, edges);\n    printf(\"%s\\n\", res);\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "4 5\n1 2 10\n2 3 15\n1 3 5\n4 2 2\n4 3 40",
+            "expected_output": "22",
+            "is_sample": true
+        },
+        {
+            "input": "3 2\n1 2 10\n2 3 10",
+            "expected_output": "-1",
+            "is_sample": true
+        },
+        {
+            "input": "5 5\n1 2 1\n2 3 1\n3 4 1\n4 5 1\n1 5 100",
+            "expected_output": "103",
+            "is_sample": false
+        },
+        {
+            "input": "5 10\n1 2 5\n1 3 6\n1 4 7\n1 5 8\n2 3 10\n2 4 11\n2 5 12\n3 4 15\n3 5 16\n4 5 20",
+            "expected_output": "30",
+            "is_sample": false
+        },
+        {
+            "input": "5 3\n1 2 1\n2 3 1\n4 5 1",
+            "expected_output": "-1",
+            "is_sample": false
+        },
+        {
+            "input": "5 6\n1 2 10\n1 3 10\n1 4 10\n1 5 50\n2 3 15\n3 4 20",
+            "expected_output": "85",
+            "is_sample": false
+        },
+        {
+            "input": "6 9\n1 2 1\n2 3 2\n3 4 3\n4 5 4\n5 6 5\n1 3 10\n3 5 10\n1 4 20\n2 6 20",
+            "expected_output": "21",
+            "is_sample": false
+        },
+        {
+            "input": "3 3\n1 2 10\n2 3 10\n1 3 10",
+            "expected_output": "20",
+            "is_sample": false
+        },
+        {
+            "input": "100 99\n1 2 1\n2 3 2\n3 4 3\n4 5 4\n5 6 5\n6 7 6\n7 8 7\n8 9 8\n9 10 9\n10 11 10\n11 12 11\n12 13 12\n13 14 13\n14 15 14\n15 16 15\n16 17 16\n17 18 17\n18 19 18\n19 20 19\n20 21 20\n21 22 21\n22 23 22\n23 24 23\n24 25 24\n25 26 25\n26 27 26\n27 28 27\n28 29 28\n29 30 29\n30 31 30\n31 32 31\n32 33 32\n33 34 33\n34 35 34\n35 36 35\n36 37 36\n37 38 37\n38 39 38\n39 40 39\n40 41 40\n41 42 41\n42 43 42\n43 44 43\n44 45 44\n45 46 45\n46 47 46\n47 48 47\n48 49 48\n49 50 49\n50 51 50\n51 52 51\n52 53 52\n53 54 53\n54 55 54\n55 56 55\n56 57 56\n57 58 57\n58 59 58\n59 60 59\n60 61 60\n61 62 61\n62 63 62\n63 64 63\n64 65 64\n65 66 65\n66 67 66\n67 68 67\n68 69 68\n69 70 69\n70 71 70\n71 72 71\n72 73 72\n73 74 73\n74 75 74\n75 76 75\n76 77 76\n77 78 77\n78 79 78\n79 80 79\n80 81 80\n81 82 81\n82 83 82\n83 84 83\n84 85 84\n85 86 85\n86 87 86\n87 88 87\n88 89 88\n89 90 89\n90 91 90\n91 92 91\n92 93 92\n93 94 93\n94 95 94\n95 96 95\n96 97 96\n97 98 97\n98 99 98\n99 100 99",
+            "expected_output": "-1",
+            "is_sample": false
+        },
+        {
+            "input": "100 100\n1 2 1\n2 3 1\n3 4 1\n4 5 1\n5 6 1\n6 7 1\n7 8 1\n8 9 1\n9 10 1\n10 11 1\n11 12 1\n12 13 1\n13 14 1\n14 15 1\n15 16 1\n16 17 1\n17 18 1\n18 19 1\n19 20 1\n20 21 1\n21 22 1\n22 23 1\n23 24 1\n24 25 1\n25 26 1\n26 27 1\n27 28 1\n28 29 1\n29 30 1\n30 31 1\n31 32 1\n32 33 1\n33 34 1\n34 35 1\n35 36 1\n36 37 1\n37 38 1\n38 39 1\n39 40 1\n40 41 1\n41 42 1\n42 43 1\n43 44 1\n44 45 1\n45 46 1\n46 47 1\n47 48 1\n48 49 1\n49 50 1\n50 51 1\n51 52 1\n52 53 1\n53 54 1\n54 55 1\n55 56 1\n56 57 1\n57 58 1\n58 59 1\n59 60 1\n60 61 1\n61 62 1\n62 63 1\n63 64 1\n64 65 1\n65 66 1\n66 67 1\n67 68 1\n68 69 1\n69 70 1\n70 71 1\n71 72 1\n72 73 1\n73 74 1\n74 75 1\n75 76 1\n76 77 1\n77 78 1\n78 79 1\n79 80 1\n80 81 1\n81 82 1\n82 83 1\n83 84 1\n84 85 1\n85 86 1\n86 87 1\n87 88 1\n88 89 1\n89 90 1\n90 91 1\n91 92 1\n92 93 1\n93 94 1\n94 95 1\n95 96 1\n96 97 1\n97 98 1\n98 99 1\n99 100 1\n100 1 5",
+            "expected_output": "103",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Graph",
+        "Minimum Spanning Tree",
+        "LCA",
+        "Binary Lifting"
+    ],
+    "companyIndex": 6
+}

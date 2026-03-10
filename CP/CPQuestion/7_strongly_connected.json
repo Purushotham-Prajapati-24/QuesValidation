@@ -1,0 +1,84 @@
+{
+    "question_text": "<h3>Minimum Edges to Make Graph Strongly Connected</h3><p>You are operating a planetary-wide information relay system composed of <code>N</code> satellite nodes and <code>M</code> directional laser links. A relay system is called <b>fully operational</b> if information can navigate from any satellite to any other satellite, following directed laser links.</p><p>Your mandate is to restructure the network with the <b>minimum number of new directed edges</b> to make it fully operational. Given the directed graph, compute the minimum number of edges to add to ensure every satellite can reach every other satellite.</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "We first decompose the directed graph into its Strongly Connected Components (SCCs) using Kosaraju's Algorithm (two-pass DFS). Each SCC can be treated as a single super-node, creating a Condensation DAG. On this DAG, any SCC with in-degree 0 needs an inbound edge, and any SCC with out-degree 0 needs an outbound edge. The answer is max(count of SCCs with in-degree 0, count of SCCs with out-degree 0). A special case: if there is exactly 1 SCC, the graph is already strongly connected and the answer is 0.",
+    "answer": "import sys\ndef solve(n, edges):\n    from collections import defaultdict\n    adj = defaultdict(list); radj = defaultdict(list)\n    for u, v in edges:\n        adj[u].append(v); radj[v].append(u)\n    visited = [False] * (n + 1)\n    order = []\n    def dfs1(v):\n        stack = [(v, 0)]\n        while stack:\n            node, i = stack[-1]\n            if i == 0: visited[node] = True\n            if i < len(adj[node]):\n                stack[-1] = (node, i + 1)\n                nb = adj[node][i]\n                if not visited[nb]: stack.append((nb, 0))\n            else: order.append(node); stack.pop()\n    for i in range(1, n + 1):\n        if not visited[i]: dfs1(i)\n    comp = [-1] * (n + 1); c = 0\n    def dfs2(v, c):\n        stack = [v]\n        while stack:\n            node = stack.pop(); comp[node] = c\n            for nb in radj[node]:\n                if comp[nb] == -1: stack.append(nb)\n    for v in reversed(order):\n        if comp[v] == -1: dfs2(v, c); c += 1\n    if c == 1: return \"0\"\n    in0 = [0] * c; out0 = [0] * c\n    for u in range(1, n + 1):\n        for v in adj[u]:\n            if comp[u] != comp[v]: out0[comp[u]] += 1; in0[comp[v]] += 1\n    return str(max(sum(1 for x in in0 if x == 0), sum(1 for x in out0 if x == 0)))\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n, m = int(data[idx]), int(data[idx+1]); idx += 2\n    edges = []\n    for _ in range(m):\n        edges.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    print(solve(n, edges))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, edges):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n, m = int(data[idx]), int(data[idx+1]); idx += 2\n    edges = []\n    for _ in range(m):\n        edges.append((int(data[idx]), int(data[idx+1]))); idx += 2\n    print(solve(n, edges))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, int m, vector<pair<int,int>>& edges) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, m; cin >> n >> m;\n    vector<pair<int,int>> edges(m);\n    for (auto& [u, v] : edges) cin >> u >> v;\n    cout << solve(n, m, edges) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int m, int[][] edges) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), m = sc.nextInt();\n        int[][] edges = new int[m][2];\n        for (int i = 0; i < m; i++) { edges[i][0] = sc.nextInt(); edges[i][1] = sc.nextInt(); }\n        System.out.println(solve(n, m, edges));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(n, m, edges) {\n    // User logic should be written here\n    return \"0\";\n}\nconst inp = fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++], m=+inp[idx++];\nconst edges=[];\nfor(let i=0;i<m;i++){edges.push([+inp[idx++],+inp[idx++]]);}\nconsole.log(solve(n,m,edges));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n, int m, int** edges) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    int n, m; scanf(\"%d %d\", &n, &m);\n    int** edges = malloc(m * sizeof(int*));\n    for (int i = 0; i < m; i++) {\n        edges[i] = malloc(2 * sizeof(int));\n        scanf(\"%d %d\", &edges[i][0], &edges[i][1]);\n    }\n    printf(\"%s\\n\", solve(n, m, edges));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "3 2\n1 2\n2 3",
+            "expected_output": "1",
+            "is_sample": true
+        },
+        {
+            "input": "4 4\n1 2\n2 3\n3 4\n4 1",
+            "expected_output": "0",
+            "is_sample": true
+        },
+        {
+            "input": "4 4\n1 2\n2 3\n3 1\n4 1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "5 4\n1 2\n2 3\n3 1\n4 5",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "6 6\n1 2\n2 1\n3 4\n4 3\n5 6\n6 5",
+            "expected_output": "3",
+            "is_sample": false
+        },
+        {
+            "input": "1 0\n",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "4 2\n1 2\n3 4",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "5 4\n1 2\n2 3\n3 4\n4 5",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "6 7\n1 2\n2 3\n3 1\n4 5\n5 6\n6 4\n3 4",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "100 99\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99\n99 100",
+            "expected_output": "1",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Graph",
+        "Strongly Connected Components",
+        "Kosaraju",
+        "Condensation DAG"
+    ],
+    "companyIndex": 5
+}

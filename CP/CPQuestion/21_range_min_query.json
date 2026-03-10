@@ -1,0 +1,83 @@
+{
+    "question_text": "<h3>Seismic Minimum Reading</h3><p>A seismic sensor array has <code>N</code> sensors arranged in a line. You are given an initial array of readings. A monitoring system processes two types of operations in real time:</p><p><b>Type 1</b>: <code>1 i x</code> \u2014 Update the reading of sensor <code>i</code> (0-indexed) to value <code>x</code>.</p><p><b>Type 2</b>: <code>2 l r</code> \u2014 Query the minimum sensor reading in the range <code>[l, r]</code> (0-indexed, inclusive).</p><p>Handle all operations efficiently and output results of all type 2 queries on separate lines.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "Use a Segment Tree for Range Minimum Query with Point Updates. Build the tree bottom-up over the array. Point updates propagate upward from leaf to root in O(log N). Range minimum queries use the standard recursive approach or iterative bottom-up approach in O(log N). Both operations total O((N + Q) log N).",
+    "answer": "import sys\ndef solve(n, arr, queries):\n    tree = [float('inf')] * (2 * n)\n    for i in range(n): tree[n + i] = arr[i]\n    for i in range(n - 1, 0, -1): tree[i] = min(tree[2*i], tree[2*i+1])\n    def update(i, val):\n        i += n; tree[i] = val\n        while i > 1: i //= 2; tree[i] = min(tree[2*i], tree[2*i+1])\n    def query(l, r):\n        res = float('inf'); l += n; r += n + 1\n        while l < r:\n            if l & 1: res = min(res, tree[l]); l += 1\n            if r & 1: r -= 1; res = min(res, tree[r])\n            l >>= 1; r >>= 1\n        return res\n    out = []\n    for type_, a, b in queries:\n        if type_ == 1: update(a, b)\n        else: out.append(str(query(a, b)))\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t,a,b = int(data[idx]),int(data[idx+1]),int(data[idx+2]); idx+=3\n        queries.append((t,a,b))\n    print(solve(n, arr, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, arr, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    n = int(data[idx]); idx += 1\n    arr = list(map(int, data[idx:idx+n])); idx += n\n    q = int(data[idx]); idx += 1\n    queries = []\n    for _ in range(q):\n        t,a,b = int(data[idx]),int(data[idx+1]),int(data[idx+2]); idx+=3\n        queries.append((t,a,b))\n    print(solve(n, arr, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, vector<int>& arr, vector<tuple<int,int,int>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n; cin >> n;\n    vector<int> arr(n); for(auto& v:arr) cin>>v;\n    int q; cin >> q;\n    vector<tuple<int,int,int>> queries(q);\n    for(auto& [t,a,b]:queries) cin>>t>>a>>b;\n    cout<<solve(n,arr,queries)<<\"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int[] arr, int[][] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n=sc.nextInt(); int[] arr=new int[n];\n        for(int i=0;i<n;i++) arr[i]=sc.nextInt();\n        int q=sc.nextInt(); int[][] queries=new int[q][3];\n        for(int i=0;i<q;i++){queries[i][0]=sc.nextInt();queries[i][1]=sc.nextInt();queries[i][2]=sc.nextInt();}\n        System.out.println(solve(n,arr,queries));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,arr,queries){return \"\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const n=+inp[idx++];\nconst arr=inp.slice(idx,idx+n).map(Number); idx+=n;\nconst q=+inp[idx++]; const queries=[];\nfor(let i=0;i<q;i++) queries.push([+inp[idx++],+inp[idx++],+inp[idx++]]);\nconsole.log(solve(n,arr,queries));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int* arr,int** queries,int q){return \"\";}\nint main(){\n    int n; scanf(\"%d\",&n);\n    int* arr=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&arr[i]);\n    int q; scanf(\"%d\",&q);\n    int** queries=malloc(q*sizeof(int*));\n    for(int i=0;i<q;i++){queries[i]=malloc(3*sizeof(int));scanf(\"%d %d %d\",&queries[i][0],&queries[i][1],&queries[i][2]);}\n    printf(\"%s\\n\",solve(n,arr,queries,q)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "8\n2 4 3 1 6 7 8 9\n3\n2 0 3\n1 1 1\n2 0 3",
+            "expected_output": "1\n1",
+            "is_sample": true
+        },
+        {
+            "input": "5\n5 3 7 1 4\n3\n2 1 4\n1 3 0\n2 1 4",
+            "expected_output": "1\n0",
+            "is_sample": true
+        },
+        {
+            "input": "3\n10 5 3\n1\n2 0 2",
+            "expected_output": "3",
+            "is_sample": false
+        },
+        {
+            "input": "5\n1 2 3 4 5\n4\n2 0 4\n2 2 4\n1 2 0\n2 0 4",
+            "expected_output": "1\n3\n0",
+            "is_sample": false
+        },
+        {
+            "input": "4\n7 7 7 7\n3\n2 1 2\n1 2 1\n2 1 2",
+            "expected_output": "7\n1",
+            "is_sample": false
+        },
+        {
+            "input": "1\n1\n2\n1 0 100\n2 0 0",
+            "expected_output": "100",
+            "is_sample": false
+        },
+        {
+            "input": "5\n5 1 5 1 5\n3\n2 0 4\n2 1 3\n2 2 4",
+            "expected_output": "1\n1\n1",
+            "is_sample": false
+        },
+        {
+            "input": "5\n100 200 300 400 500\n3\n2 0 4\n1 2 50\n2 0 4",
+            "expected_output": "100\n50",
+            "is_sample": false
+        },
+        {
+            "input": "8\n3 1 4 1 5 9 2 6\n4\n2 2 5\n2 0 7\n1 3 10\n2 0 7",
+            "expected_output": "1\n1\n1",
+            "is_sample": false
+        },
+        {
+            "input": "9\n9 8 7 6 5 4 3 2 1\n4\n2 4 8\n2 0 8\n1 8 0\n2 0 8",
+            "expected_output": "1\n1\n0",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Segment Tree",
+        "Range Queries",
+        "Point Updates"
+    ],
+    "companyIndex": 3
+}

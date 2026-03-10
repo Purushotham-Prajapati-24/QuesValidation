@@ -1,0 +1,93 @@
+{
+    "question_text": "<h3>Pattern Matching with Wildcards</h3><p>You are building a search filter for an advanced bioinformatics system. The system uses a special <b>pattern language</b> where:</p><p><code>*</code> matches any sequence of characters (including an empty sequence).<br><code>?</code> matches exactly one arbitrary character.</p><p>Given a pattern string <code>P</code> and a text string <code>T</code>, determine if the pattern matches the entire text. Output <code>1</code> if the pattern fully matches, and <code>0</code> otherwise.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 15,
+    "explanation": "This is solved with 2D DP. dp[i][j] = true if pattern[0..i-1] matches text[0..j-1]. Base: dp[0][0]=true; dp[i][0]=true only if all pattern[0..i-1] are '*'. Transition: if pattern[i-1]=='*', dp[i][j] = dp[i-1][j] (skip '*') OR dp[i][j-1] ('*' matches one more char). Else if pattern[i-1]='?' or equals text[j-1], dp[i][j] = dp[i-1][j-1]. Time Complexity: O(M*N).",
+    "answer": "import sys\n\ndef solve(pattern, text):\n    m, n = len(pattern), len(text)\n    dp = [[False]*(n+1) for _ in range(m+1)]\n    dp[0][0] = True\n    for i in range(1, m+1):\n        if pattern[i-1] == '*': dp[i][0] = dp[i-1][0]\n    for i in range(1, m+1):\n        for j in range(1, n+1):\n            if pattern[i-1] == '*': dp[i][j] = dp[i-1][j] or dp[i][j-1]\n            elif pattern[i-1] == '?' or pattern[i-1] == text[j-1]: dp[i][j] = dp[i-1][j-1]\n    return \"1\" if dp[m][n] else \"0\"\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    pattern = lines[0].strip() if len(lines) > 0 else \"\"\n    text = lines[1].strip() if len(lines) > 1 else \"\"\n    print(solve(pattern, text))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(pattern, text):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    lines = sys.stdin.read().splitlines()\n    pattern = lines[0].strip() if len(lines) > 0 else \"\"\n    text = lines[1].strip() if len(lines) > 1 else \"\"\n    print(solve(pattern, text))",
+        "cpp": "#include <iostream>\n#include <string>\nusing namespace std;\nstring solve(string pattern, string text) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    string pattern, text;\n    if (!getline(cin, pattern)) pattern = \"\";\n    if (!getline(cin, text)) text = \"\";\n    cout << solve(pattern, text) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.Scanner;\npublic class Main {\n    public static String solve(String pattern, String text) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        String pattern = sc.hasNextLine() ? sc.nextLine() : \"\";\n        String text = sc.hasNextLine() ? sc.nextLine() : \"\";\n        System.out.println(solve(pattern, text));\n    }\n}",
+        "javascript": "const fs = require('fs');\nfunction solve(pattern, text) {\n    // User logic should be written here\n    return \"0\";\n}\nconst lines = fs.readFileSync(0, 'utf8').split('\\n');\nconst pattern = lines[0] ? lines[0].trim() : \"\";\nconst text = lines[1] ? lines[1].trim() : \"\";\nconsole.log(solve(pattern, text));",
+        "c": "#include <stdio.h>\n#include <string.h>\n#include <stdlib.h>\nconst char* solve(char* pattern, char* text) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    char pattern[2000], text[2000];\n    if (!fgets(pattern, sizeof(pattern), stdin)) pattern[0]='\\0';\n    else pattern[strcspn(pattern,\"\\n\")]=0;\n    if (!fgets(text, sizeof(text), stdin)) text[0]='\\0';\n    else text[strcspn(text,\"\\n\")]=0;\n    printf(\"%s\\n\", solve(pattern, text));\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "a*b\naXYZb",
+            "expected_output": "1",
+            "is_sample": true
+        },
+        {
+            "input": "a?b\naXb",
+            "expected_output": "1",
+            "is_sample": true
+        },
+        {
+            "input": "*a*\nbanana",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "??\nab",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "*\n",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "a*b*c\naXbYc",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "a*\nb",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "*b\naaab",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "?*?\na",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "****\nany",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "a??bb?*bbb?a??b*b??b**aa*?ba*b?*?*???*abaa?b?b?ab??????ab?a?b*aa?b*b?a**aa**????aa?*abaab?bbbb?b*aaaba*baa*b?a??ba*?b*ab*b*b*b**b*a??a*?ab*b?bba*bbaa?\naabbbaaabababbbbbbbbbbbbabababaababbbbabbabbabbabbabbbaababaaaaabbababbaabaaaabbabaaaaaaabaaaabababaabaabaabaabaaaabaabaaaaabbbaabaabababbbabaaabaabba",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa*bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb\naaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "expected_output": "1",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "String",
+        "Dynamic Programming",
+        "Pattern Matching"
+    ],
+    "companyIndex": 3
+}

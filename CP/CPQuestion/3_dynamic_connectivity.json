@@ -1,0 +1,84 @@
+{
+    "question_text": "<h3>Dynamic Connectivity Queries</h3><p>You are maintaining the internal communications network of a highly volatile global defense grid. There are <code>N</code> critical facilities (nodes `1` to `N`). Over time (a series of <code>Q</code> events), heavily armored data lines are either established (type 1) or destroyed (type 2) between pairs of facilities.</p><p>You must answer urgent connectivity status requests (type 3). For each such request, you must rapidly calculate if a reliable communication path exists between two specific facilities at that exact moment in time.</p><p>Input is <code>N</code> and <code>Q</code>, followed by <code>Q</code> queries. Each query is of the format <code>type u v</code>. Assume operations are: <code>1 u v</code> (Add edge), <code>2 u v</code> (Remove edge), <code>3 u v</code> (Query connectivity).</p><p>Return a single string comprised of exclusively <code>1</code>s and <code>0</code>s denoting the boolean results of all type 3 operations.</p>",
+    "difficulty": "HARD",
+    "marks": 30,
+    "explanation": "This requires solving offline Dynamic Graph Connectivity. Since edge deletions are costly in standard Disjoint Set Union (DSU) structures, we employ 'Divide and Conquer Optimization over Time'. We map the lifespan of every edge (insertion time to deletion time) onto a Time Segment Tree. Each edge is split into at most O(log Q) nodes in the tree. Then, we traverse the segment tree using DFS. When going down to a node's children, we union all edges present in the current node into a Rollback DSU. When reaching a leaf corresponding to time `t`, we process any connectivity queries for that time. When returning (backtracking) from DFS, we rollback the DSU exactly to the state before the node's edges were unioned. Time Complexity: O(Q log Q log N).",
+    "answer": "import sys\ndef solve(n, q, queries):\n    if q == 0: return \"\"\n    parent = list(range(n + 1))\n    size = [1] * (n + 1)\n    history = []\n    \n    def find(i):\n        while i != parent[i]: i = parent[i]\n        return i\n        \n    def union(i, j):\n        root_i, root_j = find(i), find(j)\n        if root_i != root_j:\n            if size[root_i] < size[root_j]: root_i, root_j = root_j, root_i\n            parent[root_j] = root_i\n            size[root_i] += size[root_j]\n            history.append((root_j, root_i))\n            return True\n        return False\n        \n    def rollback(count):\n        while count > 0:\n            count -= 1\n            if history:\n                j, i = history.pop()\n                size[i] -= size[j]\n                parent[j] = j\n\n    tree = [[] for _ in range(4 * q + 1)]\n    def add_edge_to_tree(node, l, r, ql, qr, u, v):\n        if ql > r or qr < l: return\n        if ql <= l and r <= qr:\n            tree[node].append((u, v))\n            return\n        mid = (l + r) // 2\n        add_edge_to_tree(2 * node, l, mid, ql, qr, u, v)\n        add_edge_to_tree(2 * node + 1, mid + 1, r, ql, qr, u, v)\n\n    active_edges = {}\n    query_times = []\n    for t in range(q):\n        type_, u, v = queries[t]\n        if u > v: u, v = v, u\n        if type_ == 1: active_edges[(u, v)] = t\n        elif type_ == 2:\n            if (u, v) in active_edges:\n                start_time = active_edges.pop((u, v))\n                add_edge_to_tree(1, 0, q - 1, start_time, t - 1, u, v)\n        elif type_ == 3: query_times.append((t, u, v))\n            \n    for (u, v), start_time in active_edges.items():\n        add_edge_to_tree(1, 0, q - 1, start_time, q - 1, u, v)\n        \n    queries_by_time = [[] for _ in range(q)]\n    for t, u, v in query_times:\n        queries_by_time[t].append((u, v))\n        \n    out = []\n    def dfs_evaluate(node, l, r):\n        unions_done = 0\n        for u, v in tree[node]:\n            if union(u, v): unions_done += 1\n                \n        if l == r:\n            for u, v in queries_by_time[l]:\n                out.append(\"1\" if find(u) == find(v) else \"0\")\n        else:\n            mid = (l + r) // 2\n            dfs_evaluate(2 * node, l, mid)\n            dfs_evaluate(2 * node + 1, mid + 1, r)\n            \n        rollback(unions_done)\n\n    dfs_evaluate(1, 0, q - 1)\n    return \"\".join(out)\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().split()\n    if not input_data: exit()\n    n, q = int(input_data[0]), int(input_data[1])\n    queries = []\n    idx = 2\n    for _ in range(q):\n        queries.append((int(input_data[idx]), int(input_data[idx+1]), int(input_data[idx+2])))\n        idx += 3\n    print(solve(n, q, queries))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, q, queries):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().split()\n    if not input_data: exit()\n    n, q = int(input_data[0]), int(input_data[1])\n    queries = []\n    idx = 2\n    for _ in range(q):\n        queries.append((int(input_data[idx]), int(input_data[idx+1]), int(input_data[idx+2])))\n        idx += 3\n    print(solve(n, q, queries))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\n\nusing namespace std;\n\nstring solve(int n, int q, vector<vector<int>>& queries) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, q;\n    if (!(cin >> n >> q)) return 0;\n    vector<vector<int>> queries(q, vector<int>(3));\n    for (int i = 0; i < q; ++i) {\n        cin >> queries[i][0] >> queries[i][1] >> queries[i][2];\n    }\n    cout << solve(n, q, queries) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\n\npublic class Main {\n    public static String solve(int n, int q, int[][] queries) {\n        // User logic should be written here\n        return \"\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int q = sc.nextInt();\n        int[][] queries = new int[q][3];\n        for (int i = 0; i < q; i++) {\n            queries[i][0] = sc.nextInt();\n            queries[i][1] = sc.nextInt();\n            queries[i][2] = sc.nextInt();\n        }\n        System.out.println(solve(n, q, queries));\n    }\n}",
+        "javascript": "const fs = require('fs');\n\nfunction solve(n, q, queries) {\n    // User logic should be written here\n    return \"\";\n}\n\nconst input = fs.readFileSync(0, 'utf8').trim().split(/\\s+/);\nif (input.length >= 2) {\n    let n = parseInt(input[0]);\n    let q = parseInt(input[1]);\n    let queries = [];\n    let idx = 2;\n    for (let i = 0; i < q; i++) {\n        queries.push([parseInt(input[idx]), parseInt(input[idx+1]), parseInt(input[idx+2])]);\n        idx += 3;\n    }\n    console.log(solve(n, q, queries));\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\nchar* solve(int n, int q, int** queries) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    int n, q;\n    if (scanf(\"%d %d\", &n, &q) != 2) return 0;\n    int** queries = (int**)malloc(q * sizeof(int*));\n    for (int i = 0; i < q; ++i) {\n        queries[i] = (int*)malloc(3 * sizeof(int));\n        scanf(\"%d %d %d\", &queries[i][0], &queries[i][1], &queries[i][2]);\n    }\n    char* res = solve(n, q, queries);\n    printf(\"%s\\n\", res);\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 3000,
+        "memory_limit_mb": 512,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "4 7\n1 1 2\n1 2 3\n3 1 3\n2 1 2\n3 1 3\n1 1 3\n3 1 3",
+            "expected_output": "101",
+            "is_sample": true
+        },
+        {
+            "input": "3 5\n1 1 2\n3 1 2\n2 1 2\n3 1 2\n3 2 3",
+            "expected_output": "100",
+            "is_sample": true
+        },
+        {
+            "input": "10 5\n3 1 2\n3 2 3\n3 4 5\n3 6 7\n3 8 9",
+            "expected_output": "00000",
+            "is_sample": false
+        },
+        {
+            "input": "5 12\n1 1 2\n1 2 3\n1 3 4\n1 4 5\n3 1 5\n2 3 4\n3 1 5\n3 1 3\n3 4 5\n1 1 5\n3 2 5\n3 1 4",
+            "expected_output": "101111",
+            "is_sample": false
+        },
+        {
+            "input": "6 6\n1 1 2\n1 2 3\n1 4 5\n3 1 3\n3 4 6\n1 3 4",
+            "expected_output": "10",
+            "is_sample": false
+        },
+        {
+            "input": "4 8\n1 1 2\n1 1 2\n2 1 2\n3 1 2\n2 1 2\n1 1 3\n3 1 3\n3 2 3",
+            "expected_output": "010",
+            "is_sample": false
+        },
+        {
+            "input": "100 10\n1 1 2\n1 2 3\n1 3 4\n1 4 5\n1 5 6\n3 1 5\n2 3 4\n3 1 5\n1 2 6\n3 1 6",
+            "expected_output": "101",
+            "is_sample": false
+        },
+        {
+            "input": "10 8\n1 1 2\n1 2 3\n1 3 1\n2 2 3\n3 1 3\n2 1 3\n2 1 2\n3 1 2",
+            "expected_output": "10",
+            "is_sample": false
+        },
+        {
+            "input": "50 6\n1 10 20\n1 20 30\n3 10 30\n2 10 20\n3 10 30\n3 20 30",
+            "expected_output": "101",
+            "is_sample": false
+        },
+        {
+            "input": "100 5\n1 1 100\n3 1 100\n2 1 100\n3 1 100\n3 1 50",
+            "expected_output": "100",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Data Structures",
+        "Divide and conquer",
+        "Segment Tree",
+        "Rollback DSU"
+    ],
+    "companyIndex": 5
+}

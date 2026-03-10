@@ -1,0 +1,83 @@
+{
+    "question_text": "<h3>Critical Network Shutdown</h3><p>You are an architect for a massive decentralized autonomous organization (DAO) named <i>Nexus</i>. The DAO operates on a peering network of <code>N</code> validator nodes (numbered <code>0</code> to <code>N-1</code>) and <code>M</code> encrypted data tunnels running between them.</p><p>The Nexus council has discovered a vulnerability: if certain critical tunnels fail, the entire network fragments into isolated sub-networks, creating severe consensus faults. Your task is to mathematically identify all such <b>critical tunnels</b>.</p><p>Return the number of critical tunnels, followed by the specific tunnels themselves. Each tunnel should be represented as a space-separated pair of nodes <code>u v</code> where <code>u &lt; v</code>. You must sort the final output of tunnels lexicographically (first by <code>u</code>, then by <code>v</code>).</p>",
+    "difficulty": "HARD",
+    "marks": 25,
+    "explanation": "This is a classic bridge-finding problem in a connected undirected graph. We can use Tarjan's Bridge-Finding Algorithm, which relies on a Depth First Search (DFS). We maintain an entry time `tin[v]` and the lowest achievable entry time `low[v]` for each node. If `low[to] > tin[v]`, it means the only way to reach `to` and its descendants is strictly through the edge (v, to), making it a critical tunnel (bridge). After collecting all bridges, ensure each pair is sorted internally (u < v) and then lexicographically globally. Time and Space Complexities: O(V + E).",
+    "answer": "import sys\nsys.setrecursionlimit(200000)\ndef solve(n, m, edges):\n    adj = [[] for _ in range(n)]\n    for u, v in edges:\n        adj[u].append(v)\n        adj[v].append(u)\n    timer = 0\n    tin = [-1] * n\n    low = [-1] * n\n    bridges = []\n    \n    def dfs(v, p=-1):\n        nonlocal timer\n        tin[v] = low[v] = timer\n        timer += 1\n        for to in adj[v]:\n            if to == p: continue\n            if tin[to] != -1: low[v] = min(low[v], tin[to])\n            else:\n                dfs(to, v)\n                low[v] = min(low[v], low[to])\n                if low[to] > tin[v]: bridges.append((min(v, to), max(v, to)))\n\n    for i in range(n):\n        if tin[i] == -1: dfs(i)\n            \n    bridges.sort()\n    out = [str(len(bridges))]\n    for u, v in bridges:\n        out.append(f\"{u} {v}\")\n    return \"\\n\".join(out)\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().split()\n    if not input_data: exit()\n    n, m = int(input_data[0]), int(input_data[1])\n    edges = []\n    idx = 2\n    for _ in range(m):\n        edges.append([int(input_data[idx]), int(input_data[idx+1])])\n        idx += 2\n    print(solve(n, m, edges))",
+    "boilerplate": {
+        "python": "import sys\nsys.setrecursionlimit(200000)\n\ndef solve(n, m, edges):\n    # User logic should be written here\n    return \"\"\n\nif __name__ == '__main__':\n    input_data = sys.stdin.read().split()\n    if not input_data: exit()\n    n, m = int(input_data[0]), int(input_data[1])\n    edges = []\n    idx = 2\n    for _ in range(m):\n        edges.append([int(input_data[idx]), int(input_data[idx+1])])\n        idx += 2\n    print(solve(n, m, edges))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <algorithm>\n#include <string>\n\nusing namespace std;\n\nstring solve(int n, int m, vector<vector<int>>& edges) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, m;\n    if (!(cin >> n >> m)) return 0;\n    vector<vector<int>> edges(m, vector<int>(2));\n    for (int i = 0; i < m; ++i) {\n        cin >> edges[i][0] >> edges[i][1];\n    }\n    cout << solve(n, m, edges) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.Scanner;\nimport java.util.ArrayList;\nimport java.util.List;\n\npublic class Main {\n    public static String solve(int n, int m, int[][] edges) {\n        // User logic should be written here\n        return \"\";\n    }\n\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        if (!sc.hasNextInt()) return;\n        int n = sc.nextInt();\n        int m = sc.nextInt();\n        int[][] edges = new int[m][2];\n        for (int i = 0; i < m; i++) {\n            edges[i][0] = sc.nextInt();\n            edges[i][1] = sc.nextInt();\n        }\n        System.out.println(solve(n, m, edges));\n    }\n}",
+        "javascript": "const fs = require('fs');\n\nfunction solve(n, m, edges) {\n    // User logic should be written here\n    return \"\";\n}\n\nconst input = fs.readFileSync(0, 'utf8').trim().split(/\\s+/);\nif (input.length >= 2) {\n    let n = parseInt(input[0]);\n    let m = parseInt(input[1]);\n    let edges = [];\n    let idx = 2;\n    for (let i = 0; i < m; i++) {\n        edges.push([parseInt(input[idx]), parseInt(input[idx+1])]);\n        idx += 2;\n    }\n    console.log(solve(n, m, edges));\n}",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\n\nchar* solve(int n, int m, int** edges) {\n    // User logic should be written here\n    return \"\";\n}\n\nint main() {\n    int n, m;\n    if (scanf(\"%d %d\", &n, &m) != 2) return 0;\n    int** edges = (int**)malloc(m * sizeof(int*));\n    for (int i = 0; i < m; ++i) {\n        edges[i] = (int*)malloc(2 * sizeof(int));\n        scanf(\"%d %d\", &edges[i][0], &edges[i][1]);\n    }\n    char* res = solve(n, m, edges);\n    printf(\"%s\\n\", res);\n    // free memory\n    return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 2000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "4 4\n0 1\n1 2\n2 0\n1 3",
+            "expected_output": "1\n1 3",
+            "is_sample": true
+        },
+        {
+            "input": "6 7\n0 1\n1 2\n2 0\n3 4\n4 5\n5 3\n2 3",
+            "expected_output": "1\n2 3",
+            "is_sample": true
+        },
+        {
+            "input": "5 4\n0 1\n1 2\n2 3\n3 4",
+            "expected_output": "4\n0 1\n1 2\n2 3\n3 4",
+            "is_sample": false
+        },
+        {
+            "input": "4 6\n0 1\n0 2\n0 3\n1 2\n1 3\n2 3",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "6 3\n0 1\n2 3\n4 5",
+            "expected_output": "3\n0 1\n2 3\n4 5",
+            "is_sample": false
+        },
+        {
+            "input": "5 4\n0 1\n0 2\n0 3\n0 4",
+            "expected_output": "4\n0 1\n0 2\n0 3\n0 4",
+            "is_sample": false
+        },
+        {
+            "input": "8 9\n0 1\n1 2\n2 0\n3 4\n4 5\n5 3\n6 7\n2 3\n5 6",
+            "expected_output": "3\n2 3\n5 6\n6 7",
+            "is_sample": false
+        },
+        {
+            "input": "100 99\n0 1\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99",
+            "expected_output": "99\n0 1\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99",
+            "is_sample": false
+        },
+        {
+            "input": "100 100\n0 1\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 50\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99\n99 0",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "100 102\n0 1\n1 2\n2 3\n3 4\n4 5\n5 6\n6 7\n7 8\n8 9\n9 10\n10 11\n11 12\n12 13\n13 14\n14 15\n15 16\n16 17\n17 18\n18 19\n19 20\n20 21\n21 22\n22 23\n23 24\n24 25\n25 26\n26 27\n27 28\n28 29\n29 30\n30 31\n31 32\n32 33\n33 34\n34 35\n35 36\n36 37\n37 38\n38 39\n39 40\n40 41\n41 42\n42 43\n43 44\n44 45\n45 46\n46 47\n47 48\n48 49\n49 0\n50 51\n51 52\n52 53\n53 54\n54 55\n55 56\n56 57\n57 58\n58 59\n59 60\n60 61\n61 62\n62 63\n63 64\n64 65\n65 66\n66 67\n67 68\n68 69\n69 70\n70 71\n71 72\n72 73\n73 74\n74 75\n75 76\n76 77\n77 78\n78 79\n79 80\n80 81\n81 82\n82 83\n83 84\n84 85\n85 86\n86 87\n87 88\n88 89\n89 90\n90 91\n91 92\n92 93\n93 94\n94 95\n95 96\n96 97\n97 98\n98 99\n99 50\n25 75\n0 50",
+            "expected_output": "0",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Graph",
+        "Depth-First Search",
+        "Biconnected Components"
+    ],
+    "companyIndex": 5
+}

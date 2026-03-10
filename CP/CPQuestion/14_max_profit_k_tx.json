@@ -1,0 +1,92 @@
+{
+    "question_text": "<h3>Maximum Profit with K Transactions</h3><p>You are a high-frequency trading AI operating on the galactic stock market. Over <code>N</code> trading cycles, the price of a commodity follows a given sequence. You are permitted to make <b>at most <code>K</code> transactions</b> (each transaction is a complete buy-then-sell cycle, and you may not hold more than one unit at a time).</p><p>Given an array of <code>N</code> daily prices and an integer <code>K</code>, determine the <b>maximum profit</b> achievable.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 20,
+    "explanation": "Solution uses a space-optimized DP. Define dp[t][d] as the max profit using at most t transactions up to day d. The recurrence is: dp[t][d] = max(dp[t][d-1], prices[d] + max_prev) where max_prev tracks the best value of (dp[t-1][prev_day] - prices[prev_day]) seen so far. If k >= n/2, we can perform unlimited transactions, simplifying to a greedy sum of all positive differences. Time Complexity: O(K*N).",
+    "answer": "import sys\ndef solve(n, k, prices):\n    if k >= n // 2:\n        return str(sum(max(prices[i+1]-prices[i],0) for i in range(n-1)))\n    dp = [[0]*n for _ in range(k+1)]\n    for t in range(1, k+1):\n        max_prev = -prices[0]\n        for d in range(1, n):\n            dp[t][d] = max(dp[t][d-1], prices[d] + max_prev)\n            max_prev = max(max_prev, dp[t-1][d] - prices[d])\n    return str(dp[k][n-1])\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n, k = int(data[0]), int(data[1])\n    prices = list(map(int, data[2:2+n]))\n    print(solve(n, k, prices))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(n, k, prices):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    n, k = int(data[0]), int(data[1])\n    prices = list(map(int, data[2:2+n]))\n    print(solve(n, k, prices))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int n, int k, vector<int>& prices) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int n, k; cin >> n >> k;\n    vector<int> prices(n); for(auto& p:prices) cin >> p;\n    cout << solve(n,k,prices) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int n, int k, int[] prices) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int n = sc.nextInt(), k = sc.nextInt();\n        int[] prices = new int[n];\n        for(int i=0;i<n;i++) prices[i]=sc.nextInt();\n        System.out.println(solve(n,k,prices));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(n,k,prices){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nconst n=+inp[0],k=+inp[1];\nconst prices=inp.slice(2,2+n).map(Number);\nconsole.log(solve(n,k,prices));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int n,int k,int* prices){return \"0\";}\nint main(){\n    int n,k; scanf(\"%d %d\",&n,&k);\n    int* prices=malloc(n*sizeof(int));\n    for(int i=0;i<n;i++) scanf(\"%d\",&prices[i]);\n    printf(\"%s\\n\",solve(n,k,prices)); return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "6 2\n3 2 6 5 0 3",
+            "expected_output": "7",
+            "is_sample": true
+        },
+        {
+            "input": "5 2\n1 2 3 4 5",
+            "expected_output": "4",
+            "is_sample": true
+        },
+        {
+            "input": "2 1\n1 2",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "3 2\n2 4 1",
+            "expected_output": "2",
+            "is_sample": false
+        },
+        {
+            "input": "8 2\n3 3 5 0 0 3 1 4",
+            "expected_output": "6",
+            "is_sample": false
+        },
+        {
+            "input": "5 1\n1 2 3 4 5",
+            "expected_output": "4",
+            "is_sample": false
+        },
+        {
+            "input": "6 2\n6 1 3 2 4 7",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "5 5\n1 2 3 4 5",
+            "expected_output": "4",
+            "is_sample": false
+        },
+        {
+            "input": "9 4\n1 9 2 8 3 7 4 6 5",
+            "expected_output": "20",
+            "is_sample": false
+        },
+        {
+            "input": "6 3\n100 90 80 70 60 50",
+            "expected_output": "0",
+            "is_sample": false
+        },
+        {
+            "input": "150 50\n392 610 830 807 828 218 93 681 947 34 428 853 211 588 303 192 715 579 135 978 199 292 586 863 773 268 833 605 198 222 524 893 405 437 265 830 447 674 579 965 9 282 743 603 885 282 31 294 564 441 144 748 875 883 21 929 651 764 32 699 309 251 552 386 943 646 758 868 314 375 4 926 196 294 547 21 439 283 440 948 925 252 154 279 507 664 83 949 357 803 226 864 65 23 368 700 234 988 508 990 222 555 366 946 799 153 774 166 757 479 161 118 831 832 927 886 620 341 429 185 391 371 128 952 7 533 587 765 709 283 567 996 381 449 17 587 742 875 741 222 716 594 786 43 406 939 713 12 148 103",
+            "expected_output": "26969",
+            "is_sample": false
+        },
+        {
+            "input": "150 100\n579 212 526 991 144 416 340 943 690 33 658 5 644 983 849 30 506 96 990 315 318 889 225 254 222 210 377 602 455 143 788 888 514 496 354 298 615 55 741 299 462 160 661 636 557 142 500 197 502 173 589 437 457 477 16 935 405 483 881 669 401 918 722 853 870 950 937 977 89 365 229 114 154 51 149 653 89 276 464 855 924 570 855 910 44 91 124 340 921 336 175 23 442 859 79 17 517 148 521 770 749 440 406 545 593 944 374 321 178 116 120 931 632 240 238 167 759 745 274 900 112 304 484 740 135 543 197 833 823 865 166 428 68 275 273 717 189 91 18 927 893 947 445 420 206 324 311 896 640 658",
+            "expected_output": "23143",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Dynamic Programming",
+        "Greedy"
+    ],
+    "companyIndex": 4
+}

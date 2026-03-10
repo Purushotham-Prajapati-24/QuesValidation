@@ -1,0 +1,94 @@
+{
+    "question_text": "<h3>Cosmic Elevation Mapping</h3><p>A probe has captured a topographic elevation map of an alien planet's surface, represented as an <code>M x N</code> integer grid. You discover that ancient relics always lie on the <b>longest strictly increasing elevation trail</b>.</p><p>A trail begins at any cell and moves to adjacent cells (up, down, left, right), requiring each subsequent cell to be strictly greater in elevation than the previous one. Find the length of the <b>longest such increasing path</b>.</p>",
+    "difficulty": "MEDIUM",
+    "marks": 15,
+    "explanation": "This is a classic DFS with memoization on a DAG inherent to the grid structure. For each cell (r, c), the answer is 1 + max(DFS of all 4 valid neighbors with a strictly greater value). Since the 'strictly greater' condition means there are no cycles, memoization is safe. The length for each cell is computed exactly once, giving O(M*N) overall complexity.",
+    "answer": "import sys\ndef solve(m, n, grid):\n    memo = {}\n    dirs = [(0,1),(0,-1),(1,0),(-1,0)]\n    def dfs(r, c):\n        if (r,c) in memo: return memo[(r,c)]\n        best = 1\n        for dr, dc in dirs:\n            nr, nc = r+dr, c+dc\n            if 0<=nr<m and 0<=nc<n and grid[nr][nc] > grid[r][c]:\n                best = max(best, 1 + dfs(nr, nc))\n        memo[(r,c)] = best; return best\n    return str(max(dfs(r,c) for r in range(m) for c in range(n)))\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    m, n = int(data[idx]), int(data[idx+1]); idx += 2\n    grid = []\n    for r in range(m):\n        row = [int(data[idx+c]) for c in range(n)]; idx += n; grid.append(row)\n    print(solve(m, n, grid))",
+    "boilerplate": {
+        "python": "import sys\n\ndef solve(m, n, grid):\n    # User logic should be written here\n    return \"0\"\n\nif __name__ == '__main__':\n    data = sys.stdin.read().split()\n    idx = 0\n    m, n = int(data[idx]), int(data[idx+1]); idx += 2\n    grid = []\n    for r in range(m):\n        row = [int(data[idx+c]) for c in range(n)]; idx += n; grid.append(row)\n    print(solve(m, n, grid))",
+        "cpp": "#include <iostream>\n#include <vector>\n#include <string>\nusing namespace std;\nstring solve(int m, int n, vector<vector<int>>& grid) {\n    // User logic should be written here\n    return \"0\";\n}\nint main() {\n    ios_base::sync_with_stdio(false); cin.tie(NULL);\n    int m, n; cin >> m >> n;\n    vector<vector<int>> grid(m, vector<int>(n));\n    for(auto& row:grid) for(auto& v:row) cin>>v;\n    cout << solve(m,n,grid) << \"\\n\";\n    return 0;\n}",
+        "java": "import java.util.*;\npublic class Main {\n    public static String solve(int m, int n, int[][] grid) {\n        // User logic should be written here\n        return \"0\";\n    }\n    public static void main(String[] args) {\n        Scanner sc = new Scanner(System.in);\n        int m=sc.nextInt(), n=sc.nextInt();\n        int[][] grid = new int[m][n];\n        for(int i=0;i<m;i++) for(int j=0;j<n;j++) grid[i][j]=sc.nextInt();\n        System.out.println(solve(m,n,grid));\n    }\n}",
+        "javascript": "const fs=require('fs');\nfunction solve(m,n,grid){return \"0\";}\nconst inp=fs.readFileSync(0,'utf8').trim().split(/\\s+/);\nlet idx=0; const m=+inp[idx++],n=+inp[idx++];\nconst grid=[];\nfor(let i=0;i<m;i++){const row=[];for(let j=0;j<n;j++) row.push(+inp[idx++]);grid.push(row);}\nconsole.log(solve(m,n,grid));",
+        "c": "#include <stdio.h>\n#include <stdlib.h>\nconst char* solve(int m,int n,int** grid){return \"0\";}\nint main(){\n    int m,n;scanf(\"%d %d\",&m,&n);\n    int** grid=malloc(m*sizeof(int*));\n    for(int i=0;i<m;i++){grid[i]=malloc(n*sizeof(int));for(int j=0;j<n;j++)scanf(\"%d\",&grid[i][j]);}\n    printf(\"%s\\n\",solve(m,n,grid));return 0;\n}"
+    },
+    "metadata": {
+        "time_limit_ms": 1000,
+        "memory_limit_mb": 256,
+        "allowed_languages": [
+            "python",
+            "cpp",
+            "java",
+            "javascript",
+            "c"
+        ]
+    },
+    "test_cases": [
+        {
+            "input": "3 3\n9 9 4\n6 6 8\n2 1 1",
+            "expected_output": "4",
+            "is_sample": true
+        },
+        {
+            "input": "3 3\n3 4 5\n3 2 6\n2 2 1",
+            "expected_output": "4",
+            "is_sample": true
+        },
+        {
+            "input": "1 1\n1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "3 3\n1 2 3\n6 5 4\n7 8 9",
+            "expected_output": "9",
+            "is_sample": false
+        },
+        {
+            "input": "3 4\n1 1 1 1\n1 1 1 1\n1 1 1 1",
+            "expected_output": "1",
+            "is_sample": false
+        },
+        {
+            "input": "1 5\n1 2 3 4 5",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "5 1\n5\n4\n3\n2\n1",
+            "expected_output": "5",
+            "is_sample": false
+        },
+        {
+            "input": "3 3\n7 7 5\n2 4 6\n8 2 0",
+            "expected_output": "4",
+            "is_sample": false
+        },
+        {
+            "input": "2 2\n1 2\n3 4",
+            "expected_output": "3",
+            "is_sample": false
+        },
+        {
+            "input": "4 4\n1 2 3 4\n5 6 7 8\n9 10 11 12\n13 14 15 16",
+            "expected_output": "7",
+            "is_sample": false
+        },
+        {
+            "input": "12 12\n731318 899979 86106 402353 244022 924130 879738 587050 611050 206383 36993 740418\n188167 610146 243035 84361 315055 631974 816217 381372 267083 531436 846011 178985\n404323 493847 163580 351439 961220 946322 575881 157806 256658 4710 324486 427751\n923670 690548 781381 608549 283977 339885 273117 927770 556619 13570 316870 934337\n938428 673633 533848 349265 977063 411200 98021 640575 355953 402422 8854 82018\n340686 616770 953064 685159 101552 96933 169031 388593 359542 160858 46308 699610\n607028 475400 671078 42301 628962 789071 337817 809696 976417 424568 711966 212450\n442878 364939 95642 198010 314367 614975 792313 616396 910920 692921 44203 997371\n280345 461665 132424 882005 70608 25919 204955 517473 391001 176105 39357 33505\n284355 426728 815480 68647 58623 154691 70933 262065 729516 387529 121135 246527\n647365 370584 50434 197266 559662 102846 410028 912481 992723 168798 56431 782039\n94342 297534 892627 952305 182802 335580 46102 710657 516099 544375 188179 42207",
+            "expected_output": "8",
+            "is_sample": false
+        },
+        {
+            "input": "10 15\n898098 526660 235634 989501 692222 446366 784146 149649 671896 29684 467416 741092 849950 779996 82963\n215519 328934 476715 121863 136635 312520 538572 556302 499304 666474 947320 257783 294992 417935 277782\n625018 3385 785211 806340 603285 170104 63952 247609 340369 225518 244540 853098 981982 401270 985612\n692598 398987 751917 85302 717372 158566 128292 761601 287348 814011 729275 12897 881099 721937 829850\n128601 736078 791639 691109 742037 44143 98448 393639 230983 945900 36639 359031 507036 923915 756392\n947238 837989 775213 545942 865479 134117 862836 192719 6303 455195 891959 484325 244746 672714 86953\n985639 693876 939961 843307 30598 429350 734823 737401 149346 249942 914284 799666 859111 272634 11088\n146645 140924 431622 862170 481955 552120 628959 234606 530833 573441 499570 141914 327103 143574 317298\n78312 409099 799088 606047 948342 582525 178172 263623 405970 270469 460490 468568 114854 731210 943322\n66409 956931 511860 86793 555571 638745 621151 3701 841398 200471 931191 359931 392843 45630 42541",
+            "expected_output": "9",
+            "is_sample": false
+        }
+    ],
+    "topics": [
+        "Dynamic Programming",
+        "DFS",
+        "Memoization",
+        "Matrix"
+    ],
+    "companyIndex": 3
+}
