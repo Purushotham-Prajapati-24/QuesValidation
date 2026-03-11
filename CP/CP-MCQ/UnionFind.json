@@ -1,128 +1,263 @@
 [
-{
+    {
         "question_text": "Union-Find is used for:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Union-Find (or Disjoint Set) is a data structure specifically designed to efficiently keep track of which elements belong to which sets, solving dynamic connectivity problems.",
-        "answer": "o2",
-        "options": [
-            { "text": "Sorting arrays", "is_correct": false },
-            { "text": "Dynamic connectivity", "is_correct": true },
-            { "text": "Tree traversal", "is_correct": false },
-            { "text": "Hashing", "is_correct": false }
-        ],
-        "topics": ["Union-Find"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Union by rank helps in:",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "Union by rank optimizes the disjoint-set data structure by always attaching the smaller tree to the root of the larger tree, thereby minimizing overall tree height.",
         "answer": "o1",
         "options": [
-            { "text": "Reducing tree height", "is_correct": true },
-            { "text": "Increasing memory", "is_correct": false },
-            { "text": "Hash collisions", "is_correct": false },
-            { "text": "Graph coloring", "is_correct": false }
+            {
+                "text": "Dynamic connectivity",
+                "is_correct": true
+            },
+            {
+                "text": "Tree traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
+        "question_text": "Union by rank helps in:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Union by rank optimizes the disjoint-set data structure by always attaching the smaller tree to the root of the larger tree, thereby minimizing overall tree height.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Hash collisions",
+                "is_correct": false
+            },
+            {
+                "text": "Graph coloring",
+                "is_correct": false
+            },
+            {
+                "text": "Reducing tree height",
+                "is_correct": true
+            },
+            {
+                "text": "Increasing memory",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
         "question_text": "Path compression optimizes:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Path compression is an optimization for the Find operation in a disjoint-set data structure; it makes trees flatter by making every checked node point directly to the root.",
         "answer": "o2",
         "options": [
-            { "text": "Insert", "is_correct": false },
-            { "text": "Find operation", "is_correct": true },
-            { "text": "Delete", "is_correct": false },
-            { "text": "Search", "is_correct": false }
+            {
+                "text": "Delete",
+                "is_correct": false
+            },
+            {
+                "text": "Find operation",
+                "is_correct": true
+            },
+            {
+                "text": "Insert",
+                "is_correct": false
+            },
+            {
+                "text": "Search",
+                "is_correct": false
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Union-Find operations include:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "The Disjoint Set pattern revolves almost entirely around two fundamental operations: 'Find' (to determine which subset an element falls under) and 'Union' (to merge two distinct subsets).",
-        "answer": "o2",
+        "answer": "o3",
         "options": [
-            { "text": "Push and Pop", "is_correct": false },
-            { "text": "Union and Find", "is_correct": true },
-            { "text": "Insert and Delete", "is_correct": false },
-            { "text": "Sort and Search", "is_correct": false }
+            {
+                "text": "Push and Pop",
+                "is_correct": false
+            },
+            {
+                "text": "Insert and Delete",
+                "is_correct": false
+            },
+            {
+                "text": "Union and Find",
+                "is_correct": true
+            },
+            {
+                "text": "Sort and Search",
+                "is_correct": false
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Union by rank attaches:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Union by rank evaluates the complexity or depth of both trees. It actively prevents a massive spike in general bounds by strictly appending the root of the smaller tree specifically underneath the root of the larger tree.",
-        "answer": "o2",
+        "answer": "o3",
         "options": [
-            { "text": "Larger tree under smaller tree", "is_correct": false },
-            { "text": "Smaller tree under larger tree", "is_correct": true },
-            { "text": "Random trees", "is_correct": false },
-            { "text": "Balanced trees only", "is_correct": false }
+            {
+                "text": "Random trees",
+                "is_correct": false
+            },
+            {
+                "text": "Balanced trees only",
+                "is_correct": false
+            },
+            {
+                "text": "Smaller tree under larger tree",
+                "is_correct": true
+            },
+            {
+                "text": "Larger tree under smaller tree",
+                "is_correct": false
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Union-Find is widely used in:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Kruskal's algorithm relies intimately on Union-Find to safely build Minimum Spanning Trees by checking if drawing a new smallest edge will result in an invalid cyclic network.",
-        "answer": "o1",
+        "answer": "o4",
         "options": [
-            { "text": "Kruskal's algorithm", "is_correct": true },
-            { "text": "BFS", "is_correct": false },
-            { "text": "Binary search", "is_correct": false },
-            { "text": "Heap sort", "is_correct": false }
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "Heap sort",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Kruskal's algorithm",
+                "is_correct": true
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "What overarching mathematical group structuring concept does the specialized Union-Find data architecture definitively and continuously maintain structurally across any complex sequence of network merging operations universally?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Union-Find's entire fundamental architectural existence strictly revolves exclusively around securely processing entirely 'Disjoint sets' natively tracking utterly non-overlapping segregated collections dynamically as they continuously merge recursively.",
-        "answer": "o1",
-        "options": [
-            { "text": "Disjoint sets", "is_correct": true },
-            { "text": "Sorted arrays", "is_correct": false },
-            { "text": "Binary trees", "is_correct": false },
-            { "text": "Graph cycles", "is_correct": false }
-        ],
-        "topics": ["Union-Find"],
-        "companyIndex": 1
-},
-{
-        "question_text": "When executing a 'Find' query asking a Disjoint Set architecture basically \"Who essentially leads your specific group?\", what mathematically distinctive identity does algorithmic pathing structurally output natively universally?",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "The 'Find' mechanism continuously chases parent directory linkages upward ultimately resulting explicitly exclusively revealing the 'Representative of set', the sole singular root node uniquely characterizing that respective joined group structurally universally.",
         "answer": "o2",
         "options": [
-            { "text": "Parent node", "is_correct": false },
-            { "text": "Representative of set", "is_correct": true },
-            { "text": "Graph edge", "is_correct": false },
-            { "text": "Heap root", "is_correct": false }
+            {
+                "text": "Sorted arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Disjoint sets",
+                "is_correct": true
+            },
+            {
+                "text": "Binary trees",
+                "is_correct": false
+            },
+            {
+                "text": "Graph cycles",
+                "is_correct": false
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
+        "question_text": "When executing a 'Find' query asking a Disjoint Set architecture basically \"Who essentially leads your specific group?\", what mathematically distinctive identity does algorithmic pathing structurally output natively universally?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The 'Find' mechanism continuously chases parent directory linkages upward ultimately resulting explicitly exclusively revealing the 'Representative of set', the sole singular root node uniquely characterizing that respective joined group structurally universally.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Representative of set",
+                "is_correct": true
+            },
+            {
+                "text": "Parent node",
+                "is_correct": false
+            },
+            {
+                "text": "Heap root",
+                "is_correct": false
+            },
+            {
+                "text": "Graph edge",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
         "question_text": "When structurally expanding a distinct existing Disjoint Set network functionally calling a basic 'Union' algorithmic operation, what exact two fundamentally overarching distinct baseline objects are forcefully natively linked computationally?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Although you initially feed it single node variables, technically the basic 'Union' overarching engine merges the actual root nodes entirely natively securely bridging 'Two sets' inherently universally binding all localized members natively recursively.",
         "answer": "o2",
         "options": [
-            { "text": "Two nodes", "is_correct": false },
-            { "text": "Two sets", "is_correct": true },
-            { "text": "Two arrays", "is_correct": false },
-            { "text": "Two graphs", "is_correct": false }
+            {
+                "text": "Two graphs",
+                "is_correct": false
+            },
+            {
+                "text": "Two sets",
+                "is_correct": true
+            },
+            {
+                "text": "Two nodes",
+                "is_correct": false
+            },
+            {
+                "text": "Two arrays",
+                "is_correct": false
+            }
         ],
-        "topics": ["Union-Find"],
+        "topics": [
+            "Union-Find"
+        ],
         "companyIndex": 1
-}
+    }
 ]

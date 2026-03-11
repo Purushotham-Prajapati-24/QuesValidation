@@ -1,170 +1,350 @@
 [
-{
+    {
         "question_text": "Hash tables provide average lookup time of:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Hash tables use a hash function to map keys to an array index, allowing for constant time, O(1), average lookup complexity.",
-        "answer": "o1",
+        "answer": "o4",
         "options": [
-            { "text": "O(1)", "is_correct": true },
-            { "text": "O(n)", "is_correct": false },
-            { "text": "O(log n)", "is_correct": false },
-            { "text": "O(n^2)", "is_correct": false }
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": true
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Collision in hashing occurs when:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "A hash collision happens when two distinct keys produce the same hash value, causing them to map to the exact same index in the hash table.",
         "answer": "o2",
         "options": [
-            { "text": "Keys are unique", "is_correct": false },
-            { "text": "Two keys map to same index", "is_correct": true },
-            { "text": "Table is empty", "is_correct": false },
-            { "text": "Table is sorted", "is_correct": false }
+            {
+                "text": "Table is empty",
+                "is_correct": false
+            },
+            {
+                "text": "Two keys map to same index",
+                "is_correct": true
+            },
+            {
+                "text": "Table is sorted",
+                "is_correct": false
+            },
+            {
+                "text": "Keys are unique",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which method resolves collisions by storing elements in linked lists?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Separate chaining resolves hash collisions by making each cell of a hash table point to a linked list of records that share the same hash value.",
-        "answer": "o2",
+        "answer": "o4",
         "options": [
-            { "text": "Open addressing", "is_correct": false },
-            { "text": "Chaining", "is_correct": true },
-            { "text": "Binary search", "is_correct": false },
-            { "text": "Sorting", "is_correct": false }
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "Open addressing",
+                "is_correct": false
+            },
+            {
+                "text": "Chaining",
+                "is_correct": true
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Linear probing is a technique used in:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Linear probing is a form of open addressing in hash tables used to resolve collisions by sequentially searching for the next empty slot.",
         "answer": "o2",
         "options": [
-            { "text": "Graphs", "is_correct": false },
-            { "text": "Hashing", "is_correct": true },
-            { "text": "Trees", "is_correct": false },
-            { "text": "DP", "is_correct": false }
+            {
+                "text": "Trees",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": true
+            },
+            {
+                "text": "Graphs",
+                "is_correct": false
+            },
+            {
+                "text": "DP",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which hashing method searches next available slot sequentially?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Linear probing handles collisions by stepping sequentially (usually by +1) through the array elements until an empty bucket is located.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Double hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Chaining",
+                "is_correct": false
+            },
+            {
+                "text": "Quadratic probing",
+                "is_correct": false
+            },
+            {
+                "text": "Linear probing",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Double hashing reduces:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Double hashing fundamentally attempts to reduce collisions and the effects of clustering by applying a secondary hash function for the probing step.",
         "answer": "o2",
         "options": [
-            { "text": "Quadratic probing", "is_correct": false },
-            { "text": "Linear probing", "is_correct": true },
-            { "text": "Chaining", "is_correct": false },
-            { "text": "Double hashing", "is_correct": false }
+            {
+                "text": "Graph cycles",
+                "is_correct": false
+            },
+            {
+                "text": "Collisions",
+                "is_correct": true
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Traversal",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Double hashing reduces:",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "Double hashing fundamentally attempts to reduce collisions and the effects of clustering by applying a secondary hash function for the probing step.",
-        "answer": "o1",
-        "options": [
-            { "text": "Collisions", "is_correct": true },
-            { "text": "Sorting", "is_correct": false },
-            { "text": "Traversal", "is_correct": false },
-            { "text": "Graph cycles", "is_correct": false }
+        "topics": [
+            "Hashing"
         ],
-        "topics": ["Hashing"],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Load factor in hash tables is:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "The load factor (usually denoted as alpha) is mathematically defined as the ratio of the total number of stored keys/elements divided by the total number of table slots/buckets.",
         "answer": "o1",
         "options": [
-            { "text": "Number of keys / table size", "is_correct": true },
-            { "text": "Table size / keys", "is_correct": false },
-            { "text": "Keys^2", "is_correct": false },
-            { "text": "Table^2", "is_correct": false }
+            {
+                "text": "Number of keys / table size",
+                "is_correct": true
+            },
+            {
+                "text": "Table size / keys",
+                "is_correct": false
+            },
+            {
+                "text": "Table^2",
+                "is_correct": false
+            },
+            {
+                "text": "Keys^2",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Rehashing is done when:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "To maintain O(1) expected time bindings, a set limit on the load factor is enforced. When that factor gets too large indicating approaching overflow or collision degradation, the data structure is dynamically resized or 'rehashed'.",
         "answer": "o2",
         "options": [
-            { "text": "Table is empty", "is_correct": false },
-            { "text": "Load factor becomes large", "is_correct": true },
-            { "text": "Graph cycles appear", "is_correct": false },
-            { "text": "Tree becomes balanced", "is_correct": false }
+            {
+                "text": "Tree becomes balanced",
+                "is_correct": false
+            },
+            {
+                "text": "Load factor becomes large",
+                "is_correct": true
+            },
+            {
+                "text": "Table is empty",
+                "is_correct": false
+            },
+            {
+                "text": "Graph cycles appear",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Fundamentally bypassing expensive sequential scanning, which explicit foundational data structure structurally manages arbitrary, unrelated identifier mappings universally to associated dynamic target variables at near lightning speeds natively?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "A 'Hash table' is mathematically engineered strictly to map conceptual mapping 'Keys' instantly directly into underlying computational memory address 'Values' using mathematical formula indexing.",
-        "answer": "o1",
+        "answer": "o4",
         "options": [
-            { "text": "Hash table", "is_correct": true },
-            { "text": "Heap", "is_correct": false },
-            { "text": "Graph", "is_correct": false },
-            { "text": "Trie", "is_correct": false }
+            {
+                "text": "Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Hash table",
+                "is_correct": true
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Inside the mathematical engine practically driving every basic Hash Table structurally, what exact dynamic translation essentially allows strings and complex objects to be mapped natively inside flat RAM arrays?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "The core engine—the 'Hash function'—runs a rapid math algorithm designed strictly to convert an arbitrary readable abstract 'Key' permanently into a usable hard mathematical array 'Index' to lookup the associated bucket natively.",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The core engine\u2014the 'Hash function'\u2014runs a rapid math algorithm designed strictly to convert an arbitrary readable abstract 'Key' permanently into a usable hard mathematical array 'Index' to lookup the associated bucket natively.",
         "answer": "o1",
         "options": [
-            { "text": "Key to index", "is_correct": true },
-            { "text": "Index to key", "is_correct": false },
-            { "text": "Key to graph", "is_correct": false },
-            { "text": "Graph to key", "is_correct": false }
+            {
+                "text": "Key to index",
+                "is_correct": true
+            },
+            {
+                "text": "Key to graph",
+                "is_correct": false
+            },
+            {
+                "text": "Graph to key",
+                "is_correct": false
+            },
+            {
+                "text": "Index to key",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "When structurally engineering a predefined static dataset hash table to possess mathematically absolute \"Perfect hashing\", what definitive theoretical baseline is guaranteed strictly functionally universally?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A 'perfect hash function' specifically mathematically guarantees zero output overlap for a known static dataset set, formally enforcing absolutely 'No collisions occur' anywhere within the primary distribution bucket architecture natively.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "No collisions occur", "is_correct": true },
-            { "text": "All keys same index", "is_correct": false },
-            { "text": "Random mapping", "is_correct": false },
-            { "text": "Sorting keys", "is_correct": false }
+            {
+                "text": "Random mapping",
+                "is_correct": false
+            },
+            {
+                "text": "All keys same index",
+                "is_correct": false
+            },
+            {
+                "text": "No collisions occur",
+                "is_correct": true
+            },
+            {
+                "text": "Sorting keys",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "When encountering mapping collisions generating standard hash table pileups structurally natively, how does the mathematical 'Quadratic probing' open addressing sequence practically disperse the resulting clustered overlaps practically?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Unlike standard consecutive linear steps spreading linearly (1, 2, 3), 'Quadratic probing' dramatically resolves overlap pooling fundamentally explicitly by 'Jumping squares of step size' mathematically (1^2, 2^2, 3^2), violently shattering dense primary clusters unconditionally.",
         "answer": "o1",
         "options": [
-            { "text": "Jumping squares of step size", "is_correct": true },
-            { "text": "Linked lists", "is_correct": false },
-            { "text": "Hash trees", "is_correct": false },
-            { "text": "Sorting", "is_correct": false }
+            {
+                "text": "Jumping squares of step size",
+                "is_correct": true
+            },
+            {
+                "text": "Hash trees",
+                "is_correct": false
+            },
+            {
+                "text": "Linked lists",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            }
         ],
-        "topics": ["Hashing"],
+        "topics": [
+            "Hashing"
+        ],
         "companyIndex": 1
-}
+    }
 ]

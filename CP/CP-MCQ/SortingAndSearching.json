@@ -1,212 +1,452 @@
 [
-{
+    {
         "question_text": "Which of the following sorting algorithms is a classic example of the Divide and Conquer framework?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Merge sort perfectly showcases Divide and Conquer by recursively splitting the array in half, sorting the subsets, and then cleanly merging them back together.",
         "answer": "o1",
         "options": [
-            { "text": "Merge Sort", "is_correct": true },
-            { "text": "BFS", "is_correct": false },
-            { "text": "DFS", "is_correct": false },
-            { "text": "Heapify", "is_correct": false }
+            {
+                "text": "Merge Sort",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Divide and Conquer"],
+        "topics": [
+            "Sorting and Searching",
+            "Divide and Conquer"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "The average-case time complexity for Quick Sort is:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "While its worst-case scenario bounds to O(n^2), picking a reasonably good pivot provides Quick Sort with a highly efficient O(n log n) average running time.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "O(n log n)", "is_correct": true },
-            { "text": "O(n^2)", "is_correct": false },
-            { "text": "O(log n)", "is_correct": false },
-            { "text": "O(n)", "is_correct": false }
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Quick Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Quick Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Merge Sort is consistently guaranteed to be a stable sorting algorithm because:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Merge sort exhibits stability inherently because when elements evaluate as strictly equal during the merge step, it preserves their original sequential input order.",
         "answer": "o1",
         "options": [
-            { "text": "Equal elements keep order", "is_correct": true },
-            { "text": "It is recursive", "is_correct": false },
-            { "text": "Uses arrays", "is_correct": false },
-            { "text": "Uses stacks", "is_correct": false }
+            {
+                "text": "Equal elements keep order",
+                "is_correct": true
+            },
+            {
+                "text": "Uses arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Uses stacks",
+                "is_correct": false
+            },
+            {
+                "text": "It is recursive",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Merge Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Merge Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "For Binary Search to effectively execute on an array, the dataset natively requires to be explicitly:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Binary Search operates by halving the search space through directional comparison, entirely necessitating that the collection of elements is already sorted.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "Sorted", "is_correct": true },
-            { "text": "Random", "is_correct": false },
-            { "text": "Graph structured", "is_correct": false },
-            { "text": "Heap structured", "is_correct": false }
+            {
+                "text": "Graph structured",
+                "is_correct": false
+            },
+            {
+                "text": "Heap structured",
+                "is_correct": false
+            },
+            {
+                "text": "Sorted",
+                "is_correct": true
+            },
+            {
+                "text": "Random",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Binary Search"],
+        "topics": [
+            "Sorting and Searching",
+            "Binary Search"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "What is the worst-case operational time complexity of the standard Binary Search algorithm?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Since Binary Search recursively dismisses approximately half of the remaining array per individual iteration, its bounds cap tightly at O(log n).",
         "answer": "o1",
         "options": [
-            { "text": "O(log n)", "is_correct": true },
-            { "text": "O(n)", "is_correct": false },
-            { "text": "O(n log n)", "is_correct": false },
-            { "text": "O(n^2)", "is_correct": false }
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Binary Search"],
+        "topics": [
+            "Sorting and Searching",
+            "Binary Search"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "In the context of algorithm design, Greedy algorithms build up a solution piece by piece, always choosing the next piece that offers the most obvious and immediate benefit. This decision-making process is fundamentally based on finding the:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Greedy algorithms make the locally optimal choice at each stage with the hope that these localized decisions will logically lead to a globally optimal solution.",
         "answer": "o1",
         "options": [
-            { "text": "Local optimum", "is_correct": true },
-            { "text": "Global search", "is_correct": false },
-            { "text": "Random choices", "is_correct": false },
-            { "text": "DP tables", "is_correct": false }
+            {
+                "text": "Local optimum",
+                "is_correct": true
+            },
+            {
+                "text": "DP tables",
+                "is_correct": false
+            },
+            {
+                "text": "Random choices",
+                "is_correct": false
+            },
+            {
+                "text": "Global search",
+                "is_correct": false
+            }
         ],
-        "topics": ["Greedy Algorithms", "Miscellaneous Algorithms"],
+        "topics": [
+            "Greedy Algorithms",
+            "Miscellaneous Algorithms"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "In the context of finding a Minimum Spanning Tree (MST), which Greedy graph algorithm primarily operates by repeatedly selecting the absolute smallest weight edge that connects a currently unvisited node to the growing framework?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Prim's algorithm uniquely starts with a single node and greedily grows the spanning tree one edge at a time by strictly finding the minimum-weight edge connecting the tree to a vertex not yet in the tree.",
-        "answer": "o1",
+        "answer": "o2",
         "options": [
-            { "text": "Prim's Algorithm", "is_correct": true },
-            { "text": "DFS", "is_correct": false },
-            { "text": "BFS", "is_correct": false },
-            { "text": "Binary search", "is_correct": false }
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "Prim's Algorithm",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            }
         ],
-        "topics": ["Greedy Algorithms", "Graphs"],
+        "topics": [
+            "Greedy Algorithms",
+            "Graphs"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "The overarching algorithmic design paradigm strictly known as 'Divide and Conquer' fundamentally operates by recursively breaking down a massive, complex computational issue explicitly into multiple:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Divide and conquer works by recursively fundamentally splitting an overarching problem into two or more independent, smaller subproblems of the same or related type, until these become simple enough to be solved directly.",
-        "answer": "o1",
+        "answer": "o4",
         "options": [
-            { "text": "Smaller subproblems", "is_correct": true },
-            { "text": "Larger problems", "is_correct": false },
-            { "text": "Graph edges", "is_correct": false },
-            { "text": "Random nodes", "is_correct": false }
+            {
+                "text": "Random nodes",
+                "is_correct": false
+            },
+            {
+                "text": "Larger problems",
+                "is_correct": false
+            },
+            {
+                "text": "Graph edges",
+                "is_correct": false
+            },
+            {
+                "text": "Smaller subproblems",
+                "is_correct": true
+            }
         ],
-        "topics": ["Divide and Conquer", "Miscellaneous Algorithms"],
+        "topics": [
+            "Divide and Conquer",
+            "Miscellaneous Algorithms"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Although proving highly efficient on average, what is the absolute worst-case operational time complexity of the standard Quick Sort algorithm if the pivot variable is repeatedly chosen poorly?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "If Quick Sort continuously picks the greatest or smallest element as the pivot (e.g., when the array is already strongly sorted), it fails to split the array evenly, resulting in a degraded O(n^2) worst-case time complexity.",
         "answer": "o1",
         "options": [
-            { "text": "O(n^2)", "is_correct": true },
-            { "text": "O(n log n)", "is_correct": false },
-            { "text": "O(log n)", "is_correct": false },
-            { "text": "O(n)", "is_correct": false }
+            {
+                "text": "O(n^2)",
+                "is_correct": true
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Quick Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Quick Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which fundamental comparison sorting algorithm mechanically operates by continuously stepping linearly through the designated list, explicitly comparing adjacent elements, and repeatedly swapping them if they reside in the incorrect order?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Bubble Sort gets its name because smaller elements slowly 'bubble' their way to the top of the list by sequentially swapping adjacent out-of-order elements continuously across multiple passes.",
-        "answer": "o1",
+        "answer": "o4",
         "options": [
-            { "text": "Bubble Sort", "is_correct": true },
-            { "text": "Heap Sort", "is_correct": false },
-            { "text": "Merge Sort", "is_correct": false },
-            { "text": "Quick Sort", "is_correct": false }
+            {
+                "text": "Quick Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Merge Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Heap Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Bubble Sort",
+                "is_correct": true
+            }
         ],
-        "topics": ["Sorting and Searching", "Bubble Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Bubble Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which historically advanced divide-and-conquer sorting algorithm heavily relies algorithmically on a core engineered 'partitioning' technique to arrange array elements rigidly around a recursively selected independent pivot value?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Quick Sort fundamentally bases its entire high-speed operation on the partitioning subroutine, where array elements are dynamically segregated to be purely less than or greater than a uniquely chosen pivot component.",
-        "answer": "o1",
+        "answer": "o2",
         "options": [
-            { "text": "Quick Sort", "is_correct": true },
-            { "text": "Merge Sort", "is_correct": false },
-            { "text": "Bubble Sort", "is_correct": false },
-            { "text": "Insertion Sort", "is_correct": false }
+            {
+                "text": "Merge Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Quick Sort",
+                "is_correct": true
+            },
+            {
+                "text": "Insertion Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Bubble Sort",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Quick Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Quick Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Functionally traversing a targeted array sequentially, the basic algorithmic architecture of standard Selection Sort operates formally by explicitly scanning the unsorted region and continuously repeatedly selecting the:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Selection Sort systematically divides the array sequence into a fully sorted front section and back unsorted section, algorithmically pulling the absolute 'smallest remaining element' linearly out of the unsorted bulk individually each explicit pass.",
-        "answer": "o1",
+        "answer": "o2",
         "options": [
-            { "text": "Smallest remaining element", "is_correct": true },
-            { "text": "Largest element", "is_correct": false },
-            { "text": "Random element", "is_correct": false },
-            { "text": "Median element", "is_correct": false }
+            {
+                "text": "Median element",
+                "is_correct": false
+            },
+            {
+                "text": "Smallest remaining element",
+                "is_correct": true
+            },
+            {
+                "text": "Largest element",
+                "is_correct": false
+            },
+            {
+                "text": "Random element",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Selection Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Selection Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "While natively possessing a technically restrictive quadratic O(n^2) mathematical worst-case time complexity limit natively, the basic standard Insertion Sort algorithm technically remains extraordinarily highly efficient explicitly for:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Because Insertion Sort exclusively evaluates variables locally, if an array structure is extremely small or structurally already massively pre-sorted (few inversions), it executes blisteringly fast approaching O(n) linear performance purely.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "Small or nearly sorted arrays", "is_correct": true },
-            { "text": "Large random arrays", "is_correct": false },
-            { "text": "Graph traversal", "is_correct": false },
-            { "text": "Hash tables", "is_correct": false }
+            {
+                "text": "Large random arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Small or nearly sorted arrays",
+                "is_correct": true
+            },
+            {
+                "text": "Hash tables",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Insertion Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Insertion Sort"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "During structural active execution, a definitively standard Binary Search algorithm essentially mathematically achieves its rapid strictly logarithmic O(log n) efficiency rating entirely by repeatedly slicing the remaining natively sorted linear search space explicitly into:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "By comparing the requested target strictly centrally to the absolute middle element, Binary Search algorithmically safely entirely discards half the array constantly, partitioning the active search bounds repeatedly into 'two halves'.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "Two halves", "is_correct": true },
-            { "text": "Three parts", "is_correct": false },
-            { "text": "Four parts", "is_correct": false },
-            { "text": "Random parts", "is_correct": false }
+            {
+                "text": "Four parts",
+                "is_correct": false
+            },
+            {
+                "text": "Random parts",
+                "is_correct": false
+            },
+            {
+                "text": "Two halves",
+                "is_correct": true
+            },
+            {
+                "text": "Three parts",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Binary Search"],
+        "topics": [
+            "Sorting and Searching",
+            "Binary Search"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Unlike standard Quick Sort which explicitly mathematically degrades heavily under specific array layout conditions, which classic overarching comparison-based sorting algorithm mathematically definitively guarantees an ironclad absolute O(n log n) worst-case time complexity regardless of independent input data variable arrangement?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Because Merge Sort's exact recursive division structurally guarantees partitioning the whole array uniformly regardless of node internal values independently, it strictly strictly bounds exactly to O(n log n) explicitly constantly.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "Merge Sort", "is_correct": true },
-            { "text": "Quick Sort", "is_correct": false },
-            { "text": "Bubble Sort", "is_correct": false },
-            { "text": "Selection Sort", "is_correct": false }
+            {
+                "text": "Selection Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Bubble Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Merge Sort",
+                "is_correct": true
+            },
+            {
+                "text": "Quick Sort",
+                "is_correct": false
+            }
         ],
-        "topics": ["Sorting and Searching", "Merge Sort"],
+        "topics": [
+            "Sorting and Searching",
+            "Merge Sort"
+        ],
         "companyIndex": 1
-}
+    }
 ]

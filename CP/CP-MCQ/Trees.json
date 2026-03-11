@@ -1,506 +1,1051 @@
 [
-{
+    {
         "question_text": "What is the maximum number of children a binary tree node can have?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "A binary tree node can have at most two children: a left child and a right child.",
-        "answer": "o2",
+        "answer": "o1",
         "options": [
-            { "text": "1", "is_correct": false },
-            { "text": "2", "is_correct": true },
-            { "text": "3", "is_correct": false },
-            { "text": "Unlimited", "is_correct": false }
+            {
+                "text": "2",
+                "is_correct": true
+            },
+            {
+                "text": "3",
+                "is_correct": false
+            },
+            {
+                "text": "1",
+                "is_correct": false
+            },
+            {
+                "text": "Unlimited",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "In a Binary Search Tree (BST), the left subtree contains values that are:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "In a BST, all nodes in the left subtree have values less than the root node's value.",
-        "answer": "o3",
-        "options": [
-            { "text": "Greater than root", "is_correct": false },
-            { "text": "Equal to root", "is_correct": false },
-            { "text": "Smaller than root", "is_correct": true },
-            { "text": "Random", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Which traversal visits the root node first?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "Preorder traversal visits the current node (root) first, then the left subtree, and finally the right subtree.",
-        "answer": "o3",
-        "options": [
-            { "text": "Inorder", "is_correct": false },
-            { "text": "Postorder", "is_correct": false },
-            { "text": "Preorder", "is_correct": true },
-            { "text": "Level Order", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Which traversal of BST gives sorted order?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "Inorder traversal of a Binary Search Tree visits nodes in ascending order.",
-        "answer": "o1",
-        "options": [
-            { "text": "Inorder", "is_correct": true },
-            { "text": "Preorder", "is_correct": false },
-            { "text": "Postorder", "is_correct": false },
-            { "text": "Level order", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Which data structure is used to implement level order traversal?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "A queue is used to keep track of nodes at the current level before moving to the next level in breadth-first search (level order traversal).",
         "answer": "o2",
         "options": [
-            { "text": "Stack", "is_correct": false },
-            { "text": "Queue", "is_correct": true },
-            { "text": "Heap", "is_correct": false },
-            { "text": "Array", "is_correct": false }
+            {
+                "text": "Random",
+                "is_correct": false
+            },
+            {
+                "text": "Smaller than root",
+                "is_correct": true
+            },
+            {
+                "text": "Greater than root",
+                "is_correct": false
+            },
+            {
+                "text": "Equal to root",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
-        "question_text": "What is the height of a tree with only one node?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "The height of a tree with a single node (the root) is considered to be 0 following standard convention.",
-        "answer": "o1",
+    },
+    {
+        "question_text": "Which depth-first traversal visits the root node first?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Preorder traversal visits the current node (root) first, then the left subtree, and finally the right subtree.",
+        "answer": "o2",
         "options": [
-            { "text": "0", "is_correct": true },
-            { "text": "1", "is_correct": false },
-            { "text": "2", "is_correct": false },
-            { "text": "Undefined", "is_correct": false }
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": true
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level Order",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
+        "question_text": "Which traversal of BST gives sorted order?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Inorder traversal of a Binary Search Tree visits nodes in ascending order.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which data structure is used to implement level order traversal?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A queue is used to keep track of nodes at the current level before moving to the next level in breadth-first search (level order traversal).",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Stack",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Array",
+                "is_correct": false
+            },
+            {
+                "text": "Queue",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What is the height of a tree with only one node?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The height of a tree with a single node (the root) is considered to be 0 following standard convention.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "2",
+                "is_correct": false
+            },
+            {
+                "text": "Undefined",
+                "is_correct": false
+            },
+            {
+                "text": "0",
+                "is_correct": true
+            },
+            {
+                "text": "1",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
         "question_text": "Which tree is self-balancing?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "An AVL Tree is a self-balancing binary search tree where the heights of the two child subtrees of any node differ by at most one.",
         "answer": "o2",
         "options": [
-            { "text": "Binary Tree", "is_correct": false },
-            { "text": "AVL Tree", "is_correct": true },
-            { "text": "Heap", "is_correct": false },
-            { "text": "Trie", "is_correct": false }
+            {
+                "text": "Binary Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": true
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "AVL tree maintains balance using:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "AVL trees use tree rotations (Left, Right, Left-Right, Right-Left) to maintain balance after insertions and deletions.",
-        "answer": "o2",
+        "answer": "o4",
         "options": [
-            { "text": "Hashing", "is_correct": false },
-            { "text": "Rotation operations", "is_correct": true },
-            { "text": "BFS", "is_correct": false },
-            { "text": "Heapify", "is_correct": false }
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Rotation operations",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Red-Black tree guarantees height of:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A Red-Black tree is a balanced binary search tree that guarantees an O(log n) height, ensuring efficient search, insert, and delete operations.",
         "answer": "o2",
         "options": [
-            { "text": "O(n)", "is_correct": false },
-            { "text": "O(log n)", "is_correct": true },
-            { "text": "O(m)", "is_correct": false },
-            { "text": "O(1)", "is_correct": false }
+            {
+                "text": "O(m)",
+                "is_correct": false
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which tree is commonly used in databases and file systems?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "B-Trees are optimized for systems that read and write large blocks of data, making them ideal for databases and file systems.",
-        "answer": "o2",
+        "answer": "o3",
         "options": [
-            { "text": "AVL Tree", "is_correct": false },
-            { "text": "B Tree", "is_correct": true },
-            { "text": "Binary Tree", "is_correct": false },
-            { "text": "Trie", "is_correct": false }
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Binary Tree",
+                "is_correct": false
+            },
+            {
+                "text": "B Tree",
+                "is_correct": true
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "B+ Trees differ from B Trees because:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "In a B+ tree, all data pointers are stored in the leaf nodes, while internal nodes only store keys for routing.",
-        "answer": "o2",
+        "answer": "o3",
         "options": [
-            { "text": "All data stored in internal nodes", "is_correct": false },
-            { "text": "All data stored in leaf nodes", "is_correct": true },
-            { "text": "No internal nodes", "is_correct": false },
-            { "text": "Only two children allowed", "is_correct": false }
+            {
+                "text": "All data stored in internal nodes",
+                "is_correct": false
+            },
+            {
+                "text": "No internal nodes",
+                "is_correct": false
+            },
+            {
+                "text": "All data stored in leaf nodes",
+                "is_correct": true
+            },
+            {
+                "text": "Only two children allowed",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Segment Tree is mainly used for:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A Segment Tree is a data structure used for answering range queries (like sum, minimum, or maximum in a range) efficiently.",
-        "answer": "o2",
+        "answer": "o4",
         "options": [
-            { "text": "Sorting", "is_correct": false },
-            { "text": "Range queries", "is_correct": true },
-            { "text": "Graph traversal", "is_correct": false },
-            { "text": "Hashing", "is_correct": false }
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Range queries",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Fenwick Tree is also known as:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A Fenwick Tree is also known as a Binary Indexed Tree (BIT), used for efficiently updating elements and calculating prefix sums.",
         "answer": "o1",
         "options": [
-            { "text": "Binary Indexed Tree", "is_correct": true },
-            { "text": "Heap Tree", "is_correct": false },
-            { "text": "Balanced Tree", "is_correct": false },
-            { "text": "Trie", "is_correct": false }
+            {
+                "text": "Binary Indexed Tree",
+                "is_correct": true
+            },
+            {
+                "text": "Balanced Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Heap Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Trie is primarily used for:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A Trie (prefix tree) is a tree-like data structure that is particularly efficient for prefix searching and string matching.",
-        "answer": "o2",
+        "answer": "o1",
         "options": [
-            { "text": "Sorting numbers", "is_correct": false },
-            { "text": "Prefix searching", "is_correct": true },
-            { "text": "Graph traversal", "is_correct": false },
-            { "text": "DP problems", "is_correct": false }
+            {
+                "text": "Prefix searching",
+                "is_correct": true
+            },
+            {
+                "text": "DP problems",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting numbers",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which tree structure stores suffixes of strings efficiently?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A Suffix Tree is a compressed trie containing all the suffixes of the given text, used efficiently for string algorithms.",
-        "answer": "o2",
+        "answer": "o4",
         "options": [
-            { "text": "Binary Tree", "is_correct": false },
-            { "text": "Suffix Tree", "is_correct": true },
-            { "text": "AVL Tree", "is_correct": false },
-            { "text": "Heap", "is_correct": false }
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Binary Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Suffix Tree",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which traversal visits the left subtree, then root, then right subtree?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Inorder traversal visits the left branch, then the current node (root), then the right branch.",
-        "answer": "o2",
-        "options": [
-            { "text": "Preorder", "is_correct": false },
-            { "text": "Inorder", "is_correct": true },
-            { "text": "Postorder", "is_correct": false },
-            { "text": "Level order", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Which traversal visits children before the parent?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "Postorder traversal visits both the left and right subtrees (children) entirely before visiting the current node (parent).",
         "answer": "o3",
         "options": [
-            { "text": "Inorder", "is_correct": false },
-            { "text": "Preorder", "is_correct": false },
-            { "text": "Postorder", "is_correct": true },
-            { "text": "Level order", "is_correct": false }
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": true
+            },
+            {
+                "text": "Postorder",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
-        "question_text": "Which structure is used internally for recursive tree traversal?",
-        "difficulty": "EASY", "marks": 1,
-        "explanation": "Recursion inherently uses the program's Call Stack to keep track of function calls and states.",
-        "answer": "o2",
+    },
+    {
+        "question_text": "Which traversal visits children before the parent?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Postorder traversal visits both the left and right subtrees (children) entirely before visiting the current node (parent).",
+        "answer": "o4",
         "options": [
-            { "text": "Queue", "is_correct": false },
-            { "text": "Stack", "is_correct": true },
-            { "text": "Heap", "is_correct": false },
-            { "text": "Hash map", "is_correct": false }
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
+        "question_text": "Which structure is used internally for recursive tree traversal?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Recursion inherently uses the program's Call Stack to keep track of function calls and states.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Stack",
+                "is_correct": true
+            },
+            {
+                "text": "Hash map",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Queue",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
         "question_text": "What property does a heap maintain?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "A heap explicitly maintains the 'heap property', where the parent node's value is always greater than/equal to (max-heap) or less than/equal to (min-heap) its children's values.",
         "answer": "o2",
         "options": [
-            { "text": "Sorted order", "is_correct": false },
-            { "text": "Heap property", "is_correct": true },
-            { "text": "Binary search property", "is_correct": false },
-            { "text": "Balanced property", "is_correct": false }
+            {
+                "text": "Binary search property",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": true
+            },
+            {
+                "text": "Balanced property",
+                "is_correct": false
+            },
+            {
+                "text": "Sorted order",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "The height of a balanced BST with n nodes is approximately:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A balanced Binary Search Tree partitions the data roughly in half at each step, resulting in a logarithmic height of roughly log2(n).",
-        "answer": "o2",
+        "answer": "o1",
         "options": [
-            { "text": "n", "is_correct": false },
-            { "text": "log n", "is_correct": true },
-            { "text": "n^2", "is_correct": false },
-            { "text": "sqrt(n)", "is_correct": false }
+            {
+                "text": "log n",
+                "is_correct": true
+            },
+            {
+                "text": "n^2",
+                "is_correct": false
+            },
+            {
+                "text": "sqrt(n)",
+                "is_correct": false
+            },
+            {
+                "text": "n",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which tree is used for auto-complete suggestions?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "A Trie (prefix tree) is highly efficient for prefix matching and retrieval, making it the standard structure for auto-complete and dictionary applications.",
-        "answer": "o2",
+        "answer": "o1",
         "options": [
-            { "text": "AVL Tree", "is_correct": false },
-            { "text": "Trie", "is_correct": true },
-            { "text": "Heap", "is_correct": false },
-            { "text": "Segment Tree", "is_correct": false }
+            {
+                "text": "Trie",
+                "is_correct": true
+            },
+            {
+                "text": "Segment Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which operation keeps AVL trees balanced?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "AVL Trees automatically invoke tree rotations (Left, Right, Left-Right, Right-Left) upon insertion or deletion to ensure the balance factor is maintained.",
-        "answer": "o2",
+        "answer": "o4",
         "options": [
-            { "text": "Swapping", "is_correct": false },
-            { "text": "Rotations", "is_correct": true },
-            { "text": "Sorting", "is_correct": false },
-            { "text": "Traversal", "is_correct": false }
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Swapping",
+                "is_correct": false
+            },
+            {
+                "text": "Rotations",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "In Red-Black trees, the root is always:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "One of the fundamental properties of a Red-Black Tree is that the root node must always be colored Black.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Black",
+                "is_correct": true
+            },
+            {
+                "text": "Blue",
+                "is_correct": false
+            },
+            {
+                "text": "Red",
+                "is_correct": false
+            },
+            {
+                "text": "Green",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What ensures logarithmic height in Red-Black trees?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The specific coloring rules (like no two consecutive red nodes, and an equal number of black nodes on any path to a leaf) strictly constrain the tree to remain balanced and logarithmic in height.",
         "answer": "o2",
         "options": [
-            { "text": "Red", "is_correct": false },
-            { "text": "Black", "is_correct": true },
-            { "text": "Green", "is_correct": false },
-            { "text": "Blue", "is_correct": false }
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Coloring rules",
+                "is_correct": true
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "What ensures logarithmic height in Red-Black trees?",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "The specific coloring rules (like no two consecutive red nodes, and an equal number of black nodes on any path to a leaf) strictly constrain the tree to remain balanced and logarithmic in height.",
-        "answer": "o1",
-        "options": [
-            { "text": "Coloring rules", "is_correct": true },
-            { "text": "Sorting", "is_correct": false },
-            { "text": "Heap property", "is_correct": false },
-            { "text": "Graph traversal", "is_correct": false }
+        "topics": [
+            "Trees"
         ],
-        "topics": ["Trees"],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Binary lifting is commonly used for:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Binary lifting is a dynamic programming technique explicitly used on trees to answer Lowest Common Ancestor (LCA) queries in O(log n) time.",
-        "answer": "o1",
+        "answer": "o4",
         "options": [
-            { "text": "LCA queries", "is_correct": true },
-            { "text": "Graph coloring", "is_correct": false },
-            { "text": "Sorting arrays", "is_correct": false },
-            { "text": "Heap operations", "is_correct": false }
+            {
+                "text": "Sorting arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Heap operations",
+                "is_correct": false
+            },
+            {
+                "text": "Graph coloring",
+                "is_correct": false
+            },
+            {
+                "text": "LCA queries",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees", "Binary Lifting"],
+        "topics": [
+            "Trees",
+            "Binary Lifting"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "The Euler tour technique on trees converts structural tree problems into:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "An Euler Tour effectively flattens a tree into a linear array domain, allowing standard range structures like Segment Trees to execute subtree queries efficiently.",
-        "answer": "o1",
+        "answer": "o3",
         "options": [
-            { "text": "Array problems", "is_correct": true },
-            { "text": "Graph problems", "is_correct": false },
-            { "text": "Heap problems", "is_correct": false },
-            { "text": "Hashing problems", "is_correct": false }
+            {
+                "text": "Heap problems",
+                "is_correct": false
+            },
+            {
+                "text": "Graph problems",
+                "is_correct": false
+            },
+            {
+                "text": "Array problems",
+                "is_correct": true
+            },
+            {
+                "text": "Hashing problems",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees", "Euler Tour"],
+        "topics": [
+            "Trees",
+            "Euler Tour"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Centroid decomposition broadly divides a tree structure into:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Centroid Decomposition recursively finds the centroid of a tree to partition it cleanly into smaller, balanced components of maximum size N/2.",
         "answer": "o1",
         "options": [
-            { "text": "Balanced components", "is_correct": true },
-            { "text": "Random nodes", "is_correct": false },
-            { "text": "Graph edges", "is_correct": false },
-            { "text": "Hash buckets", "is_correct": false }
+            {
+                "text": "Balanced components",
+                "is_correct": true
+            },
+            {
+                "text": "Graph edges",
+                "is_correct": false
+            },
+            {
+                "text": "Hash buckets",
+                "is_correct": false
+            },
+            {
+                "text": "Random nodes",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees", "Centroid Decomposition"],
+        "topics": [
+            "Trees",
+            "Centroid Decomposition"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which of the following tree traversal techniques fundamentally utilizes a Queue data structure instead of Recursion or a Stack?",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "Level Order Traversal explores the tree breadth-first, node by node at each depth level. This explicitly requires a Queue (FIFO) structure to maintain the correct visitation order.",
         "answer": "o3",
         "options": [
-            { "text": "Preorder", "is_correct": false },
-            { "text": "Inorder", "is_correct": false },
-            { "text": "Level Order", "is_correct": true },
-            { "text": "Postorder", "is_correct": false }
+            {
+                "text": "Inorder",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level Order",
+                "is_correct": true
+            },
+            {
+                "text": "Preorder",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "By formal definition, in a fundamentally Full Binary Tree, every single node must mathematically have:",
-        "difficulty": "EASY", "marks": 1,
+        "difficulty": "EASY",
+        "marks": 1,
         "explanation": "A full binary tree (sometimes referred to as a proper or plane binary tree) is a tree in which every node has strictly either 0 or 2 children. Nodes cannot have exactly one child.",
-        "answer": "o2",
-        "options": [
-            { "text": "Exactly two children", "is_correct": false },
-            { "text": "Either 0 or 2 children", "is_correct": true },
-            { "text": "At least two children", "is_correct": false },
-            { "text": "Only one child", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "Given a binary tree of maximum height h (where a single root node has height 0), the theoretical maximum number of valid nodes it can possibly contain is:",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "If a binary tree is perfectly filled across all levels down to height h, the total summation of nodes across levels represents a geometric series equal to 2^(h+1) - 1.",
-        "answer": "o2",
-        "options": [
-            { "text": "2^h", "is_correct": false },
-            { "text": "2^(h+1)-1", "is_correct": true },
-            { "text": "h^2", "is_correct": false },
-            { "text": "h+1", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "A Complete Binary Tree is formally defined as a tree structure where:",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "In a Complete Binary Tree, every level, strictly except possibly the very last one, is completely filled, and all nodes in the last level are as far left as mathematically possible.",
-        "answer": "o2",
-        "options": [
-            { "text": "All levels are fully filled", "is_correct": false },
-            { "text": "All levels except possibly last are filled", "is_correct": true },
-            { "text": "Only root exists", "is_correct": false },
-            { "text": "Nodes have unlimited children", "is_correct": false }
-        ],
-        "topics": ["Trees"],
-        "companyIndex": 1
-},
-{
-        "question_text": "To effectively and safely copy the entire structure and explicit layout of a binary tree, which specific traversal method is definitively used?",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "Preorder traversal processes nodes essentially top-down (root, left, right). To create a matching clone structure, you must explicitly construct parent root nodes before dealing with their dependent children.",
         "answer": "o1",
         "options": [
-            { "text": "Preorder", "is_correct": true },
-            { "text": "Inorder", "is_correct": false },
-            { "text": "Postorder", "is_correct": false },
-            { "text": "Level order", "is_correct": false }
+            {
+                "text": "Either 0 or 2 children",
+                "is_correct": true
+            },
+            {
+                "text": "Exactly two children",
+                "is_correct": false
+            },
+            {
+                "text": "Only one child",
+                "is_correct": false
+            },
+            {
+                "text": "At least two children",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
-        "question_text": "When explicitly tasked with storing an extensive dictionary composed of thousands of words for ultra-fast prefix indexing, which specific tree structure is inherently best suited?",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "A Trie (or explicit prefix tree) uniquely stores characters across branching edges rather than full string values independently. This inherently collapses overlapping string prefixes together, resulting in extraordinary search speeds independent of dataset size.",
-        "answer": "o2",
+    },
+    {
+        "question_text": "Given a binary tree of maximum height h (where a single root node has height 0), the theoretical maximum number of valid nodes it can possibly contain is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "If a binary tree is perfectly filled across all levels down to height h, the total summation of nodes across levels represents a geometric series equal to 2^(h+1) - 1.",
+        "answer": "o4",
         "options": [
-            { "text": "Heap", "is_correct": false },
-            { "text": "Trie", "is_correct": true },
-            { "text": "Segment Tree", "is_correct": false },
-            { "text": "AVL Tree", "is_correct": false }
+            {
+                "text": "2^h",
+                "is_correct": false
+            },
+            {
+                "text": "h+1",
+                "is_correct": false
+            },
+            {
+                "text": "h^2",
+                "is_correct": false
+            },
+            {
+                "text": "2^(h+1)-1",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees", "Trie"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
-        "question_text": "In programmatic memory management systems without garbage collection, which recursive tree traversal methodology is absolutely vital for safely deleting an entire dynamically allocated tree?",
-        "difficulty": "MEDIUM", "marks": 2,
-        "explanation": "Postorder traversal works strictly bottom-up (left, right, root). Mathematically, you must fundamentally deallocate all child subtree pointers completely before it is safe to delete the parent directory representing them.",
+    },
+    {
+        "question_text": "A Complete Binary Tree is formally defined as a tree structure where:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "In a Complete Binary Tree, every level, strictly except possibly the very last one, is completely filled, and all nodes in the last level are as far left as mathematically possible.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "All levels except possibly last are filled",
+                "is_correct": true
+            },
+            {
+                "text": "Nodes have unlimited children",
+                "is_correct": false
+            },
+            {
+                "text": "All levels are fully filled",
+                "is_correct": false
+            },
+            {
+                "text": "Only root exists",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "To effectively and safely copy the entire structure and explicit layout of a binary tree, which specific traversal method is definitively used?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Preorder traversal processes nodes essentially top-down (root, left, right). To create a matching clone structure, you must explicitly construct parent root nodes before dealing with their dependent children.",
         "answer": "o3",
         "options": [
-            { "text": "Preorder", "is_correct": false },
-            { "text": "Inorder", "is_correct": false },
-            { "text": "Postorder", "is_correct": true },
-            { "text": "Level order", "is_correct": false }
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": true
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
+        "question_text": "When explicitly tasked with storing an extensive dictionary composed of thousands of words for ultra-fast prefix indexing, which specific tree structure is inherently best suited?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Trie (or explicit prefix tree) uniquely stores characters across branching edges rather than full string values independently. This inherently collapses overlapping string prefixes together, resulting in extraordinary search speeds independent of dataset size.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Trie",
+                "is_correct": true
+            },
+            {
+                "text": "Segment Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees",
+            "Trie"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In programmatic memory management systems without garbage collection, which recursive tree traversal methodology is absolutely vital for safely deleting an entire dynamically allocated tree?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Postorder traversal works strictly bottom-up (left, right, root). Mathematically, you must fundamentally deallocate all child subtree pointers completely before it is safe to delete the parent directory representing them.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": true
+            },
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
         "question_text": "Fundamentally, in a standard structurally sound binary tree configuration, the total absolute mathematically calculable amount of connecting edges structurally present is always definitively:",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "Because every single distinct node in any generic valid tree structure unequivocally possesses exactly one singular parent connection (strictly excluding the ultimate root), the mathematical edges strictly equal N - 1.",
-        "answer": "o2",
+        "answer": "o3",
         "options": [
-            { "text": "Equal to number of nodes", "is_correct": false },
-            { "text": "One less than number of nodes", "is_correct": true },
-            { "text": "Double the number of nodes", "is_correct": false },
-            { "text": "Half the number of nodes", "is_correct": false }
+            {
+                "text": "Half the number of nodes",
+                "is_correct": false
+            },
+            {
+                "text": "Equal to number of nodes",
+                "is_correct": false
+            },
+            {
+                "text": "One less than number of nodes",
+                "is_correct": true
+            },
+            {
+                "text": "Double the number of nodes",
+                "is_correct": false
+            }
         ],
-        "topics": ["Trees"],
+        "topics": [
+            "Trees"
+        ],
         "companyIndex": 1
-},
-{
+    },
+    {
         "question_text": "Which explicitly enforced strict mathematical structural property definitively guarantees that overarching search query executions remain inherently hyper-optimized and efficient within a standard Binary Search Tree (BST)?",
-        "difficulty": "MEDIUM", "marks": 2,
+        "difficulty": "MEDIUM",
+        "marks": 1,
         "explanation": "The strict structural sorted property fundamentally dictating smaller values go left and larger right allows algorithms to decisively discard an entire massive half of the search sub-domain conditionally at every single node step.",
-        "answer": "o2",
+        "answer": "o4",
         "options": [
-            { "text": "Heap property", "is_correct": false },
-            { "text": "Sorted ordering property", "is_correct": true },
-            { "text": "Graph connectivity", "is_correct": false },
-            { "text": "Balanced colors", "is_correct": false }
+            {
+                "text": "Balanced colors",
+                "is_correct": false
+            },
+            {
+                "text": "Graph connectivity",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": false
+            },
+            {
+                "text": "Sorted ordering property",
+                "is_correct": true
+            }
         ],
-        "topics": ["Trees", "Binary Search Tree"],
+        "topics": [
+            "Trees",
+            "Binary Search Tree"
+        ],
         "companyIndex": 1
-}
+    }
 ]

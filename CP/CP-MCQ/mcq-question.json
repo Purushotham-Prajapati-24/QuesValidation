@@ -1,1 +1,4716 @@
-{}
+[
+    {
+        "question_text": "What is the maximum number of children a binary tree node can have?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A binary tree node can have at most two children: a left child and a right child.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "2",
+                "is_correct": true
+            },
+            {
+                "text": "3",
+                "is_correct": false
+            },
+            {
+                "text": "1",
+                "is_correct": false
+            },
+            {
+                "text": "Unlimited",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In a Binary Search Tree (BST), the left subtree contains values that are:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "In a BST, all nodes in the left subtree have values less than the root node's value.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Random",
+                "is_correct": false
+            },
+            {
+                "text": "Smaller than root",
+                "is_correct": true
+            },
+            {
+                "text": "Greater than root",
+                "is_correct": false
+            },
+            {
+                "text": "Equal to root",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which depth-first traversal visits the root node first?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Preorder traversal visits the current node (root) first, then the left subtree, and finally the right subtree.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": true
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level Order",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which traversal of BST gives sorted order?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Inorder traversal of a Binary Search Tree visits nodes in ascending order.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which data structure is used to implement level order traversal?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A queue is used to keep track of nodes at the current level before moving to the next level in breadth-first search (level order traversal).",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Stack",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Array",
+                "is_correct": false
+            },
+            {
+                "text": "Queue",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What is the height of a tree with only one node?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The height of a tree with a single node (the root) is considered to be 0 following standard convention.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "2",
+                "is_correct": false
+            },
+            {
+                "text": "Undefined",
+                "is_correct": false
+            },
+            {
+                "text": "0",
+                "is_correct": true
+            },
+            {
+                "text": "1",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which tree is self-balancing?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "An AVL Tree is a self-balancing binary search tree where the heights of the two child subtrees of any node differ by at most one.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Binary Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": true
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "AVL tree maintains balance using:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "AVL trees use tree rotations (Left, Right, Left-Right, Right-Left) to maintain balance after insertions and deletions.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Rotation operations",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Red-Black tree guarantees height of:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Red-Black tree is a balanced binary search tree that guarantees an O(log n) height, ensuring efficient search, insert, and delete operations.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "O(m)",
+                "is_correct": false
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which tree is commonly used in databases and file systems?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "B-Trees are optimized for systems that read and write large blocks of data, making them ideal for databases and file systems.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Binary Tree",
+                "is_correct": false
+            },
+            {
+                "text": "B Tree",
+                "is_correct": true
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "B+ Trees differ from B Trees because:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "In a B+ tree, all data pointers are stored in the leaf nodes, while internal nodes only store keys for routing.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "All data stored in internal nodes",
+                "is_correct": false
+            },
+            {
+                "text": "No internal nodes",
+                "is_correct": false
+            },
+            {
+                "text": "All data stored in leaf nodes",
+                "is_correct": true
+            },
+            {
+                "text": "Only two children allowed",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Segment Tree is mainly used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Segment Tree is a data structure used for answering range queries (like sum, minimum, or maximum in a range) efficiently.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Range queries",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Fenwick Tree is also known as:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Fenwick Tree is also known as a Binary Indexed Tree (BIT), used for efficiently updating elements and calculating prefix sums.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Binary Indexed Tree",
+                "is_correct": true
+            },
+            {
+                "text": "Balanced Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Heap Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Trie is primarily used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Trie (prefix tree) is a tree-like data structure that is particularly efficient for prefix searching and string matching.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Prefix searching",
+                "is_correct": true
+            },
+            {
+                "text": "DP problems",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting numbers",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which tree structure stores suffixes of strings efficiently?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Suffix Tree is a compressed trie containing all the suffixes of the given text, used efficiently for string algorithms.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Binary Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Suffix Tree",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which traversal visits the left subtree, then root, then right subtree?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Inorder traversal visits the left branch, then the current node (root), then the right branch.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": true
+            },
+            {
+                "text": "Postorder",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which traversal visits children before the parent?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Postorder traversal visits both the left and right subtrees (children) entirely before visiting the current node (parent).",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which structure is used internally for recursive tree traversal?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Recursion inherently uses the program's Call Stack to keep track of function calls and states.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Stack",
+                "is_correct": true
+            },
+            {
+                "text": "Hash map",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Queue",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What property does a heap maintain?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A heap explicitly maintains the 'heap property', where the parent node's value is always greater than/equal to (max-heap) or less than/equal to (min-heap) its children's values.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Binary search property",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": true
+            },
+            {
+                "text": "Balanced property",
+                "is_correct": false
+            },
+            {
+                "text": "Sorted order",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The height of a balanced BST with n nodes is approximately:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A balanced Binary Search Tree partitions the data roughly in half at each step, resulting in a logarithmic height of roughly log2(n).",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "log n",
+                "is_correct": true
+            },
+            {
+                "text": "n^2",
+                "is_correct": false
+            },
+            {
+                "text": "sqrt(n)",
+                "is_correct": false
+            },
+            {
+                "text": "n",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which tree is used for auto-complete suggestions?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Trie (prefix tree) is highly efficient for prefix matching and retrieval, making it the standard structure for auto-complete and dictionary applications.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Trie",
+                "is_correct": true
+            },
+            {
+                "text": "Segment Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which operation keeps AVL trees balanced?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "AVL Trees automatically invoke tree rotations (Left, Right, Left-Right, Right-Left) upon insertion or deletion to ensure the balance factor is maintained.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Swapping",
+                "is_correct": false
+            },
+            {
+                "text": "Rotations",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In Red-Black trees, the root is always:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "One of the fundamental properties of a Red-Black Tree is that the root node must always be colored Black.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Black",
+                "is_correct": true
+            },
+            {
+                "text": "Blue",
+                "is_correct": false
+            },
+            {
+                "text": "Red",
+                "is_correct": false
+            },
+            {
+                "text": "Green",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What ensures logarithmic height in Red-Black trees?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The specific coloring rules (like no two consecutive red nodes, and an equal number of black nodes on any path to a leaf) strictly constrain the tree to remain balanced and logarithmic in height.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Coloring rules",
+                "is_correct": true
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Binary lifting is commonly used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Binary lifting is a dynamic programming technique explicitly used on trees to answer Lowest Common Ancestor (LCA) queries in O(log n) time.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Sorting arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Heap operations",
+                "is_correct": false
+            },
+            {
+                "text": "Graph coloring",
+                "is_correct": false
+            },
+            {
+                "text": "LCA queries",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees",
+            "Binary Lifting"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The Euler tour technique on trees converts structural tree problems into:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "An Euler Tour effectively flattens a tree into a linear array domain, allowing standard range structures like Segment Trees to execute subtree queries efficiently.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Heap problems",
+                "is_correct": false
+            },
+            {
+                "text": "Graph problems",
+                "is_correct": false
+            },
+            {
+                "text": "Array problems",
+                "is_correct": true
+            },
+            {
+                "text": "Hashing problems",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees",
+            "Euler Tour"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Centroid decomposition broadly divides a tree structure into:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Centroid Decomposition recursively finds the centroid of a tree to partition it cleanly into smaller, balanced components of maximum size N/2.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Balanced components",
+                "is_correct": true
+            },
+            {
+                "text": "Graph edges",
+                "is_correct": false
+            },
+            {
+                "text": "Hash buckets",
+                "is_correct": false
+            },
+            {
+                "text": "Random nodes",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees",
+            "Centroid Decomposition"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which of the following tree traversal techniques fundamentally utilizes a Queue data structure instead of Recursion or a Stack?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Level Order Traversal explores the tree breadth-first, node by node at each depth level. This explicitly requires a Queue (FIFO) structure to maintain the correct visitation order.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Inorder",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level Order",
+                "is_correct": true
+            },
+            {
+                "text": "Preorder",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "By formal definition, in a fundamentally Full Binary Tree, every single node must mathematically have:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A full binary tree (sometimes referred to as a proper or plane binary tree) is a tree in which every node has strictly either 0 or 2 children. Nodes cannot have exactly one child.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Either 0 or 2 children",
+                "is_correct": true
+            },
+            {
+                "text": "Exactly two children",
+                "is_correct": false
+            },
+            {
+                "text": "Only one child",
+                "is_correct": false
+            },
+            {
+                "text": "At least two children",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Given a binary tree of maximum height h (where a single root node has height 0), the theoretical maximum number of valid nodes it can possibly contain is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "If a binary tree is perfectly filled across all levels down to height h, the total summation of nodes across levels represents a geometric series equal to 2^(h+1) - 1.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "2^h",
+                "is_correct": false
+            },
+            {
+                "text": "h+1",
+                "is_correct": false
+            },
+            {
+                "text": "h^2",
+                "is_correct": false
+            },
+            {
+                "text": "2^(h+1)-1",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "A Complete Binary Tree is formally defined as a tree structure where:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "In a Complete Binary Tree, every level, strictly except possibly the very last one, is completely filled, and all nodes in the last level are as far left as mathematically possible.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "All levels except possibly last are filled",
+                "is_correct": true
+            },
+            {
+                "text": "Nodes have unlimited children",
+                "is_correct": false
+            },
+            {
+                "text": "All levels are fully filled",
+                "is_correct": false
+            },
+            {
+                "text": "Only root exists",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "To effectively and safely copy the entire structure and explicit layout of a binary tree, which specific traversal method is definitively used?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Preorder traversal processes nodes essentially top-down (root, left, right). To create a matching clone structure, you must explicitly construct parent root nodes before dealing with their dependent children.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Postorder",
+                "is_correct": false
+            },
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Preorder",
+                "is_correct": true
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When explicitly tasked with storing an extensive dictionary composed of thousands of words for ultra-fast prefix indexing, which specific tree structure is inherently best suited?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Trie (or explicit prefix tree) uniquely stores characters across branching edges rather than full string values independently. This inherently collapses overlapping string prefixes together, resulting in extraordinary search speeds independent of dataset size.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Trie",
+                "is_correct": true
+            },
+            {
+                "text": "Segment Tree",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees",
+            "Trie"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In programmatic memory management systems without garbage collection, which recursive tree traversal methodology is absolutely vital for safely deleting an entire dynamically allocated tree?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Postorder traversal works strictly bottom-up (left, right, root). Mathematically, you must fundamentally deallocate all child subtree pointers completely before it is safe to delete the parent directory representing them.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Preorder",
+                "is_correct": false
+            },
+            {
+                "text": "Postorder",
+                "is_correct": true
+            },
+            {
+                "text": "Level order",
+                "is_correct": false
+            },
+            {
+                "text": "Inorder",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Fundamentally, in a standard structurally sound binary tree configuration, the total absolute mathematically calculable amount of connecting edges structurally present is always definitively:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Because every single distinct node in any generic valid tree structure unequivocally possesses exactly one singular parent connection (strictly excluding the ultimate root), the mathematical edges strictly equal N - 1.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Half the number of nodes",
+                "is_correct": false
+            },
+            {
+                "text": "Equal to number of nodes",
+                "is_correct": false
+            },
+            {
+                "text": "One less than number of nodes",
+                "is_correct": true
+            },
+            {
+                "text": "Double the number of nodes",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which explicitly enforced strict mathematical structural property definitively guarantees that overarching search query executions remain inherently hyper-optimized and efficient within a standard Binary Search Tree (BST)?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The strict structural sorted property fundamentally dictating smaller values go left and larger right allows algorithms to decisively discard an entire massive half of the search sub-domain conditionally at every single node step.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Balanced colors",
+                "is_correct": false
+            },
+            {
+                "text": "Graph connectivity",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": false
+            },
+            {
+                "text": "Sorted ordering property",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Trees",
+            "Binary Search Tree"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Dynamic programming is mainly used when problems have:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Dynamic programming is an optimization technique used primarily when a problem exhibits overlapping subproblems (the same subproblems are solved repeatedly).",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Overlapping subproblems",
+                "is_correct": true
+            },
+            {
+                "text": "No recursion",
+                "is_correct": false
+            },
+            {
+                "text": "Independent subproblems",
+                "is_correct": false
+            },
+            {
+                "text": "Random subproblems",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Memoization is used in:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Memoization is a top-down dynamic programming approach where you cache the results of expensive function calls to avoid repeating them in recursive solutions.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Top-down DP",
+                "is_correct": true
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Greedy",
+                "is_correct": false
+            },
+            {
+                "text": "Bottom-up DP",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Tabulation is associated with:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Tabulation is a bottom-up dynamic programming approach that builds a table iteratively from the smallest subproblems up to the larger problem.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Top-down",
+                "is_correct": false
+            },
+            {
+                "text": "Bottom-up",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which problem is a classic DP problem?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The Fibonacci sequence problem is a classic example used to introduce dynamic programming due to its heavily overlapping subproblems when solved naively.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Binary Search",
+                "is_correct": false
+            },
+            {
+                "text": "Heap Insert",
+                "is_correct": false
+            },
+            {
+                "text": "Fibonacci",
+                "is_correct": true
+            },
+            {
+                "text": "Stack Push",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "0/1 Knapsack problem is solved using:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The 0/1 Knapsack problem requires optimizing the total value of items within a weight capacity, without splitting items; it's a quintessential DP problem.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Greedy",
+                "is_correct": false
+            },
+            {
+                "text": "Dynamic Programming",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Longest Common Subsequence problem uses:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Longest Common Subsequence (LCS) problem is typically solved optimally using a 2D dynamic programming table.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            },
+            {
+                "text": "DP table",
+                "is_correct": true
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which is the standard algorithm to optimally solve the Coin Change problem with unlimited supply?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Dynamic Programming is the standard and optimal approach for the Coin Change problem. It builds up solutions for all amounts from 0 to the target, reusing previously computed results. Greedy fails for arbitrary coin systems, and graph traversal (BFS) is non-standard and less efficient.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Greedy",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Bitmasking",
+                "is_correct": false
+            },
+            {
+                "text": "DP",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Matrix Chain Multiplication optimizes:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Matrix Chain Multiplication DP problem optimizes the overall computational cost by finding the most efficient order (parenthesization) of multiplying a sequence of matrices.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Order of multiplication",
+                "is_correct": true
+            },
+            {
+                "text": "Matrix values",
+                "is_correct": false
+            },
+            {
+                "text": "Number of matrices",
+                "is_correct": false
+            },
+            {
+                "text": "Matrix size",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "DP reduces time complexity mainly by:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Dynamic Programming reduces overall time complexity primarily by storing the results of previously solved subproblems, thus preventing redundant function calls.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Recursion",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Storing results",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which DP problem finds common subsequence of two strings?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Longest Common Subsequence (LCS) problem seeks the longest sequence of characters that appear in the same relative order within two strings.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Coin change",
+                "is_correct": false
+            },
+            {
+                "text": "LCS",
+                "is_correct": true
+            },
+            {
+                "text": "Knapsack",
+                "is_correct": false
+            },
+            {
+                "text": "Fibonacci",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Longest Increasing Subsequence can be solved in:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "LIS can be solved in O(n^2) using standard DP, or in O(n log n) using an optimized combination of DP and binary search.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n^3)",
+                "is_correct": false
+            },
+            {
+                "text": "Both A and B",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which DP problem minimizes multiplication cost?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Matrix Chain Multiplication problem aims to find the most efficient parenthesization to minimize the total scalar multiplications required.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Coin change",
+                "is_correct": false
+            },
+            {
+                "text": "Knapsack",
+                "is_correct": false
+            },
+            {
+                "text": "LCS",
+                "is_correct": false
+            },
+            {
+                "text": "Matrix Chain Multiplication",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which DP technique stores results in table form?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Tabulation systematically builds up a solution incrementally filling an N-dimensional table (array) bottom-up.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Memoization",
+                "is_correct": false
+            },
+            {
+                "text": "Tabulation",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Bitmask DP is often used when:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Bitmask DP is utilized when a dimension of the state represents all possible subsets (like visited nodes in TSP), encoding them efficiently as a bit-integer.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Sorting required",
+                "is_correct": false
+            },
+            {
+                "text": "Heap operations needed",
+                "is_correct": false
+            },
+            {
+                "text": "State includes subsets",
+                "is_correct": true
+            },
+            {
+                "text": "Graph is weighted",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which fundamental property of a problem definitively ensures that Dynamic Programming can safely reuse previously computed solutions to optimize execution time?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Optimal substructure explicitly dictates that the absolute optimal solution to a given massive problem directly contains optimal solutions to its smaller subproblems, allowing recursive reuse safely.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Random structure",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property",
+                "is_correct": false
+            },
+            {
+                "text": "Optimal substructure",
+                "is_correct": true
+            },
+            {
+                "text": "Greedy choice",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which canonical Dynamic Programming problem explicitly calculates the absolute minimum number of total currency units exclusively necessary to fulfill a specific desired target sum?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Coin Change (minimum coins iteration) problem directly minimizes the sheer count of coins required to hit a target sum optimally using dynamic tabular arrays.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "LCS",
+                "is_correct": false
+            },
+            {
+                "text": "Coin Change (minimum coins)",
+                "is_correct": true
+            },
+            {
+                "text": "Fibonacci",
+                "is_correct": false
+            },
+            {
+                "text": "Knapsack",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming",
+            "Coin Change"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which canonical Dynamic Programming problem computationally derives the total number of distinct combination ways to reach a specific target sum?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Coin Change (combinations variation) problem counts the total number of unordered ways to make up a target amount using given coin denominations, accumulating possibilities iteratively across DP states.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Coin Change combinations",
+                "is_correct": true
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heap sort",
+                "is_correct": false
+            },
+            {
+                "text": "Binary search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming",
+            "Coin Change"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which classic computationally intense algorithmic problem exclusively focuses on deriving the maximum possible length of a strictly escalating sequence mathematically drawn from a distinct given array of values?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Longest Increasing Subsequence (LIS) problem seeks the maximum length of a strictly increasing subsequence (elements need not be adjacent) that can be found within a given array.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "LIS",
+                "is_correct": true
+            },
+            {
+                "text": "Knapsack",
+                "is_correct": false
+            },
+            {
+                "text": "Matrix chain",
+                "is_correct": false
+            },
+            {
+                "text": "LCS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming",
+            "LIS"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When processing a 2D DP matrix optimally, which specific structural methodology dramatically reduces raw memory usage overhead by actively overwriting explicitly outdated states no longer needed computation-wise?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Space Optimization leverages the mathematical fact that many 2D table states only fundamentally require knowledge of the immediately preceding row continuously, allowing massive memory state reduction explicitly overwriting stale data rows directly.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Space optimization",
+                "is_correct": true
+            },
+            {
+                "text": "Recursion",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When properly expertly applied architecturally to highly complex inherently overlapping algorithmic problems, Dynamic Programming primarily serves exactly to definitively mathematically shatter unscalable exponential calculation times inherently reducing them fundamentally explicitly into manageable:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Dynamic Programming transforms many inherently exponential O(2^n) recursive problems into polynomial-time solutions by caching previously computed subproblem results. It does not always yield linear time \u2014 the result depends on the number of distinct subproblem states.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Constant time",
+                "is_correct": false
+            },
+            {
+                "text": "Random time",
+                "is_correct": false
+            },
+            {
+                "text": "Polynomial time solutions",
+                "is_correct": true
+            },
+            {
+                "text": "Linear time always",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Dynamic Programming",
+            "Time Complexity"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "A graph with edges having directions is called:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A directed graph (or digraph) is a graph where the edges have a direction associated with them.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Weighted graph",
+                "is_correct": false
+            },
+            {
+                "text": "Undirected graph",
+                "is_correct": false
+            },
+            {
+                "text": "Bipartite graph",
+                "is_correct": false
+            },
+            {
+                "text": "Directed graph",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm uses a queue for traversal?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Breadth-First Search (BFS) uses a queue data structure to keep track of vertices to visit next, exploring the graph level by level.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Dijkstra",
+                "is_correct": false
+            },
+            {
+                "text": "Kruskal",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "DFS traversal uses which structure internally?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Depth-First Search (DFS) uses a stack internally (either explicitly or via the call stack in recursion) to explore as far as possible along each branch before backtracking.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Array",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Queue",
+                "is_correct": false
+            },
+            {
+                "text": "Stack",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "A connected graph with no cycles is called:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A tree is formally defined as an undirected, connected acyclic graph. If it were not connected, it would be a forest.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Weighted Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Bipartite Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Tree",
+                "is_correct": true
+            },
+            {
+                "text": "Complete Graph",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm finds shortest path in weighted graphs with non-negative edges?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Dijkstra's algorithm finds the shortest paths from a single source node to all other nodes in a graph with non-negative edge weights.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Dijkstra",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Prim",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Bellman-Ford algorithm can detect:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Bellman-Ford algorithm is uniquely capable of handling negative weight edges and detecting negative-weight cycles in a graph.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Maximum flow",
+                "is_correct": false
+            },
+            {
+                "text": "Minimum spanning tree",
+                "is_correct": false
+            },
+            {
+                "text": "Graph coloring",
+                "is_correct": false
+            },
+            {
+                "text": "Negative cycles",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm finds shortest paths between all pairs of vertices?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Floyd-Warshall algorithm is used to find the shortest paths between all pairs of vertices in a weighted graph.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Kruskal",
+                "is_correct": false
+            },
+            {
+                "text": "Prim",
+                "is_correct": false
+            },
+            {
+                "text": "Dijkstra",
+                "is_correct": false
+            },
+            {
+                "text": "Floyd Warshall",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm is used to find Minimum Spanning Tree?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Prim's algorithm and Kruskal's algorithm are greedy algorithms used to find the Minimum Spanning Tree (MST) of a connected, undirected graph.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Prim",
+                "is_correct": true
+            },
+            {
+                "text": "Binary Search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Kruskal's algorithm uses which data structure heavily?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Kruskal's algorithm heavily relies on the Disjoint Set (or Union-Find) data structure to efficiently detect cycles when adding edges to the MST.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Union-Find",
+                "is_correct": true
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Stack",
+                "is_correct": false
+            },
+            {
+                "text": "Queue",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What is the chromatic number (minimum number of colors required for vertex coloring) of any bipartite graph with at least one edge?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A bipartite graph is by definition 2-colorable, meaning its chromatic number is 2. This means its vertices can be partitioned into two disjoint sets such that no two vertices within the same set are adjacent.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "1 color",
+                "is_correct": false
+            },
+            {
+                "text": "2 colors",
+                "is_correct": true
+            },
+            {
+                "text": "3 colors",
+                "is_correct": false
+            },
+            {
+                "text": "4 colors",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which graph representation uses the least memory for sparse graphs?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "An adjacency list representation is highly efficient for sparse graphs because it only stores the edges that actually exist, whereas an adjacency matrix uses V^2 space regardless of edge count.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Adjacency List",
+                "is_correct": true
+            },
+            {
+                "text": "Adjacency Matrix",
+                "is_correct": false
+            },
+            {
+                "text": "Incidence Matrix",
+                "is_correct": false
+            },
+            {
+                "text": "Edge Matrix",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In an adjacency matrix, space complexity is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "An adjacency matrix is a 2D array of size V x V (where V is the number of vertices), giving it a fixed space complexity of O(V^2).",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "O(log V)",
+                "is_correct": false
+            },
+            {
+                "text": "O(V^2)",
+                "is_correct": true
+            },
+            {
+                "text": "O(E)",
+                "is_correct": false
+            },
+            {
+                "text": "O(V)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "An undirected graph with no cycles (possibly disconnected) is generally called a:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "An acyclic undirected graph is called a forest. If it is also connected, it is specifically called a tree. Thus, a forest consists of one or more disjoint trees.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Cycle Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Complete Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Bipartite Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Forest",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which traversal guarantees shortest path in unweighted graphs?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Breadth-First Search (BFS) explores the graph layer by layer, ensuring that the first time it reaches a node, it has found the shortest path to it in an unweighted graph.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": true
+            },
+            {
+                "text": "Topological Sort",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Prim",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Topological sorting is possible only for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Topological sorting requires a linear ordering of vertices such that for every directed edge u -> v, u comes before v. This is mathematically only possible in Directed Acyclic Graphs (DAGs).",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Directed Acyclic Graphs",
+                "is_correct": true
+            },
+            {
+                "text": "Undirected graphs",
+                "is_correct": false
+            },
+            {
+                "text": "Complete graphs",
+                "is_correct": false
+            },
+            {
+                "text": "Cyclic graphs",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm uses greedy approach for MST?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Both Prim's and Kruskal's algorithms use a greedy approach to find the Minimum Spanning Tree. Prim's does this by consistently picking the cheapest edge that connects the tree to a new vertex.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Prim",
+                "is_correct": true
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Floyd Warshall",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm sorts edges before processing them?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Kruskal's algorithm works by first sorting all edges from lowest to highest weight, and then iteratively adding the smallest edge that doesn't form a cycle.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Dijkstra",
+                "is_correct": false
+            },
+            {
+                "text": "Kruskal",
+                "is_correct": true
+            },
+            {
+                "text": "Bellman Ford",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "A graph is strongly connected if:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A directed graph is strongly connected if there is a path from every vertex to every other vertex in the graph.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Graph has cycles",
+                "is_correct": false
+            },
+            {
+                "text": "All nodes reachable from root",
+                "is_correct": false
+            },
+            {
+                "text": "Graph is weighted",
+                "is_correct": false
+            },
+            {
+                "text": "Every node reachable from every other node",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which algorithm finds strongly connected components?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Tarjan's algorithm (and also Kosaraju's algorithm) is specifically designed to find the strongly connected components (SCCs) of a directed graph.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Prim",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Tarjan",
+                "is_correct": true
+            },
+            {
+                "text": "Binary Search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Kosaraju\u2019s algorithm uses how many DFS passes?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Kosaraju's algorithm requires exactly two DFS passes: the first pass determines the finishing times of nodes, and the second pass on the transposed graph extracts the strongly connected components.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "One",
+                "is_correct": false
+            },
+            {
+                "text": "Three",
+                "is_correct": false
+            },
+            {
+                "text": "Two",
+                "is_correct": true
+            },
+            {
+                "text": "Four",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The maximum number of distinct edges that can exist in a simple undirected graph containing exactly n vertices is mathematically represented as:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "In a simple undirected graph, an edge connects any two distinct vertices. Choosing 2 vertices from n available vertices gives nC2, which evaluates to n(n-1)/2 total possible edges.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "n-1",
+                "is_correct": false
+            },
+            {
+                "text": "n^2",
+                "is_correct": false
+            },
+            {
+                "text": "n(n-1)/2",
+                "is_correct": true
+            },
+            {
+                "text": "2n",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The theoretical maximum number of distinct directed edges that can exist in a simple directed graph containing exactly n vertices is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "In a directed graph, between any two vertices u and v, there can exist dual edges (u -> v and v -> u). This is permutation nP2, which evaluates to exactly n(n-1) directed edges.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "n-1",
+                "is_correct": false
+            },
+            {
+                "text": "n(n-1)",
+                "is_correct": true
+            },
+            {
+                "text": "n",
+                "is_correct": false
+            },
+            {
+                "text": "n^2",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "For an undirected graph strictly maintaining connectivity across exactly n individual vertices, what is the absolute minimum mathematical threshold of edges required?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A minimally connected graph is intrinsically a Tree structure. Every tree containing n distinct vertices strictly necessitates precisely n-1 interconnecting edges.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "2n edges",
+                "is_correct": false
+            },
+            {
+                "text": "n + 1 edges",
+                "is_correct": false
+            },
+            {
+                "text": "n-1 edges",
+                "is_correct": true
+            },
+            {
+                "text": "n edges",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which fundamental graph traversal strategy paired with algorithmic tracking mechanisms definitively detects cyclic dependencies within a strictly directed graph structure?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Depth First Search (DFS) natively detects cycles in directed graphs by strictly tracking the sequence of currently active nodes resting directly in the current ongoing execution recursion stack path.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "BFS only",
+                "is_correct": false
+            },
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "DFS with recursion stack",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "To effectively process variable weighted paths consistently fetching optimal minimum cost routing, which graph navigation algorithm intrinsically requires an orchestrated minimum priority queue implementation?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Dijkstra's shortest path algorithm strictly processes the absolute closest unvisited fringe vertex next. Functionally maintaining exactly this sorted dynamic ordering is handled optimally using a minimum priority queue.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Topological sort",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Dijkstra",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When structurally traversing a topological web utilizing standard Breadth-First Search (BFS) patterns, how are the nodes fundamentally prioritized and explored relative to their source coordinate?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Breadth-First Search explicitly fans outward equally, discovering and processing every immediate unvisited sibling neighbor sitting at the current path depth continuously before uniformly descending deeper layer by layer (level order).",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Level order",
+                "is_correct": true
+            },
+            {
+                "text": "Reverse order",
+                "is_correct": false
+            },
+            {
+                "text": "Depth order",
+                "is_correct": false
+            },
+            {
+                "text": "Random order",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "During structural execution of a standard Depth-First Search (DFS) graph navigation, what defines its fundamental architectural routing preference before inevitably backtracking?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Depth-First Search (DFS) relentlessly chases a single traversal branch strictly traveling down as deep as physically possible down the deepest available route string continuously, prior sequentially backtracking to try unexplored alternate branches.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Breadth-first",
+                "is_correct": false
+            },
+            {
+                "text": "Level traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Random traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Deepest path first",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When performing graph traversal on indexed vertex sets, which data structure is most commonly used to track which nodes have already been visited?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A Boolean \"visited\" array is the standard and most memory-efficient approach for tracking visited nodes in graph traversals on indexed vertex sets. Each index corresponds directly to a node, allowing O(1) lookups and updates.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Linked list",
+                "is_correct": false
+            },
+            {
+                "text": "Boolean array",
+                "is_correct": true
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When programmatically designing traversals, which classic foundational graph searching algorithm is overwhelmingly typically engineered explicitly relying purely on the inherent logic of Call Stack recursion instead of iterative data structures?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Depth First Search (DFS) organically and natively maps directly onto standard system recursive call stacks perfectly, flawlessly backtracking naturally as deep execution branches inevitably terminate execution.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Dijkstra",
+                "is_correct": false
+            },
+            {
+                "text": "Prim",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs",
+            "DFS"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In massive computational scenarios involving intensely interconnected extremely dense graphs, which memory representation layout mathematically fundamentally computes adjacency fastest conceptually?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "For dense structured graphs closely approaching the V^2 edge limit, an explicitly maintained Adjacency Matrix yields instantaneous absolute O(1) query verification structurally determining if an exact edge connects independent nodes individually.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Adjacency Matrix",
+                "is_correct": true
+            },
+            {
+                "text": "Edge List",
+                "is_correct": false
+            },
+            {
+                "text": "Tree Representation",
+                "is_correct": false
+            },
+            {
+                "text": "Adjacency List",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "To decisively algorithmically detect cyclic looping faults lurking silently within a standard undirected graph structure, what specific execution technique definitively confirms cycle existence?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "By executing a standard DFS paired explicitly with real-time specific 'parent node tracking', if execution ever suddenly blindly steps into an 'already visited' vertex that structurally isn't its immediate parent, a genuine hidden cycle categorically exists fundamentally.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "DFS with parent tracking",
+                "is_correct": true
+            },
+            {
+                "text": "BFS only",
+                "is_correct": false
+            },
+            {
+                "text": "Binary Search",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "If calculating the absolute shortest physical traversal path completely strictly exclusively across a non-weighted evenly distributed node web, which generic algorithm fundamentally always naturally discovers the optimal pathing sequentially first?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Breadth-First Search (BFS) explores the physical topology explicitly layer by strict layer purely expanding outwards, automatically inherently guaranteeing the exact very first time it discovers the target destination node is absolutely the shortest distance available unconditionally.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Kruskal",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Prim",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Graphs",
+            "BFS"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The classic well-known algorithmic computational dilemma demanding identifying a universally optimal spanning tree is frequently definitively resolved completely optimally using which explicit localized 'Greedy' paradigm methodology?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Prim's highly renowned spanning algorithm explicitly embodies the very definition of basic Greedy problem solving conceptually, continually grabbing exclusively solely the absolute lowest weight visible immediate edge to continuously expand the spanning tree systematically.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Fibonacci",
+                "is_correct": false
+            },
+            {
+                "text": "LCS",
+                "is_correct": false
+            },
+            {
+                "text": "Prim's Algorithm",
+                "is_correct": true
+            },
+            {
+                "text": "Binary Search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Graphs",
+            "Prim's Algorithm"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Hash tables provide average lookup time of:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Hash tables use a hash function to map keys to an array index, allowing for constant time, O(1), average lookup complexity.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Collision in hashing occurs when:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A hash collision happens when two distinct keys produce the same hash value, causing them to map to the exact same index in the hash table.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Table is empty",
+                "is_correct": false
+            },
+            {
+                "text": "Two keys map to same index",
+                "is_correct": true
+            },
+            {
+                "text": "Table is sorted",
+                "is_correct": false
+            },
+            {
+                "text": "Keys are unique",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which method resolves collisions by storing elements in linked lists?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Separate chaining resolves hash collisions by making each cell of a hash table point to a linked list of records that share the same hash value.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "Open addressing",
+                "is_correct": false
+            },
+            {
+                "text": "Chaining",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Linear probing is a technique used in:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Linear probing is a form of open addressing in hash tables used to resolve collisions by sequentially searching for the next empty slot.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Trees",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": true
+            },
+            {
+                "text": "Graphs",
+                "is_correct": false
+            },
+            {
+                "text": "DP",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which hashing method searches next available slot sequentially?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Linear probing handles collisions by stepping sequentially (usually by +1) through the array elements until an empty bucket is located.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Double hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Chaining",
+                "is_correct": false
+            },
+            {
+                "text": "Quadratic probing",
+                "is_correct": false
+            },
+            {
+                "text": "Linear probing",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Double hashing reduces:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Double hashing fundamentally attempts to reduce collisions and the effects of clustering by applying a secondary hash function for the probing step.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Graph cycles",
+                "is_correct": false
+            },
+            {
+                "text": "Collisions",
+                "is_correct": true
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Traversal",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Load factor in hash tables is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The load factor (usually denoted as alpha) is mathematically defined as the ratio of the total number of stored keys/elements divided by the total number of table slots/buckets.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Number of keys / table size",
+                "is_correct": true
+            },
+            {
+                "text": "Table size / keys",
+                "is_correct": false
+            },
+            {
+                "text": "Table^2",
+                "is_correct": false
+            },
+            {
+                "text": "Keys^2",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Rehashing is done when:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "To maintain O(1) expected time bindings, a set limit on the load factor is enforced. When that factor gets too large indicating approaching overflow or collision degradation, the data structure is dynamically resized or 'rehashed'.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Tree becomes balanced",
+                "is_correct": false
+            },
+            {
+                "text": "Load factor becomes large",
+                "is_correct": true
+            },
+            {
+                "text": "Table is empty",
+                "is_correct": false
+            },
+            {
+                "text": "Graph cycles appear",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Fundamentally bypassing expensive sequential scanning, which explicit foundational data structure structurally manages arbitrary, unrelated identifier mappings universally to associated dynamic target variables at near lightning speeds natively?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A 'Hash table' is mathematically engineered strictly to map conceptual mapping 'Keys' instantly directly into underlying computational memory address 'Values' using mathematical formula indexing.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Hash table",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Inside the mathematical engine practically driving every basic Hash Table structurally, what exact dynamic translation essentially allows strings and complex objects to be mapped natively inside flat RAM arrays?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The core engine\u2014the 'Hash function'\u2014runs a rapid math algorithm designed strictly to convert an arbitrary readable abstract 'Key' permanently into a usable hard mathematical array 'Index' to lookup the associated bucket natively.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Key to index",
+                "is_correct": true
+            },
+            {
+                "text": "Key to graph",
+                "is_correct": false
+            },
+            {
+                "text": "Graph to key",
+                "is_correct": false
+            },
+            {
+                "text": "Index to key",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When structurally engineering a predefined static dataset hash table to possess mathematically absolute \"Perfect hashing\", what definitive theoretical baseline is guaranteed strictly functionally universally?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A 'perfect hash function' specifically mathematically guarantees zero output overlap for a known static dataset set, formally enforcing absolutely 'No collisions occur' anywhere within the primary distribution bucket architecture natively.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Random mapping",
+                "is_correct": false
+            },
+            {
+                "text": "All keys same index",
+                "is_correct": false
+            },
+            {
+                "text": "No collisions occur",
+                "is_correct": true
+            },
+            {
+                "text": "Sorting keys",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When encountering mapping collisions generating standard hash table pileups structurally natively, how does the mathematical 'Quadratic probing' open addressing sequence practically disperse the resulting clustered overlaps practically?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Unlike standard consecutive linear steps spreading linearly (1, 2, 3), 'Quadratic probing' dramatically resolves overlap pooling fundamentally explicitly by 'Jumping squares of step size' mathematically (1^2, 2^2, 3^2), violently shattering dense primary clusters unconditionally.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Jumping squares of step size",
+                "is_correct": true
+            },
+            {
+                "text": "Hash trees",
+                "is_correct": false
+            },
+            {
+                "text": "Linked lists",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Hashing"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "A heap is typically implemented using:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Because a heap is a complete binary tree normally populated top-to-bottom and left-to-right, it can be efficiently implemented using a flat array.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Array",
+                "is_correct": true
+            },
+            {
+                "text": "Linked list",
+                "is_correct": false
+            },
+            {
+                "text": "Hash table",
+                "is_correct": false
+            },
+            {
+                "text": "Graph",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In a max heap, the root contains:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "By definition, the max-heap property ensures that the value of each node is less than or equal to the value of its parent, making the root the largest value.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Largest value",
+                "is_correct": true
+            },
+            {
+                "text": "Smallest value",
+                "is_correct": false
+            },
+            {
+                "text": "Random value",
+                "is_correct": false
+            },
+            {
+                "text": "Average value",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Heap operations take:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Standard heap operations like insertion and deletion (extracting the root) take O(log n) time because they involve traversing the tree's height.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Priority queues are commonly implemented using:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "A heap is the most efficient and common structure used to implement a priority queue, allowing O(log n) insertions and extractions.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Heap",
+                "is_correct": true
+            },
+            {
+                "text": "Queue",
+                "is_correct": false
+            },
+            {
+                "text": "Linked list",
+                "is_correct": false
+            },
+            {
+                "text": "Stack",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Heap sort time complexity is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Heap sort involves building a heap (O(n)) and then extracting the max/min n times (each taking O(log n)), resulting in an overall O(n log n) time complexity.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "O(n log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When a heap is stored in a 0-indexed array, the parent of the node at index i can be found at index:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "When a heap is stored in a 0-indexed array, the parent of the node at index i can be found at index (i-1)/2.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "2i",
+                "is_correct": false
+            },
+            {
+                "text": "i/2",
+                "is_correct": false
+            },
+            {
+                "text": "(i-1)/2",
+                "is_correct": true
+            },
+            {
+                "text": "i+1",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Left child index in heap array is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "For a 0-indexed array representing a heap, the left child of a node at index i is located at index 2*i + 1.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "2i + 1",
+                "is_correct": true
+            },
+            {
+                "text": "i/2",
+                "is_correct": false
+            },
+            {
+                "text": "i-1",
+                "is_correct": false
+            },
+            {
+                "text": "i + 2",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Right child index in heap array is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "For a 0-indexed array representing a heap, the right child of a node at index i is located at index 2*i + 2.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "i/2",
+                "is_correct": false
+            },
+            {
+                "text": "2i",
+                "is_correct": false
+            },
+            {
+                "text": "i+1",
+                "is_correct": false
+            },
+            {
+                "text": "2i + 2",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which operation restores heap property after insertion?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "After inserting a new element at the very bottom of the heap, a 'heapify up' (or bubble-up/sift-up) operation is performed to push the element to its correct hierarchical rank.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify up",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify down",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which operation restores heap property after deletion?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "After extracting the root element, the last element is moved to the root. A 'heapify down' (or sink-down/sift-down) operation forces this element down until the heap property is restored.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify down",
+                "is_correct": true
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify up",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "To strictly maintain the defining characteristic of a priority queue, which specific algorithmic operation is utilized to constantly remove and retrieve the absolute highest priority element currently stored?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The 'Extract' (or extract-max / extract-min) operation is explicitly defined to remove the root element of a heap, which by definition is guaranteed to be the highest priority item.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Search",
+                "is_correct": false
+            },
+            {
+                "text": "Peek",
+                "is_correct": false
+            },
+            {
+                "text": "Extract",
+                "is_correct": true
+            },
+            {
+                "text": "Insert",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps",
+            "Priority Queues"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Without permanently altering or deleting any active nodes, which fundamental component does the Peek operation natively return when officially querying a standard heap data structure?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The 'Peek' operation natively looks exclusively at the very top of the heap structure, safely returning the exact value resting in the 'Root element' without executing an extraction deletion.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Random node",
+                "is_correct": false
+            },
+            {
+                "text": "Root element",
+                "is_correct": true
+            },
+            {
+                "text": "Leaf node",
+                "is_correct": false
+            },
+            {
+                "text": "Parent node",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps",
+            "Priority Queues"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Functionally running a 'Heapify' subroutine on any disorganized subset node recursively ensures which critical overarching structural baseline mathematically continues to hold true?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Heapify mathematically cascades values up or down exclusively to guarantee the 'Heap property'\u2014meaning every parent strictly holds a higher (or lower) priority than its mathematical children natively.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Sorted array",
+                "is_correct": false
+            },
+            {
+                "text": "Heap property maintained",
+                "is_correct": true
+            },
+            {
+                "text": "Graph connectivity",
+                "is_correct": false
+            },
+            {
+                "text": "Balanced tree",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When explicitly challenged to locate the 'k' absolutely largest independent elements swimming within an incredibly massive, potentially infinite streaming dataset, which localized memory structure handles this calculation most efficiently?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Min-Heap inherently size-limited to exactly 'k' elements tracks the 'k largest' efficiently. By automatically pushing out the absolute strict minimum of the tracked top group at O(log k) speed, the k giants natively remain inside the heap unconditionally.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Queue",
+                "is_correct": false
+            },
+            {
+                "text": "Linked list",
+                "is_correct": false
+            },
+            {
+                "text": "Stack",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Heaps"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Sparse Table is used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Sparse Table is a data structure, typically built in O(N log N) time, that allows answering static immutable array range queries (like RMinQ) in O(1) time.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Static range queries",
+                "is_correct": true
+            },
+            {
+                "text": "Dynamic updates",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Fenwick Tree supports operations in:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Fenwick Trees (Binary Indexed Trees) support both point updates and prefix sum computations in O(log n) time.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Segment Tree space complexity is roughly:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "For an array of size N, a Segment Tree implemented as an array requires roughly 4N space to ensure all leaf and internal nodes can be stored without out-of-bounds errors.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "4n",
+                "is_correct": true
+            },
+            {
+                "text": "2n",
+                "is_correct": false
+            },
+            {
+                "text": "n",
+                "is_correct": false
+            },
+            {
+                "text": "Undefined",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Segment tree query complexity is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Segment trees organize array elements hierarchically ensuring that practically any generic associative range query runs in purely O(log n) overhead.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "O(1)",
+                "is_correct": false
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Segment tree update complexity is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "To update a single value in a segment tree, you walk uniformly from the root directly to exactly one leaf and update values up along the backtracking steps, operating cleanly in logarithmic time bounds.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Lazy propagation helps to:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "When doing range updates on Segment Trees, executing independent unit updates is extremely taxing. Lazy propagation postpones traversing deeply into uniform lower bounds thus avoiding inherently redundant operational work until absolutely necessary.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Sort data",
+                "is_correct": false
+            },
+            {
+                "text": "Avoid unnecessary updates",
+                "is_correct": true
+            },
+            {
+                "text": "Traverse graphs",
+                "is_correct": false
+            },
+            {
+                "text": "Compress memory",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Segment tree nodes represent:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "At its core logic, a singular node situated anywhere within a segment tree natively maintains aggregate variables reflecting some contiguous range interval embedded in the foundational array.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Heap nodes",
+                "is_correct": false
+            },
+            {
+                "text": "String prefixes",
+                "is_correct": false
+            },
+            {
+                "text": "Graph edges",
+                "is_correct": false
+            },
+            {
+                "text": "Array ranges",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which data structure supports fast prefix sum queries?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Fenwick Tree, also known as a Binary Indexed Tree (BIT), efficiently calculates and updates prefix sums of an array of numbers.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Fenwick Tree",
+                "is_correct": true
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "AVL Tree",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Fenwick Tree"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Fenwick tree update complexity is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A Fenwick Tree updates an element and correctly propagates the change to all relevant sums in O(log n) time.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(1)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Fenwick Tree"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Mo's algorithm is optimally used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Mo's Algorithm is an elegant square-root decomposition technique used to answer a large batch of offline range queries efficiently.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Offline range queries",
+                "is_correct": true
+            },
+            {
+                "text": "DP optimization",
+                "is_correct": false
+            },
+            {
+                "text": "Heap operations",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Mo's Algorithm"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In a structurally pure Segment Tree encompassing an entire foundational array, what explicitly does the sheer absolute highest root node mathematically encompass and represent entirely?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Structurally, the segment tree's ultimate root node inherently spans the summation bounds of the complete [0, N-1] indices collectively, storing the aggregate calculation result for the 'Entire array range' natively.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Single element",
+                "is_correct": false
+            },
+            {
+                "text": "Middle element",
+                "is_correct": false
+            },
+            {
+                "text": "Entire array range",
+                "is_correct": true
+            },
+            {
+                "text": "Last element",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "At a mathematically fundamental level, which specific classification of overarching variable data processing are sophisticated Segment Trees optimally conceptually engineered to resolve at blistering logarithmic speeds natively?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Segment Trees natively partition vast data sets hierarchically entirely so arbitrary dynamic functions like 'Range minimum queries' (or range sum, GCD, etc.) resolve completely purely in O(log N) operations consistently.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Hashing",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Range minimum queries",
+                "is_correct": true
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When facing intensive continuous broad block data edits simultaneously targeting massive continuous contiguous array sections dynamically, what explicit Segment Tree enhancement structurally drastically optimizes overhead speeds universally?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Instead of immediately executing millions of single distinct array node updates constantly, 'Lazy propagation' exclusively delays deep recursive traversal completely intentionally until the child nodes strictly mathematically demand evaluation natively.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Lazy propagation",
+                "is_correct": true
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Range Query Structures",
+            "Segment Trees"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which of the following sorting algorithms is a classic example of the Divide and Conquer framework?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Merge sort perfectly showcases Divide and Conquer by recursively splitting the array in half, sorting the subsets, and then cleanly merging them back together.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Merge Sort",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "Heapify",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Divide and Conquer"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The average-case time complexity for Quick Sort is:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "While its worst-case scenario bounds to O(n^2), picking a reasonably good pivot provides Quick Sort with a highly efficient O(n log n) average running time.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Quick Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Merge Sort is consistently guaranteed to be a stable sorting algorithm because:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Merge sort exhibits stability inherently because when elements evaluate as strictly equal during the merge step, it preserves their original sequential input order.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Equal elements keep order",
+                "is_correct": true
+            },
+            {
+                "text": "Uses arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Uses stacks",
+                "is_correct": false
+            },
+            {
+                "text": "It is recursive",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Merge Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "For Binary Search to effectively execute on an array, the dataset natively requires to be explicitly:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Binary Search operates by halving the search space through directional comparison, entirely necessitating that the collection of elements is already sorted.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Graph structured",
+                "is_correct": false
+            },
+            {
+                "text": "Heap structured",
+                "is_correct": false
+            },
+            {
+                "text": "Sorted",
+                "is_correct": true
+            },
+            {
+                "text": "Random",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Binary Search"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What is the worst-case operational time complexity of the standard Binary Search algorithm?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Since Binary Search recursively dismisses approximately half of the remaining array per individual iteration, its bounds cap tightly at O(log n).",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "O(log n)",
+                "is_correct": true
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Binary Search"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In the context of algorithm design, Greedy algorithms build up a solution piece by piece, always choosing the next piece that offers the most obvious and immediate benefit. This decision-making process is fundamentally based on finding the:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Greedy algorithms make the locally optimal choice at each stage with the hope that these localized decisions will logically lead to a globally optimal solution.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Local optimum",
+                "is_correct": true
+            },
+            {
+                "text": "DP tables",
+                "is_correct": false
+            },
+            {
+                "text": "Random choices",
+                "is_correct": false
+            },
+            {
+                "text": "Global search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Greedy Algorithms",
+            "Miscellaneous Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In the context of finding a Minimum Spanning Tree (MST), which Greedy graph algorithm primarily operates by repeatedly selecting the absolute smallest weight edge that connects a currently unvisited node to the growing framework?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Prim's algorithm uniquely starts with a single node and greedily grows the spanning tree one edge at a time by strictly finding the minimum-weight edge connecting the tree to a vertex not yet in the tree.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "Prim's Algorithm",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Greedy Algorithms",
+            "Graphs"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The overarching algorithmic design paradigm strictly known as 'Divide and Conquer' fundamentally operates by recursively breaking down a massive, complex computational issue explicitly into multiple:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Divide and conquer works by recursively fundamentally splitting an overarching problem into two or more independent, smaller subproblems of the same or related type, until these become simple enough to be solved directly.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Random nodes",
+                "is_correct": false
+            },
+            {
+                "text": "Larger problems",
+                "is_correct": false
+            },
+            {
+                "text": "Graph edges",
+                "is_correct": false
+            },
+            {
+                "text": "Smaller subproblems",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Divide and Conquer",
+            "Miscellaneous Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Although proving highly efficient on average, what is the absolute worst-case operational time complexity of the standard Quick Sort algorithm if the pivot variable is repeatedly chosen poorly?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "If Quick Sort continuously picks the greatest or smallest element as the pivot (e.g., when the array is already strongly sorted), it fails to split the array evenly, resulting in a degraded O(n^2) worst-case time complexity.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "O(n^2)",
+                "is_correct": true
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n)",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Quick Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which fundamental comparison sorting algorithm mechanically operates by continuously stepping linearly through the designated list, explicitly comparing adjacent elements, and repeatedly swapping them if they reside in the incorrect order?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Bubble Sort gets its name because smaller elements slowly 'bubble' their way to the top of the list by sequentially swapping adjacent out-of-order elements continuously across multiple passes.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Quick Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Merge Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Heap Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Bubble Sort",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Bubble Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which historically advanced divide-and-conquer sorting algorithm heavily relies algorithmically on a core engineered 'partitioning' technique to arrange array elements rigidly around a recursively selected independent pivot value?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Quick Sort fundamentally bases its entire high-speed operation on the partitioning subroutine, where array elements are dynamically segregated to be purely less than or greater than a uniquely chosen pivot component.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Merge Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Quick Sort",
+                "is_correct": true
+            },
+            {
+                "text": "Insertion Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Bubble Sort",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Quick Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Functionally traversing a targeted array sequentially, the basic algorithmic architecture of standard Selection Sort operates formally by explicitly scanning the unsorted region and continuously repeatedly selecting the:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Selection Sort systematically divides the array sequence into a fully sorted front section and back unsorted section, algorithmically pulling the absolute 'smallest remaining element' linearly out of the unsorted bulk individually each explicit pass.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Median element",
+                "is_correct": false
+            },
+            {
+                "text": "Smallest remaining element",
+                "is_correct": true
+            },
+            {
+                "text": "Largest element",
+                "is_correct": false
+            },
+            {
+                "text": "Random element",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Selection Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "While natively possessing a technically restrictive quadratic O(n^2) mathematical worst-case time complexity limit natively, the basic standard Insertion Sort algorithm technically remains extraordinarily highly efficient explicitly for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Because Insertion Sort exclusively evaluates variables locally, if an array structure is extremely small or structurally already massively pre-sorted (few inversions), it executes blisteringly fast approaching O(n) linear performance purely.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Large random arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Small or nearly sorted arrays",
+                "is_correct": true
+            },
+            {
+                "text": "Hash tables",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Insertion Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "During structural active execution, a definitively standard Binary Search algorithm essentially mathematically achieves its rapid strictly logarithmic O(log n) efficiency rating entirely by repeatedly slicing the remaining natively sorted linear search space explicitly into:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "By comparing the requested target strictly centrally to the absolute middle element, Binary Search algorithmically safely entirely discards half the array constantly, partitioning the active search bounds repeatedly into 'two halves'.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Four parts",
+                "is_correct": false
+            },
+            {
+                "text": "Random parts",
+                "is_correct": false
+            },
+            {
+                "text": "Two halves",
+                "is_correct": true
+            },
+            {
+                "text": "Three parts",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Binary Search"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Unlike standard Quick Sort which explicitly mathematically degrades heavily under specific array layout conditions, which classic overarching comparison-based sorting algorithm mathematically definitively guarantees an ironclad absolute O(n log n) worst-case time complexity regardless of independent input data variable arrangement?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Because Merge Sort's exact recursive division structurally guarantees partitioning the whole array uniformly regardless of node internal values independently, it strictly strictly bounds exactly to O(n log n) explicitly constantly.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Selection Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Bubble Sort",
+                "is_correct": false
+            },
+            {
+                "text": "Merge Sort",
+                "is_correct": true
+            },
+            {
+                "text": "Quick Sort",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Sorting and Searching",
+            "Merge Sort"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Trie search complexity depends on:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The time complexity to search, insert, or delete a word in a Trie depends solely on the length of the word (L), resulting in O(L) time.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Alphabet size only",
+                "is_correct": false
+            },
+            {
+                "text": "Number of edges",
+                "is_correct": false
+            },
+            {
+                "text": "Length of word",
+                "is_correct": true
+            },
+            {
+                "text": "Number of nodes",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "String Structures"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Suffix arrays are mainly used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A suffix array is a sorted array of all suffixes of a string, and it is a powerful data structure used extensively for fast substring search and string processing.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Heap operations",
+                "is_correct": false
+            },
+            {
+                "text": "Fast substring search",
+                "is_correct": true
+            },
+            {
+                "text": "Sorting numbers",
+                "is_correct": false
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "String Structures"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Aho-Corasick algorithm is used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Aho-Corasick string matching algorithm is designed to quickly locate all occurrences of multiple search patterns within a text simultaneously using a finite state machine.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Single pattern search",
+                "is_correct": false
+            },
+            {
+                "text": "DP optimization",
+                "is_correct": false
+            },
+            {
+                "text": "Multiple pattern search",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "String Structures"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The Knuth-Morris-Pratt (KMP) string search algorithm is primarily utilized in computer science for which of the following tasks?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The KMP algorithm guarantees worst-case linear time complexity precisely for the purpose of exact string or pattern matching operations.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Tree balancing",
+                "is_correct": false
+            },
+            {
+                "text": "Pattern matching",
+                "is_correct": true
+            },
+            {
+                "text": "Graph traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "String Structures",
+            "String Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "By utilizing an LPS (Longest Prefix Suffix) array to avoid redundant character comparisons, the Knuth-Morris-Pratt (KMP) algorithm improves the worst-case time complexity of string matching to:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Because KMP avoids backtracking the text pointer by utilizing the precomputed LPS array, it matches the pattern in O(n + m) time, where n is text length and m is pattern length.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "O(n^3)",
+                "is_correct": false
+            },
+            {
+                "text": "O(log n)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n^2)",
+                "is_correct": false
+            },
+            {
+                "text": "O(n+m)",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "String Structures",
+            "String Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "In the context of the Knuth-Morris-Pratt (KMP) string matching algorithm, what does the acronym 'LPS' array stand for?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The LPS array formally stores the length of the 'Longest Prefix which is also Suffix' for every sub-pattern to prevent unnecessary mismatch checks.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Lowest Possible String",
+                "is_correct": false
+            },
+            {
+                "text": "Linear Pattern Search",
+                "is_correct": false
+            },
+            {
+                "text": "Longest Prefix Suffix",
+                "is_correct": true
+            },
+            {
+                "text": "Longest Pattern Sequence",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "String Structures",
+            "String Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "The Rabin-Karp algorithm optimizes the process of identifying a pattern within a larger text by heavily relying on which of the following techniques?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Rabin-Karp effectively performs pattern matching operations by computing a rolling hash value of the pattern and comparing it to all consecutive rolling hashes of the target text.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Sorting",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "String Structures",
+            "String Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which foundational string evaluation algorithm functionally pioneers computing an explicit failure 'Prefix table' (LPS array) entirely natively to systematically prevent redundant index backtracking dynamically?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The Knuth-Morris-Pratt (KMP) search algorithm proactively builds a definitive structural mapping table specifically cataloging the Longest Prefix Suffix (LPS), guaranteeing the execution strictly never re-reads a previously verified text block.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Rabin-Karp",
+                "is_correct": false
+            },
+            {
+                "text": "KMP",
+                "is_correct": true
+            },
+            {
+                "text": "DFS",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "String Structures",
+            "String Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Which massively complex mathematically highly branched specialized explicit prefix tree variant inherently stores completely exhaustively every single distinct contiguous suffix fragment stemming from a root source string fundamentally?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "A structural 'Suffix tree' explicitly maps branching paths strictly containing every continuous trailing sequence possible for a target string, establishing an enormous optimized web for instantaneous substring evaluation functionally.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Graph",
+                "is_correct": false
+            },
+            {
+                "text": "Trie",
+                "is_correct": false
+            },
+            {
+                "text": "Heap",
+                "is_correct": false
+            },
+            {
+                "text": "Suffix tree",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "String Structures",
+            "String Algorithms"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Union-Find is used for:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Union-Find (or Disjoint Set) is a data structure specifically designed to efficiently keep track of which elements belong to which sets, solving dynamic connectivity problems.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Dynamic connectivity",
+                "is_correct": true
+            },
+            {
+                "text": "Tree traversal",
+                "is_correct": false
+            },
+            {
+                "text": "Sorting arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Hashing",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Union by rank helps in:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Union by rank optimizes the disjoint-set data structure by always attaching the smaller tree to the root of the larger tree, thereby minimizing overall tree height.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Hash collisions",
+                "is_correct": false
+            },
+            {
+                "text": "Graph coloring",
+                "is_correct": false
+            },
+            {
+                "text": "Reducing tree height",
+                "is_correct": true
+            },
+            {
+                "text": "Increasing memory",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Path compression optimizes:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Path compression is an optimization for the Find operation in a disjoint-set data structure; it makes trees flatter by making every checked node point directly to the root.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Delete",
+                "is_correct": false
+            },
+            {
+                "text": "Find operation",
+                "is_correct": true
+            },
+            {
+                "text": "Insert",
+                "is_correct": false
+            },
+            {
+                "text": "Search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Union-Find operations include:",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "The Disjoint Set pattern revolves almost entirely around two fundamental operations: 'Find' (to determine which subset an element falls under) and 'Union' (to merge two distinct subsets).",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Push and Pop",
+                "is_correct": false
+            },
+            {
+                "text": "Insert and Delete",
+                "is_correct": false
+            },
+            {
+                "text": "Union and Find",
+                "is_correct": true
+            },
+            {
+                "text": "Sort and Search",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Union by rank attaches:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Union by rank evaluates the complexity or depth of both trees. It actively prevents a massive spike in general bounds by strictly appending the root of the smaller tree specifically underneath the root of the larger tree.",
+        "answer": "o3",
+        "options": [
+            {
+                "text": "Random trees",
+                "is_correct": false
+            },
+            {
+                "text": "Balanced trees only",
+                "is_correct": false
+            },
+            {
+                "text": "Smaller tree under larger tree",
+                "is_correct": true
+            },
+            {
+                "text": "Larger tree under smaller tree",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "Union-Find is widely used in:",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Kruskal's algorithm relies intimately on Union-Find to safely build Minimum Spanning Trees by checking if drawing a new smallest edge will result in an invalid cyclic network.",
+        "answer": "o4",
+        "options": [
+            {
+                "text": "Binary search",
+                "is_correct": false
+            },
+            {
+                "text": "Heap sort",
+                "is_correct": false
+            },
+            {
+                "text": "BFS",
+                "is_correct": false
+            },
+            {
+                "text": "Kruskal's algorithm",
+                "is_correct": true
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "What overarching mathematical group structuring concept does the specialized Union-Find data architecture definitively and continuously maintain structurally across any complex sequence of network merging operations universally?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "Union-Find's entire fundamental architectural existence strictly revolves exclusively around securely processing entirely 'Disjoint sets' natively tracking utterly non-overlapping segregated collections dynamically as they continuously merge recursively.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Sorted arrays",
+                "is_correct": false
+            },
+            {
+                "text": "Disjoint sets",
+                "is_correct": true
+            },
+            {
+                "text": "Binary trees",
+                "is_correct": false
+            },
+            {
+                "text": "Graph cycles",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When executing a 'Find' query asking a Disjoint Set architecture basically \"Who essentially leads your specific group?\", what mathematically distinctive identity does algorithmic pathing structurally output natively universally?",
+        "difficulty": "MEDIUM",
+        "marks": 1,
+        "explanation": "The 'Find' mechanism continuously chases parent directory linkages upward ultimately resulting explicitly exclusively revealing the 'Representative of set', the sole singular root node uniquely characterizing that respective joined group structurally universally.",
+        "answer": "o1",
+        "options": [
+            {
+                "text": "Representative of set",
+                "is_correct": true
+            },
+            {
+                "text": "Parent node",
+                "is_correct": false
+            },
+            {
+                "text": "Heap root",
+                "is_correct": false
+            },
+            {
+                "text": "Graph edge",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    },
+    {
+        "question_text": "When structurally expanding a distinct existing Disjoint Set network functionally calling a basic 'Union' algorithmic operation, what exact two fundamentally overarching distinct baseline objects are forcefully natively linked computationally?",
+        "difficulty": "EASY",
+        "marks": 1,
+        "explanation": "Although you initially feed it single node variables, technically the basic 'Union' overarching engine merges the actual root nodes entirely natively securely bridging 'Two sets' inherently universally binding all localized members natively recursively.",
+        "answer": "o2",
+        "options": [
+            {
+                "text": "Two graphs",
+                "is_correct": false
+            },
+            {
+                "text": "Two sets",
+                "is_correct": true
+            },
+            {
+                "text": "Two nodes",
+                "is_correct": false
+            },
+            {
+                "text": "Two arrays",
+                "is_correct": false
+            }
+        ],
+        "topics": [
+            "Union-Find"
+        ],
+        "companyIndex": 1
+    }
+]
