@@ -1,0 +1,128 @@
+[
+{
+        "question_text": "Trie search complexity depends on:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The time complexity to search, insert, or delete a word in a Trie depends solely on the length of the word (L), resulting in O(L) time.",
+        "answer": "o2",
+        "options": [
+            { "text": "Number of nodes", "is_correct": false },
+            { "text": "Length of word", "is_correct": true },
+            { "text": "Number of edges", "is_correct": false },
+            { "text": "Alphabet size only", "is_correct": false }
+        ],
+        "topics": ["String Structures"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Suffix arrays are mainly used for:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A suffix array is a sorted array of all suffixes of a string, and it is a powerful data structure used extensively for fast substring search and string processing.",
+        "answer": "o2",
+        "options": [
+            { "text": "Graph traversal", "is_correct": false },
+            { "text": "Fast substring search", "is_correct": true },
+            { "text": "Sorting numbers", "is_correct": false },
+            { "text": "Heap operations", "is_correct": false }
+        ],
+        "topics": ["String Structures"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Aho-Corasick algorithm is used for:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Aho-Corasick string matching algorithm is designed to quickly locate all occurrences of multiple search patterns within a text simultaneously using a finite state machine.",
+        "answer": "o2",
+        "options": [
+            { "text": "Single pattern search", "is_correct": false },
+            { "text": "Multiple pattern search", "is_correct": true },
+            { "text": "Graph traversal", "is_correct": false },
+            { "text": "DP optimization", "is_correct": false }
+        ],
+        "topics": ["String Structures"],
+        "companyIndex": 1
+},
+{
+        "question_text": "The Knuth-Morris-Pratt (KMP) string search algorithm is primarily utilized in computer science for which of the following tasks?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The KMP algorithm guarantees worst-case linear time complexity precisely for the purpose of exact string or pattern matching operations.",
+        "answer": "o1",
+        "options": [
+            { "text": "Pattern matching", "is_correct": true },
+            { "text": "Graph traversal", "is_correct": false },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "Tree balancing", "is_correct": false }
+        ],
+        "topics": ["String Structures", "String Algorithms"],
+        "companyIndex": 1
+},
+{
+        "question_text": "By utilizing an LPS (Longest Prefix Suffix) array to avoid redundant character comparisons, the Knuth-Morris-Pratt (KMP) algorithm improves the worst-case time complexity of string matching to:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Because KMP avoids backtracking the text pointer by utilizing the precomputed LPS array, it matches the pattern in O(n + m) time, where n is text length and m is pattern length.",
+        "answer": "o1",
+        "options": [
+            { "text": "O(n+m)", "is_correct": true },
+            { "text": "O(n^2)", "is_correct": false },
+            { "text": "O(n^3)", "is_correct": false },
+            { "text": "O(log n)", "is_correct": false }
+        ],
+        "topics": ["String Structures", "String Algorithms"],
+        "companyIndex": 1
+},
+{
+        "question_text": "In the context of the Knuth-Morris-Pratt (KMP) string matching algorithm, what does the acronym 'LPS' array stand for?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The LPS array formally stores the length of the 'Longest Prefix which is also Suffix' for every sub-pattern to prevent unnecessary mismatch checks.",
+        "answer": "o1",
+        "options": [
+            { "text": "Longest Prefix Suffix", "is_correct": true },
+            { "text": "Lowest Possible String", "is_correct": false },
+            { "text": "Longest Pattern Sequence", "is_correct": false },
+            { "text": "Linear Pattern Search", "is_correct": false }
+        ],
+        "topics": ["String Structures", "String Algorithms"],
+        "companyIndex": 1
+},
+{
+        "question_text": "The Rabin-Karp algorithm optimizes the process of identifying a pattern within a larger text by heavily relying on which of the following techniques?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Rabin-Karp effectively performs pattern matching operations by computing a rolling hash value of the pattern and comparing it to all consecutive rolling hashes of the target text.",
+        "answer": "o1",
+        "options": [
+            { "text": "Hashing", "is_correct": true },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "DFS", "is_correct": false },
+            { "text": "Heap", "is_correct": false }
+        ],
+        "topics": ["String Structures", "String Algorithms"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which foundational string evaluation algorithm functionally pioneers computing an explicit failure 'Prefix table' (LPS array) entirely natively to systematically prevent redundant index backtracking dynamically?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Knuth-Morris-Pratt (KMP) search algorithm proactively builds a definitive structural mapping table specifically cataloging the Longest Prefix Suffix (LPS), guaranteeing the execution strictly never re-reads a previously verified text block.",
+        "answer": "o1",
+        "options": [
+            { "text": "KMP", "is_correct": true },
+            { "text": "Rabin-Karp", "is_correct": false },
+            { "text": "DFS", "is_correct": false },
+            { "text": "BFS", "is_correct": false }
+        ],
+        "topics": ["String Structures", "String Algorithms"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which massively complex mathematically highly branched specialized explicit prefix tree variant inherently stores completely exhaustively every single distinct contiguous suffix fragment stemming from a root source string fundamentally?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A structural 'Suffix tree' explicitly maps branching paths strictly containing every continuous trailing sequence possible for a target string, establishing an enormous optimized web for instantaneous substring evaluation functionally.",
+        "answer": "o1",
+        "options": [
+            { "text": "Suffix tree", "is_correct": true },
+            { "text": "Trie", "is_correct": false },
+            { "text": "Heap", "is_correct": false },
+            { "text": "Graph", "is_correct": false }
+        ],
+        "topics": ["String Structures", "String Algorithms"],
+        "companyIndex": 1
+}
+]

@@ -1,0 +1,198 @@
+[
+{
+        "question_text": "A heap is typically implemented using:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Because a heap is a complete binary tree normally populated top-to-bottom and left-to-right, it can be efficiently implemented using a flat array.",
+        "answer": "o2",
+        "options": [
+            { "text": "Linked list", "is_correct": false },
+            { "text": "Array", "is_correct": true },
+            { "text": "Graph", "is_correct": false },
+            { "text": "Hash table", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "In a max heap, the root contains:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "By definition, the max-heap property ensures that the value of each node is less than or equal to the value of its parent, making the root the largest value.",
+        "answer": "o2",
+        "options": [
+            { "text": "Smallest value", "is_correct": false },
+            { "text": "Largest value", "is_correct": true },
+            { "text": "Random value", "is_correct": false },
+            { "text": "Average value", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Heap operations take:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Standard heap operations like insertion and deletion (extracting the root) take O(log n) time because they involve traversing the tree's height.",
+        "answer": "o2",
+        "options": [
+            { "text": "O(1)", "is_correct": false },
+            { "text": "O(log n)", "is_correct": true },
+            { "text": "O(n)", "is_correct": false },
+            { "text": "O(n log n)", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Priority queues are commonly implemented using:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "A heap is the most efficient and common structure used to implement a priority queue, allowing O(log n) insertions and extractions.",
+        "answer": "o1",
+        "options": [
+            { "text": "Heap", "is_correct": true },
+            { "text": "Stack", "is_correct": false },
+            { "text": "Queue", "is_correct": false },
+            { "text": "Linked list", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Heap sort time complexity is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Heap sort involves building a heap (O(n)) and then extracting the max/min n times (each taking O(log n)), resulting in an overall O(n log n) time complexity.",
+        "answer": "o2",
+        "options": [
+            { "text": "O(n)", "is_correct": false },
+            { "text": "O(n log n)", "is_correct": true },
+            { "text": "O(1)", "is_correct": false },
+            { "text": "O(log n)", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "The parent index of node i in a heap array is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "When a heap is stored in a 0-indexed array, the parent of the node at index i can be found at index (i-1)/2.",
+        "answer": "o2",
+        "options": [
+            { "text": "i/2", "is_correct": false },
+            { "text": "(i-1)/2", "is_correct": true },
+            { "text": "i+1", "is_correct": false },
+            { "text": "2i", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Left child index in heap array is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "For a 0-indexed array representing a heap, the left child of a node at index i is located at index 2*i + 1.",
+        "answer": "o1",
+        "options": [
+            { "text": "2i + 1", "is_correct": true },
+            { "text": "i + 2", "is_correct": false },
+            { "text": "i/2", "is_correct": false },
+            { "text": "i-1", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Right child index in heap array is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "For a 0-indexed array representing a heap, the right child of a node at index i is located at index 2*i + 2.",
+        "answer": "o1",
+        "options": [
+            { "text": "2i + 2", "is_correct": true },
+            { "text": "2i", "is_correct": false },
+            { "text": "i+1", "is_correct": false },
+            { "text": "i/2", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which operation restores heap property after insertion?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "After inserting a new element at the very bottom of the heap, a 'heapify up' (or bubble-up/sift-up) operation is performed to push the element to its correct hierarchical rank.",
+        "answer": "o1",
+        "options": [
+            { "text": "Heapify up", "is_correct": true },
+            { "text": "Heapify down", "is_correct": false },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "DFS", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which operation restores heap property after deletion?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "After extracting the root element, the last element is moved to the root. A 'heapify down' (or sink-down/sift-down) operation forces this element down until the heap property is restored.",
+        "answer": "o1",
+        "options": [
+            { "text": "Heapify down", "is_correct": true },
+            { "text": "Heapify up", "is_correct": false },
+            { "text": "BFS", "is_correct": false },
+            { "text": "Sorting", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "To strictly maintain the defining characteristic of a priority queue, which specific algorithmic operation is utilized to constantly remove and retrieve the absolute highest priority element currently stored?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "The 'Extract' (or extract-max / extract-min) operation is explicitly defined to remove the root element of a heap, which by definition is guaranteed to be the highest priority item.",
+        "answer": "o2",
+        "options": [
+            { "text": "Peek", "is_correct": false },
+            { "text": "Extract", "is_correct": true },
+            { "text": "Insert", "is_correct": false },
+            { "text": "Search", "is_correct": false }
+        ],
+        "topics": ["Heaps", "Priority Queues"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Without permanently altering or deleting any active nodes, which fundamental component does the Peek operation natively return when officially querying a standard heap data structure?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "The 'Peek' operation natively looks exclusively at the very top of the heap structure, safely returning the exact value resting in the 'Root element' without executing an extraction deletion.",
+        "answer": "o2",
+        "options": [
+            { "text": "Random node", "is_correct": false },
+            { "text": "Root element", "is_correct": true },
+            { "text": "Leaf node", "is_correct": false },
+            { "text": "Parent node", "is_correct": false }
+        ],
+        "topics": ["Heaps", "Priority Queues"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Functionally running a 'Heapify' subroutine on any disorganized subset node recursively ensures which critical overarching structural baseline mathematically continues to hold true?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Heapify mathematically cascades values up or down exclusively to guarantee the 'Heap property'—meaning every parent strictly holds a higher (or lower) priority than its mathematical children natively.",
+        "answer": "o2",
+        "options": [
+            { "text": "Sorted array", "is_correct": false },
+            { "text": "Heap property maintained", "is_correct": true },
+            { "text": "Balanced tree", "is_correct": false },
+            { "text": "Graph connectivity", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When explicitly challenged to locate the 'k' absolutely largest independent elements swimming within an incredibly massive, potentially infinite streaming dataset, which localized memory structure handles this calculation most efficiently?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A Min-Heap inherently size-limited to exactly 'k' elements tracks the 'k largest' efficiently. By automatically pushing out the absolute strict minimum of the tracked top group at O(log k) speed, the k giants natively remain inside the heap unconditionally.",
+        "answer": "o1",
+        "options": [
+            { "text": "Heap", "is_correct": true },
+            { "text": "Stack", "is_correct": false },
+            { "text": "Queue", "is_correct": false },
+            { "text": "Linked list", "is_correct": false }
+        ],
+        "topics": ["Heaps"],
+        "companyIndex": 1
+}
+]

@@ -1,0 +1,464 @@
+[
+{
+        "question_text": "A graph with edges having directions is called:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "A directed graph (or digraph) is a graph where the edges have a direction associated with them.",
+        "answer": "o2",
+        "options": [
+            { "text": "Undirected graph", "is_correct": false },
+            { "text": "Directed graph", "is_correct": true },
+            { "text": "Weighted graph", "is_correct": false },
+            { "text": "Bipartite graph", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm uses a queue for traversal?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Breadth-First Search (BFS) uses a queue data structure to keep track of vertices to visit next, exploring the graph level by level.",
+        "answer": "o2",
+        "options": [
+            { "text": "DFS", "is_correct": false },
+            { "text": "BFS", "is_correct": true },
+            { "text": "Dijkstra", "is_correct": false },
+            { "text": "Kruskal", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "DFS traversal uses which structure internally?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Depth-First Search (DFS) uses a stack internally (either explicitly or via the call stack in recursion) to explore as far as possible along each branch before backtracking.",
+        "answer": "o2",
+        "options": [
+            { "text": "Queue", "is_correct": false },
+            { "text": "Stack", "is_correct": true },
+            { "text": "Heap", "is_correct": false },
+            { "text": "Array", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "A graph with no cycles is called:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "A tree is an undirected, connected acyclic graph. Alternatively, an acyclic graph can be a collection of trees (a forest).",
+        "answer": "o2",
+        "options": [
+            { "text": "Complete Graph", "is_correct": false },
+            { "text": "Tree", "is_correct": true },
+            { "text": "Bipartite Graph", "is_correct": false },
+            { "text": "Weighted Graph", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm finds shortest path in weighted graphs with non-negative edges?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Dijkstra's algorithm finds the shortest paths from a single source node to all other nodes in a graph with non-negative edge weights.",
+        "answer": "o2",
+        "options": [
+            { "text": "BFS", "is_correct": false },
+            { "text": "Dijkstra", "is_correct": true },
+            { "text": "DFS", "is_correct": false },
+            { "text": "Prim", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Bellman-Ford algorithm can detect:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Bellman-Ford algorithm is uniquely capable of handling negative weight edges and detecting negative-weight cycles in a graph.",
+        "answer": "o2",
+        "options": [
+            { "text": "Minimum spanning tree", "is_correct": false },
+            { "text": "Negative cycles", "is_correct": true },
+            { "text": "Graph coloring", "is_correct": false },
+            { "text": "Maximum flow", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm finds shortest paths between all pairs of vertices?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Floyd-Warshall algorithm is used to find the shortest paths between all pairs of vertices in a weighted graph.",
+        "answer": "o2",
+        "options": [
+            { "text": "Dijkstra", "is_correct": false },
+            { "text": "Floyd Warshall", "is_correct": true },
+            { "text": "Prim", "is_correct": false },
+            { "text": "Kruskal", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm is used to find Minimum Spanning Tree?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Prim's algorithm and Kruskal's algorithm are greedy algorithms used to find the Minimum Spanning Tree (MST) of a connected, undirected graph.",
+        "answer": "o3",
+        "options": [
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": false },
+            { "text": "Prim", "is_correct": true },
+            { "text": "Binary Search", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Kruskal's algorithm uses which data structure heavily?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Kruskal's algorithm heavily relies on the Disjoint Set (or Union-Find) data structure to efficiently detect cycles when adding edges to the MST.",
+        "answer": "o2",
+        "options": [
+            { "text": "Trie", "is_correct": false },
+            { "text": "Union-Find", "is_correct": true },
+            { "text": "Stack", "is_correct": false },
+            { "text": "Queue", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "A bipartite graph can be colored using:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A bipartite graph can be colored using exactly 2 colors such that no two adjacent vertices share the same color.",
+        "answer": "o1",
+        "options": [
+            { "text": "2 colors", "is_correct": true },
+            { "text": "3 colors", "is_correct": false },
+            { "text": "4 colors", "is_correct": false },
+            { "text": "Unlimited colors", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which graph representation uses the least memory for sparse graphs?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "An adjacency list representation is highly efficient for sparse graphs because it only stores the edges that actually exist, whereas an adjacency matrix uses V^2 space regardless of edge count.",
+        "answer": "o2",
+        "options": [
+            { "text": "Adjacency Matrix", "is_correct": false },
+            { "text": "Adjacency List", "is_correct": true },
+            { "text": "Incidence Matrix", "is_correct": false },
+            { "text": "Edge Matrix", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "In an adjacency matrix, space complexity is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "An adjacency matrix is a 2D array of size V x V (where V is the number of vertices), giving it a fixed space complexity of O(V^2).",
+        "answer": "o3",
+        "options": [
+            { "text": "O(V)", "is_correct": false },
+            { "text": "O(E)", "is_correct": false },
+            { "text": "O(V^2)", "is_correct": true },
+            { "text": "O(log V)", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "A graph with edges but no cycles is called:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "An undirected, connected graph without any cycles is fundamentally defined as a Tree.",
+        "answer": "o1",
+        "options": [
+            { "text": "Tree", "is_correct": true },
+            { "text": "Directed graph", "is_correct": false },
+            { "text": "Weighted graph", "is_correct": false },
+            { "text": "Bipartite graph", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which traversal guarantees shortest path in unweighted graphs?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Breadth-First Search (BFS) explores the graph layer by layer, ensuring that the first time it reaches a node, it has found the shortest path to it in an unweighted graph.",
+        "answer": "o2",
+        "options": [
+            { "text": "DFS", "is_correct": false },
+            { "text": "BFS", "is_correct": true },
+            { "text": "Topological Sort", "is_correct": false },
+            { "text": "Prim", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Topological sorting is possible only for:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Topological sorting requires a linear ordering of vertices such that for every directed edge u -> v, u comes before v. This is mathematically only possible in Directed Acyclic Graphs (DAGs).",
+        "answer": "o2",
+        "options": [
+            { "text": "Cyclic graphs", "is_correct": false },
+            { "text": "Directed Acyclic Graphs", "is_correct": true },
+            { "text": "Undirected graphs", "is_correct": false },
+            { "text": "Complete graphs", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm uses greedy approach for MST?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Both Prim's and Kruskal's algorithms use a greedy approach to find the Minimum Spanning Tree. Prim's does this by consistently picking the cheapest edge that connects the tree to a new vertex.",
+        "answer": "o1",
+        "options": [
+            { "text": "Prim", "is_correct": true },
+            { "text": "DFS", "is_correct": false },
+            { "text": "BFS", "is_correct": false },
+            { "text": "Floyd Warshall", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm sorts edges before processing them?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Kruskal's algorithm works by first sorting all edges from lowest to highest weight, and then iteratively adding the smallest edge that doesn't form a cycle.",
+        "answer": "o1",
+        "options": [
+            { "text": "Kruskal", "is_correct": true },
+            { "text": "Dijkstra", "is_correct": false },
+            { "text": "Bellman Ford", "is_correct": false },
+            { "text": "BFS", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "A graph is strongly connected if:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A directed graph is strongly connected if there is a path from every vertex to every other vertex in the graph.",
+        "answer": "o2",
+        "options": [
+            { "text": "All nodes reachable from root", "is_correct": false },
+            { "text": "Every node reachable from every other node", "is_correct": true },
+            { "text": "Graph has cycles", "is_correct": false },
+            { "text": "Graph is weighted", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which algorithm finds strongly connected components?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Tarjan's algorithm (and also Kosaraju's algorithm) is specifically designed to find the strongly connected components (SCCs) of a directed graph.",
+        "answer": "o1",
+        "options": [
+            { "text": "Tarjan", "is_correct": true },
+            { "text": "Prim", "is_correct": false },
+            { "text": "BFS", "is_correct": false },
+            { "text": "Binary Search", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Kosaraju’s algorithm uses how many DFS passes?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Kosaraju's algorithm requires exactly two DFS passes: the first pass determines the finishing times of nodes, and the second pass on the transposed graph extracts the strongly connected components.",
+        "answer": "o2",
+        "options": [
+            { "text": "One", "is_correct": false },
+            { "text": "Two", "is_correct": true },
+            { "text": "Three", "is_correct": false },
+            { "text": "Four", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "The maximum number of distinct edges that can exist in a simple undirected graph containing exactly n vertices is mathematically represented as:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "In a simple undirected graph, an edge connects any two distinct vertices. Choosing 2 vertices from n available vertices gives nC2, which evaluates to n(n-1)/2 total possible edges.",
+        "answer": "o2",
+        "options": [
+            { "text": "n^2", "is_correct": false },
+            { "text": "n(n-1)/2", "is_correct": true },
+            { "text": "n-1", "is_correct": false },
+            { "text": "2n", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "The theoretical maximum number of distinct directed edges that can exist in a simple directed graph containing exactly n vertices is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "In a directed graph, between any two vertices u and v, there can exist dual edges (u -> v and v -> u). This is permutation nP2, which evaluates to exactly n(n-1) directed edges.",
+        "answer": "o1",
+        "options": [
+            { "text": "n(n-1)", "is_correct": true },
+            { "text": "n^2", "is_correct": false },
+            { "text": "n-1", "is_correct": false },
+            { "text": "n", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "For an undirected graph strictly maintaining connectivity across exactly n individual vertices, what is the absolute minimum mathematical threshold of edges required?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "A minimally connected graph is intrinsically a Tree structure. Every tree containing n distinct vertices strictly necessitates precisely n-1 interconnecting edges.",
+        "answer": "o2",
+        "options": [
+            { "text": "n edges", "is_correct": false },
+            { "text": "n-1 edges", "is_correct": true },
+            { "text": "n + 1 edges", "is_correct": false },
+            { "text": "2n edges", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which fundamental graph traversal strategy paired with algorithmic tracking mechanisms definitively detects cyclic dependencies within a strictly directed graph structure?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Depth First Search (DFS) natively detects cycles in directed graphs by strictly tracking the sequence of currently active nodes resting directly in the current ongoing execution recursion stack path.",
+        "answer": "o1",
+        "options": [
+            { "text": "DFS with recursion stack", "is_correct": true },
+            { "text": "BFS only", "is_correct": false },
+            { "text": "Heap", "is_correct": false },
+            { "text": "Binary search", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "To effectively process variable weighted paths consistently fetching optimal minimum cost routing, which graph navigation algorithm intrinsically requires an orchestrated minimum priority queue implementation?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Dijkstra's shortest path algorithm strictly processes the absolute closest unvisited fringe vertex next. Functionally maintaining exactly this sorted dynamic ordering is handled optimally using a minimum priority queue.",
+        "answer": "o1",
+        "options": [
+            { "text": "Dijkstra", "is_correct": true },
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": false },
+            { "text": "Topological sort", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When structurally traversing a topological web utilizing standard Breadth-First Search (BFS) patterns, how are the nodes fundamentally prioritized and explored relative to their source coordinate?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Breadth-First Search explicitly fans outward equally, discovering and processing every immediate unvisited sibling neighbor sitting at the current path depth continuously before uniformly descending deeper layer by layer (level order).",
+        "answer": "o2",
+        "options": [
+            { "text": "Depth order", "is_correct": false },
+            { "text": "Level order", "is_correct": true },
+            { "text": "Random order", "is_correct": false },
+            { "text": "Reverse order", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "During structural execution of a standard Depth-First Search (DFS) graph navigation, what defines its fundamental architectural routing preference before inevitably backtracking?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Depth-First Search (DFS) relentlessly chases a single traversal branch strictly traveling down as deep as physically possible down the deepest available route string continuously, prior sequentially backtracking to try unexplored alternate branches.",
+        "answer": "o2",
+        "options": [
+            { "text": "Breadth-first", "is_correct": false },
+            { "text": "Deepest path first", "is_correct": true },
+            { "text": "Random traversal", "is_correct": false },
+            { "text": "Level traversal", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When systematically traversing connected web datasets recursively preventing infinitely looping recursive cycles, what strictly optimized fundamental data structure explicitly logs historically processed node identities persistently?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Algorithms tracking pathing universally utilize a simplified fast-access Boolean \"visited\" mapped array (or fundamentally standard hash set globally mapping equivalent index triggers) preventing duplicate revisitation directly stopping infinite cyclic recursion dead.",
+        "answer": "o1",
+        "options": [
+            { "text": "Boolean array", "is_correct": true },
+            { "text": "Heap", "is_correct": false },
+            { "text": "Trie", "is_correct": false },
+            { "text": "Hash map only", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When programmatically designing traversals, which classic foundational graph searching algorithm is overwhelmingly typically engineered explicitly relying purely on the inherent logic of Call Stack recursion instead of iterative data structures?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Depth First Search (DFS) organically and natively maps directly onto standard system recursive call stacks perfectly, flawlessly backtracking naturally as deep execution branches inevitably terminate execution.",
+        "answer": "o2",
+        "options": [
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": true },
+            { "text": "Dijkstra", "is_correct": false },
+            { "text": "Prim", "is_correct": false }
+        ],
+        "topics": ["Graphs", "DFS"],
+        "companyIndex": 1
+},
+{
+        "question_text": "In massive computational scenarios involving intensely interconnected extremely dense graphs, which memory representation layout mathematically fundamentally computes adjacency fastest conceptually?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "For dense structured graphs closely approaching the V^2 edge limit, an explicitly maintained Adjacency Matrix yields instantaneous absolute O(1) query verification structurally determining if an exact edge connects independent nodes individually.",
+        "answer": "o2",
+        "options": [
+            { "text": "Adjacency List", "is_correct": false },
+            { "text": "Adjacency Matrix", "is_correct": true },
+            { "text": "Edge List", "is_correct": false },
+            { "text": "Tree Representation", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "To decisively algorithmically detect cyclic looping faults lurking silently within a standard undirected graph structure, what specific execution technique definitively confirms cycle existence?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "By executing a standard DFS paired explicitly with real-time specific 'parent node tracking', if execution ever suddenly blindly steps into an 'already visited' vertex that structurally isn't its immediate parent, a genuine hidden cycle categorically exists fundamentally.",
+        "answer": "o2",
+        "options": [
+            { "text": "BFS only", "is_correct": false },
+            { "text": "DFS with parent tracking", "is_correct": true },
+            { "text": "Heap", "is_correct": false },
+            { "text": "Binary Search", "is_correct": false }
+        ],
+        "topics": ["Graphs"],
+        "companyIndex": 1
+},
+{
+        "question_text": "If calculating the absolute shortest physical traversal path completely strictly exclusively across a non-weighted evenly distributed node web, which generic algorithm fundamentally always naturally discovers the optimal pathing sequentially first?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Breadth-First Search (BFS) explores the physical topology explicitly layer by strict layer purely expanding outwards, automatically inherently guaranteeing the exact very first time it discovers the target destination node is absolutely the shortest distance available unconditionally.",
+        "answer": "o2",
+        "options": [
+            { "text": "DFS", "is_correct": false },
+            { "text": "BFS", "is_correct": true },
+            { "text": "Prim", "is_correct": false },
+            { "text": "Kruskal", "is_correct": false }
+        ],
+        "topics": ["Graphs", "BFS"],
+        "companyIndex": 1
+},
+{
+        "question_text": "The classic well-known algorithmic computational dilemma demanding identifying a universally optimal spanning tree is frequently definitively resolved completely optimally using which explicit localized 'Greedy' paradigm methodology?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Prim's highly renowned spanning algorithm explicitly embodies the very definition of basic Greedy problem solving conceptually, continually grabbing exclusively solely the absolute lowest weight visible immediate edge to continuously expand the spanning tree systematically.",
+        "answer": "o1",
+        "options": [
+            { "text": "Prim's Algorithm", "is_correct": true },
+            { "text": "Fibonacci", "is_correct": false },
+            { "text": "Binary Search", "is_correct": false },
+            { "text": "LCS", "is_correct": false }
+        ],
+        "topics": ["Graphs", "Prim's Algorithm"],
+        "companyIndex": 1
+}
+]

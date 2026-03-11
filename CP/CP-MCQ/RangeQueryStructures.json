@@ -1,0 +1,184 @@
+[
+{
+        "question_text": "Sparse Table is used for:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A Sparse Table is a data structure, typically built in O(N log N) time, that allows answering static immutable array range queries (like RMinQ) in O(1) time.",
+        "answer": "o2",
+        "options": [
+            { "text": "Dynamic updates", "is_correct": false },
+            { "text": "Static range queries", "is_correct": true },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "Graph traversal", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Fenwick Tree supports operations in:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Fenwick Trees (Binary Indexed Trees) support both point updates and prefix sum computations in O(log n) time.",
+        "answer": "o1",
+        "options": [
+            { "text": "O(log n)", "is_correct": true },
+            { "text": "O(n)", "is_correct": false },
+            { "text": "O(n log n)", "is_correct": false },
+            { "text": "O(1)", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Segment Tree space complexity is roughly:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "For an array of size N, a Segment Tree implemented as an array requires roughly 4N space to ensure all leaf and internal nodes can be stored without out-of-bounds errors.",
+        "answer": "o3",
+        "options": [
+            { "text": "n", "is_correct": false },
+            { "text": "2n", "is_correct": false },
+            { "text": "4n", "is_correct": true },
+            { "text": "Undefined", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Segment tree query complexity is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Segment trees organize array elements hierarchically ensuring that practically any generic associative range query runs in purely O(log n) overhead.",
+        "answer": "o2",
+        "options": [
+            { "text": "O(n)", "is_correct": false },
+            { "text": "O(log n)", "is_correct": true },
+            { "text": "O(n^2)", "is_correct": false },
+            { "text": "O(1)", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Segment tree update complexity is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "To update a single value in a segment tree, you walk uniformly from the root directly to exactly one leaf and update values up along the backtracking steps, operating cleanly in logarithmic time bounds.",
+        "answer": "o1",
+        "options": [
+            { "text": "O(log n)", "is_correct": true },
+            { "text": "O(n)", "is_correct": false },
+            { "text": "O(n log n)", "is_correct": false },
+            { "text": "O(1)", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Lazy propagation helps to:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "When doing range updates on Segment Trees, executing independent unit updates is extremely taxing. Lazy propagation postpones traversing deeply into uniform lower bounds thus avoiding inherently redundant operational work until absolutely necessary.",
+        "answer": "o1",
+        "options": [
+            { "text": "Avoid unnecessary updates", "is_correct": true },
+            { "text": "Sort data", "is_correct": false },
+            { "text": "Compress memory", "is_correct": false },
+            { "text": "Traverse graphs", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Segment tree nodes represent:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "At its core logic, a singular node situated anywhere within a segment tree natively maintains aggregate variables reflecting some contiguous range interval embedded in the foundational array.",
+        "answer": "o1",
+        "options": [
+            { "text": "Array ranges", "is_correct": true },
+            { "text": "Graph edges", "is_correct": false },
+            { "text": "String prefixes", "is_correct": false },
+            { "text": "Heap nodes", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which data structure supports fast prefix sum queries?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A Fenwick Tree, also known as a Binary Indexed Tree (BIT), efficiently calculates and updates prefix sums of an array of numbers.",
+        "answer": "o1",
+        "options": [
+            { "text": "Fenwick Tree", "is_correct": true },
+            { "text": "Trie", "is_correct": false },
+            { "text": "Heap", "is_correct": false },
+            { "text": "AVL Tree", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Fenwick Tree"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Fenwick tree update complexity is:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "A Fenwick Tree updates an element and correctly propagates the change to all relevant sums in O(log n) time.",
+        "answer": "o1",
+        "options": [
+            { "text": "O(log n)", "is_correct": true },
+            { "text": "O(n)", "is_correct": false },
+            { "text": "O(n log n)", "is_correct": false },
+            { "text": "O(1)", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Fenwick Tree"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Mo's algorithm is optimally used for:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Mo's Algorithm is an elegant square-root decomposition technique used to answer a large batch of offline range queries efficiently.",
+        "answer": "o1",
+        "options": [
+            { "text": "Offline range queries", "is_correct": true },
+            { "text": "Graph traversal", "is_correct": false },
+            { "text": "Heap operations", "is_correct": false },
+            { "text": "DP optimization", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Mo's Algorithm"],
+        "companyIndex": 1
+},
+{
+        "question_text": "In a structurally pure Segment Tree encompassing an entire foundational array, what explicitly does the sheer absolute highest root node mathematically encompass and represent entirely?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Structurally, the segment tree's ultimate root node inherently spans the summation bounds of the complete [0, N-1] indices collectively, storing the aggregate calculation result for the 'Entire array range' natively.",
+        "answer": "o1",
+        "options": [
+            { "text": "Entire array range", "is_correct": true },
+            { "text": "Single element", "is_correct": false },
+            { "text": "Last element", "is_correct": false },
+            { "text": "Middle element", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+},
+{
+        "question_text": "At a mathematically fundamental level, which specific classification of overarching variable data processing are sophisticated Segment Trees optimally conceptually engineered to resolve at blistering logarithmic speeds natively?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Segment Trees natively partition vast data sets hierarchically entirely so arbitrary dynamic functions like 'Range minimum queries' (or range sum, GCD, etc.) resolve completely purely in O(log N) operations consistently.",
+        "answer": "o1",
+        "options": [
+            { "text": "Range minimum queries", "is_correct": true },
+            { "text": "Graph traversal", "is_correct": false },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "Hashing", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When facing intensive continuous broad block data edits simultaneously targeting massive continuous contiguous array sections dynamically, what explicit Segment Tree enhancement structurally drastically optimizes overhead speeds universally?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Instead of immediately executing millions of single distinct array node updates constantly, 'Lazy propagation' exclusively delays deep recursive traversal completely intentionally until the child nodes strictly mathematically demand evaluation natively.",
+        "answer": "o1",
+        "options": [
+            { "text": "Lazy propagation", "is_correct": true },
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": false },
+            { "text": "Hashing", "is_correct": false }
+        ],
+        "topics": ["Range Query Structures", "Segment Trees"],
+        "companyIndex": 1
+}
+]

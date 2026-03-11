@@ -1,0 +1,282 @@
+[
+{
+        "question_text": "Dynamic programming is mainly used when problems have:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Dynamic programming is an optimization technique used primarily when a problem exhibits overlapping subproblems (the same subproblems are solved repeatedly).",
+        "answer": "o2",
+        "options": [
+            { "text": "Random subproblems", "is_correct": false },
+            { "text": "Overlapping subproblems", "is_correct": true },
+            { "text": "Independent subproblems", "is_correct": false },
+            { "text": "No recursion", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Memoization is used in:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Memoization is a top-down dynamic programming approach where you cache the results of expensive function calls to avoid repeating them in recursive solutions.",
+        "answer": "o1",
+        "options": [
+            { "text": "Top-down DP", "is_correct": true },
+            { "text": "Bottom-up DP", "is_correct": false },
+            { "text": "BFS", "is_correct": false },
+            { "text": "Greedy", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Tabulation is associated with:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Tabulation is a bottom-up dynamic programming approach that builds a table iteratively from the smallest subproblems up to the larger problem.",
+        "answer": "o2",
+        "options": [
+            { "text": "Top-down", "is_correct": false },
+            { "text": "Bottom-up", "is_correct": true },
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which problem is a classic DP problem?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "The Fibonacci sequence problem is a classic example used to introduce dynamic programming due to its heavily overlapping subproblems when solved naively.",
+        "answer": "o2",
+        "options": [
+            { "text": "Binary Search", "is_correct": false },
+            { "text": "Fibonacci", "is_correct": true },
+            { "text": "Stack Push", "is_correct": false },
+            { "text": "Heap Insert", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "0/1 Knapsack problem is solved using:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The 0/1 Knapsack problem requires optimizing the total value of items within a weight capacity, without splitting items; it's a quintessential DP problem.",
+        "answer": "o2",
+        "options": [
+            { "text": "Greedy", "is_correct": false },
+            { "text": "Dynamic Programming", "is_correct": true },
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Longest Common Subsequence problem uses:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Longest Common Subsequence (LCS) problem is typically solved optimally using a 2D dynamic programming table.",
+        "answer": "o1",
+        "options": [
+            { "text": "DP table", "is_correct": true },
+            { "text": "Hashing", "is_correct": false },
+            { "text": "Heap", "is_correct": false },
+            { "text": "BFS", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Coin Change problem can be solved using:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The general Coin Change problem (finding minimum coins or total combinations) uses dynamic programming to ensure optimal subproblem combinations.",
+        "answer": "o2",
+        "options": [
+            { "text": "Greedy only", "is_correct": false },
+            { "text": "DP", "is_correct": true },
+            { "text": "Graph traversal", "is_correct": false },
+            { "text": "Sorting", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Matrix Chain Multiplication optimizes:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Matrix Chain Multiplication DP problem optimizes the overall computational cost by finding the most efficient order (parenthesization) of multiplying a sequence of matrices.",
+        "answer": "o2",
+        "options": [
+            { "text": "Number of matrices", "is_correct": false },
+            { "text": "Order of multiplication", "is_correct": true },
+            { "text": "Matrix values", "is_correct": false },
+            { "text": "Matrix size", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "DP reduces time complexity mainly by:",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Dynamic Programming reduces overall time complexity primarily by storing the results of previously solved subproblems, thus preventing redundant function calls.",
+        "answer": "o2",
+        "options": [
+            { "text": "Recursion", "is_correct": false },
+            { "text": "Storing results", "is_correct": true },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "Graph traversal", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which DP problem finds common subsequence of two strings?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Longest Common Subsequence (LCS) problem seeks the longest sequence of characters that appear in the same relative order within two strings.",
+        "answer": "o2",
+        "options": [
+            { "text": "Knapsack", "is_correct": false },
+            { "text": "LCS", "is_correct": true },
+            { "text": "Coin change", "is_correct": false },
+            { "text": "Fibonacci", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Longest Increasing Subsequence can be solved in:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "LIS can be solved in O(n^2) using standard DP, or in O(n log n) using an optimized combination of DP and binary search.",
+        "answer": "o3",
+        "options": [
+            { "text": "O(n^2)", "is_correct": false },
+            { "text": "O(n log n)", "is_correct": false },
+            { "text": "Both A and B", "is_correct": true },
+            { "text": "O(n^3)", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which DP problem minimizes multiplication cost?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Matrix Chain Multiplication problem aims to find the most efficient parenthesization to minimize the total scalar multiplications required.",
+        "answer": "o1",
+        "options": [
+            { "text": "Matrix Chain Multiplication", "is_correct": true },
+            { "text": "LCS", "is_correct": false },
+            { "text": "Knapsack", "is_correct": false },
+            { "text": "Coin change", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which DP technique stores results in table form?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Tabulation systematically builds up a solution incrementally filling an N-dimensional table (array) bottom-up.",
+        "answer": "o2",
+        "options": [
+            { "text": "Memoization", "is_correct": false },
+            { "text": "Tabulation", "is_correct": true },
+            { "text": "BFS", "is_correct": false },
+            { "text": "DFS", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Bitmask DP is often used when:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Bitmask DP is utilized when a dimension of the state represents all possible subsets (like visited nodes in TSP), encoding them efficiently as a bit-integer.",
+        "answer": "o2",
+        "options": [
+            { "text": "Graph is weighted", "is_correct": false },
+            { "text": "State includes subsets", "is_correct": true },
+            { "text": "Sorting required", "is_correct": false },
+            { "text": "Heap operations needed", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which fundamental property of a problem definitively ensures that Dynamic Programming can safely reuse previously computed solutions to optimize execution time?",
+        "difficulty": "EASY", "marks": 1,
+        "explanation": "Optimal substructure explicitly dictates that the absolute optimal solution to a given massive problem directly contains optimal solutions to its smaller subproblems, allowing recursive reuse safely.",
+        "answer": "o2",
+        "options": [
+            { "text": "Greedy choice", "is_correct": false },
+            { "text": "Optimal substructure", "is_correct": true },
+            { "text": "Random structure", "is_correct": false },
+            { "text": "Heap property", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which canonical Dynamic Programming problem explicitly calculates the absolute minimum number of total currency units exclusively necessary to fulfill a specific desired target sum?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Coin Change (minimum coins iteration) problem directly minimizes the sheer count of coins required to hit a target sum optimally using dynamic tabular arrays.",
+        "answer": "o1",
+        "options": [
+            { "text": "Coin Change (minimum coins)", "is_correct": true },
+            { "text": "Knapsack", "is_correct": false },
+            { "text": "LCS", "is_correct": false },
+            { "text": "Fibonacci", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming", "Coin Change"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which canonical Dynamic Programming problem computationally derives the total exhaustive number of valid distinct permutation ways to aggregate a specific numerical target sum?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Coin Change (combinations variation) problem calculates total pathing ways instead of minimizing counts, accumulating subset summation possibilities iteratively across DP states.",
+        "answer": "o1",
+        "options": [
+            { "text": "Coin Change combinations", "is_correct": true },
+            { "text": "BFS", "is_correct": false },
+            { "text": "Heap sort", "is_correct": false },
+            { "text": "Binary search", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming", "Coin Change"],
+        "companyIndex": 1
+},
+{
+        "question_text": "Which classic computationally intense algorithmic problem exclusively focuses on deriving the maximum possible length of a strictly escalating sequence mathematically drawn from a distinct given array of values?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "The Longest Increasing Subsequence (LIS) algorithmic problem searches exactly for the absolute maximum continuous or scattered string of elements exclusively scaling upward in numeric value.",
+        "answer": "o1",
+        "options": [
+            { "text": "LIS", "is_correct": true },
+            { "text": "LCS", "is_correct": false },
+            { "text": "Knapsack", "is_correct": false },
+            { "text": "Matrix chain", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming", "LIS"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When processing a 2D DP matrix optimally, which specific structural methodology dramatically reduces raw memory usage overhead by actively overwriting explicitly outdated states no longer needed computation-wise?",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Space Optimization leverages the mathematical fact that many 2D table states only fundamentally require knowledge of the immediately preceding row continuously, allowing massive memory state reduction explicitly overwriting stale data rows directly.",
+        "answer": "o1",
+        "options": [
+            { "text": "Space optimization", "is_correct": true },
+            { "text": "Recursion", "is_correct": false },
+            { "text": "Sorting", "is_correct": false },
+            { "text": "BFS", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming"],
+        "companyIndex": 1
+},
+{
+        "question_text": "When properly expertly applied architecturally to highly complex inherently overlapping algorithmic problems, Dynamic Programming primarily serves exactly to definitively mathematically shatter unscalable exponential calculation times inherently reducing them fundamentally explicitly into manageable:",
+        "difficulty": "MEDIUM", "marks": 2,
+        "explanation": "Dynamic Programming structurally entirely breaks inherently slow, highly redundant recursive O(2^n) exponential calculations purely into blazing fast explicitly linear O(N) or polynomial bounds by decisively caching all uniquely solved substates permanently.",
+        "answer": "o1",
+        "options": [
+            { "text": "Polynomial time solutions", "is_correct": true },
+            { "text": "Linear time always", "is_correct": false },
+            { "text": "Constant time", "is_correct": false },
+            { "text": "Random time", "is_correct": false }
+        ],
+        "topics": ["Dynamic Programming", "Time Complexity"],
+        "companyIndex": 1
+}
+]
