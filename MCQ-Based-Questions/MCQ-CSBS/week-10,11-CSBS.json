@@ -4,323 +4,583 @@
         "questions": [
             {
                 "id": "cs04a001-0001-4000-a001-000000000001",
-                "question": "What is an Expression Tree and what is stored in its internal nodes versus leaf nodes?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "Internal nodes store operands (numbers/variables); leaf nodes store operators (+, -, *, /).",
-                    "B": "Internal nodes store operators (+, -, *, /); leaf nodes store operands (numbers or variables).",
-                    "C": "All nodes store both an operator and an operand.",
-                    "D": "Leaf nodes store the final computed result; internal nodes are empty."
-                },
+                "options": [
+                    {
+                        "option_text": "Internal nodes store operands (numbers/variables); leaf nodes store operators (+, -, *, /).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Internal nodes store operators (+, -, *, /); leaf nodes store operands (numbers or variables).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "All nodes store both an operator and an operand.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Leaf nodes store the final computed result; internal nodes are empty.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Expression Tree (ET)**: A binary tree representing an arithmetic expression.\n2. **Internal nodes**: Operators (+, -, *, /, ^) — they perform an operation on their two subtrees.\n3. **Leaf nodes**: Operands — numbers (3, 5.7) or variables (x, y).\n4. **Evaluation**: Recursively evaluate left subtree and right subtree, apply the root operator.\n5. **Example**: `(3 + 5) * 2` → root *, left child +, left-left child 3, left-right child 5, right child 2.",
-                "language": "C"
+                "solution_explanation": "1. **Expression Tree (ET)**: A binary tree representing an arithmetic expression.\n2. **Internal nodes**: Operators (+, -, *, /, ^) \u2014 they perform an operation on their two subtrees.\n3. **Leaf nodes**: Operands \u2014 numbers (3, 5.7) or variables (x, y).\n4. **Evaluation**: Recursively evaluate left subtree and right subtree, apply the root operator.\n5. **Example**: `(3 + 5) * 2` \u2192 root *, left child +, left-left child 3, left-right child 5, right child 2.",
+                "language": "C",
+                "question_text": "What is an Expression Tree and what is stored in its internal nodes versus leaf nodes?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000002",
-                "question": "Which traversal of an expression tree produces the INFIX notation of the expression?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "C",
-                "options": {
-                    "A": "Pre-Order (Root-Left-Right) → Prefix notation.",
-                    "B": "Post-Order (Left-Right-Root) → Postfix (RPN) notation.",
-                    "C": "In-Order (Left-Root-Right) → Infix notation (with parentheses added for correctness).",
-                    "D": "Level-Order → Mixed notation."
-                },
+                "options": [
+                    {
+                        "option_text": "Pre-Order (Root-Left-Right) \u2192 Prefix notation.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Post-Order (Left-Right-Root) \u2192 Postfix (RPN) notation.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "In-Order (Left-Root-Right) \u2192 Infix notation (with parentheses added for correctness).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Level-Order \u2192 Mixed notation.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Pre-Order** (Root-Left-Right): Visit operator before operands → **Prefix** (Polish) notation. Example: `* + 3 5 2`.\n2. **Post-Order** (Left-Right-Root): Visit operator after operands → **Postfix** (Reverse Polish) notation. Example: `3 5 + 2 *`.\n3. **In-Order** (Left-Root-Right): Visit left operand, then operator, then right operand → **Infix**. Example: `3 + 5 * 2`. Parentheses needed to preserve operator precedence.\n4. **Level-Order**: Breadth-first — not a standard expression form.",
-                "language": "C"
+                "solution_explanation": "1. **Pre-Order** (Root-Left-Right): Visit operator before operands \u2192 **Prefix** (Polish) notation. Example: `* + 3 5 2`.\n2. **Post-Order** (Left-Right-Root): Visit operator after operands \u2192 **Postfix** (Reverse Polish) notation. Example: `3 5 + 2 *`.\n3. **In-Order** (Left-Root-Right): Visit left operand, then operator, then right operand \u2192 **Infix**. Example: `3 + 5 * 2`. Parentheses needed to preserve operator precedence.\n4. **Level-Order**: Breadth-first \u2014 not a standard expression form.",
+                "language": "C",
+                "question_text": "Which traversal of an expression tree produces the INFIX notation of the expression?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000003",
-                "question": "The postfix expression `3 4 + 5 * 6 -` is evaluated using a stack. What is the final result?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "29 (wrong)",
-                    "B": "29",
-                    "C": "41",
-                    "D": "9"
-                },
+                "options": [
+                    {
+                        "option_text": "29 (wrong)",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "29",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "41",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "9",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "Evaluate left to right:\n1. Push 3. Stack: [3]\n2. Push 4. Stack: [3, 4]\n3. `+`: Pop 4, pop 3. Push 3+4=7. Stack: [7]\n4. Push 5. Stack: [7, 5]\n5. `*`: Pop 5, pop 7. Push 7*5=35. Stack: [35]\n6. Push 6. Stack: [35, 6]\n7. `-`: Pop 6, pop 35. Push 35-6=**29**. Stack: [29]\n\nResult = **29**.",
-                "language": "C"
+                "language": "C",
+                "question_text": "The postfix expression `3 4 + 5 * 6 -` is evaluated using a stack. What is the final result?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000004",
-                "question": "Build the Expression Tree for the postfix expression `A B + C D - *`. What is the root operator and what are the two subtrees?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "D",
-                "options": {
-                    "A": "Root = +; Left subtree = (A B), Right subtree = (C D -).",
-                    "B": "Root = -; Left subtree = (A B +), Right subtree = (C D).",
-                    "C": "Root = +; Left subtree = (A), Right subtree = (B C D - *).",
-                    "D": "Root = *; Left subtree = (A+B), Right subtree = (C-D)."
-                },
+                "options": [
+                    {
+                        "option_text": "Root = +; Left subtree = (A B), Right subtree = (C D -).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Root = -; Left subtree = (A B +), Right subtree = (C D).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Root = +; Left subtree = (A), Right subtree = (B C D - *).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Root = *; Left subtree = (A+B), Right subtree = (C-D).",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Build ET from postfix using a stack:\n1. Push leaf A. Stack: [A]\n2. Push leaf B. Stack: [A, B]\n3. `+`: Pop B (right), pop A (left). Create (+) with children A,B. Push (+). Stack: [(A+B)]\n4. Push leaf C. Stack: [(A+B), C]\n5. Push leaf D. Stack: [(A+B), C, D]\n6. `-`: Pop D (right), pop C (left). Create (-) with children C,D. Push (-). Stack: [(A+B), (C-D)]\n7. `*`: Pop (C-D) (right), pop (A+B) (left). Create (*). Push (*).\n\n**Root = *, Left = (A+B), Right = (C-D)** — represents `(A+B)*(C-D)`.",
-                "language": "C"
+                "solution_explanation": "Build ET from postfix using a stack:\n1. Push leaf A. Stack: [A]\n2. Push leaf B. Stack: [A, B]\n3. `+`: Pop B (right), pop A (left). Create (+) with children A,B. Push (+). Stack: [(A+B)]\n4. Push leaf C. Stack: [(A+B), C]\n5. Push leaf D. Stack: [(A+B), C, D]\n6. `-`: Pop D (right), pop C (left). Create (-) with children C,D. Push (-). Stack: [(A+B), (C-D)]\n7. `*`: Pop (C-D) (right), pop (A+B) (left). Create (*). Push (*).\n\n**Root = *, Left = (A+B), Right = (C-D)** \u2014 represents `(A+B)*(C-D)`.",
+                "language": "C",
+                "question_text": "Build the Expression Tree for the postfix expression `A B + C D - *`. What is the root operator and what are the two subtrees?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000005",
-                "question": "Convert the infix expression `(A + B) * (C - D)` to its prefix (Polish) notation.",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "* + A B - C D",
-                    "B": "A B + C D - *",
-                    "C": "+ A B * - C D",
-                    "D": "* A + B - C D"
-                },
+                "options": [
+                    {
+                        "option_text": "* + A B - C D",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "A B + C D - *",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "+ A B * - C D",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "* A + B - C D",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "**Method 1 — Expression Tree**:\nTree root = *, left = (+, A, B), right = (-, C, D).\nPre-Order (Root-Left-Right): visit *, then (+,A,B) pre-order = + A B, then (-,C,D) pre-order = - C D.\nResult: `* + A B - C D` ✅\n\n**Method 2 — Direct rule**:\n- Rightmost operator has lowest precedence → *, write * first.\n- Write prefix of each operand: prefix(A+B) = +AB, prefix(C-D) = -CD.\n- Concatenate: `* +AB -CD` = `* + A B - C D`.\n\nOption B is the postfix notation.",
-                "language": "C"
+                "solution_explanation": "**Method 1 \u2014 Expression Tree**:\nTree root = *, left = (+, A, B), right = (-, C, D).\nPre-Order (Root-Left-Right): visit *, then (+,A,B) pre-order = + A B, then (-,C,D) pre-order = - C D.\nResult: `* + A B - C D` \u2705\n\n**Method 2 \u2014 Direct rule**:\n- Rightmost operator has lowest precedence \u2192 *, write * first.\n- Write prefix of each operand: prefix(A+B) = +AB, prefix(C-D) = -CD.\n- Concatenate: `* +AB -CD` = `* + A B - C D`.\n\nOption B is the postfix notation.",
+                "language": "C",
+                "question_text": "Convert the infix expression `(A + B) * (C - D)` to its prefix (Polish) notation.",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000006",
-                "question": "Evaluating an expression tree recursively — what is the base case and what does the recursive step do?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "Base case: node is the root; recursive step: compute left and right children separately.",
-                    "B": "Base case: node has two children; recursive step: return node->value.",
-                    "C": "Base case: node is a leaf (no children) → return node->operand value. Recursive step: evaluate left subtree, evaluate right subtree, apply node->operator to both results.",
-                    "D": "Base case: stack is empty; recursive step: push the current node's value."
-                },
+                "options": [
+                    {
+                        "option_text": "Base case: node is the root; recursive step: compute left and right children separately.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Base case: node has two children; recursive step: return node->value.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Base case: node is a leaf (no children) \u2192 return node->operand value. Recursive step: evaluate left subtree, evaluate right subtree, apply node->operator to both results.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Base case: stack is empty; recursive step: push the current node's value.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Base case**: `if (isLeaf(node)) return atof(node->value);` — a leaf holds a numeric operand; return it directly.\n2. **Recursive step**: `left_val = evaluate(node->left); right_val = evaluate(node->right); return applyOp(node->operator, left_val, right_val);`\n3. **Correctness**: The tree structure enforces correct precedence — deeper sub-expressions are evaluated first (lower in the tree = higher precedence).\n4. **No need for operator precedence rules**: The tree encodes precedence structurally — no shunting-yard algorithm needed at evaluation time.",
-                "language": "C"
+                "solution_explanation": "1. **Base case**: `if (isLeaf(node)) return atof(node->value);` \u2014 a leaf holds a numeric operand; return it directly.\n2. **Recursive step**: `left_val = evaluate(node->left); right_val = evaluate(node->right); return applyOp(node->operator, left_val, right_val);`\n3. **Correctness**: The tree structure enforces correct precedence \u2014 deeper sub-expressions are evaluated first (lower in the tree = higher precedence).\n4. **No need for operator precedence rules**: The tree encodes precedence structurally \u2014 no shunting-yard algorithm needed at evaluation time.",
+                "language": "C",
+                "question_text": "Evaluating an expression tree recursively \u2014 what is the base case and what does the recursive step do?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000007",
-                "question": "The prefix expression `- + * A B C / D E` represents which infix expression?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "(A * B + C) - (D / E)",
-                    "B": "((A * B) + C) - (D / E)",
-                    "C": "(A * (B + C)) - (D / E)",
-                    "D": "(A + B * C) - D / E"
-                },
+                "options": [
+                    {
+                        "option_text": "(A * B + C) - (D / E)",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "((A * B) + C) - (D / E)",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "(A * (B + C)) - (D / E)",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "(A + B * C) - D / E",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Build ET from prefix (recursively take root, then build left, then right):\n- Root = `-`\n- Left of `-` = prefix `+ * A B C`:\n  - Root = `+`\n  - Left of `+` = prefix `* A B` → root=`*`, left=A, right=B → **(A*B)**\n  - Right of `+` = C → **((A*B)+C)**\n- Right of `-` = prefix `/ D E` → root=`/`, left=D, right=E → **(D/E)**\n\nFull infix: **((A*B)+C) - (D/E)** ✅\n\nOptions A and B are equivalent with explicit parentheses added to A: `(A*B+C)-(D/E)` = `((A*B)+C)-(D/E)` since `*` has higher precedence than `+`.",
-                "language": "C"
+                "solution_explanation": "Build ET from prefix (recursively take root, then build left, then right):\n- Root = `-`\n- Left of `-` = prefix `+ * A B C`:\n  - Root = `+`\n  - Left of `+` = prefix `* A B` \u2192 root=`*`, left=A, right=B \u2192 **(A*B)**\n  - Right of `+` = C \u2192 **((A*B)+C)**\n- Right of `-` = prefix `/ D E` \u2192 root=`/`, left=D, right=E \u2192 **(D/E)**\n\nFull infix: **((A*B)+C) - (D/E)** \u2705\n\nOptions A and B are equivalent with explicit parentheses added to A: `(A*B+C)-(D/E)` = `((A*B)+C)-(D/E)` since `*` has higher precedence than `+`.",
+                "language": "C",
+                "question_text": "The prefix expression `- + * A B C / D E` represents which infix expression?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000008",
-                "question": "To convert an infix expression to postfix using a stack (Shunting-Yard algorithm), when should an operator O₂ be popped from the stack and output BEFORE pushing the new operator O₁?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "C",
-                "options": {
-                    "A": "When O₂ is any operator.",
-                    "B": "When O₁ has higher precedence than O₂.",
-                    "C": "When O₂ has higher or equal precedence to O₁ (and O₁ is left-associative), or when O₂ has strictly higher precedence (if O₁ is right-associative).",
-                    "D": "When O₂ is a left parenthesis '('."
-                },
+                "options": [
+                    {
+                        "option_text": "When O\u2082 is any operator.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "When O\u2081 has higher precedence than O\u2082.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "When O\u2082 has higher or equal precedence to O\u2081 (and O\u2081 is left-associative), or when O\u2082 has strictly higher precedence (if O\u2081 is right-associative).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "When O\u2082 is a left parenthesis '('.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Shunting-Yard rule for operator O₁**: While the stack's top is an operator O₂ AND either:\n   - O₂ has **higher precedence** than O₁, OR\n   - O₂ has **equal precedence** and O₁ is **left-associative** (e.g., + - * /)\n   → Pop O₂ to output.\n2. **Right-associative** operators (e.g., exponentiation `^`): Only pop if O₂ has **strictly higher** precedence — equal precedence does NOT trigger a pop.\n3. **Stop popping**: When stack top is `(` or has lower precedence than O₁, or stack is empty.\n4. **D is wrong**: `(` is never popped until the matching `)` is processed.",
-                "language": "C"
+                "solution_explanation": "1. **Shunting-Yard rule for operator O\u2081**: While the stack's top is an operator O\u2082 AND either:\n   - O\u2082 has **higher precedence** than O\u2081, OR\n   - O\u2082 has **equal precedence** and O\u2081 is **left-associative** (e.g., + - * /)\n   \u2192 Pop O\u2082 to output.\n2. **Right-associative** operators (e.g., exponentiation `^`): Only pop if O\u2082 has **strictly higher** precedence \u2014 equal precedence does NOT trigger a pop.\n3. **Stop popping**: When stack top is `(` or has lower precedence than O\u2081, or stack is empty.\n4. **D is wrong**: `(` is never popped until the matching `)` is processed.",
+                "language": "C",
+                "question_text": "To convert an infix expression to postfix using a stack (Shunting-Yard algorithm), when should an operator O\u2082 be popped from the stack and output BEFORE pushing the new operator O\u2081?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000009",
-                "question": "Given the expression tree for `a * b + c / d`, which of the following correctly describes the tree structure (root and its two subtrees)?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "Root = +; Left subtree = (a*b); Right subtree = (c/d) — addition has lower precedence than * and /, so it is the root.",
-                    "B": "Root = *; Left subtree = a; Right subtree = (b + c / d).",
-                    "C": "Root = /; Left subtree = (a*b+c); Right subtree = d.",
-                    "D": "Root = a; Left = nothing; Right = (b*+c/d)."
-                },
+                "options": [
+                    {
+                        "option_text": "Root = +; Left subtree = (a*b); Right subtree = (c/d) \u2014 addition has lower precedence than * and /, so it is the root.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Root = *; Left subtree = a; Right subtree = (b + c / d).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Root = /; Left subtree = (a*b+c); Right subtree = d.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Root = a; Left = nothing; Right = (b*+c/d).",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "1. **Operator precedence**: * and / have higher precedence than +. Lower precedence operators appear HIGHER (closer to root) in the expression tree.\n2. **Parsing `a*b + c/d`**: The expression splits at `+` (lowest precedence): Left = `a*b`, Right = `c/d`.\n3. **Root = +**; Left subtree root = `*` (with leaves a, b); Right subtree root = `/` (with leaves c, d).\n4. **Key insight**: The root of an expression tree is ALWAYS the last operator evaluated (lowest precedence or rightmost for equal precedence in left-to-right evaluation).",
-                "language": "C"
+                "language": "C",
+                "question_text": "Given the expression tree for `a * b + c / d`, which of the following correctly describes the tree structure (root and its two subtrees)?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000010",
-                "question": "An expression tree is used to represent and simplify algebraic expressions symbolically. For the expression `2 * x + 2 * y`, can it be automatically simplified to `2 * (x + y)` using tree operations?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "B",
-                "options": {
-                    "A": "No — expression trees cannot perform algebraic simplification.",
-                    "B": "Yes — by pattern matching the tree structure for common factors (distributive law): detect two `*` subtrees sharing the same constant subtree, then restructure.",
-                    "C": "Yes — simply traverse the tree and replace the root.",
-                    "D": "No — expression trees can only evaluate numeric expressions, not symbolic algebra."
-                },
+                "options": [
+                    {
+                        "option_text": "No \u2014 expression trees cannot perform algebraic simplification.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Yes \u2014 by pattern matching the tree structure for common factors (distributive law): detect two `*` subtrees sharing the same constant subtree, then restructure.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Yes \u2014 simply traverse the tree and replace the root.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "No \u2014 expression trees can only evaluate numeric expressions, not symbolic algebra.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Tree for `2*x + 2*y`**: Root = +, Left = (* 2 x), Right = (* 2 y).\n2. **Pattern detection**: Identify that both children of `+` are `*` nodes, and both have the same left child (constant 2).\n3. **Restructuring (distributive law)**: Replace root `+` subtree with `* 2 (+ x y)` — factor out the common `2`.\n4. **Symbolic computation engines** (like Mathematica, SymPy) do exactly this — pattern matching on expression trees is the foundation of computer algebra systems.\n5. **This shows that expression trees extend beyond mere evaluation** — they enable transformation, differentiation, integration, and simplification.",
-                "language": "C"
+                "solution_explanation": "1. **Tree for `2*x + 2*y`**: Root = +, Left = (* 2 x), Right = (* 2 y).\n2. **Pattern detection**: Identify that both children of `+` are `*` nodes, and both have the same left child (constant 2).\n3. **Restructuring (distributive law)**: Replace root `+` subtree with `* 2 (+ x y)` \u2014 factor out the common `2`.\n4. **Symbolic computation engines** (like Mathematica, SymPy) do exactly this \u2014 pattern matching on expression trees is the foundation of computer algebra systems.\n5. **This shows that expression trees extend beyond mere evaluation** \u2014 they enable transformation, differentiation, integration, and simplification.",
+                "language": "C",
+                "question_text": "An expression tree is used to represent and simplify algebraic expressions symbolically. For the expression `2 * x + 2 * y`, can it be automatically simplified to `2 * (x + y)` using tree operations?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000011",
-                "question": "The postfix expression `5 1 2 + 4 * + 3 -` is evaluated. What is the result?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "C",
-                "options": {
-                    "A": "10",
-                    "B": "21",
-                    "C": "14",
-                    "D": "17"
-                },
+                "options": [
+                    {
+                        "option_text": "10",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "21",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "14",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "17",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Evaluate step by step:\n1. Push 5. Stack: [5]\n2. Push 1. Stack: [5,1]\n3. Push 2. Stack: [5,1,2]\n4. `+`: pop 2,1 → 1+2=3, push 3. Stack: [5,3]\n5. Push 4. Stack: [5,3,4]\n6. `*`: pop 4,3 → 3*4=12, push 12. Stack: [5,12]\n7. `+`: pop 12,5 → 5+12=17, push 17. Stack: [17]\n8. Push 3. Stack: [17,3]\n9. `-`: pop 3,17 → 17-3=**14**, push 14.\n\nResult = **14** ✅\n\nNote: The original infix is `5 + (1+2)*4 - 3 = 5+12-3 = 14`.",
-                "language": "C"
+                "solution_explanation": "Evaluate step by step:\n1. Push 5. Stack: [5]\n2. Push 1. Stack: [5,1]\n3. Push 2. Stack: [5,1,2]\n4. `+`: pop 2,1 \u2192 1+2=3, push 3. Stack: [5,3]\n5. Push 4. Stack: [5,3,4]\n6. `*`: pop 4,3 \u2192 3*4=12, push 12. Stack: [5,12]\n7. `+`: pop 12,5 \u2192 5+12=17, push 17. Stack: [17]\n8. Push 3. Stack: [17,3]\n9. `-`: pop 3,17 \u2192 17-3=**14**, push 14.\n\nResult = **14** \u2705\n\nNote: The original infix is `5 + (1+2)*4 - 3 = 5+12-3 = 14`.",
+                "language": "C",
+                "question_text": "The postfix expression `5 1 2 + 4 * + 3 -` is evaluated. What is the result?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000012",
-                "question": "When converting a prefix expression to an expression tree, what is the correct order of processing and stack operations?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "D",
-                "options": {
-                    "A": "Read left to right: push operands, pop on operators.",
-                    "B": "Recursively: read the first symbol as root, build right subtree first, then left subtree.",
-                    "C": "Read right to left: push operands, pop children on operators — left child = first pop, right child = second pop.",
-                    "D": "Read right to left: push operands, pop children on operators — right child = second pop (pushed later = on top)... or read left to right recursively: first symbol is root, build left subtree recursively, then right subtree."
-                },
+                "options": [
+                    {
+                        "option_text": "Read left to right: push operands, pop on operators.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Recursively: read the first symbol as root, build right subtree first, then left subtree.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Read right to left: push operands, pop children on operators \u2014 left child = first pop, right child = second pop.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Read right to left: push operands, pop children on operators \u2014 right child = second pop (pushed later = on top)... or read left to right recursively: first symbol is root, build left subtree recursively, then right subtree.",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Recursive (left to right)**: Read first token. If operand → leaf. If operator → root node. Recursively build left child from remaining prefix. Recursively build right child.\n2. **Stack-based (right to left)**: Process prefix right-to-left. Push operand nodes. On operator: pop two nodes — **first pop = right child**, **second pop = left child** (because right was pushed last). Push the new subtree node.\n3. **Key**: Left-to-right recursive is usually simpler to implement. Right-to-left stack exactly mirrors postfix→ET construction (but with left/right swapped).",
-                "language": "C"
+                "solution_explanation": "1. **Recursive (left to right)**: Read first token. If operand \u2192 leaf. If operator \u2192 root node. Recursively build left child from remaining prefix. Recursively build right child.\n2. **Stack-based (right to left)**: Process prefix right-to-left. Push operand nodes. On operator: pop two nodes \u2014 **first pop = right child**, **second pop = left child** (because right was pushed last). Push the new subtree node.\n3. **Key**: Left-to-right recursive is usually simpler to implement. Right-to-left stack exactly mirrors postfix\u2192ET construction (but with left/right swapped).",
+                "language": "C",
+                "question_text": "When converting a prefix expression to an expression tree, what is the correct order of processing and stack operations?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000013",
-                "question": "Expression trees can compute the derivative of expressions symbolically. For the expression `f(x) = x²`, represented as `* x x` in an ET, which rule must the derivative algorithm apply?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "B",
-                "options": {
-                    "A": "Chain rule only.",
-                    "B": "Product rule: d/dx[u*v] = u'*v + u*v'. For `u=x, v=x`: `d/dx[x*x] = 1*x + x*1 = 2x`.",
-                    "C": "Quotient rule: d/dx[u/v].",
-                    "D": "Power rule directly: recognise x² and return 2x immediately without tree manipulation."
-                },
+                "options": [
+                    {
+                        "option_text": "Chain rule only.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Product rule: d/dx[u*v] = u'*v + u*v'. For `u=x, v=x`: `d/dx[x*x] = 1*x + x*1 = 2x`.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Quotient rule: d/dx[u/v].",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Power rule directly: recognise x\u00b2 and return 2x immediately without tree manipulation.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Tree for `x*x`**: Root = `*`, Left = x, Right = x.\n2. **Derivative of multiplication node**: Apply Product Rule: `d/dx[u*v] = u'*v + u*v'`.\n3. **u = x → u' = 1; v = x → v' = 1**.\n4. **Result tree**: root = +, left = (* 1 x) → simplify to x, right = (* x 1) → simplify to x. So derivative tree = (+, x, x) = 2x ✅.\n5. **This is how CAS systems work**: Recursively apply differentiation rules based on the operator in each subtree root — the power rule `d/dx[xⁿ] = nxⁿ⁻¹` would be a directly recognised pattern if the tree stored `**` (exponentiation).",
-                "language": "C"
+                "solution_explanation": "1. **Tree for `x*x`**: Root = `*`, Left = x, Right = x.\n2. **Derivative of multiplication node**: Apply Product Rule: `d/dx[u*v] = u'*v + u*v'`.\n3. **u = x \u2192 u' = 1; v = x \u2192 v' = 1**.\n4. **Result tree**: root = +, left = (* 1 x) \u2192 simplify to x, right = (* x 1) \u2192 simplify to x. So derivative tree = (+, x, x) = 2x \u2705.\n5. **This is how CAS systems work**: Recursively apply differentiation rules based on the operator in each subtree root \u2014 the power rule `d/dx[x\u207f] = nx\u207f\u207b\u00b9` would be a directly recognised pattern if the tree stored `**` (exponentiation).",
+                "language": "C",
+                "question_text": "Expression trees can compute the derivative of expressions symbolically. For the expression `f(x) = x\u00b2`, represented as `* x x` in an ET, which rule must the derivative algorithm apply?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000014",
-                "question": "Convert the following expression tree to postfix (post-order traversal):\n```\n      /\n     / \\\n    *   5\n   / \\\n  3   +\n     / \\\n    2   4\n```",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "A",
-                "options": {
-                    "A": "3 2 4 + * 5 /",
-                    "B": "3 * 2 + 4 / 5",
-                    "C": "/ * 3 + 2 4 5",
-                    "D": "3 2 * 4 + 5 /"
-                },
+                "options": [
+                    {
+                        "option_text": "3 2 4 + * 5 /",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "3 * 2 + 4 / 5",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "/ * 3 + 2 4 5",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "3 2 * 4 + 5 /",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Post-Order (Left-Right-Root) traverse:\n\nSubtree `+` (leaves 2, 4): left=2, right=4, root=+ → **2 4 +**\n\nSubtree `*` (left=3, right=+): left=3, right=(2 4 +), root=* → **3 2 4 + ***\n\nRoot `/` (left=*, right=5): left=(3 2 4 + *), right=5, root=/ → **3 2 4 + * 5 /**\n\nPostfix: **`3 2 4 + * 5 /`** ✅\n\nThis represents the infix `(3 * (2 + 4)) / 5 = (3*6)/5 = 18/5`.",
-                "language": "C"
+                "solution_explanation": "Post-Order (Left-Right-Root) traverse:\n\nSubtree `+` (leaves 2, 4): left=2, right=4, root=+ \u2192 **2 4 +**\n\nSubtree `*` (left=3, right=+): left=3, right=(2 4 +), root=* \u2192 **3 2 4 + ***\n\nRoot `/` (left=*, right=5): left=(3 2 4 + *), right=5, root=/ \u2192 **3 2 4 + * 5 /**\n\nPostfix: **`3 2 4 + * 5 /`** \u2705\n\nThis represents the infix `(3 * (2 + 4)) / 5 = (3*6)/5 = 18/5`.",
+                "language": "C",
+                "question_text": "Convert the following expression tree to postfix (post-order traversal):\n```\n      /\n     / \\\n    *   5\n   / \\\n  3   +\n     / \\\n    2   4\n```",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000015",
-                "question": "What is the time complexity of evaluating an expression tree with N nodes?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "O(log N) — operators at higher levels skip leaf traversal.",
-                    "B": "O(N) — every node is visited exactly once during post-order traversal.",
-                    "C": "O(N²) — each operator must scan all operands.",
-                    "D": "O(N log N) — tree structure requires sorting."
-                },
+                "options": [
+                    {
+                        "option_text": "O(log N) \u2014 operators at higher levels skip leaf traversal.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N) \u2014 every node is visited exactly once during post-order traversal.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "O(N\u00b2) \u2014 each operator must scan all operands.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N log N) \u2014 tree structure requires sorting.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Evaluation = Post-Order traversal**: Visit every node exactly once.\n2. **N nodes**: Each node visited once → O(N) total.\n3. **Each visit**: O(1) operation — either return the leaf value or apply the operator to two already-computed values.\n4. **Comparison**: Evaluating the equivalent postfix string with a stack is also O(N) where N is the number of tokens.\n5. **Key property**: Tree structure preserves precedence spatially — no extra parsing overhead needed during evaluation.",
-                "language": "C"
+                "solution_explanation": "1. **Evaluation = Post-Order traversal**: Visit every node exactly once.\n2. **N nodes**: Each node visited once \u2192 O(N) total.\n3. **Each visit**: O(1) operation \u2014 either return the leaf value or apply the operator to two already-computed values.\n4. **Comparison**: Evaluating the equivalent postfix string with a stack is also O(N) where N is the number of tokens.\n5. **Key property**: Tree structure preserves precedence spatially \u2014 no extra parsing overhead needed during evaluation.",
+                "language": "C",
+                "question_text": "What is the time complexity of evaluating an expression tree with N nodes?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000016",
-                "question": "An expression tree is being built from the infix expression `a + b * c - d / e`. Without explicit parentheses, which node is the ROOT and why?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "The `*` node — highest precedence becomes root.",
-                    "B": "The `+` node — leftmost operator is root.",
-                    "C": "The `-` node — in left-to-right evaluation, `-` is the last operator to be applied at the lowest precedence level.",
-                    "D": "The `/` node — division is computed last."
-                },
+                "options": [
+                    {
+                        "option_text": "The `*` node \u2014 highest precedence becomes root.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The `+` node \u2014 leftmost operator is root.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The `-` node \u2014 in left-to-right evaluation, `-` is the last operator to be applied at the lowest precedence level.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "The `/` node \u2014 division is computed last.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Operator precedence**: `*` and `/` > `+` and `-`. Same precedence levels are left-associative.\n2. **Parsing `a + b*c - d/e`**:\n   - `b*c` and `d/e` are computed first (higher precedence) → they become subtrees.\n   - Then `a + (b*c) - (d/e)` at equal `+/-` precedence, left-to-right: first `a+(b*c)`, then the result `-(d/e)`.\n3. **Root = last operator applied = `-`**: The subtraction between `(a+b*c)` and `(d/e)` is the final operation.\n4. **Rule**: Lower precedence operators nearer to the root; among equal precedence, rightmost operator (for left-associative) becomes root of the next higher level.",
-                "language": "C"
+                "solution_explanation": "1. **Operator precedence**: `*` and `/` > `+` and `-`. Same precedence levels are left-associative.\n2. **Parsing `a + b*c - d/e`**:\n   - `b*c` and `d/e` are computed first (higher precedence) \u2192 they become subtrees.\n   - Then `a + (b*c) - (d/e)` at equal `+/-` precedence, left-to-right: first `a+(b*c)`, then the result `-(d/e)`.\n3. **Root = last operator applied = `-`**: The subtraction between `(a+b*c)` and `(d/e)` is the final operation.\n4. **Rule**: Lower precedence operators nearer to the root; among equal precedence, rightmost operator (for left-associative) becomes root of the next higher level.",
+                "language": "C",
+                "question_text": "An expression tree is being built from the infix expression `a + b * c - d / e`. Without explicit parentheses, which node is the ROOT and why?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000017",
-                "question": "In a compiler's intermediate code generation, expression trees are used. What is an advantage of using an ET over direct postfix notation for intermediate representation?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "D",
-                "options": {
-                    "A": "Expression trees require less memory than postfix strings.",
-                    "B": "Expression trees are always faster to evaluate.",
-                    "C": "Expression trees eliminate the need for a stack entirely.",
-                    "D": "Expression trees expose the structure of the expression, enabling optimisations like common subexpression elimination (CSE), constant folding, and algebraic simplification — tree nodes representing the same subexpression can be shared (DAG)."
-                },
+                "options": [
+                    {
+                        "option_text": "Expression trees require less memory than postfix strings.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Expression trees are always faster to evaluate.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Expression trees eliminate the need for a stack entirely.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Expression trees expose the structure of the expression, enabling optimisations like common subexpression elimination (CSE), constant folding, and algebraic simplification \u2014 tree nodes representing the same subexpression can be shared (DAG).",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Structural analysis**: An ET makes relationships between sub-expressions explicit — compilers can detect patterns.\n2. **DAG (Directed Acyclic Graph)**: If two subexpressions are identical (e.g., `a+b` appears twice), they can share a single DAG node — avoiding redundant computation (CSE).\n3. **Constant folding**: ET nodes with all-constant children can be pre-computed at compile time: `3+4` → `7`.\n4. **Algebraic simplification**: Detect identity patterns (e.g., `x*1` → `x`, `x+0` → `x`) via tree pattern matching.\n5. **Postfix strings**: Sequential — harder to identify and manipulate sub-expression patterns without first building a tree.",
-                "language": "C"
+                "solution_explanation": "1. **Structural analysis**: An ET makes relationships between sub-expressions explicit \u2014 compilers can detect patterns.\n2. **DAG (Directed Acyclic Graph)**: If two subexpressions are identical (e.g., `a+b` appears twice), they can share a single DAG node \u2014 avoiding redundant computation (CSE).\n3. **Constant folding**: ET nodes with all-constant children can be pre-computed at compile time: `3+4` \u2192 `7`.\n4. **Algebraic simplification**: Detect identity patterns (e.g., `x*1` \u2192 `x`, `x+0` \u2192 `x`) via tree pattern matching.\n5. **Postfix strings**: Sequential \u2014 harder to identify and manipulate sub-expression patterns without first building a tree.",
+                "language": "C",
+                "question_text": "In a compiler's intermediate code generation, expression trees are used. What is an advantage of using an ET over direct postfix notation for intermediate representation?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000018",
-                "question": "What is the height of the expression tree for the infix expression `((a + b) * (c - d)) / ((e + f) * g)`?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "B",
-                "options": {
-                    "A": "[7, 1, 5, 12, 10, 8]",
-                    "B": "Height 3",
-                    "C": "Height 7 — one level per operand.",
-                    "D": "Height 5"
-                },
+                "options": [
+                    {
+                        "option_text": "[7, 1, 5, 12, 10, 8]",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Height 3",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Height 7 \u2014 one level per operand.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Height 5",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Build the tree:\n- Root = `/` (lowest precedence outer operator).\n- Left of `/` = `*` with children `(a+b)` and `(c-d)` → height 2 subtree.\n- Right of `/` = `*` with children `(e+f)` and `g`.\n  - `(e+f)` has height 1; `g` has height 0.\n  - Right `*` has height 2.\n- Root `/` level = 1. Child `*` levels = 2. Leaf operator levels (+ and -) = 3. Leaf operand levels (a,b,c,d,e,f,g) = height from root = 4... \n\nRe-counting from root = 0:\n- Level 0: `/`\n- Level 1: `*` (left), `*` (right)\n- Level 2: `+`(a,b), `-`(c,d) [left branch]; `+`(e,f), g [right branch]\n- Level 3: a, b, c, d, e, f\n\n**Height = 3** (longest path from root to a leaf = 3 edges). ✅",
-                "language": "C"
+                "solution_explanation": "Build the tree:\n- Root = `/` (lowest precedence outer operator).\n- Left of `/` = `*` with children `(a+b)` and `(c-d)` \u2192 height 2 subtree.\n- Right of `/` = `*` with children `(e+f)` and `g`.\n  - `(e+f)` has height 1; `g` has height 0.\n  - Right `*` has height 2.\n- Root `/` level = 1. Child `*` levels = 2. Leaf operator levels (+ and -) = 3. Leaf operand levels (a,b,c,d,e,f,g) = height from root = 4... \n\nRe-counting from root = 0:\n- Level 0: `/`\n- Level 1: `*` (left), `*` (right)\n- Level 2: `+`(a,b), `-`(c,d) [left branch]; `+`(e,f), g [right branch]\n- Level 3: a, b, c, d, e, f\n\n**Height = 3** (longest path from root to a leaf = 3 edges). \u2705",
+                "language": "C",
+                "question_text": "What is the height of the expression tree for the infix expression `((a + b) * (c - d)) / ((e + f) * g)`?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000019",
-                "question": "Converting the infix `A - B + C` to postfix using the Shunting-Yard algorithm. Operators `+` and `-` have the same precedence, both left-associative. What is the correct postfix output?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "A B - C +",
-                    "B": "A B C - +",
-                    "C": "A B C + -",
-                    "D": "A - B + C (unchanged)"
-                },
+                "options": [
+                    {
+                        "option_text": "A B - C +",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "A B C - +",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "A B C + -",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "A - B + C (unchanged)",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Apply Shunting-Yard step by step:\n1. Read A → output A. Output: [A], Stack: []\n2. Read `-` → stack empty, push. Output: [A], Stack: [-]\n3. Read B → output B. Output: [A, B], Stack: [-]\n4. Read `+` → top is `-`, same precedence, left-associative → pop `-` to output. Stack empty → push `+`. Output: [A, B, -], Stack: [+]\n5. Read C → output C. Output: [A, B, -, C], Stack: [+]\n6. End → pop remaining: pop `+`. Output: **A B - C +**\n\nResult: **`A B - C +`** ✅ (represents `(A-B)+C` — correct left-to-right evaluation).",
-                "language": "C"
+                "solution_explanation": "Apply Shunting-Yard step by step:\n1. Read A \u2192 output A. Output: [A], Stack: []\n2. Read `-` \u2192 stack empty, push. Output: [A], Stack: [-]\n3. Read B \u2192 output B. Output: [A, B], Stack: [-]\n4. Read `+` \u2192 top is `-`, same precedence, left-associative \u2192 pop `-` to output. Stack empty \u2192 push `+`. Output: [A, B, -], Stack: [+]\n5. Read C \u2192 output C. Output: [A, B, -, C], Stack: [+]\n6. End \u2192 pop remaining: pop `+`. Output: **A B - C +**\n\nResult: **`A B - C +`** \u2705 (represents `(A-B)+C` \u2014 correct left-to-right evaluation).",
+                "language": "C",
+                "question_text": "Converting the infix `A - B + C` to postfix using the Shunting-Yard algorithm. Operators `+` and `-` have the same precedence, both left-associative. What is the correct postfix output?",
+                "marks": 1
             },
             {
                 "id": "cs04a001-0001-4000-a001-000000000020",
-                "question": "An expression tree is constructed for `(a^b)^c` where `^` is right-associative exponentiation. Compare this to `a^(b^c)`. Are the trees the same? What key structural difference exists?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "C",
-                "options": {
-                    "A": "Yes, both expressions produce identical trees since a^b^c is unambiguous.",
-                    "B": "No — `(a^b)^c` has a deeper left subtree; `a^(b^c)` has a deeper right subtree. Both trees are mirror images.",
-                    "C": "No — `(a^b)^c`: root=^, left=(^,a,b), right=c. `a^(b^c)`: root=^, left=a, right=(^,b,c). The grouping of the exponent subtrees differs, and they compute different mathematical values.",
-                    "D": "Yes — exponentiation trees are always identical regardless of grouping."
-                },
+                "options": [
+                    {
+                        "option_text": "Yes, both expressions produce identical trees since a^b^c is unambiguous.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "No \u2014 `(a^b)^c` has a deeper left subtree; `a^(b^c)` has a deeper right subtree. Both trees are mirror images.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "No \u2014 `(a^b)^c`: root=^, left=(^,a,b), right=c. `a^(b^c)`: root=^, left=a, right=(^,b,c). The grouping of the exponent subtrees differs, and they compute different mathematical values.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Yes \u2014 exponentiation trees are always identical regardless of grouping.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **`(a^b)^c`**: Root=^. Left child = (^, a, b). Right child = c. Evaluates as `(a^b)^c = a^(b*c)`.\n2. **`a^(b^c)`**: Root=^. Left child = a. Right child = (^, b, c). Evaluates as `a^(b^c)` — generally different from `a^(bc)`.\n3. **Different trees, different mathematics**: e.g., `(2^3)^2 = 8^2 = 64` but `2^(3^2) = 2^9 = 512`.\n4. **Associativity matters**: `^` is right-associative in most languages — `a^b^c` is parsed as `a^(b^c)`, not `(a^b)^c`.\n5. **Expression trees explicitly encode associativity** via their structure — no ambiguity in the tree form.",
-                "language": "C"
+                "solution_explanation": "1. **`(a^b)^c`**: Root=^. Left child = (^, a, b). Right child = c. Evaluates as `(a^b)^c = a^(b*c)`.\n2. **`a^(b^c)`**: Root=^. Left child = a. Right child = (^, b, c). Evaluates as `a^(b^c)` \u2014 generally different from `a^(bc)`.\n3. **Different trees, different mathematics**: e.g., `(2^3)^2 = 8^2 = 64` but `2^(3^2) = 2^9 = 512`.\n4. **Associativity matters**: `^` is right-associative in most languages \u2014 `a^b^c` is parsed as `a^(b^c)`, not `(a^b)^c`.\n5. **Expression trees explicitly encode associativity** via their structure \u2014 no ambiguity in the tree form.",
+                "language": "C",
+                "question_text": "An expression tree is constructed for `(a^b)^c` where `^` is right-associative exponentiation. Compare this to `a^(b^c)`. Are the trees the same? What key structural difference exists?",
+                "marks": 1
             }
         ]
     }

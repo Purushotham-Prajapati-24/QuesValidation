@@ -4,163 +4,293 @@
         "questions": [
             {
                 "id": "a94dbacc-165b-409f-958f-0f9d7ebef6c3",
-                "question": "When a Binary Search Tree (BST) is traversed using **Inorder** traversal (Left → Root → Right), the output is always:",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "A",
-                "options": {
-                    "A": "Nodes in sorted (non-decreasing) order.",
-                    "B": "Nodes in reverse sorted order.",
-                    "C": "Nodes level by level from top to bottom.",
-                    "D": "The root node always printed first."
-                },
+                "options": [
+                    {
+                        "option_text": "Nodes in sorted (non-decreasing) order.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Nodes in reverse sorted order.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Nodes level by level from top to bottom.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The root node always printed first.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "By the BST property, for any node N: all values in the left subtree < N < all values in the right subtree. Inorder traversal visits Left first, then Root, then Right — this naturally visits nodes in **ascending (non-decreasing) sorted order**. This is a key property used in BST-based sorting. Reverse Inorder (Right → Root → Left) gives descending order. Level-by-level is BFS. Root-first is Preorder.",
-                "language": "General"
+                "solution_explanation": "By the BST property, for any node N: all values in the left subtree < N < all values in the right subtree. Inorder traversal visits Left first, then Root, then Right \u2014 this naturally visits nodes in **ascending (non-decreasing) sorted order**. This is a key property used in BST-based sorting. Reverse Inorder (Right \u2192 Root \u2192 Left) gives descending order. Level-by-level is BFS. Root-first is Preorder.",
+                "language": "General",
+                "question_text": "When a Binary Search Tree (BST) is traversed using **Inorder** traversal (Left \u2192 Root \u2192 Right), the output is always:",
+                "marks": 1
             },
             {
                 "id": "ada09537-a09e-4e41-9292-866ddaf03c9b",
-                "question": "For a BST constructed by inserting keys in the order: 50, 30, 70, 20, 40, 60, 80 — what is the **Preorder** traversal sequence (Root → Left → Right)?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "50, 30, 20, 40, 70, 60, 80",
-                    "B": "20, 30, 40, 50, 60, 70, 80",
-                    "C": "20, 40, 30, 60, 80, 70, 50",
-                    "D": "50, 70, 80, 60, 30, 40, 20"
-                },
+                "options": [
+                    {
+                        "option_text": "50, 30, 20, 40, 70, 60, 80",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "20, 30, 40, 50, 60, 70, 80",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "20, 40, 30, 60, 80, 70, 50",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "50, 70, 80, 60, 30, 40, 20",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Build the BST:\n- 50 = root\n- 30 goes left of 50; 70 goes right of 50\n- 20 goes left of 30; 40 goes right of 30\n- 60 goes left of 70; 80 goes right of 70\n\nTree structure:\n```\n        50\n       /  \\\n      30   70\n     / \\  / \\\n    20 40 60 80\n```\n**Preorder** (Root → Left → Right): 50 → 30 → 20 → 40 → 70 → 60 → 80.\nOption B is Inorder (sorted). Option C is Postorder. Option D is right-first Preorder.",
-                "language": "General"
+                "solution_explanation": "Build the BST:\n- 50 = root\n- 30 goes left of 50; 70 goes right of 50\n- 20 goes left of 30; 40 goes right of 30\n- 60 goes left of 70; 80 goes right of 70\n\nTree structure:\n```\n        50\n       /  \\\n      30   70\n     / \\  / \\\n    20 40 60 80\n```\n**Preorder** (Root \u2192 Left \u2192 Right): 50 \u2192 30 \u2192 20 \u2192 40 \u2192 70 \u2192 60 \u2192 80.\nOption B is Inorder (sorted). Option C is Postorder. Option D is right-first Preorder.",
+                "language": "General",
+                "question_text": "For a BST constructed by inserting keys in the order: 50, 30, 70, 20, 40, 60, 80 \u2014 what is the **Preorder** traversal sequence (Root \u2192 Left \u2192 Right)?",
+                "marks": 1
             },
             {
                 "id": "8f097ca7-846e-47cf-879c-ed629562692c",
-                "question": "Using the same BST (keys: 50, 30, 70, 20, 40, 60, 80), what is the **Postorder** traversal sequence (Left → Right → Root)?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "50, 30, 20, 40, 70, 60, 80",
-                    "B": "20, 30, 40, 50, 60, 70, 80",
-                    "C": "20, 40, 30, 60, 80, 70, 50",
-                    "D": "80, 70, 60, 50, 40, 30, 20"
-                },
+                "options": [
+                    {
+                        "option_text": "50, 30, 20, 40, 70, 60, 80",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "20, 30, 40, 50, 60, 70, 80",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "20, 40, 30, 60, 80, 70, 50",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "80, 70, 60, 50, 40, 30, 20",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Using the same BST from the previous question:\n```\n        50\n       /  \\\n      30   70\n     / \\  / \\\n    20 40 60 80\n```\n**Postorder** (Left → Right → Root):\n- Left subtree of 50: Postorder of subtree rooted at 30 = 20, 40, 30.\n- Right subtree of 50: Postorder of subtree rooted at 70 = 60, 80, 70.\n- Root: 50.\n- Full postorder: **20, 40, 30, 60, 80, 70, 50**.",
-                "language": "General"
+                "solution_explanation": "Using the same BST from the previous question:\n```\n        50\n       /  \\\n      30   70\n     / \\  / \\\n    20 40 60 80\n```\n**Postorder** (Left \u2192 Right \u2192 Root):\n- Left subtree of 50: Postorder of subtree rooted at 30 = 20, 40, 30.\n- Right subtree of 50: Postorder of subtree rooted at 70 = 60, 80, 70.\n- Root: 50.\n- Full postorder: **20, 40, 30, 60, 80, 70, 50**.",
+                "language": "General",
+                "question_text": "Using the same BST (keys: 50, 30, 70, 20, 40, 60, 80), what is the **Postorder** traversal sequence (Left \u2192 Right \u2192 Root)?",
+                "marks": 1
             },
             {
                 "id": "2d7a3b85-97ce-413d-b999-4c0accdfe33d",
-                "question": "During BST **creation (insertion)**, the value 45 is to be inserted into the BST: 50 → 30 → 70 → 20 → 40. Which node does 45 become a child of, and on which side?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "Right child of node 30.",
-                    "B": "Right child of node 40.",
-                    "C": "Left child of node 50.",
-                    "D": "Left child of node 40."
-                },
+                "options": [
+                    {
+                        "option_text": "Right child of node 30.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Right child of node 40.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Left child of node 50.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Left child of node 40.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Trace insertion of 45:\n1. Compare 45 with root 50: 45 < 50, go **left** to node 30.\n2. Compare 45 with 30: 45 > 30, go **right** to node 40.\n3. Compare 45 with 40: 45 > 40, go **right** — node 40 has no right child.\n4. Insert 45 as the **right child of 40**.\n\nFinal position: `40->right = 45`. This demonstrates how BST insertion always follows the same comparison path as a search.",
-                "language": "General"
+                "solution_explanation": "Trace insertion of 45:\n1. Compare 45 with root 50: 45 < 50, go **left** to node 30.\n2. Compare 45 with 30: 45 > 30, go **right** to node 40.\n3. Compare 45 with 40: 45 > 40, go **right** \u2014 node 40 has no right child.\n4. Insert 45 as the **right child of 40**.\n\nFinal position: `40->right = 45`. This demonstrates how BST insertion always follows the same comparison path as a search.",
+                "language": "General",
+                "question_text": "During BST **creation (insertion)**, the value 45 is to be inserted into the BST: 50 \u2192 30 \u2192 70 \u2192 20 \u2192 40. Which node does 45 become a child of, and on which side?",
+                "marks": 1
             },
             {
                 "id": "714162ea-f752-4d65-ad8c-f4903023d457",
-                "question": "Given only the **Inorder** traversal of a BST: `5, 10, 15, 20, 25`, which of the following Preorder sequences is a valid BST that produces this Inorder?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "5, 10, 15, 20, 25 (same as inorder — a right-skewed BST).",
-                    "B": "25, 20, 15, 10, 5 (reverse — a left-skewed BST).",
-                    "C": "15, 10, 5, 20, 25 (balanced BST with 15 as root).",
-                    "D": "5, 25, 10, 20, 15"
-                },
+                "options": [
+                    {
+                        "option_text": "5, 10, 15, 20, 25 (same as inorder \u2014 a right-skewed BST).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "25, 20, 15, 10, 5 (reverse \u2014 a left-skewed BST).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "15, 10, 5, 20, 25 (balanced BST with 15 as root).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "5, 25, 10, 20, 15",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Any valid BST with keys {5,10,15,20,25} must produce inorder 5,10,15,20,25. Multiple BSTs are valid. Let's verify Option C (Preorder: 15,10,5,20,25):\n- Root = 15. Left subtree preorder: 10, 5 → BST: 10 with left child 5.\n- Right subtree preorder: 20, 25 → BST: 20 with right child 25.\n- Inorder: 5, 10, **15**, 20, 25 ✓\n\nOnly sequence C correctly forms a BST matching the inorder.. However, Option C is the most canonical balanced form and is the expected textbook answer.",
-                "language": "General"
+                "solution_explanation": "Any valid BST with keys {5,10,15,20,25} must produce inorder 5,10,15,20,25. Multiple BSTs are valid. Let's verify Option C (Preorder: 15,10,5,20,25):\n- Root = 15. Left subtree preorder: 10, 5 \u2192 BST: 10 with left child 5.\n- Right subtree preorder: 20, 25 \u2192 BST: 20 with right child 25.\n- Inorder: 5, 10, **15**, 20, 25 \u2713\n\nOnly sequence C correctly forms a BST matching the inorder.. However, Option C is the most canonical balanced form and is the expected textbook answer.",
+                "language": "General",
+                "question_text": "Given only the **Inorder** traversal of a BST: `5, 10, 15, 20, 25`, which of the following Preorder sequences is a valid BST that produces this Inorder?",
+                "marks": 1
             },
             {
                 "id": "4bec3bc3-264b-4de9-a3c0-a898a1cc9151",
-                "question": "For a BST traversal, which of the following traversals is most commonly used to **serialize** (save) a BST so that it can be fully reconstructed from the stored data alone, without additional structure information?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "Inorder traversal alone.",
-                    "B": "Preorder traversal alone.",
-                    "C": "Postorder traversal alone.",
-                    "D": "Any single traversal is sufficient for full reconstruction."
-                },
+                "options": [
+                    {
+                        "option_text": "Inorder traversal alone.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Preorder traversal alone.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Postorder traversal alone.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Any single traversal is sufficient for full reconstruction.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "**Preorder** traversal uniquely defines a BST because:\n- The first element in Preorder is always the **root**.\n- Elements smaller than the root belong to the **left subtree**.\n- Elements larger belong to the **right subtree**.\n- This logic applies recursively, fully reconstructing the tree.\n\nInorder alone cannot reconstruct a BST uniquely (multiple BSTs have the same Inorder). Postorder alone CAN also reconstruct a BST (last element = root), but Preorder is the standard serialization method. For general binary trees (not BST), you need Preorder + Inorder or Postorder + Inorder.",
-                "language": "General"
+                "language": "General",
+                "question_text": "For a BST traversal, which of the following traversals is most commonly used to **serialize** (save) a BST so that it can be fully reconstructed from the stored data alone, without additional structure information?",
+                "marks": 1
             },
             {
                 "id": "f70d4ede-426c-4229-866f-1224044eb9de",
-                "question": "What is the **worst-case time complexity** of searching for a value in a BST with N nodes?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "D",
-                "options": {
-                    "A": "O(log N) — BST always halves the search space.",
-                    "B": "O(N log N) — due to traversal overhead.",
-                    "C": "O(1) — direct access via root comparison.",
-                    "D": "O(N) — in a degenerate (skewed) BST where all nodes are in a single chain."
-                },
+                "options": [
+                    {
+                        "option_text": "O(log N) \u2014 BST always halves the search space.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N log N) \u2014 due to traversal overhead.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(1) \u2014 direct access via root comparison.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N) \u2014 in a degenerate (skewed) BST where all nodes are in a single chain.",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "A **balanced BST** has height O(log N), giving O(log N) search. However, if keys are inserted in sorted order (e.g., 1, 2, 3, 4, ..., N), the BST degenerates into a **right-skewed linked list** — every node has only a right child. In this case, the height = N, and searching requires traversing all N nodes in the worst case: **O(N)**. This is why **balanced BSTs** (AVL, Red-Black Trees) are important — they guarantee O(log N) in all cases.",
-                "language": "General"
+                "solution_explanation": "A **balanced BST** has height O(log N), giving O(log N) search. However, if keys are inserted in sorted order (e.g., 1, 2, 3, 4, ..., N), the BST degenerates into a **right-skewed linked list** \u2014 every node has only a right child. In this case, the height = N, and searching requires traversing all N nodes in the worst case: **O(N)**. This is why **balanced BSTs** (AVL, Red-Black Trees) are important \u2014 they guarantee O(log N) in all cases.",
+                "language": "General",
+                "question_text": "What is the **worst-case time complexity** of searching for a value in a BST with N nodes?",
+                "marks": 1
             },
             {
                 "id": "cc3a11b8-8c63-432d-8543-4a710747a66d",
-                "question": "A recursive Inorder traversal function visits nodes in sorted order. What is the **space complexity** of this recursive approach for a BST of N nodes with height H?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "O(N) always — due to storing all node values.",
-                    "B": "O(H) — the call stack depth equals the tree height H (O(log N) for balanced, O(N) worst case).",
-                    "C": "O(1) — recursion uses no extra space.",
-                    "D": "O(N^2) — each recursive call creates a new copy of the subtree."
-                },
+                "options": [
+                    {
+                        "option_text": "O(N) always \u2014 due to storing all node values.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(H) \u2014 the call stack depth equals the tree height H (O(log N) for balanced, O(N) worst case).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "O(1) \u2014 recursion uses no extra space.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N^2) \u2014 each recursive call creates a new copy of the subtree.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Recursive traversal uses the **call stack** for pending function calls. At any point, the maximum depth of recursive calls equals the current path length from root to a leaf — which is the **tree height H**. For a balanced BST: H = O(log N), so space = O(log N). For a degenerate BST: H = O(N), so space = O(N). In general, space complexity is **O(H)** where H is the height. No node values are stored in auxiliary space — just function frames.",
-                "language": "General"
+                "solution_explanation": "Recursive traversal uses the **call stack** for pending function calls. At any point, the maximum depth of recursive calls equals the current path length from root to a leaf \u2014 which is the **tree height H**. For a balanced BST: H = O(log N), so space = O(log N). For a degenerate BST: H = O(N), so space = O(N). In general, space complexity is **O(H)** where H is the height. No node values are stored in auxiliary space \u2014 just function frames.",
+                "language": "General",
+                "question_text": "A recursive Inorder traversal function visits nodes in sorted order. What is the **space complexity** of this recursive approach for a BST of N nodes with height H?",
+                "marks": 1
             },
             {
                 "id": "065bc524-d0f0-49c4-bfb8-41705800b17c",
-                "question": "For the BST with Preorder: `8, 3, 1, 6, 4, 7, 10, 14, 13` — which node is the **right child of node 10**?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "Node 8 (the root)",
-                    "B": "Node 13",
-                    "C": "Node 14",
-                    "D": "Node 7"
-                },
+                "options": [
+                    {
+                        "option_text": "Node 8 (the root)",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Node 13",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Node 14",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Node 7",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Reconstruct the BST from Preorder `8, 3, 1, 6, 4, 7, 10, 14, 13`:\n- Root = 8.\n- {3,1,6,4,7} < 8 → left subtree; {10,14,13} > 8 → right subtree.\n- Right subtree Preorder: `10, 14, 13`. Root = 10.\n- From 10: {14, 13} > 10 → right subtree of 10.\n- Right subtree of 10 Preorder: `14, 13`. Root = 14.\n- 13 < 14 → left child of 14.\n\n**Tree**: 10's right child is **14**. 14's left child is 13.\n\nFull tree:\n```\n         8\n        / \\\n       3   10\n      / \\    \\\n     1   6   14\n        / \\  /\n       4   7 13\n```",
-                "language": "General"
+                "solution_explanation": "Reconstruct the BST from Preorder `8, 3, 1, 6, 4, 7, 10, 14, 13`:\n- Root = 8.\n- {3,1,6,4,7} < 8 \u2192 left subtree; {10,14,13} > 8 \u2192 right subtree.\n- Right subtree Preorder: `10, 14, 13`. Root = 10.\n- From 10: {14, 13} > 10 \u2192 right subtree of 10.\n- Right subtree of 10 Preorder: `14, 13`. Root = 14.\n- 13 < 14 \u2192 left child of 14.\n\n**Tree**: 10's right child is **14**. 14's left child is 13.\n\nFull tree:\n```\n         8\n        / \\\n       3   10\n      / \\    \\\n     1   6   14\n        / \\  /\n       4   7 13\n```",
+                "language": "General",
+                "question_text": "For the BST with Preorder: `8, 3, 1, 6, 4, 7, 10, 14, 13` \u2014 which node is the **right child of node 10**?",
+                "marks": 1
             },
             {
                 "id": "346170db-5e33-4e85-bbd0-666d1acf216f",
-                "question": "**[HARD]** Given the Inorder traversal: `4, 8, 10, 12, 14, 20, 22` and Postorder traversal: `8, 4, 12, 14, 10, 22, 20` of a Binary Tree, what is the **Preorder** traversal?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "A",
-                "options": {
-                    "A": "20, 10, 4, 8, 14, 12, 22",
-                    "B": "20, 10, 4, 8, 12, 14, 22",
-                    "C": "4, 8, 10, 12, 14, 20, 22",
-                    "D": "20, 22, 10, 14, 12, 4, 8"
-                },
+                "options": [
+                    {
+                        "option_text": "20, 10, 4, 8, 14, 12, 22",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "20, 10, 4, 8, 12, 14, 22",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "4, 8, 10, 12, 14, 20, 22",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "20, 22, 10, 14, 12, 4, 8",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "**Reconstruction from Inorder + Postorder**:\n1. Last element in Postorder = root = **20**. \n   Inorder: `[4,8,10,12,14] | 20 | [22]`.\n2. Left subtree: Inorder `[4,8,10,12,14]`, Postorder `[8,4,12,14,10]`.\n   - Last of left Postorder = **10**. Inorder: `[4,8] | 10 | [12,14]`.\n3. Left of 10: Inorder `[4,8]`, Postorder `[8,4]`.\n   - Last = **4**. Inorder: `[] | 4 | [8]`. → 4 has right child 8.\n4. Right of 10: Inorder `[12,14]`, Postorder `[12,14]`.\n   - Last = **14**. Inorder: `[12] | 14 | []`. → 14 has left child 12.\n5. Right subtree of 20: Inorder `[22]`, Postorder `[22]` → single node **22**.\n\n**Preorder** (Root→Left→Right): 20 → 10 → 4 → 8 → 14 → 12 → 22.",
-                "language": "General"
+                "solution_explanation": "**Reconstruction from Inorder + Postorder**:\n1. Last element in Postorder = root = **20**. \n   Inorder: `[4,8,10,12,14] | 20 | [22]`.\n2. Left subtree: Inorder `[4,8,10,12,14]`, Postorder `[8,4,12,14,10]`.\n   - Last of left Postorder = **10**. Inorder: `[4,8] | 10 | [12,14]`.\n3. Left of 10: Inorder `[4,8]`, Postorder `[8,4]`.\n   - Last = **4**. Inorder: `[] | 4 | [8]`. \u2192 4 has right child 8.\n4. Right of 10: Inorder `[12,14]`, Postorder `[12,14]`.\n   - Last = **14**. Inorder: `[12] | 14 | []`. \u2192 14 has left child 12.\n5. Right subtree of 20: Inorder `[22]`, Postorder `[22]` \u2192 single node **22**.\n\n**Preorder** (Root\u2192Left\u2192Right): 20 \u2192 10 \u2192 4 \u2192 8 \u2192 14 \u2192 12 \u2192 22.",
+                "language": "General",
+                "question_text": "**[HARD]** Given the Inorder traversal: `4, 8, 10, 12, 14, 20, 22` and Postorder traversal: `8, 4, 12, 14, 10, 22, 20` of a Binary Tree, what is the **Preorder** traversal?",
+                "marks": 1
             }
         ]
     }

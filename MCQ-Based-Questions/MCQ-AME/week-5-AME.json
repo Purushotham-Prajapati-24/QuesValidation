@@ -1,166 +1,296 @@
 [
     {
-        "name": "Week 5: Single Linked List Operations",
+        "name": "Week 5: Singly Linked List",
         "questions": [
             {
                 "id": "9372118b-88a1-43bc-abd4-51c7883d56f5",
-                "question": "In a Singly Linked List, each node contains two parts. Which of the following correctly describes the structure of a node?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "A data field and two pointers: one to the previous node and one to the next node.",
-                    "B": "A data field and one pointer that stores the address of the next node.",
-                    "C": "Two data fields and one pointer to the next node.",
-                    "D": "Only a pointer to the head node and a data field."
-                },
+                "options": [
+                    {
+                        "option_text": "A data field and two pointers: one to the previous node and one to the next node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "A data field and one pointer that stores the address of the next node.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Two data fields and one pointer to the next node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Only a pointer to the head node and a data field.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "A Singly Linked List node is the simplest form of a linked list node. It consists of:\n1. **Data field**: Stores the actual value (e.g., an integer).\n2. **Next pointer**: A pointer that holds the memory address of the next node in the sequence.\n\nNote that a **Doubly** Linked List has two pointers (prev and next), not a Singly Linked List. The head is not stored inside a node itself, it is a separate pointer maintained by the list.",
-                "language": "General"
+                "language": "General",
+                "question_text": "In a Singly Linked List, each node contains two parts. Which of the following correctly describes the structure of a node?",
+                "marks": 1
             },
             {
                 "id": "380850ba-545f-4be1-b130-76e794610910",
-                "question": "A singly linked list has nodes: `10 -> 20 -> 30 -> NULL`. A new node with value `5` is to be inserted at the **beginning**. Which pointer update sequence correctly performs this operation?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "C",
-                "options": {
-                    "A": "Set `head->next = newNode`, then set `newNode->next = NULL`, then update `head = newNode`.",
-                    "B": "Set `head = newNode`, then set `newNode->next = head`.",
-                    "C": "Set `newNode->next = head`, then update `head = newNode`.",
-                    "D": "Set `newNode->next = NULL`, then set the last node's next to `newNode`, then update `head`."
-                },
+                "options": [
+                    {
+                        "option_text": "Set `head->next = newNode`, then set `newNode->next = NULL`, then update `head = newNode`.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Set `head = newNode`, then set `newNode->next = head`.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Set `newNode->next = head`, then update `head = newNode`.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Set `newNode->next = NULL`, then set the last node's next to `newNode`, then update `head`.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "To insert at the beginning without losing the rest of the list:\n1. **First**, link `newNode->next = head`. This connects the new node to the existing first node.\n2. **Then**, update `head = newNode`. This makes the new node the official start of the list.\n\nIf you update `head = newNode` first (as in option B), you lose the reference to the original list, since `newNode->next = head` would then point to itself. The order is critical.",
-                "language": "General"
+                "language": "General",
+                "question_text": "A singly linked list has nodes: `10 -> 20 -> 30 -> NULL`. A new node with value `5` is to be inserted at the **beginning**. Which pointer update sequence correctly performs this operation?",
+                "marks": 1
             },
             {
                 "id": "a3d0f2be-fc18-4b59-a207-58cd261590c1",
-                "question": "Consider the following C code that inserts a node at the **end** of a singly linked list. What is the time complexity of this insertion?\n\n```c\nvoid insertEnd(struct Node** head_ref, int data) {\n    struct Node* new_node = malloc(sizeof(struct Node));\n    new_node->data = data;\n    new_node->next = NULL;\n    if (*head_ref == NULL) { *head_ref = new_node; return; }\n    struct Node* temp = *head_ref;\n    while (temp->next != NULL)\n        temp = temp->next;\n    temp->next = new_node;\n}\n```",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "O(1) — constant time since we just update the last pointer.",
-                    "B": "O(log N) — binary search can be used to find the last node.",
-                    "C": "O(N) — we must traverse the entire list to reach the last node.",
-                    "D": "O(N^2) — we traverse the list and also allocate memory dynamically."
-                },
+                "options": [
+                    {
+                        "option_text": "O(1) \u2014 constant time since we just update the last pointer.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(log N) \u2014 binary search can be used to find the last node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N) \u2014 we must traverse the entire list to reach the last node.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "O(N^2) \u2014 we traverse the list and also allocate memory dynamically.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "In a standard singly linked list **without a tail pointer**, inserting at the end requires traversing from the head all the way to the last node whose `next == NULL`. This traversal visits every node exactly once, making the time complexity **O(N)** where N is the number of nodes. Memory allocation (`malloc`) is O(1) on average and does **not** affect the traversal cost. A doubly-linked list or a list that maintains a `tail` pointer can do end insertion in O(1).",
-                "language": "C"
+                "language": "C",
+                "question_text": "Consider the following C code that inserts a node at the **end** of a singly linked list. What is the time complexity of this insertion?\n\n```c\nvoid insertEnd(struct Node** head_ref, int data) {\n    struct Node* new_node = malloc(sizeof(struct Node));\n    new_node->data = data;\n    new_node->next = NULL;\n    if (*head_ref == NULL) { *head_ref = new_node; return; }\n    struct Node* temp = *head_ref;\n    while (temp->next != NULL)\n        temp = temp->next;\n    temp->next = new_node;\n}\n```",
+                "marks": 1
             },
             {
                 "id": "e5e6b3e8-2353-4b4e-a9ec-1b48a55733bd",
-                "question": "To insert a new node **after the k-th node** (1-indexed) in a singly linked list of N nodes, how many pointer updates are minimally needed, and what is the time complexity of locating position k?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "3 pointer updates; O(1) time to locate position k.",
-                    "B": "2 pointer updates; O(k) time to locate position k.",
-                    "C": "1 pointer update; O(N) time to locate position k.",
-                    "D": "4 pointer updates; O(N log N) time to locate position k."
-                },
+                "options": [
+                    {
+                        "option_text": "3 pointer updates; O(1) time to locate position k.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "2 pointer updates; O(k) time to locate position k.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "1 pointer update; O(N) time to locate position k.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "4 pointer updates; O(N log N) time to locate position k.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "To insert a new node after position k:\n1. **Traverse** from the head, moving k-1 times to reach the k-th node. This takes O(k) time.\n2. **Pointer Update 1**: `newNode->next = kthNode->next` — Link the new node to what comes after position k.\n3. **Pointer Update 2**: `kthNode->next = newNode` — Connect the k-th node to the new node.\n\nExactly **2 pointer updates** are needed. The time complexity to find position k is O(k). Note: The order of these two updates matters — reversing them would lose the reference to the rest of the list.",
-                "language": "General"
+                "solution_explanation": "To insert a new node after position k:\n1. **Traverse** from the head, moving k-1 times to reach the k-th node. This takes O(k) time.\n2. **Pointer Update 1**: `newNode->next = kthNode->next` \u2014 Link the new node to what comes after position k.\n3. **Pointer Update 2**: `kthNode->next = newNode` \u2014 Connect the k-th node to the new node.\n\nExactly **2 pointer updates** are needed. The time complexity to find position k is O(k). Note: The order of these two updates matters \u2014 reversing them would lose the reference to the rest of the list.",
+                "language": "General",
+                "question_text": "To insert a new node **after the k-th node** (1-indexed) in a singly linked list of N nodes, how many pointer updates are minimally needed, and what is the time complexity of locating position k?",
+                "marks": 1
             },
             {
                 "id": "5036cade-3ad1-4f2a-819a-d9c63a6a71e4",
-                "question": "A singly linked list currently holds: `1 -> 2 -> 3 -> 4 -> 5 -> NULL`. After deleting the node at the **beginning**, which of the following shows the correct updated state and `head` pointer?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "A",
-                "options": {
-                    "A": "`head` points to node `2`; list becomes `2 -> 3 -> 4 -> 5 -> NULL`.",
-                    "B": "`head` still points to node `1` (now holding `NULL`); list becomes `NULL -> 2 -> 3 -> 4 -> 5`.",
-                    "C": "`head` points to node `5`; list gets reversed after deletion.",
-                    "D": "`head` points to node `3`; the first two nodes are deleted."
-                },
+                "options": [
+                    {
+                        "option_text": "`head` points to node `2`; list becomes `2 -> 3 -> 4 -> 5 -> NULL`.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "`head` still points to node `1` (now holding `NULL`); list becomes `NULL -> 2 -> 3 -> 4 -> 5`.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`head` points to node `5`; list gets reversed after deletion.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`head` points to node `3`; the first two nodes are deleted.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Deleting from the beginning:\n1. Store `temp = head` (points to node `1`).\n2. Move `head = head->next` (head now points to node `2`).\n3. Free `temp` (node `1` is deallocated).\n\nThe list becomes `2 -> 3 -> 4 -> 5 -> NULL`. The head is updated once, and only one node is removed. Nothing reverses — linked list operations are **positional**, not directional.",
-                "language": "General"
+                "solution_explanation": "Deleting from the beginning:\n1. Store `temp = head` (points to node `1`).\n2. Move `head = head->next` (head now points to node `2`).\n3. Free `temp` (node `1` is deallocated).\n\nThe list becomes `2 -> 3 -> 4 -> 5 -> NULL`. The head is updated once, and only one node is removed. Nothing reverses \u2014 linked list operations are **positional**, not directional.",
+                "language": "General",
+                "question_text": "A singly linked list currently holds: `1 -> 2 -> 3 -> 4 -> 5 -> NULL`. After deleting the node at the **beginning**, which of the following shows the correct updated state and `head` pointer?",
+                "marks": 1
             },
             {
                 "id": "e6e30964-5c7e-4083-b940-c21cdbafce38",
-                "question": "Analyze the following C code that attempts to delete a node with value `target` from a singly linked list. What is the bug in this code?\n\n```c\nvoid deleteNode(struct Node** head, int target) {\n    struct Node* temp = *head;\n    while (temp != NULL && temp->data != target)\n        temp = temp->next;\n    if (temp == NULL) return;\n    temp->data = temp->next->data;\n    temp->next = temp->next->next;\n}\n```",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "D",
-                "options": {
-                    "A": "The while loop condition is wrong — it should use `||` instead of `&&`.",
-                    "B": "The free() call is missing after deletion, causing a memory leak.",
-                    "C": "The code will fail to delete the head node.",
-                    "D": "If the node to delete is the **last node** in the list, `temp->next->data` will cause a NULL pointer dereference crash."
-                },
+                "options": [
+                    {
+                        "option_text": "The while loop condition is wrong \u2014 it should use `||` instead of `&&`.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The free() call is missing after deletion, causing a memory leak.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The code will fail to delete the head node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "If the node to delete is the **last node** in the list, `temp->next->data` will cause a NULL pointer dereference crash.",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "The 'copy-data-and-skip' trick is a clever way to delete a node without needing the previous pointer. However, it breaks when the target node is the **last node** because `temp->next` is `NULL`. Accessing `temp->next->data` (i.e., `NULL->data`) is a **NULL pointer dereference** which causes a segmentation fault/crash.\n\n- Option B: A memory leak is valid concern (the skipped node isn't freed), but not a crash-inducing bug.\n- Option C: This technique actually **works for the head node** since the same in-place swap logic applies.\n- Option D is the critical, crash-causing bug.",
-                "language": "C"
+                "language": "C",
+                "question_text": "Analyze the following C code that attempts to delete a node with value `target` from a singly linked list. What is the bug in this code?\n\n```c\nvoid deleteNode(struct Node** head, int target) {\n    struct Node* temp = *head;\n    while (temp != NULL && temp->data != target)\n        temp = temp->next;\n    if (temp == NULL) return;\n    temp->data = temp->next->data;\n    temp->next = temp->next->next;\n}\n```",
+                "marks": 1
             },
             {
                 "id": "1f7ad7cc-0578-428f-ac34-8eb4e2864c0a",
-                "question": "In a singly linked list of N nodes, what is the time complexity of deleting the **last node**?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "O(1) — just update the last pointer to NULL.",
-                    "B": "O(N) — we must traverse to the second-to-last node to update its `next` to NULL.",
-                    "C": "O(log N) — a binary search approach can locate the last node.",
-                    "D": "O(N^2) — each deletion shifts all elements, similar to an array."
-                },
+                "options": [
+                    {
+                        "option_text": "O(1) \u2014 just update the last pointer to NULL.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N) \u2014 we must traverse to the second-to-last node to update its `next` to NULL.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "O(log N) \u2014 a binary search approach can locate the last node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N^2) \u2014 each deletion shifts all elements, similar to an array.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Unlike arrays where you know the last index directly, in a singly linked list there is no backward pointer. To delete the last node:\n1. Traverse from `head` until the node **before** the last one (i.e., where `current->next->next == NULL`).\n2. Set `current->next = NULL`.\n3. Free the last node.\n\nThis traversal visits N-1 nodes, giving **O(N)** time complexity. If a `tail` pointer were maintained, we would still need O(N) because we need the **second-to-last** node — one of the rare cases where a tail pointer alone doesn't help.",
-                "language": "General"
+                "solution_explanation": "Unlike arrays where you know the last index directly, in a singly linked list there is no backward pointer. To delete the last node:\n1. Traverse from `head` until the node **before** the last one (i.e., where `current->next->next == NULL`).\n2. Set `current->next = NULL`.\n3. Free the last node.\n\nThis traversal visits N-1 nodes, giving **O(N)** time complexity. If a `tail` pointer were maintained, we would still need O(N) because we need the **second-to-last** node \u2014 one of the rare cases where a tail pointer alone doesn't help.",
+                "language": "General",
+                "question_text": "In a singly linked list of N nodes, what is the time complexity of deleting the **last node**?",
+                "marks": 1
             },
             {
                 "id": "296ce837-e1c9-45c0-87d5-202dc3f149f2",
-                "question": "A student writes the following `display()` function for a singly linked list, but it causes an infinite loop on a valid non-empty list. What is most likely wrong?\n\n```c\nvoid display(struct Node* head) {\n    struct Node* temp = head;\n    while (temp->next != NULL) {\n        printf(\"%d \", temp->data);\n        // temp = temp->next; <-- accidentally commented out\n    }\n    printf(\"%d\", temp->data);\n}\n```",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "The traversal pointer `temp` is never advanced — it stays on the head node, looping forever since `head->next` is never NULL (for N > 1).",
-                    "B": "The while loop condition should be `temp != NULL` instead of `temp->next != NULL`.",
-                    "C": "The `printf` statement inside the loop is printing a wrong format specifier.",
-                    "D": "The function is missing a base case for single-node lists."
-                },
+                "options": [
+                    {
+                        "option_text": "The traversal pointer `temp` is never advanced \u2014 it stays on the head node, looping forever since `head->next` is never NULL (for N > 1).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "The while loop condition should be `temp != NULL` instead of `temp->next != NULL`.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The `printf` statement inside the loop is printing a wrong format specifier.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The function is missing a base case for single-node lists.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "The line `temp = temp->next;` was commented out. Without advancing `temp`:\n- `temp` always points to the head node.\n- `head->next` is not NULL (assuming N > 1).\n- The condition `temp->next != NULL` is always `true`.\n- Result: **infinite loop**.\n\nOption B also points to a real improvement (changing to `temp != NULL` is indeed more standard), but the **primary cause of the infinite loop** is the missing traversal update. With `temp->next != NULL`, the last node is printed outside the loop — which is intentional here but fragile.",
-                "language": "C"
+                "solution_explanation": "The line `temp = temp->next;` was commented out. Without advancing `temp`:\n- `temp` always points to the head node.\n- `head->next` is not NULL (assuming N > 1).\n- The condition `temp->next != NULL` is always `true`.\n- Result: **infinite loop**.\n\nOption B also points to a real improvement (changing to `temp != NULL` is indeed more standard), but the **primary cause of the infinite loop** is the missing traversal update. With `temp->next != NULL`, the last node is printed outside the loop \u2014 which is intentional here but fragile.",
+                "language": "C",
+                "question_text": "A student writes the following `display()` function for a singly linked list, but it causes an infinite loop on a valid non-empty list. What is most likely wrong?\n\n```c\nvoid display(struct Node* head) {\n    struct Node* temp = head;\n    while (temp->next != NULL) {\n        printf(\"%d \", temp->data);\n        // temp = temp->next; <-- accidentally commented out\n    }\n    printf(\"%d\", temp->data);\n}\n```",
+                "marks": 1
             },
             {
                 "id": "b7dd363b-dd11-497f-9eaa-7a79618d7f6b",
-                "question": "A singly linked list has the following nodes in memory:\n\n| Node | Data | Next Pointer |\n|------|------|--------------|\n| A    |  10  | → B          |\n| B    |  20  | → C          |\n| C    |  30  | → D          |\n| D    |  40  | → NULL       |\n\n`head` points to A. A new node E with data `25` is to be inserted **between** nodes B (data=20) and C (data=30). After insertion, what does `B->next` point to, and what does `E->next` point to?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "`B->next` = E, `E->next` = C",
-                    "B": "`B->next` = C, `E->next` = C",
-                    "C": "`B->next` = E, `E->next` = NULL",
-                    "D": "`B->next` = NULL, `E->next` = C"
-                },
+                "options": [
+                    {
+                        "option_text": "`B->next` = E, `E->next` = C",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "`B->next` = C, `E->next` = C",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`B->next` = E, `E->next` = NULL",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`B->next` = NULL, `E->next` = C",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "Insertion after node B (middle insertion):\n1. Set `E->next = B->next` → `E->next` now points to **C** (preserving the rest of the list).\n2. Set `B->next = E` → B now points to the new node **E**.\n\nAfter insertion:\n- `B->next` = **E**\n- `E->next` = **C**\n- Final list: A → B(20) → E(25) → C(30) → D(40) → NULL",
-                "language": "General"
+                "solution_explanation": "Insertion after node B (middle insertion):\n1. Set `E->next = B->next` \u2192 `E->next` now points to **C** (preserving the rest of the list).\n2. Set `B->next = E` \u2192 B now points to the new node **E**.\n\nAfter insertion:\n- `B->next` = **E**\n- `E->next` = **C**\n- Final list: A \u2192 B(20) \u2192 E(25) \u2192 C(30) \u2192 D(40) \u2192 NULL",
+                "language": "General",
+                "question_text": "A singly linked list has the following nodes in memory:\n\n| Node | Data | Next Pointer |\n|------|------|--------------|\n| A    |  10  | \u2192 B          |\n| B    |  20  | \u2192 C          |\n| C    |  30  | \u2192 D          |\n| D    |  40  | \u2192 NULL       |\n\n`head` points to A. A new node E with data `25` is to be inserted **between** nodes B (data=20) and C (data=30). After insertion, what does `B->next` point to, and what does `E->next` point to?",
+                "marks": 1
             },
             {
                 "id": "bc09e576-a783-4b21-8b0e-e482c79312f2",
-                "question": "**[HARD]** Consider the following C function that manipulates a non-empty singly linked list with at least 3 nodes.\n\n```c\nvoid mystery(struct Node** head) {\n    struct Node *prev = NULL, *curr = *head, *next = NULL;\n    while (curr != NULL) {\n        next = curr->next;\n        curr->next = prev;\n        prev = curr;\n        curr = next;\n    }\n    *head = prev;\n}\n```\nIf the original list is `1 -> 2 -> 3 -> 4 -> 5 -> NULL`, what is the state of the list after calling `mystery(&head)`? Also, how many pointer updates happen in total during the execution of this function?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "C",
-                "options": {
-                    "A": "`5 -> 4 -> 3 -> 2 -> 1 -> NULL`; 10 pointer updates.",
-                    "B": "`1 -> 2 -> 3 -> 4 -> 5 -> NULL` (unchanged); 5 pointer updates.",
-                    "C": "`5 -> 4 -> 3 -> 2 -> 1 -> NULL`; 21 assignments (4 per node + 1 final).",
-                    "D": "`2 -> 1 -> 4 -> 3 -> 5 -> NULL`; 10 pointer updates."
-                },
+                "options": [
+                    {
+                        "option_text": "`5 -> 4 -> 3 -> 2 -> 1 -> NULL`; 10 pointer updates.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`1 -> 2 -> 3 -> 4 -> 5 -> NULL` (unchanged); 5 pointer updates.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`5 -> 4 -> 3 -> 2 -> 1 -> NULL`; 21 assignments (4 per node + 1 final).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "`2 -> 1 -> 4 -> 3 -> 5 -> NULL`; 10 pointer updates.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "The function `mystery` reverses the linked list in place, resulting in `5 -> 4 -> 3 -> 2 -> 1 -> NULL`. Counting convention (loop assignments): 4 assignments per node × 5 nodes = 20 assignments, plus the final `*head = prev` → 21 total assignments.",
-                "language": "C"
+                "solution_explanation": "The function `mystery` reverses the linked list in place, resulting in `5 -> 4 -> 3 -> 2 -> 1 -> NULL`. Counting convention (loop assignments): 4 assignments per node \u00d7 5 nodes = 20 assignments, plus the final `*head = prev` \u2192 21 total assignments.",
+                "language": "C",
+                "question_text": "**[HARD]** Consider the following C function that manipulates a non-empty singly linked list with at least 3 nodes.\n\n```c\nvoid mystery(struct Node** head) {\n    struct Node *prev = NULL, *curr = *head, *next = NULL;\n    while (curr != NULL) {\n        next = curr->next;\n        curr->next = prev;\n        prev = curr;\n        curr = next;\n    }\n    *head = prev;\n}\n```\nIf the original list is `1 -> 2 -> 3 -> 4 -> 5 -> NULL`, what is the state of the list after calling `mystery(&head)`? Also, how many pointer updates happen in total during the execution of this function?",
+                "marks": 1
             }
         ]
     }

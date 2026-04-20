@@ -1,326 +1,586 @@
 [
     {
-        "name": "Week 14 & 15: Sorting",
+        "name": "Week - 14 & 15: Advanced Sorting Techniques",
         "questions": [
             {
                 "id": "cs06a001-0001-4000-a001-000000000001",
-                "question": "Which C file mode string is correct to WRITE binary data to a file, creating it if it doesn't exist and truncating it if it does?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "\"r+b\" — read+write binary.",
-                    "B": "\"wb\" — write binary; creates or truncates the file.",
-                    "C": "\"ab\" — append binary; cannot truncate existing data.",
-                    "D": "\"rb\" — read binary only; creates nothing."
-                },
+                "options": [
+                    {
+                        "option_text": "\"r+b\" \u2014 read+write binary.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "\"wb\" \u2014 write binary; creates or truncates the file.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "\"ab\" \u2014 append binary; cannot truncate existing data.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "\"rb\" \u2014 read binary only; creates nothing.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **\"wb\"**: Opens for writing in binary mode. Creates the file if absent. If file exists, its contents are truncated to zero length before writing.\n2. **\"rb\"**: Read-only binary — file must exist; writing is not allowed.\n3. **\"ab\"**: Append binary — all writes go to the end; existing data is preserved; cannot truncate.\n4. **\"r+b\" (or \"rb+\")**: Read and write binary — file must already exist; does NOT truncate.\n5. **Binary vs text mode**: `\"wb\"` skips newline translation (\\n ↔ \\r\\n on Windows) — essential for saving structs and trees correctly.",
-                "language": "C"
+                "solution_explanation": "1. **\"wb\"**: Opens for writing in binary mode. Creates the file if absent. If file exists, its contents are truncated to zero length before writing.\n2. **\"rb\"**: Read-only binary \u2014 file must exist; writing is not allowed.\n3. **\"ab\"**: Append binary \u2014 all writes go to the end; existing data is preserved; cannot truncate.\n4. **\"r+b\" (or \"rb+\")**: Read and write binary \u2014 file must already exist; does NOT truncate.\n5. **Binary vs text mode**: `\"wb\"` skips newline translation (\\n \u2194 \\r\\n on Windows) \u2014 essential for saving structs and trees correctly.",
+                "language": "C",
+                "question_text": "Which C file mode string is correct to WRITE binary data to a file, creating it if it doesn't exist and truncating it if it does?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000002",
-                "question": "When saving a Binary Search Tree to a file for later reconstruction, which traversal order allows exact reconstruction without storing additional structural information (like NULL markers)?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "A",
-                "options": {
-                    "A": "Pre-Order (Root-Left-Right) — the root is always first; re-insertion of keys in Pre-Order sequence rebuilds the identical BST structure.",
-                    "B": "In-Order (Left-Root-Right) — produces a sorted sequence; any re-insertion order recreates the same BST.",
-                    "C": "Post-Order (Left-Right-Root) — last element is the root; enables reconstruction.",
-                    "D": "Level-Order — preserves level structure; simplest to reconstruct."
-                },
+                "options": [
+                    {
+                        "option_text": "Pre-Order (Root-Left-Right) \u2014 the root is always first; re-insertion of keys in Pre-Order sequence rebuilds the identical BST structure.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "In-Order (Left-Root-Right) \u2014 produces a sorted sequence; any re-insertion order recreates the same BST.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Post-Order (Left-Right-Root) \u2014 last element is the root; enables reconstruction.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Level-Order \u2014 preserves level structure; simplest to reconstruct.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Pre-Order save**: Writes root first, then left subtree, then right subtree.\n2. **Pre-Order reload**: The first key read becomes the BST root. Each subsequent key is inserted via standard BST insert — exactly recreating the original tree structure (because each key is inserted into the same position it occupied originally).\n3. **In-Order (sorted)**: Re-inserting sorted keys into an empty BST creates a degenerate (skewed) BST — completely different structure.\n4. **Post-Order**: The root is the LAST element — you must know the total count first; reconstruction is more complex.\n5. **Level-Order**: Requires explicit NULL markers to distinguish missing children.",
-                "language": "C"
+                "solution_explanation": "1. **Pre-Order save**: Writes root first, then left subtree, then right subtree.\n2. **Pre-Order reload**: The first key read becomes the BST root. Each subsequent key is inserted via standard BST insert \u2014 exactly recreating the original tree structure (because each key is inserted into the same position it occupied originally).\n3. **In-Order (sorted)**: Re-inserting sorted keys into an empty BST creates a degenerate (skewed) BST \u2014 completely different structure.\n4. **Post-Order**: The root is the LAST element \u2014 you must know the total count first; reconstruction is more complex.\n5. **Level-Order**: Requires explicit NULL markers to distinguish missing children.",
+                "language": "C",
+                "question_text": "When saving a Binary Search Tree to a file for later reconstruction, which traversal order allows exact reconstruction without storing additional structural information (like NULL markers)?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000003",
-                "question": "The `fwrite` function in C is used to save a struct to a binary file. What does the following call write?\n```c\nfwrite(&node, sizeof(TreeNode), 1, fp);\n```",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "C",
-                "options": {
-                    "A": "Writes the pointer addresses for `left` and `right` children — the full tree is serialised.",
-                    "B": "Writes only the `data` field of the node.",
-                    "C": "Writes the raw memory bytes of the `node` struct (including `data`, and pointer values for `left`/`right`) — these pointer values are meaningless on reload.",
-                    "D": "Writes a text representation of the struct fields."
-                },
+                "options": [
+                    {
+                        "option_text": "Writes the pointer addresses for `left` and `right` children \u2014 the full tree is serialised.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Writes only the `data` field of the node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Writes the raw memory bytes of the `node` struct (including `data`, and pointer values for `left`/`right`) \u2014 these pointer values are meaningless on reload.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Writes a text representation of the struct fields.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **`fwrite`**: Writes `sizeof(TreeNode)` raw bytes from `&node` to the binary file — exactly as the struct is laid out in memory.\n2. **Pointer fields included**: `left` and `right` pointers are also written, but they contain memory addresses valid ONLY in the current execution — they become garbage on reload.\n3. **Correct approach for trees**: Traverse the tree and write only the `data` field (and possibly a flag for NULL children). On reload, reconstruct the tree via insertion.\n4. **For flat structures (no pointers)**: `fwrite` of an entire struct works perfectly — e.g., saving an array of `int` or `Record` structs where all fields are values (not pointers).",
-                "language": "C"
+                "solution_explanation": "1. **`fwrite`**: Writes `sizeof(TreeNode)` raw bytes from `&node` to the binary file \u2014 exactly as the struct is laid out in memory.\n2. **Pointer fields included**: `left` and `right` pointers are also written, but they contain memory addresses valid ONLY in the current execution \u2014 they become garbage on reload.\n3. **Correct approach for trees**: Traverse the tree and write only the `data` field (and possibly a flag for NULL children). On reload, reconstruct the tree via insertion.\n4. **For flat structures (no pointers)**: `fwrite` of an entire struct works perfectly \u2014 e.g., saving an array of `int` or `Record` structs where all fields are values (not pointers).",
+                "language": "C",
+                "question_text": "The `fwrite` function in C is used to save a struct to a binary file. What does the following call write?\n```c\nfwrite(&node, sizeof(TreeNode), 1, fp);\n```",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000004",
-                "question": "To save a linked list to a file and correctly reload it, what approach properly handles the `next` pointer issue?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "Write each node struct entirely with `fwrite` — the `next` pointers auto-adjust on reload.",
-                    "B": "Traverse the list and write only the `data` field of each node. On reload, read each value and rebuild the list by allocating new nodes and linking them.",
-                    "C": "Write only the head pointer to file — all nodes are reachable from head.",
-                    "D": "Store the linked list in an array, write the array, reload into array, then convert back to linked list."
-                },
+                "options": [
+                    {
+                        "option_text": "Write each node struct entirely with `fwrite` \u2014 the `next` pointers auto-adjust on reload.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Traverse the list and write only the `data` field of each node. On reload, read each value and rebuild the list by allocating new nodes and linking them.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Write only the head pointer to file \u2014 all nodes are reachable from head.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Store the linked list in an array, write the array, reload into array, then convert back to linked list.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Pointer problem**: `next` pointers contain virtual memory addresses — valid only during current execution. Saving and reloading them gives dangling/garbage pointers.\n2. **Correct approach (Option B)**: Serialize only data values. Deserialise by reconstructing nodes with fresh `malloc` and linking them in order.\n3. **Option A**: Reloaded `next` pointers point to old memory addresses that no longer hold the correct data — undefined behaviour.\n4. **Option C**: Writing only the head pointer (a memory address) is useless on reload.\n5. **Option D**: Also valid — convert to array, save array, reload array, re-link — but adds redundant conversion steps.",
-                "language": "C"
+                "solution_explanation": "1. **Pointer problem**: `next` pointers contain virtual memory addresses \u2014 valid only during current execution. Saving and reloading them gives dangling/garbage pointers.\n2. **Correct approach (Option B)**: Serialize only data values. Deserialise by reconstructing nodes with fresh `malloc` and linking them in order.\n3. **Option A**: Reloaded `next` pointers point to old memory addresses that no longer hold the correct data \u2014 undefined behaviour.\n4. **Option C**: Writing only the head pointer (a memory address) is useless on reload.\n5. **Option D**: Also valid \u2014 convert to array, save array, reload array, re-link \u2014 but adds redundant conversion steps.",
+                "language": "C",
+                "question_text": "To save a linked list to a file and correctly reload it, what approach properly handles the `next` pointer issue?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000005",
-                "question": "What is the purpose of `fseek(fp, 0, SEEK_SET)` when reading back a non-linear data structure from a file?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "D",
-                "options": {
-                    "A": "Closes the file and reopens it.",
-                    "B": "Skips the first record in the file.",
-                    "C": "Moves the file position indicator to the END of the file.",
-                    "D": "Resets the file position indicator to the BEGINNING of the file, allowing traversal or re-reading from the start."
-                },
+                "options": [
+                    {
+                        "option_text": "Closes the file and reopens it.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Skips the first record in the file.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Moves the file position indicator to the END of the file.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Resets the file position indicator to the BEGINNING of the file, allowing traversal or re-reading from the start.",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **`fseek(fp, offset, whence)`**: Moves the file position indicator.\n   - `SEEK_SET`: Relative to the start of file.\n   - `SEEK_CUR`: Relative to current position.\n   - `SEEK_END`: Relative to end of file.\n2. **`fseek(fp, 0, SEEK_SET)`**: offset=0, from start → goes to byte 0 = beginning of file.\n3. **Use case**: After writing a tree to file (position is now at end), call `fseek(fp, 0, SEEK_SET)` before reading it back.\n4. **`rewind(fp)`**: Equivalent shorthand for `fseek(fp, 0, SEEK_SET)` — also clears the error indicator.\n5. **`fseek(fp, 0, SEEK_END)`**: Moves to the end — used to find file size via `ftell(fp)`.",
-                "language": "C"
+                "solution_explanation": "1. **`fseek(fp, offset, whence)`**: Moves the file position indicator.\n   - `SEEK_SET`: Relative to the start of file.\n   - `SEEK_CUR`: Relative to current position.\n   - `SEEK_END`: Relative to end of file.\n2. **`fseek(fp, 0, SEEK_SET)`**: offset=0, from start \u2192 goes to byte 0 = beginning of file.\n3. **Use case**: After writing a tree to file (position is now at end), call `fseek(fp, 0, SEEK_SET)` before reading it back.\n4. **`rewind(fp)`**: Equivalent shorthand for `fseek(fp, 0, SEEK_SET)` \u2014 also clears the error indicator.\n5. **`fseek(fp, 0, SEEK_END)`**: Moves to the end \u2014 used to find file size via `ftell(fp)`.",
+                "language": "C",
+                "question_text": "What is the purpose of `fseek(fp, 0, SEEK_SET)` when reading back a non-linear data structure from a file?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000006",
-                "question": "Saving an AVL Tree to a file in Pre-Order and reloading with simple BST insertions restores the data. Does it restore the exact AVL structure (including balance factors)?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "Yes — re-inserting keys in Pre-Order order into an AVL tree will trigger the same rotations as the original insertions, producing the same balanced structure.",
-                    "B": "No — rotations during reload may produce a different but still valid AVL tree.",
-                    "C": "No — Pre-Order reload always creates a degenerate tree.",
-                    "D": "Yes — but only if the file additionally stores each node's balance factor."
-                },
+                "options": [
+                    {
+                        "option_text": "Yes \u2014 re-inserting keys in Pre-Order order into an AVL tree will trigger the same rotations as the original insertions, producing the same balanced structure.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "No \u2014 rotations during reload may produce a different but still valid AVL tree.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "No \u2014 Pre-Order reload always creates a degenerate tree.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Yes \u2014 but only if the file additionally stores each node's balance factor.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Pre-Order save into AVL reload**: Each key in Pre-Order order was inserted to create the original tree. Re-inserting them in the same order into an empty AVL tree triggers the same sequence of insertions and rotations → **identical final structure**.\n2. **Why it works**: Pre-Order sequence uniquely determines the BST structure. AVL is a BST with balance enforcement — the same insert sequence + same rotation rules → same tree.\n3. **Balance factors**: Are recomputed during AVL insertion automatically — no need to store them explicitly.\n4. **Alternative approach**: Store level-order with explicit NULL markers — simpler to reload without re-running insert logic.",
-                "language": "C"
+                "solution_explanation": "1. **Pre-Order save into AVL reload**: Each key in Pre-Order order was inserted to create the original tree. Re-inserting them in the same order into an empty AVL tree triggers the same sequence of insertions and rotations \u2192 **identical final structure**.\n2. **Why it works**: Pre-Order sequence uniquely determines the BST structure. AVL is a BST with balance enforcement \u2014 the same insert sequence + same rotation rules \u2192 same tree.\n3. **Balance factors**: Are recomputed during AVL insertion automatically \u2014 no need to store them explicitly.\n4. **Alternative approach**: Store level-order with explicit NULL markers \u2014 simpler to reload without re-running insert logic.",
+                "language": "C",
+                "question_text": "Saving an AVL Tree to a file in Pre-Order and reloading with simple BST insertions restores the data. Does it restore the exact AVL structure (including balance factors)?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000007",
-                "question": "What is the worst-case time and space complexity of Merge Sort on an array of N elements?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "C",
-                "options": {
-                    "A": "Time: O(N²); Space: O(1).",
-                    "B": "Time: O(N log N); Space: O(1).",
-                    "C": "Time: O(N log N); Space: O(N).",
-                    "D": "Time: O(N); Space: O(N log N)."
-                },
+                "options": [
+                    {
+                        "option_text": "Time: O(N\u00b2); Space: O(1).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Time: O(N log N); Space: O(1).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Time: O(N log N); Space: O(N).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Time: O(N); Space: O(N log N).",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Merge Sort time**: T(N) = 2T(N/2) + O(N). By Master Theorem (Case 2): T(N) = **O(N log N)** in all cases (best, average, worst).\n2. **Space**: The merge step requires an auxiliary array of size N to hold merged elements during combining. O(N) extra space.\n3. **Not O(1) space**: Unlike Heap Sort or in-place Quick Sort — Merge Sort needs the auxiliary buffer.\n4. **Stable**: Equal elements preserve their original order — useful for multi-key sorts.\n5. **Best for Linked Lists**: Merge Sort on LL can merge in-place by relinking → O(1) extra space for LL.",
-                "language": "C"
+                "solution_explanation": "1. **Merge Sort time**: T(N) = 2T(N/2) + O(N). By Master Theorem (Case 2): T(N) = **O(N log N)** in all cases (best, average, worst).\n2. **Space**: The merge step requires an auxiliary array of size N to hold merged elements during combining. O(N) extra space.\n3. **Not O(1) space**: Unlike Heap Sort or in-place Quick Sort \u2014 Merge Sort needs the auxiliary buffer.\n4. **Stable**: Equal elements preserve their original order \u2014 useful for multi-key sorts.\n5. **Best for Linked Lists**: Merge Sort on LL can merge in-place by relinking \u2192 O(1) extra space for LL.",
+                "language": "C",
+                "question_text": "What is the worst-case time and space complexity of Merge Sort on an array of N elements?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000008",
-                "question": "Quick Sort's average-case time complexity is O(N log N) but worst-case is O(N²). For which input and pivot selection does the worst case occur?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "Random input with median-of-three pivot.",
-                    "B": "Already sorted (or reverse sorted) input with the first (or last) element chosen as pivot — pivot is always the minimum/maximum, creating maximally unbalanced partitions.",
-                    "C": "All-equal elements with random pivot.",
-                    "D": "Reverse sorted input with a median-of-three pivot."
-                },
+                "options": [
+                    {
+                        "option_text": "Random input with median-of-three pivot.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Already sorted (or reverse sorted) input with the first (or last) element chosen as pivot \u2014 pivot is always the minimum/maximum, creating maximally unbalanced partitions.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "All-equal elements with random pivot.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Reverse sorted input with a median-of-three pivot.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Worst case**: Pivot divides into (0, N-1) partitions at every step. T(N) = T(N-1) + O(N) → T(N) = O(N²).\n2. **Trigger**: Sorted array + first/last pivot → pivot is always the minimum (or maximum) element → empty partition + N-1 partition.\n3. **Mitigation**: Randomised pivot or median-of-three (choose median of first, middle, last elements) greatly reduces the chance of worst-case behaviour.\n4. **All-equal elements + naïve partition**: Also O(N²) — all elements go to one partition. Fix: Three-way partitioning (Dutch National Flag).\n5. **Median-of-three**: Still not worst-case-proof (adversarial inputs can exploit it), but reduces worst case almost entirely in practice.",
-                "language": "C"
+                "solution_explanation": "1. **Worst case**: Pivot divides into (0, N-1) partitions at every step. T(N) = T(N-1) + O(N) \u2192 T(N) = O(N\u00b2).\n2. **Trigger**: Sorted array + first/last pivot \u2192 pivot is always the minimum (or maximum) element \u2192 empty partition + N-1 partition.\n3. **Mitigation**: Randomised pivot or median-of-three (choose median of first, middle, last elements) greatly reduces the chance of worst-case behaviour.\n4. **All-equal elements + na\u00efve partition**: Also O(N\u00b2) \u2014 all elements go to one partition. Fix: Three-way partitioning (Dutch National Flag).\n5. **Median-of-three**: Still not worst-case-proof (adversarial inputs can exploit it), but reduces worst case almost entirely in practice.",
+                "language": "C",
+                "question_text": "Quick Sort's average-case time complexity is O(N log N) but worst-case is O(N\u00b2). For which input and pivot selection does the worst case occur?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000009",
-                "question": "Heap Sort performs sorting in-place. What are its time and space complexities?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "B",
-                "options": {
-                    "A": "Time: O(N²); Space: O(N).",
-                    "B": "Time: O(N log N) worst case; Space: O(1) — no auxiliary array needed.",
-                    "C": "Time: O(N log N); Space: O(log N) for recursion stack.",
-                    "D": "Time: O(N); Space: O(N)."
-                },
+                "options": [
+                    {
+                        "option_text": "Time: O(N\u00b2); Space: O(N).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Time: O(N log N) worst case; Space: O(1) \u2014 no auxiliary array needed.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Time: O(N log N); Space: O(log N) for recursion stack.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Time: O(N); Space: O(N).",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Phase 1 — buildHeap**: O(N) using Floyd's bottom-up algorithm.\n2. **Phase 2 — N extract-max operations**: Each heapifyDown is O(log N). N extractions → O(N log N).\n3. **Total**: O(N) + O(N log N) = **O(N log N)** worst, average, and best case.\n4. **Space**: O(1) — sorts the array in-place. No auxiliary array (unlike Merge Sort). No recursion (unlike recursive Quick Sort).\n5. **Not stable**: The swap operations in heapifyDown can reverse the order of equal elements.\n6. **In practice**: Heap Sort is slower than Quick Sort due to poor cache performance — heap accesses are scattered in memory.",
-                "language": "C"
+                "solution_explanation": "1. **Phase 1 \u2014 buildHeap**: O(N) using Floyd's bottom-up algorithm.\n2. **Phase 2 \u2014 N extract-max operations**: Each heapifyDown is O(log N). N extractions \u2192 O(N log N).\n3. **Total**: O(N) + O(N log N) = **O(N log N)** worst, average, and best case.\n4. **Space**: O(1) \u2014 sorts the array in-place. No auxiliary array (unlike Merge Sort). No recursion (unlike recursive Quick Sort).\n5. **Not stable**: The swap operations in heapifyDown can reverse the order of equal elements.\n6. **In practice**: Heap Sort is slower than Quick Sort due to poor cache performance \u2014 heap accesses are scattered in memory.",
+                "language": "C",
+                "question_text": "Heap Sort performs sorting in-place. What are its time and space complexities?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000010",
-                "question": "A graph (adjacency list) is saved to a text file and later reloaded. Which file format correctly represents the graph for easy reconstruction?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "C",
-                "options": {
-                    "A": "Write only the number of vertices V — edges are implicit.",
-                    "B": "Write each vertex's pointer address followed by its adjacency list pointers.",
-                    "C": "Write V and E on the first line, then each edge as a pair (u, v) on subsequent lines. On reload, read V, E, allocate adjacency lists, then add each edge.",
-                    "D": "Write the entire adjacency list struct using `fwrite` — pointers auto-reload."
-                },
+                "options": [
+                    {
+                        "option_text": "Write only the number of vertices V \u2014 edges are implicit.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Write each vertex's pointer address followed by its adjacency list pointers.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Write V and E on the first line, then each edge as a pair (u, v) on subsequent lines. On reload, read V, E, allocate adjacency lists, then add each edge.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Write the entire adjacency list struct using `fwrite` \u2014 pointers auto-reload.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Standard graph serialisation format**: `V E\\n` header + one `u v\\n` (or `u v w\\n` for weighted) per edge.\n2. **Reload**: Read V → allocate `adj[V]`. Read E edges → for each (u,v), add v to adj[u] (and u to adj[v] for undirected).\n3. **Option B**: Pointer values are meaningless across executions.\n4. **Option D**: `fwrite` on adjacency list structs stores next-pointers — garbage on reload.\n5. **Text vs binary**: Text format is human-readable and portable across architectures. Binary format (with proper serialisation, not raw pointer writes) is faster and more compact.",
-                "language": "C"
+                "solution_explanation": "1. **Standard graph serialisation format**: `V E\\n` header + one `u v\\n` (or `u v w\\n` for weighted) per edge.\n2. **Reload**: Read V \u2192 allocate `adj[V]`. Read E edges \u2192 for each (u,v), add v to adj[u] (and u to adj[v] for undirected).\n3. **Option B**: Pointer values are meaningless across executions.\n4. **Option D**: `fwrite` on adjacency list structs stores next-pointers \u2014 garbage on reload.\n5. **Text vs binary**: Text format is human-readable and portable across architectures. Binary format (with proper serialisation, not raw pointer writes) is faster and more compact.",
+                "language": "C",
+                "question_text": "A graph (adjacency list) is saved to a text file and later reloaded. Which file format correctly represents the graph for easy reconstruction?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000011",
-                "question": "Which sorting algorithm is NOT stable, meaning it does not preserve the relative order of equal elements?",
                 "question_type": "MCQ",
                 "difficulty_level": "EASY",
                 "answer": "D",
-                "options": {
-                    "A": "Merge Sort",
-                    "B": "Insertion Sort",
-                    "C": "Bubble Sort",
-                    "D": "Heap Sort"
-                },
+                "options": [
+                    {
+                        "option_text": "Merge Sort",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Insertion Sort",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Bubble Sort",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Heap Sort",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Stable sorts**: Merge Sort ✅, Insertion Sort ✅, Bubble Sort ✅, Counting Sort ✅, Timsort ✅.\n2. **Unstable sorts**: Heap Sort ❌, Quick Sort ❌ (standard partition), Selection Sort ❌.\n3. **Heap Sort instability**: The heapifyDown process swaps elements based on value comparisons without considering original indices. Equal elements may be reordered.\n4. **Stability importance**: When sorting records by a secondary key after a primary sort, stability ensures the primary order is preserved. For example, sort students by grade (primary), then by name (secondary, stable) — the grade order is maintained.\n5. **Quick Sort stability**: Standard Lomuto/Hoare partition is unstable. 3-way partitioning variants can be stable.",
-                "language": "C"
+                "solution_explanation": "1. **Stable sorts**: Merge Sort \u2705, Insertion Sort \u2705, Bubble Sort \u2705, Counting Sort \u2705, Timsort \u2705.\n2. **Unstable sorts**: Heap Sort \u274c, Quick Sort \u274c (standard partition), Selection Sort \u274c.\n3. **Heap Sort instability**: The heapifyDown process swaps elements based on value comparisons without considering original indices. Equal elements may be reordered.\n4. **Stability importance**: When sorting records by a secondary key after a primary sort, stability ensures the primary order is preserved. For example, sort students by grade (primary), then by name (secondary, stable) \u2014 the grade order is maintained.\n5. **Quick Sort stability**: Standard Lomuto/Hoare partition is unstable. 3-way partitioning variants can be stable.",
+                "language": "C",
+                "question_text": "Which sorting algorithm is NOT stable, meaning it does not preserve the relative order of equal elements?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000012",
-                "question": "Counting Sort runs in O(N+K) time where K is the range of values. When is Counting Sort MORE efficient than comparison-based sorts like Merge Sort?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "B",
-                "options": {
-                    "A": "Always — O(N+K) < O(N log N).",
-                    "B": "When K = O(N) — the range K is proportional to the number of elements. For example, sorting 1000 exam scores ranging from 0 to 100 (K=100 ≪ N=1000).",
-                    "C": "When K is very large (e.g., K = 10⁹) — more distinct values make counting faster.",
-                    "D": "Counting Sort is never more efficient — it uses more memory."
-                },
+                "options": [
+                    {
+                        "option_text": "Always \u2014 O(N+K) < O(N log N).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "When K = O(N) \u2014 the range K is proportional to the number of elements. For example, sorting 1000 exam scores ranging from 0 to 100 (K=100 \u226a N=1000).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "When K is very large (e.g., K = 10\u2079) \u2014 more distinct values make counting faster.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Counting Sort is never more efficient \u2014 it uses more memory.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Counting Sort: O(N+K)**: Creates a count array of size K. O(K) to initialise + O(N) to count + O(N+K) to reconstruct.\n2. **Efficient when K is small** (K = O(N)): Total cost O(N) — faster than O(N log N).\n3. **Inefficient when K is large**: Sorting 1000 integers in range [1, 10⁹] requires a 10⁹-element count array → O(10⁹) initialisation — far worse than O(1000 log 1000).\n4. **Not comparison-based**: Counting Sort sidesteps the Ω(N log N) lower bound for comparison sorts by using direct indexing.\n5. **Stable version**: The standard counting sort algorithm is stable — preserves relative order of equal elements.",
-                "language": "C"
+                "solution_explanation": "1. **Counting Sort: O(N+K)**: Creates a count array of size K. O(K) to initialise + O(N) to count + O(N+K) to reconstruct.\n2. **Efficient when K is small** (K = O(N)): Total cost O(N) \u2014 faster than O(N log N).\n3. **Inefficient when K is large**: Sorting 1000 integers in range [1, 10\u2079] requires a 10\u2079-element count array \u2192 O(10\u2079) initialisation \u2014 far worse than O(1000 log 1000).\n4. **Not comparison-based**: Counting Sort sidesteps the \u03a9(N log N) lower bound for comparison sorts by using direct indexing.\n5. **Stable version**: The standard counting sort algorithm is stable \u2014 preserves relative order of equal elements.",
+                "language": "C",
+                "question_text": "Counting Sort runs in O(N+K) time where K is the range of values. When is Counting Sort MORE efficient than comparison-based sorts like Merge Sort?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000013",
-                "question": "A B+ Tree index is serialised to a file. Which additional structural information (beyond key values) MUST be stored to correctly reconstruct the tree on reload?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "C",
-                "options": {
-                    "A": "Balance factors for each node.",
-                    "B": "Pointer values for left/right children.",
-                    "C": "For each node: whether it is a leaf or internal node, its key count, its keys, and for internal nodes — the keys of its children (since B+ Tree internal nodes replicate keys from leaves).",
-                    "D": "Only the leaf-level linked list — internal nodes can be recomputed."
-                },
+                "options": [
+                    {
+                        "option_text": "Balance factors for each node.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Pointer values for left/right children.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "For each node: whether it is a leaf or internal node, its key count, its keys, and for internal nodes \u2014 the keys of its children (since B+ Tree internal nodes replicate keys from leaves).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Only the leaf-level linked list \u2014 internal nodes can be recomputed.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **B+ Tree serialisation**: Cannot use simple pre-order reinsertion like BST — B-Trees have multi-key nodes and complex split rules.\n2. **Required information**:\n   - **Node type** (leaf/internal): Different reconstruction logic.\n   - **Key count**: Number of keys in the node.\n   - **Keys**: The actual search keys.\n   - **Leaf pointers**: For leaf nodes, the `next` pointer (leaf-level linked list) — saved as logical position/offset.\n3. **Not pointer values**: Memory addresses are meaningless on reload.\n4. **Level-order serialisation**: Save nodes breadth-first with explicit NULL markers for empty children — commonly used for B/B+ tree serialisation in databases.\n5. **Database approach**: Most DBMSes keep the B+ tree on disk persistently — pages are naturally serialised by the buffer manager.",
-                "language": "C"
+                "solution_explanation": "1. **B+ Tree serialisation**: Cannot use simple pre-order reinsertion like BST \u2014 B-Trees have multi-key nodes and complex split rules.\n2. **Required information**:\n   - **Node type** (leaf/internal): Different reconstruction logic.\n   - **Key count**: Number of keys in the node.\n   - **Keys**: The actual search keys.\n   - **Leaf pointers**: For leaf nodes, the `next` pointer (leaf-level linked list) \u2014 saved as logical position/offset.\n3. **Not pointer values**: Memory addresses are meaningless on reload.\n4. **Level-order serialisation**: Save nodes breadth-first with explicit NULL markers for empty children \u2014 commonly used for B/B+ tree serialisation in databases.\n5. **Database approach**: Most DBMSes keep the B+ tree on disk persistently \u2014 pages are naturally serialised by the buffer manager.",
+                "language": "C",
+                "question_text": "A B+ Tree index is serialised to a file. Which additional structural information (beyond key values) MUST be stored to correctly reconstruct the tree on reload?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000014",
-                "question": "Radix Sort sorts integers by processing digits. For N numbers each with D digits in base B, what is the time complexity?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "O(D × (N + B)) — D passes of counting sort (each O(N+B)).",
-                    "B": "O(N² × D) — each digit comparison requires a full scan.",
-                    "C": "O(N log N) — same as comparison-based sorts.",
-                    "D": "O(D × N log N) — D passes of comparison sort."
-                },
+                "options": [
+                    {
+                        "option_text": "O(D \u00d7 (N + B)) \u2014 D passes of counting sort (each O(N+B)).",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "O(N\u00b2 \u00d7 D) \u2014 each digit comparison requires a full scan.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(N log N) \u2014 same as comparison-based sorts.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "O(D \u00d7 N log N) \u2014 D passes of comparison sort.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Radix Sort**: Process D digit positions (least significant to most significant for LSD Radix Sort) using Counting Sort at each digit.\n2. **Each pass (one digit)**: Counting Sort over base B → O(N + B).\n3. **D passes**: Total = **O(D × (N + B))**.\n4. **For fixed D and B (e.g., 32-bit ints in base 256: D=4, B=256)**: O(4 × (N + 256)) = O(N) — linear time!\n5. **Comparison**: For large N and small D, Radix Sort outperforms O(N log N) sorts. Downside: requires O(N + B) extra space and only works on integers/strings (not arbitrary comparisons).",
-                "language": "C"
+                "solution_explanation": "1. **Radix Sort**: Process D digit positions (least significant to most significant for LSD Radix Sort) using Counting Sort at each digit.\n2. **Each pass (one digit)**: Counting Sort over base B \u2192 O(N + B).\n3. **D passes**: Total = **O(D \u00d7 (N + B))**.\n4. **For fixed D and B (e.g., 32-bit ints in base 256: D=4, B=256)**: O(4 \u00d7 (N + 256)) = O(N) \u2014 linear time!\n5. **Comparison**: For large N and small D, Radix Sort outperforms O(N log N) sorts. Downside: requires O(N + B) extra space and only works on integers/strings (not arbitrary comparisons).",
+                "language": "C",
+                "question_text": "Radix Sort sorts integers by processing digits. For N numbers each with D digits in base B, what is the time complexity?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000015",
-                "question": "When using `fprintf` vs `fwrite` to save a tree node to a file, what is the key practical difference?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "D",
-                "options": {
-                    "A": "`fprintf` is faster; `fwrite` is safer.",
-                    "B": "Both are identical for saving integers.",
-                    "C": "`fwrite` produces human-readable text; `fprintf` produces binary.",
-                    "D": "`fprintf` writes text (human-readable, portable across architectures/platforms); `fwrite` writes raw binary bytes (faster, compact, but architecture-dependent for types like int/float due to endianness and field size)."
-                },
+                "options": [
+                    {
+                        "option_text": "`fprintf` is faster; `fwrite` is safer.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Both are identical for saving integers.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`fwrite` produces human-readable text; `fprintf` produces binary.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "`fprintf` writes text (human-readable, portable across architectures/platforms); `fwrite` writes raw binary bytes (faster, compact, but architecture-dependent for types like int/float due to endianness and field size).",
+                        "is_correct": true
+                    }
+                ],
                 "test_cases": null,
                 "solution_explanation": "1. **`fprintf(fp, \"%d \", node->data)`**: Converts integer to ASCII text characters. File is human-readable/editable. Portable across 32/64-bit systems and endianness.\n2. **`fwrite(&node->data, sizeof(int), 1, fp)`**: Writes raw 4-byte binary representation. Faster (no conversion). Compact (exact type size). NOT portable if file is read on a system with different int size or byte order (endianness).\n3. **Tree reconstruction**: Both work equally well for reconstruction IF the same architecture reads the binary file.\n4. **Recommendation**: Use text format for portability (config files, data exchange). Use binary for performance and internal-use files (e.g., database index pages).",
-                "language": "C"
+                "language": "C",
+                "question_text": "When using `fprintf` vs `fwrite` to save a tree node to a file, what is the key practical difference?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000016",
-                "question": "Shell Sort is an improvement over Insertion Sort. What is its key modification and what is its best-known time complexity?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "B",
-                "options": {
-                    "A": "Shell Sort splits the array like Merge Sort; time complexity O(N log N).",
-                    "B": "Shell Sort uses a diminishing gap sequence — elements separated by `gap` distance are insertion-sorted. As gap decreases to 1, it becomes standard Insertion Sort. Best-known complexity: O(N log² N) with Hibbard's gap sequence.",
-                    "C": "Shell Sort applies Quick Sort's partition with varying pivot sizes; time O(N log N).",
-                    "D": "Shell Sort always runs in O(N) because the gap reduces the number of comparisons to zero."
-                },
+                "options": [
+                    {
+                        "option_text": "Shell Sort splits the array like Merge Sort; time complexity O(N log N).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Shell Sort uses a diminishing gap sequence \u2014 elements separated by `gap` distance are insertion-sorted. As gap decreases to 1, it becomes standard Insertion Sort. Best-known complexity: O(N log\u00b2 N) with Hibbard's gap sequence.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Shell Sort applies Quick Sort's partition with varying pivot sizes; time O(N log N).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Shell Sort always runs in O(N) because the gap reduces the number of comparisons to zero.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Key idea**: Instead of comparing adjacent elements (gap=1 like Insertion Sort), Shell Sort first compares elements far apart (large gap), creating a rough ordering. Then reduces gap progressively.\n2. **Gap sequences**: Knuth (1, 4, 13, 40, 121...): O(N^(3/2)). Hibbard (1, 3, 7, 15...): O(N^(5/4)). Shell's original (N/2, N/4, ... 1): O(N²) worst case.\n3. **Benefit**: Large-gap passes move elements closer to their final positions quickly, making the small-gap (nearly sorted) passes very fast.\n4. **Shell Sort analysis** is still an open research problem for some gap sequences.\n5. **Not stable**: Shell Sort is not a stable sort.",
-                "language": "C"
+                "solution_explanation": "1. **Key idea**: Instead of comparing adjacent elements (gap=1 like Insertion Sort), Shell Sort first compares elements far apart (large gap), creating a rough ordering. Then reduces gap progressively.\n2. **Gap sequences**: Knuth (1, 4, 13, 40, 121...): O(N^(3/2)). Hibbard (1, 3, 7, 15...): O(N^(5/4)). Shell's original (N/2, N/4, ... 1): O(N\u00b2) worst case.\n3. **Benefit**: Large-gap passes move elements closer to their final positions quickly, making the small-gap (nearly sorted) passes very fast.\n4. **Shell Sort analysis** is still an open research problem for some gap sequences.\n5. **Not stable**: Shell Sort is not a stable sort.",
+                "language": "C",
+                "question_text": "Shell Sort is an improvement over Insertion Sort. What is its key modification and what is its best-known time complexity?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000017",
-                "question": "Saving a Binary Tree (not BST) to a file and reconstructing it exactly requires NULL markers. Which serialisation correctly handles this?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "A",
-                "options": {
-                    "A": "Preorder with NULL markers (e.g., write -1 or '#' for NULL children): `8 5 1 # # 7 # # 10 # 12 # #`. On reload, recursively read — if value is NULL marker, return NULL; otherwise create node and recurse for left, then right.",
-                    "B": "Inorder only — the sorted sequence reconstructs the tree without NULL markers.",
-                    "C": "Postorder only — last element is root, rest reconstructs automatically.",
-                    "D": "Level-order without NULL markers — layer-by-layer uniquely identifies the tree."
-                },
+                "options": [
+                    {
+                        "option_text": "Preorder with NULL markers (e.g., write -1 or '#' for NULL children): `8 5 1 # # 7 # # 10 # 12 # #`. On reload, recursively read \u2014 if value is NULL marker, return NULL; otherwise create node and recurse for left, then right.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Inorder only \u2014 the sorted sequence reconstructs the tree without NULL markers.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Postorder only \u2014 last element is root, rest reconstructs automatically.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Level-order without NULL markers \u2014 layer-by-layer uniquely identifies the tree.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Why NULL markers**: For a general binary tree (not a BST), inorder alone cannot uniquely reconstruct the tree (two different trees can have the same inorder sequence if they have different structures).\n2. **Preorder + NULLs**: Each NULL marker explicitly encodes the absence of a child at that position. The recursive structure naturally reads back:\n   - Read value → if NULL marker, return NULL.\n   - Create node, recursively read left child, recursively read right child.\n3. **Option B**: Inorder alone — ambiguous without preorder or postorder.\n4. **Option D**: Level-order without NULLs — cannot distinguish which children of internal nodes are missing.\n5. **Alternative**: Level-order WITH explicit NULL markers (e.g., `8 5 10 1 7 # 12 # # # # # #`) — heap-style serialisation.",
-                "language": "C"
+                "solution_explanation": "1. **Why NULL markers**: For a general binary tree (not a BST), inorder alone cannot uniquely reconstruct the tree (two different trees can have the same inorder sequence if they have different structures).\n2. **Preorder + NULLs**: Each NULL marker explicitly encodes the absence of a child at that position. The recursive structure naturally reads back:\n   - Read value \u2192 if NULL marker, return NULL.\n   - Create node, recursively read left child, recursively read right child.\n3. **Option B**: Inorder alone \u2014 ambiguous without preorder or postorder.\n4. **Option D**: Level-order without NULLs \u2014 cannot distinguish which children of internal nodes are missing.\n5. **Alternative**: Level-order WITH explicit NULL markers (e.g., `8 5 10 1 7 # 12 # # # # # #`) \u2014 heap-style serialisation.",
+                "language": "C",
+                "question_text": "Saving a Binary Tree (not BST) to a file and reconstructing it exactly requires NULL markers. Which serialisation correctly handles this?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000018",
-                "question": "Tim Sort (used in Python and Java) is a hybrid sorting algorithm. What two algorithms does it combine and why?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "C",
-                "options": {
-                    "A": "Quick Sort + Merge Sort — uses Quick Sort for partitioning and Merge Sort for combining.",
-                    "B": "Heap Sort + Counting Sort — heap for small subarrays, counting for large.",
-                    "C": "Insertion Sort + Merge Sort — Insertion Sort handles small subarrays (where its small constant beats O(N log N) algorithms) efficiently; Merge Sort merges the sorted runs for overall O(N log N) with stable sorting.",
-                    "D": "Bubble Sort + Merge Sort — Bubble Sort detects nearly-sorted subarrays for O(N) best case."
-                },
+                "options": [
+                    {
+                        "option_text": "Quick Sort + Merge Sort \u2014 uses Quick Sort for partitioning and Merge Sort for combining.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Heap Sort + Counting Sort \u2014 heap for small subarrays, counting for large.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Insertion Sort + Merge Sort \u2014 Insertion Sort handles small subarrays (where its small constant beats O(N log N) algorithms) efficiently; Merge Sort merges the sorted runs for overall O(N log N) with stable sorting.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Bubble Sort + Merge Sort \u2014 Bubble Sort detects nearly-sorted subarrays for O(N) best case.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Tim Sort**: Uses Insertion Sort on small runs (typically 32–64 elements) — Insertion Sort has very small constants and is cache-friendly on small arrays.\n2. **Why Insertion Sort for small arrays**: For N < 64, Insertion Sort beats Merge Sort due to lower overhead (no function call costs, better cache behaviour).\n3. **Merge Sort for merging**: Identifies natural runs in the input (already-sorted sequences), extends short runs using Insertion Sort, then merges runs using merge operations.\n4. **Result**: Stable sort, O(N log N) worst case, O(N) best case (already sorted), excellent real-world performance.\n5. **Python's `list.sort()`** and **Java's `Arrays.sort(Object[])`** both use Tim Sort.",
-                "language": "C"
+                "solution_explanation": "1. **Tim Sort**: Uses Insertion Sort on small runs (typically 32\u201364 elements) \u2014 Insertion Sort has very small constants and is cache-friendly on small arrays.\n2. **Why Insertion Sort for small arrays**: For N < 64, Insertion Sort beats Merge Sort due to lower overhead (no function call costs, better cache behaviour).\n3. **Merge Sort for merging**: Identifies natural runs in the input (already-sorted sequences), extends short runs using Insertion Sort, then merges runs using merge operations.\n4. **Result**: Stable sort, O(N log N) worst case, O(N) best case (already sorted), excellent real-world performance.\n5. **Python's `list.sort()`** and **Java's `Arrays.sort(Object[])`** both use Tim Sort.",
+                "language": "C",
+                "question_text": "Tim Sort (used in Python and Java) is a hybrid sorting algorithm. What two algorithms does it combine and why?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000019",
-                "question": "The lower bound for comparison-based sorting is Ω(N log N). Which of the following correctly explains WHY this lower bound exists?",
                 "question_type": "MCQ",
                 "difficulty_level": "HARD",
                 "answer": "B",
-                "options": {
-                    "A": "All sorting algorithms make exactly N² comparisons.",
-                    "B": "The decision tree for any comparison-based sort has at least N! leaves (one per permutation). A binary tree of height h has at most 2^h leaves → 2^h ≥ N! → h ≥ log₂(N!) = Ω(N log N) by Stirling's approximation.",
-                    "C": "Comparison sorts must read each element at least twice → 2N reads = Ω(N log N).",
-                    "D": "Memory bandwidth is limited — sorting N elements requires N × log N cache misses."
-                },
+                "options": [
+                    {
+                        "option_text": "All sorting algorithms make exactly N\u00b2 comparisons.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The decision tree for any comparison-based sort has at least N! leaves (one per permutation). A binary tree of height h has at most 2^h leaves \u2192 2^h \u2265 N! \u2192 h \u2265 log\u2082(N!) = \u03a9(N log N) by Stirling's approximation.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Comparison sorts must read each element at least twice \u2192 2N reads = \u03a9(N log N).",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Memory bandwidth is limited \u2014 sorting N elements requires N \u00d7 log N cache misses.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Decision tree model**: Model any comparison-based sort as a binary decision tree where each internal node is a comparison (a≤b?) and each leaf is a sorted permutation.\n2. **N! leaves needed**: There are N! possible orderings of N elements — each must correspond to at least one leaf.\n3. **Tree height**: A binary tree with N! leaves has height ≥ log₂(N!).\n4. **Stirling's approximation**: log₂(N!) = Σ log₂(k) ≈ N log₂N - N/ln2 = **Ω(N log N)**.\n5. **Implication**: No comparison-based sort can guarantee fewer than Ω(N log N) comparisons in the worst case — Merge Sort and Heap Sort achieve this lower bound.",
-                "language": "C"
+                "solution_explanation": "1. **Decision tree model**: Model any comparison-based sort as a binary decision tree where each internal node is a comparison (a\u2264b?) and each leaf is a sorted permutation.\n2. **N! leaves needed**: There are N! possible orderings of N elements \u2014 each must correspond to at least one leaf.\n3. **Tree height**: A binary tree with N! leaves has height \u2265 log\u2082(N!).\n4. **Stirling's approximation**: log\u2082(N!) = \u03a3 log\u2082(k) \u2248 N log\u2082N - N/ln2 = **\u03a9(N log N)**.\n5. **Implication**: No comparison-based sort can guarantee fewer than \u03a9(N log N) comparisons in the worst case \u2014 Merge Sort and Heap Sort achieve this lower bound.",
+                "language": "C",
+                "question_text": "The lower bound for comparison-based sorting is \u03a9(N log N). Which of the following correctly explains WHY this lower bound exists?",
+                "marks": 1
             },
             {
                 "id": "cs06a001-0001-4000-a001-000000000020",
-                "question": "After saving a Max-Heap (stored as an array) to a binary file using `fwrite`, what is the correct reload sequence to restore the heap?",
                 "question_type": "MCQ",
                 "difficulty_level": "MEDIUM",
                 "answer": "A",
-                "options": {
-                    "A": "Read the array with `fread` — the heap property is preserved because a heap's array representation has no pointers; it is a plain value array that restores correctly.",
-                    "B": "Read the array, then run `buildHeap` on it — the saved array is not in heap order.",
-                    "C": "Read the array, insert each element one by one using `insert`.",
-                    "D": "The heap cannot be saved to a binary file — must be reconstructed from scratch."
-                },
+                "options": [
+                    {
+                        "option_text": "Read the array with `fread` \u2014 the heap property is preserved because a heap's array representation has no pointers; it is a plain value array that restores correctly.",
+                        "is_correct": true
+                    },
+                    {
+                        "option_text": "Read the array, then run `buildHeap` on it \u2014 the saved array is not in heap order.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "Read the array, insert each element one by one using `insert`.",
+                        "is_correct": false
+                    },
+                    {
+                        "option_text": "The heap cannot be saved to a binary file \u2014 must be reconstructed from scratch.",
+                        "is_correct": false
+                    }
+                ],
                 "test_cases": null,
-                "solution_explanation": "1. **Heap as array**: A heap is stored compactly as `arr[0..N-1]`. No pointers — every 'link' is computed: parent at `(i-1)/2`, children at `2i+1` and `2i+2`.\n2. **Save**: `fwrite(arr, sizeof(int), N, fp)` — writes the N integer values sequentially.\n3. **Reload**: `fread(arr, sizeof(int), N, fp)` — reads exactly the same N values back into the array. The heap property is ALREADY encoded in the array positions — no rebuild needed.\n4. **Why buildHeap is unnecessary**: The saved array already satisfies `arr[i] >= arr[2i+1]` and `arr[i] >= arr[2i+2]` — the heap invariant is preserved byte-for-byte in the file.\n5. **Contrast with trees**: Pointer-based trees require serialisation of structure. Array-based heaps/trees need only the value array.",
-                "language": "C"
+                "solution_explanation": "1. **Heap as array**: A heap is stored compactly as `arr[0..N-1]`. No pointers \u2014 every 'link' is computed: parent at `(i-1)/2`, children at `2i+1` and `2i+2`.\n2. **Save**: `fwrite(arr, sizeof(int), N, fp)` \u2014 writes the N integer values sequentially.\n3. **Reload**: `fread(arr, sizeof(int), N, fp)` \u2014 reads exactly the same N values back into the array. The heap property is ALREADY encoded in the array positions \u2014 no rebuild needed.\n4. **Why buildHeap is unnecessary**: The saved array already satisfies `arr[i] >= arr[2i+1]` and `arr[i] >= arr[2i+2]` \u2014 the heap invariant is preserved byte-for-byte in the file.\n5. **Contrast with trees**: Pointer-based trees require serialisation of structure. Array-based heaps/trees need only the value array.",
+                "language": "C",
+                "question_text": "After saving a Max-Heap (stored as an array) to a binary file using `fwrite`, what is the correct reload sequence to restore the heap?",
+                "marks": 1
             }
         ]
     }
